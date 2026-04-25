@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoQ - Leistungsverzeichnis</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="BoQ_Logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="BoQ_Logo.png">
+  <link rel="shortcut icon" href="BoQ_Logo.png">
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --page-bg: #f5f7fa;
+      --panel-bg: #ffffff;
+      --border-color: #e5e7eb;
+      --text-color: #374151;
+      --muted-color: #6b7280;
+      --accent-color: #f7931e;
+      --accent-color-hover: #e67e12;
+      --accent-soft: #fff1dc;
+      --info-bg: #f9fafb;
+      --info-border: #e5e7eb;
+      --success-bg: #ecfdf5;
+      --success-border: #86efac;
+      --error-bg: #fef2f2;
+      --error-border: #fca5a5;
+      --warning-bg: #fff7ed;
+      --warning-border: #fdba74;
+    }
+
+    body {
+      margin: 0;
+      padding: 28px 18px 48px;
+      background: var(--page-bg);
+      color: var(--text-color);
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      margin-bottom: 18px;
+      padding: 0 16px 12px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      box-shadow: 0 4px 12px rgba(17, 24, 39, 0.08);
+    }
+
+    .boq-header {
+      text-align: center;
+      margin: 18px 0 6px 0;
+      padding: 0;
+    }
+
+    .boq-logo {
+      display: block;
+      width: 45px;
+      height: auto;
+      margin: 0 auto 2px auto;
+    }
+
+    .boq-title-line {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #374151;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .boq-main {
+      color: #374151;
+      font-weight: 700;
+    }
+
+    .boq-sub {
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .step-card {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(17, 24, 39, 0.03);
+      cursor: pointer;
+      user-select: none;
+      text-align: left;
+      font-family: inherit;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .step-card strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #9ca3af;
+      letter-spacing: 0.03em;
+    }
+
+    .step-card span {
+      display: block;
+      font-size: 0.94rem;
+      line-height: 1.15;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .step-card.is-active {
+      background: #fff7ed;
+      border-color: #fdba74;
+      box-shadow: inset 0 0 0 1px rgba(247, 147, 30, 0.08);
+    }
+
+    .step-card.is-active strong,
+    .step-card.is-active span {
+      color: #ea580c;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    section {
+      margin-top: 18px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(17, 24, 39, 0.03);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .lead {
+      color: var(--muted-color);
+      max-width: 78ch;
+      margin-bottom: 0;
+    }
+
+    .import-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    #jsonFile {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .btn-secondary {
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--text-color);
+      font-size: 0.96rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(17, 24, 39, 0.04);
+      transition: background 0.15s ease, border-color 0.15s ease;
+      font-family: inherit;
+    }
+
+    .btn-secondary:hover {
+      background: #f9fafb;
+      border-color: #d1d5db;
+      transform: none;
+      box-shadow: 0 2px 6px rgba(17, 24, 39, 0.06);
+    }
+
+    .file-name-display {
+      flex: 1 1 180px;
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: #f9fafb;
+      color: var(--muted-color);
+      font-size: 0.9rem;
+      font-weight: 500;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      box-sizing: border-box;
+    }
+
+    .file-name-display.has-file {
+      color: var(--text-color);
+      font-weight: 600;
+      background: #ffffff;
+    }
+
+    button {
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent-color);
+      color: #fff;
+      font-size: 0.96rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(247, 147, 30, 0.18);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent-color-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(230, 126, 18, 0.22);
+    }
+
+    button:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .hint {
+      margin-top: 12px;
+      color: var(--muted-color);
+      font-size: 0.9rem;
+    }
+
+    #status {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-card {
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--info-border);
+      background: var(--info-bg);
+      color: var(--text-color);
+    }
+
+    .status-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted-color);
+    }
+
+    .status-card p {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .status-idle {
+      background: var(--info-bg);
+      border-color: var(--info-border);
+    }
+
+    .status-success {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .status-error {
+      background: var(--error-bg);
+      border-color: var(--error-border);
+    }
+
+    .status-warning {
+      background: var(--warning-bg);
+      border-color: var(--warning-border);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .summary-item {
+      padding: 16px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+    }
+
+    .summary-item dt {
+      margin: 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--muted-color);
+    }
+
+    .unit {
+      text-transform: lowercase;
+    }
+
+    .summary-item dd {
+      margin: 10px 0 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .overview-group {
+      margin-top: 20px;
+    }
+
+    .overview-group:first-child {
+      margin-top: 0;
+    }
+
+    .overview-group-label {
+      margin: 0 0 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted-color);
+    }
+
+    .group-divider {
+      height: 1px;
+      width: 100%;
+      background: #fbbf24;
+      margin: 16px 0 20px 0;
+    }
+
+    .package-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .package-list li {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #e6f4ea;
+      color: #166534;
+      border: 1px solid #86efac;
+      font-weight: 600;
+      transition: background 0.15s ease;
+    }
+
+    .package-list li:hover {
+      background: #d1fae5;
+    }
+
+    #positionsOverview .overview-group {
+      padding-bottom: 4px;
+    }
+
+    #positionsOverview .overview-group + .overview-group {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    #positionsOverview .overview-group-label {
+      font-size: 0.92rem;
+      color: #1f2937;
+      letter-spacing: 0.02em;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #fdba74;
+      margin-bottom: 14px;
+    }
+
+    .positions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .position-card {
+      padding: 16px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      box-shadow: 0 1px 3px rgba(17, 24, 39, 0.05);
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .position-card:hover {
+      border-color: #d1d5db;
+      box-shadow: 0 2px 6px rgba(17, 24, 39, 0.08);
+    }
+
+    .position-card-title {
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .position-card-title strong {
+      display: block;
+      color: #1f2937;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .position-id {
+      display: block;
+      margin-top: 3px;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .position-card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .position-card-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .position-card-label {
+      font-weight: 600;
+      color: var(--muted-color);
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .position-card-value {
+      color: #1f2937;
+      font-weight: 500;
+      text-align: right;
+      flex-grow: 1;
+    }
+
+    .position-card-meta {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .position-card-meta .position-card-label,
+    .position-card-meta .position-card-value {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .position-card-meta .position-card-value {
+      color: #9ca3af;
+      font-weight: 400;
+    }
+
+    .empty-state {
+      padding: 18px;
+      border: 1px dashed var(--border-color);
+      border-radius: 14px;
+      color: var(--muted-color);
+      background: #f9fafb;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: #ffffff;
+    }
+
+    th,
+    td {
+      padding: 12px 10px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f9fafb;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--muted-color);
+    }
+
+    tbody tr:hover {
+      background: #f9fafb;
+    }
+
+    .meta-row {
+      margin-top: 10px;
+      color: var(--muted-color);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .export-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .btn-export-word {
+      background: #1d4ed8;
+      box-shadow: 0 6px 14px rgba(29, 78, 216, 0.2);
+    }
+
+    .btn-export-word:hover {
+      background: #1e40af;
+      box-shadow: 0 8px 18px rgba(30, 64, 175, 0.24);
+    }
+
+    .btn-export-gaeb {
+      background: #166534;
+      box-shadow: 0 6px 14px rgba(22, 101, 52, 0.2);
+    }
+
+    .btn-export-gaeb:hover {
+      background: #14532d;
+      box-shadow: 0 8px 18px rgba(20, 83, 45, 0.24);
+    }
+
+    .btn-validate-x83 {
+      background: #92400e;
+      box-shadow: 0 6px 14px rgba(146, 64, 14, 0.2);
+    }
+
+    .btn-validate-x83:hover {
+      background: #78350f;
+      box-shadow: 0 8px 18px rgba(120, 53, 15, 0.24);
+    }
+
+    .btn-export-x83-test {
+      background: #0f766e;
+      box-shadow: 0 6px 14px rgba(15, 118, 110, 0.2);
+    }
+
+    .btn-export-x83-test:hover {
+      background: #115e59;
+      box-shadow: 0 8px 18px rgba(17, 94, 89, 0.24);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    section[data-page] {
+      display: none;
+    }
+
+    section[data-page].is-visible {
+      display: block;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 16px 12px 32px;
+      }
+
+      main {
+        margin: 0;
+      }
+
+      .app-header {
+        padding: 0 10px 10px;
+        border-radius: 22px;
+      }
+
+      .step-card {
+        padding: 8px 10px;
+      }
+
+      .boq-logo {
+        width: min(45px, 100%);
+      }
+
+      .step-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .import-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      section {
+        padding: 16px;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        margin-bottom: 14px;
+        padding: 14px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: none;
+      }
+
+      td {
+        padding: 6px 0;
+        border-bottom: 0;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.85rem;
+        color: var(--muted-color);
+      }
+
+      .positions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="app-header">
+      <div class="boq-header">
+        <img src="boq_logo.svg" alt="BoQ Logo" class="boq-logo">
+        <div class="boq-title-line"><span class="boq-main">BoQ</span> <span class="boq-sub">Bill of Quantities</span></div>
+      </div>
+
+      <div class="step-grid" aria-label="BoQ Prozessschritte">
+        <button class="step-card is-active" data-target="import" type="button">
+          <strong>01</strong>
+          <span>Import</span>
+        </button>
+        <button class="step-card" data-target="projektdaten" type="button">
+          <strong>02</strong>
+          <span>Projektdaten</span>
+        </button>
+        <button class="step-card" data-target="pakete" type="button">
+          <strong>03</strong>
+          <span>Pakete</span>
+        </button>
+        <button class="step-card" data-target="positionen" type="button">
+          <strong>04</strong>
+          <span>Positionen</span>
+        </button>
+      </div>
+    </header>
+
+    <section data-page="import" aria-labelledby="import-heading">
+      <h2 id="import-heading">JSON-Import</h2>
+      <div class="import-controls">
+        <input id="jsonFile" type="file" accept=".json,application/json" aria-label="JSON-Datei auswaehlen">
+        <button id="selectFileButton" class="btn-secondary" type="button">JSON-Datei auswählen</button>
+        <span id="fileNameDisplay" class="file-name-display" aria-live="polite">Keine Datei ausgewählt</span>
+        <button id="importButton" type="button">JSON importieren</button>
+      </div>
+      <p class="hint">Erwartet wird die exportierte JSON-Struktur mit projekt, anlage, technik, pakete, kalkulation und meta.</p>
+      <div id="status" aria-live="polite">
+        <div id="backendStatus" class="status-card status-idle">
+          <strong>Backend-Status</strong>
+          <p>Pruefe Backend-Verbindung...</p>
+        </div>
+        <div id="importStatus" class="status-card status-idle">
+          <strong>Import-Status</strong>
+          <p>Noch keine Datei geladen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-page="projektdaten" aria-labelledby="project-heading">
+      <h2 id="project-heading">Projektuebersicht</h2>
+      <div id="projectOverview" class="empty-state">Noch keine Projektdaten geladen.</div>
+    </section>
+
+    <section data-page="pakete" aria-labelledby="packages-heading">
+      <h2 id="packages-heading">Paketuebersicht</h2>
+      <div id="packageOverview" class="empty-state">Noch keine aktiven Pakete geladen.</div>
+    </section>
+
+    <section data-page="positionen" aria-labelledby="positions-heading">
+      <h2 id="positions-heading">Positionsuebersicht</h2>
+      <div class="export-actions">
+        <button id="wordExportButton" class="btn-export-word" type="button">Word exportieren</button>
+        <button id="gaebExportButton" class="btn-export-gaeb" type="button">X83 Export</button>
+        <button id="x83TestExportButton" class="btn-export-x83-test" type="button">ORCA Test-X83</button>
+        <button id="x83ValidateButton" class="btn-validate-x83" type="button">X83 Schema-Check</button>
+      </div>
+      <div id="positionsMeta" class="meta-row hidden"></div>
+      <div id="positionsOverview" class="empty-state">Noch keine LV-Positionen geladen.</div>
+    </section>
+  </main>
+
+  <script>
+    const expectedTopLevelKeys = ['projekt', 'anlage', 'technik', 'pakete', 'kalkulation', 'meta'];
+
+    let currentData = null;
+
+    const elements = {
+      fileInput: document.getElementById('jsonFile'),
+      selectFileButton: document.getElementById('selectFileButton'),
+      fileNameDisplay: document.getElementById('fileNameDisplay'),
+      importButton: document.getElementById('importButton'),
+      backendStatus: document.querySelector('#backendStatus p'),
+      backendStatusCard: document.getElementById('backendStatus'),
+      importStatus: document.querySelector('#importStatus p'),
+      importStatusCard: document.getElementById('importStatus'),
+      projectOverview: document.getElementById('projectOverview'),
+      packageOverview: document.getElementById('packageOverview'),
+      positionsOverview: document.getElementById('positionsOverview'),
+      positionsMeta: document.getElementById('positionsMeta'),
+      wordExportButton: document.getElementById('wordExportButton'),
+      gaebExportButton: document.getElementById('gaebExportButton'),
+      x83TestExportButton: document.getElementById('x83TestExportButton'),
+      x83ValidateButton: document.getElementById('x83ValidateButton'),
+    };
+
+    function setStatus(card, textNode, type, message) {
+      card.className = `status-card status-${type}`;
+      textNode.textContent = message;
+    }
+
+    function fallbackValue(value) {
+      if (value === null || value === undefined || value === '') {
+        return 'Nicht vorhanden';
+      }
+
+      return String(value);
+    }
+
+    function clearImportViews() {
+      elements.projectOverview.className = 'empty-state';
+      elements.projectOverview.textContent = 'Noch keine Projektdaten geladen.';
+      elements.packageOverview.className = 'empty-state';
+      elements.packageOverview.textContent = 'Noch keine aktiven Pakete geladen.';
+      elements.positionsOverview.className = 'empty-state';
+      elements.positionsOverview.textContent = 'Noch keine LV-Positionen geladen.';
+      elements.positionsMeta.className = 'meta-row hidden';
+      elements.positionsMeta.textContent = '';
+    }
+
+    function makeGroup(label, fields) {
+      const visibleFields = fields.filter(([, value]) => value !== null && value !== undefined && value !== '');
+      if (!visibleFields.length) return null;
+
+      const group = document.createElement('div');
+      group.className = 'overview-group';
+
+      const heading = document.createElement('h3');
+      heading.className = 'overview-group-label';
+      heading.textContent = label;
+      group.appendChild(heading);
+
+      const grid = document.createElement('div');
+      grid.className = 'summary-grid';
+
+      fields.forEach(([fieldLabel, value]) => {
+        const wrapper = document.createElement('dl');
+        wrapper.className = 'summary-item';
+        const term = document.createElement('dt');
+        if (typeof fieldLabel === 'string') {
+          term.textContent = fieldLabel;
+        } else if (fieldLabel && typeof fieldLabel === 'object') {
+          term.append(fieldLabel.labelText, ' (');
+          const unit = document.createElement('span');
+          unit.className = 'unit';
+          unit.textContent = fieldLabel.unitText;
+          term.append(unit, ')');
+        }
+        const definition = document.createElement('dd');
+        if (value && typeof value === 'object' && typeof value.html === 'string') {
+          definition.innerHTML = value.html;
+        } else {
+          definition.textContent = fallbackValue(value);
+        }
+        wrapper.append(term, definition);
+        grid.appendChild(wrapper);
+      });
+
+      group.appendChild(grid);
+      return group;
+    }
+
+    function renderProjectOverview(data) {
+      const projekt = data.projekt || {};
+      const anlage = data.anlage || {};
+      const auftraggeber = data.auftraggeber || {};
+      const techParams = data.technik?.technischeParameter || {};
+      const techLabelOverrides = {
+        vnenn: { labelText: 'Vnenn', unitText: 'm/s' },
+        tragfaehigkeit: { labelText: 'Tragfähigkeit', unitText: 'kg' },
+        foerderhoehe: { labelText: 'Förderhöhe', unitText: 'm' },
+        kostenMontagestunde: 'Kosten Montagestunde netto (€)',
+      };
+
+      const container = document.createElement('div');
+
+      function appendGroup(group) {
+        if (!group) return;
+        if (container.children.length > 0) {
+          const previousGroup = container.lastElementChild;
+          const divider = document.createElement('div');
+          divider.className = 'group-divider';
+          previousGroup.appendChild(divider);
+        }
+        container.appendChild(group);
+      }
+
+      const projektGroup = makeGroup('Projektdaten', [
+        ['Projekt-ID', projekt.projektnummer],
+        ['Bauvorhaben / Projektname', projekt.bauvorhaben],
+        ['Stadt', projekt.stadt],
+        ['Strasse', projekt.strasse],
+        ['PLZ', projekt.postleitzahl],
+        ['Projektart', projekt.projektart],
+        ['Anlagenbezeichnung', anlage.bezeichnung],
+      ]);
+      appendGroup(projektGroup);
+
+      const auftraggeberGroup = makeGroup('Auftraggeber', [
+        ['Firma', data.auftraggeber?.kunde],
+        ['Adresse', data.auftraggeber?.adresse],
+        ['PLZ', data.auftraggeber?.plz],
+        ['Ort', data.auftraggeber?.ort],
+      ]);
+      appendGroup(auftraggeberGroup);
+
+      if (techParams && typeof techParams === 'object' && !Array.isArray(techParams)) {
+        const techFields = [[
+          'Technische Parameter',
+          {
+            html: Object.entries(data.technik?.technischeParameter || {})
+              .map(([key, value]) => `${key}: ${value}`)
+              .join('<br>')
+          }
+        ]];
+        const techGroup = makeGroup('Technische Parameter', techFields);
+        appendGroup(techGroup);
+      }
+
+      elements.projectOverview.className = '';
+      elements.projectOverview.replaceChildren(container);
+    }
+
+    const packageLabels = {
+      antrieb: 'Antrieb',
+      steuerung: 'Steuerung',
+      messungen: 'Messungen / ZÜS-Abnahmen',
+      rohbau: 'Rohbau',
+      ausbau: 'Ausbau',
+      elektro: 'Elektro',
+      heizung: 'Heizung',
+      sanitaer: 'Sanitär',
+      lueftung: 'Lüftung',
+      aufzug: 'Aufzug',
+      dach: 'Dach',
+      fassade: 'Fassade',
+      tiefbau: 'Tiefbau',
+    };
+
+    const lvBezeichnungen = {
+      steuerung_grundpreis: 'Steuerung – Grundposition',
+      fahrkorbtableau: 'Fahrkorbtableau',
+      aussenruftableau: 'Außenruftableau',
+      standanzeige: 'Standanzeige',
+      lastmessung: 'Lastmessung',
+      schachtbeleuchtung: 'Schachtbeleuchtung',
+      kontakt_regler: 'Kontakt Regler',
+      notruf: 'Notrufsystem',
+      kabelkanaele: 'Kabelkanäle',
+      inkrementalgeber: 'Inkrementalgeber',
+      zues_vorpruefung: 'ZÜS Vorprüfung',
+      zues_abnahme: 'ZÜS Abnahme',
+      zues_begleitung: 'ZÜS Begleitung',
+      pruefgewichte: 'Prüfgewichte',
+      transport_baustelle_lager: 'Transport Baustelle / Lager',
+    };
+
+    function padNum(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function formatPositionBezeichnung(position) {
+      const mapped = lvBezeichnungen[position.id];
+      console.log('[BoQ] position.id:', position.id, '→ mapped:', mapped ?? '(kein Mapping, Fallback)');
+      if (mapped) return mapped;
+      const raw = fallbackValue(position.bezeichnung);
+      return raw.charAt(0).toUpperCase() + raw.slice(1);
+    }
+
+    function formatPackageLabel(raw) {
+      if (!raw || typeof raw !== 'string') return 'Unbekanntes Paket';
+      const key = raw.trim().toLowerCase();
+      return packageLabels[key] ?? raw.trim().charAt(0).toUpperCase() + raw.trim().slice(1);
+    }
+
+    function normalizePackageKey(raw) {
+      const key = String(raw || '').trim().toLowerCase();
+
+      if (!key) {
+        return '';
+      }
+
+      if (key === 'antrieb') return 'antrieb';
+      if (key === 'steuerung') return 'steuerung';
+      if (['messungen', 'abnahme', 'abnahme & co', 'zues', 'züs'].includes(key)) return 'abnahme';
+
+      return key;
+    }
+
+    function formatPositionPackageLabel(packageKey, fallbackLabel = '') {
+      const normalizedKey = normalizePackageKey(packageKey || fallbackLabel);
+
+      if (normalizedKey === 'antrieb') return 'Antrieb';
+      if (normalizedKey === 'steuerung') return 'Steuerung';
+      if (normalizedKey === 'abnahme') return 'Abnahme & Co';
+
+      if (fallbackLabel && fallbackLabel !== 'Nicht vorhanden') {
+        return formatPackageLabel(fallbackLabel);
+      }
+
+      return formatPackageLabel(packageKey);
+    }
+
+    function buildFallbackPositionsByPackage(data) {
+      const fallbackGroups = new Map();
+      const paketSummen = Array.isArray(data?.kalkulation?.paketSummen) ? data.kalkulation.paketSummen : [];
+
+      paketSummen.forEach((paketEintrag) => {
+        const packageKey = normalizePackageKey(paketEintrag?.paket);
+        if (!packageKey || !Array.isArray(paketEintrag?.positionen) || paketEintrag.positionen.length === 0) {
+          return;
+        }
+
+        fallbackGroups.set(
+          packageKey,
+          paketEintrag.positionen.map((position) => ({
+            paket: formatPositionPackageLabel(packageKey, paketEintrag?.paket),
+            id: position?.id || position?.key || position?.roh?.name || '',
+            bezeichnung: position?.bezeichnung || position?.roh?.bezeichnung || '',
+            anzahl: position?.anzahl ?? position?.roh?.anzahl ?? '',
+            einheit: position?.einheit || position?.roh?.einheit || 'Stk',
+            lvTextKey: position?.lvTextKey || position?.key || position?.roh?.name || '',
+          }))
+        );
+      });
+
+      return fallbackGroups;
+    }
+
+    function buildPositionGroups(data) {
+      const positions = Array.isArray(data?.kalkulation?.lvPositionen) ? data.kalkulation.lvPositionen : [];
+      const groupedByPackage = new Map();
+
+      positions.forEach((position, idx) => {
+        const paketRaw = position?.paket;
+        const packageKey = normalizePackageKey(paketRaw);
+        const packageLabel = formatPositionPackageLabel(packageKey, fallbackValue(paketRaw));
+
+        console.log(`[BoQ] Position[${idx}] id="${position.id}" paket="${paketRaw}" → Gruppe "${packageLabel}"`);
+
+        if (!groupedByPackage.has(packageKey)) {
+          groupedByPackage.set(packageKey, {
+            key: packageKey,
+            label: packageLabel,
+            positions: [],
+          });
+        }
+
+        groupedByPackage.get(packageKey).positions.push(position);
+      });
+
+      const activePackages = Array.isArray(data?.pakete?.aktiv) ? data.pakete.aktiv : [];
+      const expectedOrder = [];
+      activePackages.forEach((entry) => {
+        const packageKey = normalizePackageKey(entry);
+        if (packageKey && !expectedOrder.includes(packageKey)) {
+          expectedOrder.push(packageKey);
+        }
+      });
+
+      const fallbackGroups = buildFallbackPositionsByPackage(data);
+      expectedOrder.forEach((packageKey) => {
+        if (!groupedByPackage.has(packageKey) && fallbackGroups.has(packageKey)) {
+          groupedByPackage.set(packageKey, {
+            key: packageKey,
+            label: formatPositionPackageLabel(packageKey),
+            positions: fallbackGroups.get(packageKey),
+          });
+        }
+      });
+
+      const remainingKeys = Array.from(groupedByPackage.keys()).filter((key) => !expectedOrder.includes(key));
+      const orderedKeys = [...expectedOrder.filter((key) => groupedByPackage.has(key)), ...remainingKeys];
+
+      return orderedKeys.map((key) => groupedByPackage.get(key));
+    }
+
+    function logImportSnapshot(data, stage) {
+      const packages = Array.isArray(data?.pakete?.aktiv) ? data.pakete.aktiv : [];
+      const positions = Array.isArray(data?.kalkulation?.lvPositionen) ? data.kalkulation.lvPositionen : [];
+      console.log(`[BoQ] ${stage} – aktive Pakete: ${packages.length}`, packages);
+      console.log(`[BoQ] ${stage} – lvPositionen: ${positions.length}`, positions);
+      if (positions.length) {
+        console.log(`[BoQ] ${stage} – Positions-IDs:`, positions.map((entry) => entry?.id ?? '(ohne id)'));
+      }
+    }
+
+    function renderPackageOverview(packages) {
+      if (!packages.length) {
+        elements.packageOverview.className = 'empty-state';
+        elements.packageOverview.textContent = 'Keine aktiven Pakete gefunden.';
+        return;
+      }
+
+      const list = document.createElement('ul');
+      list.className = 'package-list';
+
+      packages.forEach((entry, index) => {
+        const item = document.createElement('li');
+        item.textContent = typeof entry === 'string' && entry.trim() ? formatPackageLabel(entry) : `Paket ${index + 1}`;
+        list.appendChild(item);
+      });
+
+      elements.packageOverview.className = '';
+      elements.packageOverview.replaceChildren(list);
+    }
+
+    function renderPositionsOverview(data) {
+      const positions = Array.isArray(data?.kalkulation?.lvPositionen) ? data.kalkulation.lvPositionen : [];
+      // DEBUG – Schritt 1: Wie viele lvPositionen wurden übergeben?
+      console.log('[BoQ] renderPositionsOverview aufgerufen – Anzahl Positionen:', Array.isArray(positions) ? positions.length : '(kein Array)', positions);
+
+      if (!positions || !Array.isArray(positions) || positions.length === 0) {
+        console.log('[BoQ] Keine Positionen vorhanden – leerer Zustand wird angezeigt.');
+        elements.positionsOverview.className = 'empty-state';
+        elements.positionsOverview.textContent = 'Keine LV-Positionen gefunden.';
+        elements.positionsMeta.className = 'meta-row';
+        elements.positionsMeta.textContent = 'Es wurden keine importierbaren Positionen in kalkulation.lvPositionen gefunden.';
+        return;
+      }
+
+      const groupedPackages = buildPositionGroups(data);
+      const paketKeys = groupedPackages.map((group) => group.label);
+      console.log('[BoQ] Erkannte Pakete (' + paketKeys.length + '):', paketKeys);
+      groupedPackages.forEach((group) => {
+        console.log(`[BoQ]   Paket "${group.label}": ${group.positions.length} Position(en) →`, group.positions.map((p) => p.id));
+      });
+
+      const container = document.createElement('div');
+
+      // Erstelle Gruppen für jedes Paket
+      groupedPackages.forEach(({ label, positions: paketPositions }, paketIndex) => {
+        const paketNr = padNum(paketIndex + 1);
+        // DEBUG – Schritt 4: Jedes Paket beim Rendern bestätigen
+        console.log(`[BoQ] Rendere Paket ${paketNr} "${label}" mit ${paketPositions.length} Position(en)`);
+        const group = document.createElement('div');
+        group.className = 'overview-group';
+
+        const heading = document.createElement('h3');
+        heading.className = 'overview-group-label';
+        heading.textContent = `${paketNr} ${label}`;
+        group.appendChild(heading);
+
+        const grid = document.createElement('div');
+        grid.className = 'positions-grid';
+
+        paketPositions.forEach((position, posIndex) => {
+          const posNr = `${paketNr}.${padNum(posIndex + 1)}`;
+          // DEBUG – Schritt 5: Jede Position beim Rendern bestätigen
+          console.log(`[BoQ]   Rendere Position ${posNr} id="${position.id}"`);
+          let card;
+          try {
+          card = document.createElement('div');
+          card.className = 'position-card';
+
+          // Position ID & Bezeichnung als Hauptzeile
+          const titleLine = document.createElement('div');
+          titleLine.className = 'position-card-title';
+          const titleStrong = document.createElement('strong');
+          titleStrong.textContent = `${posNr} ${formatPositionBezeichnung(position)}`;
+          const idSpan = document.createElement('span');
+          idSpan.className = 'position-id';
+          idSpan.textContent = fallbackValue(position.id);
+          titleLine.appendChild(titleStrong);
+          titleLine.appendChild(idSpan);
+          card.appendChild(titleLine);
+
+          // Anzahl & Einheit
+          const quantityLine = document.createElement('div');
+          quantityLine.className = 'position-card-row';
+          const quantityLabel = document.createElement('span');
+          quantityLabel.className = 'position-card-label';
+          quantityLabel.textContent = 'Menge:';
+          const quantityValue = document.createElement('span');
+          quantityValue.className = 'position-card-value';
+          quantityValue.textContent = `${fallbackValue(position.anzahl)} ${fallbackValue(position.einheit)}`;
+          quantityLine.appendChild(quantityLabel);
+          quantityLine.appendChild(quantityValue);
+          card.appendChild(quantityLine);
+
+          // LV-Text-Key
+          const lvKeyLine = document.createElement('div');
+          lvKeyLine.className = 'position-card-row position-card-meta';
+          const lvKeyLabel = document.createElement('span');
+          lvKeyLabel.className = 'position-card-label';
+          lvKeyLabel.textContent = 'LV-Key:';
+          const lvKeyValue = document.createElement('span');
+          lvKeyValue.className = 'position-card-value';
+          lvKeyValue.textContent = fallbackValue(position.lvTextKey);
+          lvKeyLine.appendChild(lvKeyLabel);
+          lvKeyLine.appendChild(lvKeyValue);
+          card.appendChild(lvKeyLine);
+
+          grid.appendChild(card);
+          } catch (err) {
+            console.error(`[BoQ] Fehler beim Rendern von Position ${posNr} (id="${position.id}"):`, err);
+          }
+        });
+
+        group.appendChild(grid);
+        container.appendChild(group);
+      });
+
+      elements.positionsOverview.className = '';
+      elements.positionsOverview.replaceChildren(container);
+      elements.positionsMeta.className = 'meta-row';
+      // DEBUG – Schritt 6: Zusammenfassung
+      console.log(`[BoQ] Rendering abgeschlossen: ${positions.length} Position(en) in ${paketKeys.length} Paket(en).`);
+      elements.positionsMeta.textContent = `${positions.length} LV-Position(en) in ${paketKeys.length} Paket(en) geladen.`;
+    }
+
+    function validateImportData(data) {
+      const missingSections = [];
+
+      if (!data || typeof data !== 'object' || Array.isArray(data)) {
+        return {
+          isValid: false,
+          message: 'Struktur nicht kompatibel: JSON muss ein Objekt sein.',
+          level: 'error',
+        };
+      }
+
+      expectedTopLevelKeys.forEach((key) => {
+        if (!(key in data)) {
+          missingSections.push(key);
+        }
+      });
+
+      if (missingSections.length) {
+        return {
+          isValid: false,
+          message: `Struktur nicht kompatibel: Hauptbereiche fehlen (${missingSections.join(', ')}).`,
+          level: 'error',
+        };
+      }
+
+      if (!Array.isArray(data.pakete?.aktiv)) {
+        return {
+          isValid: false,
+          message: 'Struktur nicht kompatibel: pakete.aktiv muss ein Array sein.',
+          level: 'error',
+        };
+      }
+
+      if (!Array.isArray(data.kalkulation?.lvPositionen)) {
+        return {
+          isValid: false,
+          message: 'Struktur nicht kompatibel: kalkulation.lvPositionen muss ein Array sein.',
+          level: 'error',
+        };
+      }
+
+      const warnings = [];
+
+      if (!data.pakete.aktiv.length) {
+        warnings.push('Keine aktiven Pakete gefunden.');
+      }
+
+      if (!data.kalkulation.lvPositionen.length) {
+        warnings.push('Keine LV-Positionen gefunden.');
+      }
+
+      return {
+        isValid: true,
+        warnings,
+      };
+    }
+
+    function applyImportData(data) {
+      const validation = validateImportData(data);
+
+      if (!validation.isValid) {
+        throw new Error(validation.message);
+      }
+
+      logImportSnapshot(data, 'applyImportData');
+
+      currentData = data;
+
+      renderProjectOverview(data);
+      renderPackageOverview(data.pakete.aktiv);
+      renderPositionsOverview(data);
+
+      if (validation.warnings.length) {
+        setStatus(
+          elements.importStatusCard,
+          elements.importStatus,
+          'warning',
+          `Datei erfolgreich geladen. ${validation.warnings.join(' ')}`
+        );
+        return validation;
+      }
+
+      setStatus(elements.importStatusCard, elements.importStatus, 'success', 'Datei erfolgreich geladen. Import erfolgreich.');
+      return validation;
+    }
+
+    async function readSelectedFile() {
+      const file = elements.fileInput.files[0];
+
+      if (!file) {
+        clearImportViews();
+        setStatus(elements.importStatusCard, elements.importStatus, 'warning', 'Keine Datei ausgewaehlt.');
+        return;
+      }
+
+      const fileName = file.name.toLowerCase();
+      const isJsonType = file.type === 'application/json' || file.type === 'text/json' || file.type === '';
+
+      if (!fileName.endsWith('.json') || !isJsonType) {
+        clearImportViews();
+        setStatus(elements.importStatusCard, elements.importStatus, 'error', 'Falscher Dateityp. Bitte eine JSON-Datei auswaehlen.');
+        return;
+      }
+
+      if (file.size === 0) {
+        clearImportViews();
+        setStatus(elements.importStatusCard, elements.importStatus, 'error', 'Datei ist leer.');
+        return;
+      }
+
+      setStatus(elements.importStatusCard, elements.importStatus, 'idle', 'Datei wird geladen...');
+
+      let rawText;
+
+      try {
+        rawText = await file.text();
+      } catch {
+        clearImportViews();
+        setStatus(elements.importStatusCard, elements.importStatus, 'error', 'Datei konnte nicht gelesen werden.');
+        return;
+      }
+
+      if (!rawText.trim()) {
+        clearImportViews();
+        setStatus(elements.importStatusCard, elements.importStatus, 'error', 'Datei ist leer.');
+        return;
+      }
+
+      let parsedData;
+
+      try {
+        parsedData = JSON.parse(rawText);
+      } catch {
+        clearImportViews();
+        setStatus(elements.importStatusCard, elements.importStatus, 'error', 'Ungueltiges JSON.');
+        return;
+      }
+
+      logImportSnapshot(parsedData, 'JSON.parse');
+
+      try {
+        applyImportData(parsedData);
+      } catch (error) {
+        clearImportViews();
+        setStatus(elements.importStatusCard, elements.importStatus, 'error', error.message || 'Struktur nicht kompatibel.');
+      }
+    }
+
+    async function checkBackend() {
+      try {
+        const response = await fetch('http://localhost:3001/api/health');
+
+        if (!response.ok) {
+          throw new Error('Health-Check fehlgeschlagen');
+        }
+
+        setStatus(elements.backendStatusCard, elements.backendStatus, 'success', 'Backend erreichbar');
+      } catch {
+        setStatus(elements.backendStatusCard, elements.backendStatus, 'error', 'Backend nicht erreichbar');
+      }
+    }
+
+    function triggerSteuerungWordExport() {
+      const projekt = (currentData && currentData.projekt) || {};
+      const anlage = (currentData && currentData.anlage) || {};
+      const auftraggeber = (currentData && currentData.auftraggeber) || {};
+      const technik = (currentData && currentData.technik) || {};
+      const params = new URLSearchParams({
+        projektname: projekt.bauvorhaben || projekt.name || '',
+        projektnummer: projekt.projektnummer || projekt.id || '',
+        projektart: projekt.projektart || '',
+        strasse: projekt.strasse || '',
+        plz: projekt.postleitzahl || projekt.plz || '',
+        stadt: projekt.stadt || '',
+        leistung: anlage.bezeichnung || '',
+        agkunde: currentData?.auftraggeber?.kunde || auftraggeber.kunde || '',
+        agadresse: currentData?.auftraggeber?.adresse || auftraggeber.adresse || '',
+        agplz: currentData?.auftraggeber?.plz || auftraggeber.plz || '',
+        aort: currentData?.auftraggeber?.ort || auftraggeber.ort || '',
+        technik_json: JSON.stringify(technik),
+      });
+      const downloadUrl = `http://localhost:3001/api/export/word/steuerung?${params.toString()}`;
+      elements.positionsMeta.className = 'meta-row';
+      elements.positionsMeta.textContent = 'Word-Export wird erstellt und als Download gestartet...';
+
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+
+    function readDownloadFilename(contentDisposition, fallbackName) {
+      if (!contentDisposition || typeof contentDisposition !== 'string') {
+        return fallbackName;
+      }
+
+      const utf8Match = contentDisposition.match(/filename\*=UTF-8''([^;]+)/i);
+      if (utf8Match && utf8Match[1]) {
+        try {
+          return decodeURIComponent(utf8Match[1]);
+        } catch {
+          return utf8Match[1];
+        }
+      }
+
+      const plainMatch = contentDisposition.match(/filename="?([^";]+)"?/i);
+      if (plainMatch && plainMatch[1]) {
+        return plainMatch[1];
+      }
+
+      return fallbackName;
+    }
+
+    async function triggerX83Export() {
+      elements.positionsMeta.className = 'meta-row';
+      elements.positionsMeta.textContent = 'X83-Export wird erstellt und als Download gestartet...';
+
+      if (!currentData) {
+        elements.positionsMeta.textContent = 'Bitte zuerst eine gueltige JSON-Datei importieren.';
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3001/api/export-x83', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(currentData),
+        });
+
+        if (!response.ok) {
+          let errorMessage = 'X83 Export fehlgeschlagen';
+          try {
+            const errorPayload = await response.json();
+            if (errorPayload && typeof errorPayload.error === 'string' && errorPayload.error.trim()) {
+              errorMessage = errorPayload.error.trim();
+            }
+          } catch {
+            // Ignore invalid JSON error payload.
+          }
+
+          throw new Error(errorMessage);
+        }
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = readDownloadFilename(response.headers.get('content-disposition'), 'LV_Export.X83');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+
+        elements.positionsMeta.textContent = 'X83-Export erfolgreich heruntergeladen.';
+      } catch (error) {
+        elements.positionsMeta.className = 'meta-row';
+        elements.positionsMeta.textContent = error?.message || 'X83 Export fehlgeschlagen';
+      }
+    }
+
+    async function triggerX83TestExport() {
+      elements.positionsMeta.className = 'meta-row';
+      elements.positionsMeta.textContent = 'ORCA-Test-X83 wird erstellt und als Download gestartet...';
+
+      try {
+        const response = await fetch('http://localhost:3001/api/export-x83-test');
+
+        if (!response.ok) {
+          let errorMessage = 'ORCA-Test-X83 Export fehlgeschlagen';
+          try {
+            const errorPayload = await response.json();
+            if (errorPayload && typeof errorPayload.error === 'string' && errorPayload.error.trim()) {
+              errorMessage = errorPayload.error.trim();
+            }
+          } catch {
+            // Ignore invalid JSON error payload.
+          }
+
+          throw new Error(errorMessage);
+        }
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = readDownloadFilename(response.headers.get('content-disposition'), 'TEST_ORCA_IMPORT.X83');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+
+        elements.positionsMeta.textContent = 'ORCA-Test-X83 erfolgreich heruntergeladen.';
+      } catch (error) {
+        elements.positionsMeta.textContent = error?.message || 'ORCA-Test-X83 Export fehlgeschlagen';
+      }
+    }
+
+    async function triggerX83Validation() {
+      elements.positionsMeta.className = 'meta-row';
+      elements.positionsMeta.textContent = 'X83-Schema wird geprueft...';
+
+      if (!currentData) {
+        elements.positionsMeta.textContent = 'Bitte zuerst eine gueltige JSON-Datei importieren.';
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3001/api/validate-x83', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(currentData),
+        });
+
+        const payload = await response.json();
+
+        if (response.ok && payload?.isValid) {
+          elements.positionsMeta.textContent = `X83-Schema-Check erfolgreich (${payload.schemaFile}).`;
+          return;
+        }
+
+        const errors = Array.isArray(payload?.errors) ? payload.errors : [];
+        const firstErrors = errors.slice(0, 3).join(' | ');
+        elements.positionsMeta.textContent = firstErrors || payload?.error || 'X83-Schema-Check fehlgeschlagen.';
+      } catch (error) {
+        elements.positionsMeta.textContent = error?.message || 'X83-Schema-Check fehlgeschlagen.';
+      }
+    }
+
+    globalThis.BoQApp = {
+      validateImportData,
+      applyImportData,
+      clearImportViews,
+      getCurrentData: () => currentData,
+    };
+
+    function activatePage(target) {
+      document.querySelectorAll('[data-page]').forEach(p => p.classList.toggle('is-visible', p.dataset.page === target));
+      document.querySelectorAll('[data-target]').forEach(t => t.classList.toggle('is-active', t.dataset.target === target));
+    }
+
+    document.querySelectorAll('[data-target]').forEach(tab => {
+      tab.addEventListener('click', () => activatePage(tab.dataset.target));
+      tab.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') activatePage(tab.dataset.target);
+      });
+    });
+
+    elements.selectFileButton.addEventListener('click', () => elements.fileInput.click());
+
+    elements.importButton.addEventListener('click', readSelectedFile);
+    elements.wordExportButton.addEventListener('click', triggerSteuerungWordExport);
+    elements.gaebExportButton.addEventListener('click', triggerX83Export);
+    elements.x83TestExportButton.addEventListener('click', triggerX83TestExport);
+    elements.x83ValidateButton.addEventListener('click', triggerX83Validation);
+    elements.fileInput.addEventListener('change', () => {
+      const file = elements.fileInput.files[0];
+      if (file) {
+        elements.fileNameDisplay.textContent = file.name;
+        elements.fileNameDisplay.classList.add('has-file');
+      } else {
+        elements.fileNameDisplay.textContent = 'Keine Datei ausgewählt';
+        elements.fileNameDisplay.classList.remove('has-file');
+      }
+      setStatus(elements.importStatusCard, elements.importStatus, 'idle', 'Datei ausgewaehlt. Bereit fuer den Import.');
+    });
+
+    window.addEventListener('load', () => {
+      clearImportViews();
+      checkBackend();
+      activatePage('import');
+    });
+  </script>
+</body>
+</html>

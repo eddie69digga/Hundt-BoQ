@@ -1,0 +1,28 @@
+{
+  "id": "abnahme",
+  "titel": "Abnahme / Dokumentation / Einweisung",
+  "mengeneinheit": "Stk",
+  "positionstyp": "hauptposition",
+  "preislogik": "eine_position",
+  "fliesstext": "",
+  "module": [
+    {
+      "id": "inverkehrbringung_pvi",
+      "titel": "Inverkehrbringung / Inbetriebnahme (PVI)",
+      "typ": "pflicht",
+      "text": "Für die Inverkehrbringung der Aufzugsanlage gelten die aktuellen Bestimmungen der Verordnung zum Geräte- und Produktsicherheitsgesetz (GPSG).\n\nAlle geforderten Maßnahmen für die erfolgreiche Inverkehrbringung / Inbetriebnahme der Anlage wie, Genehmigungen, Gefahrenanalysen, Gebühren, Messgeräte, Prüfgewichte, Personal und Unterlagen sind durch den Angebotspreis abgegolten.\n\nDie Inverkehrbringung der Anlage erfolgt über eine ZÜS.\n\nAlternativ:\nSollte der AN über ein ISO-Zertifiziertes Qualitätsmanagement verfügen und darüber berechtigt sein, die Anlagen selbst in Verkehr bringen zu können, ist dies mit Zustimmung des AG möglich.\n\nDie Inverkehrbringung der Aufzugsanlage ist mit Fang- und Lastproben in Gegenwart eines Sachverständigen einer ZÜS oder durch einen ISO-Zertifizierten AN durchzuführen.\n\nNach Durchführung der zuvor beschriebenen Verfahren muss die Inbetriebnahme (PVI) durch einen Sachverständigen einer ZÜS erfolgen. Der AN begleitet die PVI.\n\nVoraussetzung zum Antrag auf Abnahme durch den AG ist die erfolgreiche Inverkehrbringung, Inbetriebnahme (PVI)* und Behebung aller wesentlichen Mängel der Aufzugsanlage.\nDes Weiteren ist die Übergabe der Dokumentation mit allen Dokumenten wie z.B. Konformitätserklärung und mangelfreier PVI-Bericht notwendig.\n\n*ausgenommen sind bauseitige PVI Mängel."
+    },
+    {
+      "id": "kundendokumentation_pruefbuch",
+      "titel": "Kundendokumentation / Prüfbuch (ZÜS)",
+      "typ": "pflicht",
+      "text": "Mindestens folgender Dokumentationsinhalt ist bei Übergabe der Aufzugsanlagen zu übergeben:\n\n•\tKonformitätserklärung\n•\tPVI-Bericht (Mangelfrei)\n•\tBeschreibung der Aufzugsanlage inkl. deren Hauptkomponenten\n•\tReinigungs- & Schmieranweisungen\n•\tBerechnungen, Prüfatteste und Bescheinigungen\n•\tAnlagen-, Fahrkorb- und Tableauzeichnungen\n•\tAntriebsbeschreibung\n•\tSteuerungsbeschreibung\n•\tHinweise für Aufzugswärter\n•\tListe der verwendeten Schmiermittel\n•\tAuflistung der auszuführenden Wartungs- und Revisionsarbeiten im Wartungsheft\n•\tBedienungsanleitung\n•\tNotbefreiungsanleitung\n•\tNotfallplan\n•\tGefährdungsbeurteilung\n\nDie Dokumentationsstruktur kann der AG durch eine eindeutige Vorlage vorgeben.\nDie Vorlage ist dem AN rechtzeitig zu übergeben.\n\nAnzahl und Form der Ausfertigung pro Anlage\n\nKundendokumentation:\t1-fach in Papier\nPrüfbuch(ZÜS):\t\t\t1-fach in Papier\t(optional)\nCD oder USB-Stick:\t\t1-fach digital\t(optional)"
+    },
+    {
+      "id": "einweisung_haustechnik",
+      "titel": "Einweisung Haustechnik in die Aufzugsanlage",
+      "typ": "pflicht",
+      "text": "Einweisung des Haustechnikers in die Grundlagen, Bedienung und Sicherheitsaspekte der Aufzugsanlage. Vermittlung von Kenntnissen zur Befreiung eingeschlossener Personen, Nutzung und Pflege der technischen Dokumentation sowie Einhaltung der geltenden Sicherheitsvorschriften.\n\nInhalt der Einweisung:\t\tGrundlagen und Bedienung der\nAufzugsanlage\nHinweise und Vorgehensweise zur Befreiung eingeschlossener Personen\nDokumentation:\t\t\tfirmeneigenes Dokument\nDauer je Einweisung:\t\tca. 2 Stunden\nAnzahl der Einweisungen:\t2\nDurchführung:\tQualifiziertes Fachpersonal gemäß geltenden Sicherheitsvorschriften und spezifischen Anforderungen der Anlage"
+    }
+  ]
+}

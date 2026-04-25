@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 18 76 86" role="img" aria-label="BoQ Logo">
+  <defs>
+    <style>
+      .g{fill:#606a78}
+      .o{fill:#f7931e}
+    </style>
+  </defs>
+
+  <!-- outer document frame -->
+  <path class="g" d="M26 18c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h49v-8H26V26h60v42h8V26c0-4.4-3.6-8-8-8H26z"/>
+
+  <!-- folded corner -->
+  <path class="g" d="M76 86l18 0-18 18z"/>
+
+  <!-- bullets -->
+  <rect class="g" x="36" y="33" width="10" height="10" rx="1.5"/>
+  <rect class="g" x="36" y="50" width="10" height="10" rx="1.5"/>
+  <rect class="o" x="36" y="67" width="10" height="10" rx="1.5"/>
+
+  <!-- text lines -->
+  <rect class="g" x="52" y="33" width="38" height="10" rx="1.5"/>
+  <rect class="g" x="52" y="50" width="38" height="10" rx="1.5"/>
+  <rect class="o" x="52" y="67" width="38" height="10" rx="1.5"/>
+</svg>

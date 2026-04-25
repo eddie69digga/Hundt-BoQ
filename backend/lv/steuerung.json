@@ -1,0 +1,158 @@
+{
+  "id": "steuerung",
+  "titel": "Steuerung",
+  "kurztext": "Steuerung - Lieferung und Montage einer kompletten Aufzugssteuerung",
+  "mengeneinheit": "Stk",
+  "positionstyp": "hauptposition",
+  "preislogik": "eine_position",
+  "fliesstext": "Lieferung und Montage einer kompletten, betriebsbereiten Aufzugssteuerung als zusammenhaengende Hauptleistung. Der Leistungsumfang umfasst den Schaltschrank mit allen erforderlichen Komponenten, ein auf die Anlage abgestimmtes Steuerungssystem, die Brandfallsteuerung, die Schachtkopierung, ein Lastmesssystem sowie die Antriebsregelung mit Frequenzumrichter. Eingeschlossen sind alle fuer Funktion, Bedienung und Schnittstellen erforderlichen Installationsleistungen und Bedienstellen einschliesslich Anzeigen. Die Ausfuehrung erfolgt normgerecht, fachgerecht montiert, geprueft und fuer den ordnungsgemaessen Betrieb vorbereitet.",
+  "module": [
+    {
+      "id": "schaltschrank",
+      "titel": "Schaltschrank",
+      "typ": "pflicht",
+      "positionscode": "TWR",
+      "text": "Der Schaltschrank ist gemäß VDE als Stand- oder Wandschrank im Triebwerksraum, körperschallisoliert montiert, vorzusehen.\nDer Schaltschrank ist allseitig geschlossen und in stahlblechgekapselter Profilstahlkonstruktion (mind. IP 22) mit Fronttüren sowie Frontblenden und Sockel nach Erfordernis auszubilden. \nDer Schaltschrank soll mit sämtlichen Tragkonstruktionen für Einbauteile und erforderlichen Verbindern ggf. Dichtungen, Rück- und Seitenwänden, Anschlussstellen, Einführungsabdeckungen usw. ausgerüstet werden.\nHinsichtlich der Verdrahtung des Schaltschrankes ist besonders darauf zu achten, dass alle zu- und abgehenden Leitungen übersichtlich angeordnet, einzeln zugentlastet und ordentlich befestigt auf die bezeichnenden Reihenklemmen geführt sind.\nAlle Leitungen sind an ihren Klemmstellen ausreichend zu kennzeichnen. Diese Kennzeichnung muss mit dem für Revisionszwecke mitgelieferten Schema bzw. Klemmenbelegungsplan übereinstimmen.\nAusreichende Be- und Entlüftung ist zu gewährleisten.\n\nHauptschalter:\t\t\tja, in Tür integriert\nFahrtenzähler:\t\t\tja, in Tür integriert\nBetriebsstundenzähler:\t\tja, in Tür integriert\nPlantasche:\t\t\tja, in Tür integriert\nBelüftung:\t\t\tLüfter (Zu-/Abluft)\nReserve:\t\t\tmin. 1 Hutschiene"
+    },
+    {
+      "id": "steuerung",
+      "titel": "Steuerung",
+      "typ": "pflicht",
+      "text": "Aufzugssteuerung in Mikroprozessortechnik aus EU-Produktion mit allen Bedienungs- und Anzeigeeinrichtungen. Kommunikation der Komponenten in Bus-Technik.\nSchütze und Relais sollen nur für die Bauteile eingesetzt werden, für die die DIN EN 81 dieses vorschreibt. Die zu liefernde Steuerung muss der elektromagnetischen Verträglichkeit gem. EN 12015 / 12016 entsprechen\nDie Steuerung muss ein fest verbautes Klartextdisplay enthalten, um auf besondere Hilfsmittel oder Werkzeuge für Wartung, Fehlersuche und Parameteranpassung in der Benutzer- Technikerebene verzichten zu können.\nEine vollständige, deutschsprachige Ausfertigung der möglichen Fehlercodes ist im Rahmen der Dokumentation zu übergeben.\n\nSteuerungsart:\t\t\t1-KS / 2-KS\nStörmeldung:\t\t\tvorbereitet\nPotentialfreie Kontakte:\t\tmind. 3\t\nÜberspannungsschutz:\t\tJa; gem. DIN EN 62305 (VDE \n185-305 (2007)"
+    },
+    {
+      "id": "brandfallsteuerung",
+      "titel": "Brandfallsteuerung",
+      "typ": "pflicht",
+      "text": "Brandfalltyp:\t\t\tErweitert statisch mit Ausweich-\nhaltestelle, volldynamisch\nHauptevakuierungshaltestelle:\tEG / 1.OG / Festlegung folgt\nAusweichhaltestelle:\t\t1. OG\nBei Fertigungsbeginn sind die Vorgaben des aktuellen, genehmigten Brandschutzkonzeptes diesbezüglich abzugleichen."
+    },
+    {
+      "id": "schachtkopierung",
+      "titel": "Schachtkopierung",
+      "typ": "pflicht",
+      "text": "Schachtkopierung kontaktlos in Absolutwertgeber Technik realisieren. Die Fahrstrecke ist mittels Absolutwertgeber zu vermessen und auszuwerten.\n\nAuflösung: \tMillimetergenaue Positionsbestimmung über die gesamte Fahrstrecke.\nFlexibilität:\t\t\tGeeignet für den Einsatz bei \nVariablen Fahrgeschwindig-keiten.\nFahrkomfort:\t\t\tEinfahrt der Kabine in die \nHaltestellen mit Direktfahrt (ohne Nachjustierung).\nSchlupffreier Betrieb: \t\tKeine Abweichungen durch \nSeil- oder Riemenschlupf.\nSpannungsausfallsicherheit:\tKeine Referenzfahrt \nerforderlich, auch nach längerem Spannungsausfall.\nGeräuschloser Betrieb:\t\tVermeidung von Geräuschent-\nwicklung durch rotierende oder bewegliche Teile.\nWartungsfrei:\t\t\tKein Verschleiß durch \nberührungsloses Funktionsprinzip.\n\nDas System muss robust gegenüber Verschmutzungen, Vibrationen und elektromagnetischen Störungen sein.\nBieterspezifische Abweichungen sind im Angebotsschreiben aufzuführen."
+    },
+    {
+      "id": "standby_betrieb",
+      "titel": "Standby Betrieb",
+      "typ": "pflicht",
+      "text": "Zur Reduzierung des Energiebedarfs ist ein Standby Betrieb für Aufzugssteuerung und -regelung sowie Signalisation vorzusehen. Die diesbezügliche technische Dokumentation ist mit dem Angebot einzureichen"
+    },
+    {
+      "id": "fahrkorblichtabschaltung",
+      "titel": "Fahrkorblichtabschaltung",
+      "typ": "pflicht",
+      "text": "Das Fahrkorblicht wird 5 Minuten nach der Beendigung der letzten Fahrt bei geschlossenen Türen automatisch abgeschaltet. Die Zeit ist vor Ort einstellbar. Bei Rufgabe (innen / außen) wird das Fahrkorblicht wieder aktiviert."
+    },
+    {
+      "id": "parkhaltestelle",
+      "titel": "Parkhaltestelle",
+      "typ": "pflicht",
+      "text": "Der Aufzug ist so zu konzipieren, dass eine Parkhaltestelle programmiert werden kann.\nJe nach Bedürfnis muss diese Parkhaltestelle in der Steuerung einstellbar sein, bzw. geändert werden können."
+    },
+    {
+      "id": "lastmesssystem",
+      "titel": "Lastmesssystem",
+      "typ": "pflicht",
+      "text": "Lieferung und Montage eines Messsystems zur Erfassung der Zuladung und Einbindung in die Steuerung\nVoll-Lastzustände müssen erkannt werden, vorliegende Außenrufe werden nicht bedient, bleiben jedoch gespeichert.\nDie Lastwiegeeinrichtung muss in der Lage sein, bei einer Fahrkorbauslastung von weniger als 40 kg nicht mehr als zwei\nFahrkommandos anzunehmen.\n\nSystem Seilaufzug:\t\tSeilsensoren\nSystem Hydraulikaufzug:\tDrucksensor am Steuerblock\nAuswerteeinheit:\t\tJa"
+    },
+    {
+      "id": "frequenzumrichter_regelung",
+      "titel": "Frequenzumrichter / Regelung",
+      "typ": "pflicht",
+      "text": "Ein für die Wandmontage geeigneter FU mit festem oder mobilen Programmdisplay, Netzfilter sowie Leistungsreserve und Rückspeiseoption ins Netz.\n\nAlternativ, Frequenzumrichter im Schachtkopf platzieren.\n\nElektronische, feldorientierte Regelung \nDas System soll die Motorspannung und die Motorfrequenz regeln.\nDurch die Regelung soll der Motor für alle Lastverhältnisse ein konstantes Drehmoment erzeugen. Ein ruckfreies, stufenloses Anfahren und Abbremsen müssen gewährleistet sein.\nDer Aufzug soll ohne Schleichfahrt mit einer Anhalte-Genauigkeit von +/- 5 mm direkt in die Haltestellen einfahren.\nDas System ist für …. Fahrten/Stunde auszulegen\nDie Regelung soll auch bei Netzspannungsschwankungen von +/- 10 % funktionsfähig bleiben.\nEntstör-Filter zur Vermeidung von Netzbeeinflussung sind vorzusehen.\n\nLeistungsreserve: mind. 10 %\n(Leistungsreserve muss nachgewiesen werden.)"
+    },
+    {
+      "id": "schachtinstallation_elektro",
+      "titel": "Schachtinstallation (Elektro)",
+      "typ": "pflicht",
+      "text": "Installation erfolgt ausschließlich im Kabelkanal \nIm Wegebereich sind angeschrägte und trittfeste Kanäle vorzusehen, bzw. sind Kabelkanäle trittfest (reversibel) abzudecken.\nKabelkanäle:\t\t\tJa- Dimensionierung nach \nErfordernis\nInstallation halogenfrei:\t\tnein\nSteckdose in Schachtgrube:\tja\nPotentialausgleichsschiene:\tja\nUnterkonstruktion für Kabelkanal \nbei Glasschächten:\t\tja\nMaterial UK:\t\t\tEdelstahlblech"
+    },
+    {
+      "id": "schachtbeleuchtung",
+      "titel": "Schachtbeleuchtung",
+      "typ": "pflicht",
+      "text": "Schachtbeleuchtung in energieeffizienter LED-Technik als Tasterschaltung von drei Schaltstellen bedienbar ausführen.\n\nBedienstellen:\nFahrkorbdach\nTriebwerksraum / Steuerung\nGrube"
+    },
+    {
+      "id": "verzoegerungskontrollschaltung",
+      "titel": "Verzögerungskontrollschaltung / Temporäre Schutzräume",
+      "typ": "pflicht",
+      "text": "Systembedingte Maßnahmen zur Generierung temporärer Schutzräume (Schachtkopf / Schachtgrube) sowie benötigte Verzögerungskontrollschaltungen sind im Leistungsumfang enthalten."
+    },
+    {
+      "id": "elektroinstallation_fahrkorb",
+      "titel": "Elektroinstallation (Fahrkorb)",
+      "typ": "pflicht",
+      "text": "Die Installation erfolgt in Kabelkanälen oder Installationsrohr. \nIm Wegebereich sind angeschrägte und trittfeste Kanäle bzw. reversible trittfeste Abdeckungen vorzusehen.\n\nKabelkanäle:\t\t\tKunststoff \nInstallationsrohr:\t\tstarr / flexibel\nInstallation halogenfrei:\t\tnein\nReservesteckdosen:\t\t2 Stück (separat abgesichert)"
+    },
+    {
+      "id": "energie_komfortfunktionen",
+      "titel": "Energie- und Komfortfunktionen",
+      "typ": "pflicht",
+      "text": "Originaltext fehlt"
+    },
+    {
+      "id": "installation",
+      "titel": "Installation",
+      "typ": "pflicht",
+      "text": "Originaltext fehlt"
+    },
+    {
+      "id": "bedienstellen_anzeigen",
+      "titel": "Bedienstellen und Anzeigen",
+      "typ": "pflicht",
+      "text": "Originaltext fehlt"
+    },
+    {
+      "id": "allgemeine_anforderungen",
+      "titel": "Allgemeine Anforderungen",
+      "typ": "pflicht",
+      "text": "Originaltext fehlt"
+    },
+    {
+      "id": "fahrkorbtableau_vertikal",
+      "titel": "Fahrkorbtableau vertikal",
+      "typ": "pflicht",
+      "text": "Flächenbündiges aufgesetztes Vertikaltableau gemäß DIN EN 81-70 als raumhohes halbhohes Paneel mit sichtbarer verdeckter Befestigung und Punktmatrix TFT- Anzeige.\n\nDeckplatte\nMaterial:\t\t\tEdelstahl / Glas / Carbon\nMaterialstärke:\t\t\t1,5 mm\nDekor / Farbe:\t\t\tgeschliffen / schwarz\nBreite:\t\t\t\tgemäß Hersteller\nMontageart:\t\t\tflächenbündig U-Form, \naufgesetzt\nBefestigung:\t\t\tSterntorx sichtbar\nAnzeige:\t\t\tPunktmatrix oder TFT-Display      \nAnzeigegröße:\t\t\tgemäß Hersteller\nKartenleser:\t\t\tnein\nPiktogramm:\t\t\tBrandfallsymbol / DIN EN 81-73 / graviert: \t\t\tJa\nNorm:\t\t\t\tDIN EN 81-70 / DIN EN 81-71 \nKategorie 2\n\nTasterelement\nForm:\t\t\t\tRund\nGrossflächentaster:\t\tnein\t\nTaktil:\t\t\t\tja\nBrailleschrift:\t\t\tnein\nTastkappe:\t\t\tgemäß Norm\t\nQuittung:\t\t\tBicolor / weiss / rot\nNorm:\t\t\t\tDIN EN 81-70 / DIN EN 81-71 \nKategorie 2\n\nAusstattung\nRufbezeichnung:\t\tE/1/2/3/4 usw.\nTür auf / Tür zu:\t\tja\nHauptzugang:\t\t\terhaben „grün\"\nInnenvorzug:\t\t\tja, inkl. Eurozylinder\nRufanordnung:\t\t\t1-reihig bzw. 2-reihig\nNotruftaster Höhe:\t\tmin. 850 mm"
+    },
+    {
+      "id": "infofeld_fahrkorbtableau",
+      "titel": "Infofeld neben den Etagentastern Fahrkorbtableau",
+      "typ": "pflicht",
+      "text": "Infofeld mit Plexiglasabdeckung zur Aufnahme einer Folie mit bauseitig noch festzulegendem Text (Vorstand, Information etc.)\nForm:\t\t\t\tEckig\nHinterleuchtet:\t\t\tja, LED\t"
+    },
+    {
+      "id": "befehlsgeber_aussenruf",
+      "titel": "Befehlsgeber (Außenruf)",
+      "typ": "pflicht",
+      "text": "Befehlsgebertableau 2 mm aufgesetzt flächenbündig in Mauerumfassungszarge, Türzarge mit unsichtbarer sichtbarer Befestigung und Ruftastern inkl. graviertem Brandfallpiktogramm. \n\nNicht mehr benötigte Öffnungen abgängiger Außenrufe / Anzeigen sind mit einem Edelstahlblech zu verschließen\n\nAusführung gemäß DIN EN 81-71 Kategorie 2.\n\nMontage und Art der Befehlsgeber gemäß DIN EN 81-70.\n\nDeckplatte\nMaterial:\t\tEdelstahl / Bieterstandard / Glas \n/ Carbon\nMaterialstärke:\t\t\t2 mm\nDekor / Farbe:\t\t\tgeschliffen / schwarz \nBreite:\t\t\t\tBieterstandard / ca. 80 mm\nHöhe:\t\t\t\tBieterstandard / ca. 150 mm\nBefestigung:\t\t\tSterntorx / unsichtbar\nNorm:\t\t\t\tDIN EN 81-70 / DIN EN 81-73 / \nDIN EN 81-71 Kategorie 2\nPiktogramm:\t\t\tBrandfallsymbol graviert \nAnzahl Ruftaster:\t\t1 oder 2\nSchlüsselschalter:\t\tnein\n\nTasterelement\nForm:\t\t\t\tRund\nGrossflächentaster:\t\tnein\t\nTaktil:\t\t\t\tja\nBrailleschrift:\t\t\tnein\nTastkappe:\t\t\tgemäß Norm\t\nQuittung:\t\t\tBieterstandard / Bicolor \nNorm:\t\t\t\tDIN EN 81-70 / DIN EN 81-71 \nKategorie 2\nEinbauhöhe Taster:\t\tmin. 850 mm ab OKFF\t"
+    },
+    {
+      "id": "standanzeige_aussen",
+      "titel": "Stand- und Weiterfahrtanzeige Außen",
+      "typ": "pflicht",
+      "text": "Display:\t\t\tPunktmatrix / TFT\nGröße:\t\t\t\tBieterstandard\t\nDeckplatte:\t\tEdelstahl / Bieterstandard / Glas \n/ Carbon\nDekor / Farbe:\t\t\tgeschliffen / schwarz \nBefestigung:\t\t\tBieterstandard / Verdeckt / \nSterntorx\nHaltestellen:\t\t\tAlle Haltestellen, \nHauptzugangsstelle"
+    }
+  ],
+  "optionaleModule": [
+    {
+      "id": "kartenleser",
+      "titel": "Kartenleser",
+      "typ": "optional",
+      "text": ""
+    },
+    {
+      "id": "sonderanzeigen",
+      "titel": "Sonderanzeigen",
+      "typ": "optional",
+      "text": ""
+    },
+    {
+      "id": "sondersteuerung",
+      "titel": "Sondersteuerung",
+      "typ": "optional",
+      "text": ""
+    }
+  ]
+}

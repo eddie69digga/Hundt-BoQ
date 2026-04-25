@@ -1,0 +1,65 @@
+{
+  "id": "antrieb",
+  "titel": "Antriebseinheit",
+  "kurztext": "Antriebseinheit - Lieferung und Montage einer gearless Seilantriebseinheit",
+  "mengeneinheit": "Stk",
+  "positionstyp": "hauptposition",
+  "preislogik": "eine_position",
+  "fliesstext": "Lieferung und Montage einer kompletten, betriebsbereiten Antriebseinheit fuer Seilaufzuege in getriebeloser Technologie. Der Leistungsumfang umfasst die Antriebstechnik einschliesslich aller erforderlichen Komponenten zur sicheren, normgerechten und funktionsfaehigen Integration in die Aufzugsanlage.",
+  "module": [
+    {
+      "id": "antrieb_seil",
+      "titel": "Antrieb Seil",
+      "typ": "pflicht",
+      "text": "MRL - Seil Synchron\nTreibscheibenantrieb in getriebeloser Technologie mit Leistungsreserve auf einer koerperschallentkoppelten Lagerung.\n\nDer Antrieb steht auf einer mitzuliefernden Stahltraegerkonstruktion / Fuehrungsschienensystem.\n\nAntriebsart:\t\t\t\tgetriebelos\nAntriebstyp:\t\t\t\tgemaess Bieterstandard\nGeregelt:\t\t\t\tJa\nBelueftung:\t\t\t\tohne Fremdbelueftung\nBremse:\t\t\t\tZwei-Kreis Haltebremse\nBremslueftung Notfall:\t\tElektrisch\nMontageart:\t\t\t\tauf Unterkonstruktion\nAufhaengung:\t\t\t\ts. techn. Daten\nLeistungsreserve:\t\t\tmind. 10 %\n(Leistungsreserve muss nachgewiesen werden.)"
+    },
+    {
+      "id": "ucm_schutzeinrichtung",
+      "titel": "Schutz gegen unkontrollierte Bewegung des Fahrkorbes (UCM)",
+      "typ": "pflicht",
+      "text": "Die Aufzugsanlage muss mit einer Schutzeinrichtung - direkt auf die Treibscheibenwelle wirkend - gegen unbeabsichtigte Bewegung des Fahrkorbes von der Haltestelle weg ausgestattet sein."
+    },
+    {
+      "id": "umlenkrollen_gegengewicht",
+      "titel": "Umlenkrollen Gegengewicht",
+      "typ": "pflicht",
+      "text": "Die Umlenkrollen sind neu zu lagern und zu erneuern.\n\nAnzahl:\t\t\t\ts. Anlagenzeichnung\nDurchmesser:\t\t\ts. Anlagenzeichnung\nKunststoff:\t\t\t\tnein"
+    },
+    {
+      "id": "gegengewichtsverkleidung",
+      "titel": "Gegengewichtsverkleidung",
+      "typ": "pflicht",
+      "text": "Ausfuehrung entsprechend EN 81-20 5.2.5.5.1\n\nHoehe:\t\t\t\tmin. 2000 mm\nMaterial:\t\t\tStahlblech verzinkt\nAusfuehrung:\t\t\tGlattblech\nMaterialstaerke:\t\t\tmin. 1,5 mm"
+    },
+    {
+      "id": "geschwindigkeitsbegrenzer",
+      "titel": "Geschwindigkeitsbegrenzer im Aufzugsschacht",
+      "typ": "pflicht",
+      "text": "Geschwindigkeitsbegrenzer zur Ausloesung der Fangvorrichtung bei Ueberschreitung der Nenngeschwindigkeit. Ausgestattet mit Sicherheitskontakten, Spanngewicht, Begrenzerseil sowie allen erforderlichen Befestigungsteilen und Schutzvorrichtungen.\n\nSpanngewicht:\t\t\tJa\nBegrenzerseil:\t\t\tJa\nEinfallschutz:\t\t\tJa\nReglerspanngewichtsschalter:\tJa\nSeilabsprungsicherung:\t\tJa\nBefestigungsmaterial:\t\tJa"
+    },
+    {
+      "id": "oelauffangschalen",
+      "titel": "Oelauffangschalen",
+      "typ": "pflicht",
+      "text": "Oelauffangschalen aus Kunststoff an den unteren Schienenenden liefern und montieren."
+    },
+    {
+      "id": "verzoegerungskontrollschaltung",
+      "titel": "Verzoegerungskontrollschaltung / Temporaere Schutzraeume",
+      "typ": "pflicht",
+      "text": "Systembedingte Massnahmen zur Generierung temporaerer Schutzraeume (Schachtkopf / Schachtgrube) sowie benoetigte Verzoegerungskontrollschaltungen sind im Leistungsumfang enthalten."
+    },
+    {
+      "id": "umlenkrollen_fahrkorb",
+      "titel": "Umlenkrollen Fahrkorb",
+      "typ": "pflicht",
+      "text": "Die Umlenkrollen sind neu zu lagern und zu reinigen.\n\nAnzahl:\t\t\t\ts. Anlagenzeichnung\nDurchmesser:\t\t\ts. Anlagenzeichnung\nKunststoff:\t\t\t\tnein"
+    },
+    {
+      "id": "tragmittel_aufhaengung",
+      "titel": "Tragmittel / Aufhaengung",
+      "typ": "pflicht",
+      "text": "Die Tragmittel sind zu erneuern.\nDie Tragseile sind so auszulegen, dass eine hohe Standzeit erzielt wird.\n\nDie Auslegung der Tragseile erfolgt auf Basis den DIN 15020.\n\nDie Tragseile sind ueber separat nachspannbare Aufhaengungen am Fangrahmen und am Gegengewicht zu befestigen.\n\nZur Befestigung der Tragmittel an Aufzuegen werden Seilenden mit Kausche nach DIN 3090 mithilfe einer Augenschraube bzw. Oesenstange, Druckfedern, Federtellern, Muttern und Splinten montiert und gegen Verdrehen gesichert.\n\nTragmittel:\t\t\tSeil / Gurt\nKunststoffummantelte Seile\nZulaessig:\t\t\tja / nein\nAnzahl:\t\t\t\tgemaess Auslegung\nDurchmesser:\t\t\tgemaess Auslegung\nDer Lebenszyklus der Gurte in Bezug auf Anzahl Fahrten oder Jahre ist ebenfalls anzugeben."
+    }
+  ]
+}
