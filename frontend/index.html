@@ -272,6 +272,44 @@
       margin-top: 16px;
     }
 
+    .import-panel {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      background: #f9fafb;
+    }
+
+    .import-panel h3 {
+      margin: 0 0 6px;
+      font-size: 0.98rem;
+      color: #1f2937;
+    }
+
+    .import-panel p {
+      margin: 0;
+      color: var(--muted-color);
+      font-size: 0.9rem;
+    }
+
+    .cloud-export-select {
+      flex: 1 1 280px;
+      min-height: 46px;
+      padding: 0 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--text-color);
+      font: inherit;
+      box-sizing: border-box;
+    }
+
+    .cloud-export-select:disabled {
+      background: #f3f4f6;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+
     #jsonFile {
       position: absolute;
       width: 1px;
@@ -842,6 +880,15 @@
         <span id="fileNameDisplay" class="file-name-display" aria-live="polite">Keine Datei ausgewählt</span>
         <button id="importButton" type="button">JSON importieren</button>
       </div>
+      <div class="import-panel" aria-labelledby="cloud-import-heading">
+        <h3 id="cloud-import-heading">Cloud-Export laden</h3>
+        <p>Verfügbare Exporte werden anhand des eingeloggten Benutzers automatisch geladen.</p>
+        <div class="import-controls">
+          <select id="cloudExportSelect" class="cloud-export-select" aria-label="Cloud-Export auswählen" disabled>
+            <option value="">Keine Cloud-Exporte verfügbar</option>
+          </select>
+        </div>
+      </div>
       <p class="hint">Erwartet wird die exportierte JSON-Struktur mit projekt, anlage, technik, pakete, kalkulation und meta.</p>
       <div id="status" aria-live="polite">
         <div id="backendStatus" class="status-card status-idle">
@@ -908,6 +955,7 @@
       selectFileButton: document.getElementById('selectFileButton'),
       fileNameDisplay: document.getElementById('fileNameDisplay'),
       importButton: document.getElementById('importButton'),
+      cloudExportSelect: document.getElementById('cloudExportSelect'),
       backendStatus: document.querySelector('#backendStatus p'),
       backendStatusCard: document.getElementById('backendStatus'),
       importStatus: document.querySelector('#importStatus p'),
@@ -933,6 +981,7 @@
       elements.loginContainer.classList.add('hidden');
       elements.appContainer.classList.remove('hidden');
       elements.loginError.textContent = '';
+      loadCloudExportOptions(username);
     }
 
     function getStoredUsername() {
@@ -987,6 +1036,7 @@
     function handleLogout() {
       localStorage.removeItem(AUTH_STORAGE_KEY);
       elements.loginPassword.value = '';
+      resetCloudExportOptions('Bitte zuerst einloggen');
       showLoginView('');
     }
 
@@ -1003,6 +1053,63 @@
     function setStatus(card, textNode, type, message) {
       card.className = `status-card status-${type}`;
       textNode.textContent = message;
+    }
+
+    function resetCloudExportOptions(placeholder = 'Keine Cloud-Exporte verfügbar') {
+      elements.cloudExportSelect.innerHTML = '';
+      const option = document.createElement('option');
+      option.value = '';
+      option.textContent = placeholder;
+      elements.cloudExportSelect.appendChild(option);
+      elements.cloudExportSelect.value = '';
+      elements.cloudExportSelect.disabled = true;
+    }
+
+    function populateCloudExportOptions(exportsList) {
+      resetCloudExportOptions('Cloud-Export auswählen');
+
+      exportsList.forEach((entry) => {
+        const option = document.createElement('option');
+        option.value = entry.export_id;
+        option.textContent = `${fallbackValue(entry.project_number)} - ${fallbackValue(entry.project_name)}`;
+        elements.cloudExportSelect.appendChild(option);
+      });
+
+      elements.cloudExportSelect.disabled = exportsList.length === 0;
+      if (!exportsList.length) {
+        elements.cloudExportSelect.options[0].textContent = 'Keine Cloud-Exporte verfügbar';
+      }
+    }
+
+    async function loadCloudExportOptions(username = getStoredUsername()) {
+      const normalizedUsername = typeof username === 'string' ? username.trim() : '';
+
+      if (!normalizedUsername) {
+        resetCloudExportOptions('Bitte zuerst einloggen');
+        return;
+      }
+
+      resetCloudExportOptions('Cloud-Exporte werden geladen...');
+
+      try {
+        const params = new URLSearchParams({ username: normalizedUsername });
+        const response = await fetch(buildApiUrl(`/api/xl-exports?${params.toString()}`));
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok || payload?.success !== true || !Array.isArray(payload?.exports)) {
+          throw new Error(payload?.error || 'Cloud-Exporte konnten nicht geladen werden.');
+        }
+
+        populateCloudExportOptions(payload.exports);
+      } catch (error) {
+        resetCloudExportOptions('Cloud-Exporte konnten nicht geladen werden');
+        setStatus(
+          elements.importStatusCard,
+          elements.importStatus,
+          'error',
+          error?.message || 'Cloud-Exporte konnten nicht geladen werden.'
+        );
+      }
     }
 
     function fallbackValue(value) {
@@ -1472,7 +1579,7 @@
       };
     }
 
-    function applyImportData(data) {
+    function applyImportData(data, sourceLabel = 'Datei') {
       const validation = validateImportData(data);
 
       if (!validation.isValid) {
@@ -1492,13 +1599,81 @@
           elements.importStatusCard,
           elements.importStatus,
           'warning',
-          `Datei erfolgreich geladen. ${validation.warnings.join(' ')}`
+          `${sourceLabel} erfolgreich geladen. ${validation.warnings.join(' ')}`
         );
         return validation;
       }
 
-      setStatus(elements.importStatusCard, elements.importStatus, 'success', 'Datei erfolgreich geladen. Import erfolgreich.');
+      setStatus(elements.importStatusCard, elements.importStatus, 'success', `${sourceLabel} erfolgreich geladen. Import erfolgreich.`);
       return validation;
+    }
+
+    function extractCloudImportData(exportPayload) {
+      if (!exportPayload || typeof exportPayload !== 'object' || Array.isArray(exportPayload)) {
+        return null;
+      }
+
+      const directValidation = validateImportData(exportPayload);
+      if (directValidation.isValid) {
+        return exportPayload;
+      }
+
+      const nestedData = exportPayload.daten;
+      if (nestedData && typeof nestedData === 'object' && !Array.isArray(nestedData)) {
+        const nestedValidation = validateImportData(nestedData);
+        if (nestedValidation.isValid) {
+          return nestedData;
+        }
+      }
+
+      return null;
+    }
+
+    async function handleCloudExportSelection(event) {
+      const exportId = event.target.value;
+      const username = getStoredUsername();
+
+      if (!exportId) {
+        return;
+      }
+
+      if (!username) {
+        resetCloudExportOptions('Bitte zuerst einloggen');
+        setStatus(elements.importStatusCard, elements.importStatus, 'error', 'Benutzername fehlt. Bitte erneut einloggen.');
+        return;
+      }
+
+      setStatus(elements.importStatusCard, elements.importStatus, 'idle', 'Cloud-Export wird geladen...');
+
+      try {
+        const params = new URLSearchParams({ username });
+        const response = await fetch(buildApiUrl(`/api/xl-exports/${encodeURIComponent(exportId)}?${params.toString()}`));
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok || payload?.success !== true || !payload?.export || typeof payload.export !== 'object') {
+          throw new Error(payload?.error || 'Cloud-Export konnte nicht geladen werden.');
+        }
+
+        const importData = extractCloudImportData(payload.export.data);
+        if (!importData) {
+          throw new Error('Cloud-Export ist nicht mit dem BoQ-Importformat kompatibel.');
+        }
+
+        logImportSnapshot(importData, 'cloud export');
+        applyImportData(importData, 'Cloud-Export');
+
+        const selectedLabel = event.target.selectedOptions[0]?.textContent || exportId;
+        elements.fileNameDisplay.textContent = selectedLabel;
+        elements.fileNameDisplay.classList.add('has-file');
+      } catch (error) {
+        clearImportViews();
+        setStatus(
+          elements.importStatusCard,
+          elements.importStatus,
+          'error',
+          error?.message || 'Cloud-Export konnte nicht geladen werden.'
+        );
+      }
     }
 
     async function readSelectedFile() {
@@ -1770,6 +1945,7 @@
     elements.selectFileButton.addEventListener('click', () => elements.fileInput.click());
 
     elements.importButton.addEventListener('click', readSelectedFile);
+    elements.cloudExportSelect.addEventListener('change', handleCloudExportSelection);
     elements.wordExportButton.addEventListener('click', triggerSteuerungWordExport);
     elements.gaebExportButton.addEventListener('click', triggerX83Export);
     elements.x83TestExportButton.addEventListener('click', triggerX83TestExport);
@@ -1790,6 +1966,7 @@
 
     window.addEventListener('load', () => {
       clearImportViews();
+      resetCloudExportOptions('Bitte zuerst einloggen');
       checkBackend();
       activatePage('import');
       initializeAuthGate();
