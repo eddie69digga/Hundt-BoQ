@@ -5,6 +5,7 @@ const os = require('node:os');
 const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 const { Document, Packer, Paragraph, TextRun, TabStopType, HeadingLevel, UnderlineType, AlignmentType, Table, TableRow, TableCell, BorderStyle, WidthType, VerticalAlign, ShadingType, ImageRun } = require('docx');
+const { createClient } = require('@supabase/supabase-js');
 const { buildX83Model, buildX83Document, buildX83Filename } = require('./gaeb/x83-mapping');
 
 const app = express();
@@ -44,6 +45,22 @@ function loadEnvFileIfPresent() {
 }
 
 loadEnvFileIfPresent();
+
+// --- Supabase Initialization ---
+let supabase = null;
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (supabaseUrl && supabaseKey) {
+  try {
+    supabase = createClient(supabaseUrl, supabaseKey);
+    console.log('✓ Supabase Client initialisiert');
+  } catch (error) {
+    console.error('✗ Supabase Initialisierung fehlgeschlagen:', error.message);
+  }
+} else {
+  console.warn('⚠ Supabase nicht konfiguriert (SUPABASE_URL oder SUPABASE_SERVICE_ROLE_KEY fehlt)');
+}
 
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
@@ -2183,6 +2200,140 @@ app.post('/api/validate-x83-test', handleX83TestSchemaValidation);
 
 // Legacy alias mapped to the new X83 exporter for backwards compatibility.
 app.get('/api/export-gaeb', handleX83Export);
+
+// --- Supabase XL-Exports API ---
+
+// Helper: Validate username
+function validateUsername(username) {
+  const allowedUsers = ['admin', 'testuser'];
+  return allowedUsers.includes(username);
+}
+
+// Endpoint: List all XL exports for a user
+// GET /api/xl-exports?username=admin
+app.get('/api/xl-exports', async (req, res) => {
+  try {
+    const username = typeof req.query.username === 'string' ? req.query.username.trim() : '';
+
+    if (!username) {
+      return res.status(400).json({
+        success: false,
+        error: 'username erforderlich'
+      });
+    }
+
+    if (!validateUsername(username)) {
+      return res.status(403).json({
+        success: false,
+        error: 'Unbekannter Nutzer'
+      });
+    }
+
+    if (!supabase) {
+      return res.status(503).json({
+        success: false,
+        error: 'Supabase nicht verfügbar'
+      });
+    }
+
+    // Query Supabase
+    const { data, error } = await supabase
+      .from('xl_exports')
+      .select('export_id,project_number,project_name,updated_at')
+      .eq('username', username)
+      .order('updated_at', { ascending: false });
+
+    if (error) {
+      console.error('[XL-Exports] Abfragefehler:', error.message);
+      return res.status(500).json({
+        success: false,
+        error: 'Datenbankabfrage fehlgeschlagen'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      exports: data || []
+    });
+  } catch (error) {
+    console.error('[XL-Exports] Fehler:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'Interner Fehler'
+    });
+  }
+});
+
+// Endpoint: Get single XL export detail
+// GET /api/xl-exports/<exportId>?username=admin
+app.get('/api/xl-exports/:exportId', async (req, res) => {
+  try {
+    const username = typeof req.query.username === 'string' ? req.query.username.trim() : '';
+    const exportId = typeof req.params.exportId === 'string' ? req.params.exportId.trim() : '';
+
+    if (!username) {
+      return res.status(400).json({
+        success: false,
+        error: 'username erforderlich'
+      });
+    }
+
+    if (!exportId) {
+      return res.status(400).json({
+        success: false,
+        error: 'exportId erforderlich'
+      });
+    }
+
+    if (!validateUsername(username)) {
+      return res.status(403).json({
+        success: false,
+        error: 'Unbekannter Nutzer'
+      });
+    }
+
+    if (!supabase) {
+      return res.status(503).json({
+        success: false,
+        error: 'Supabase nicht verfügbar'
+      });
+    }
+
+    // Query Supabase - get exact record
+    const { data, error } = await supabase
+      .from('xl_exports')
+      .select('export_id,project_number,project_name,data')
+      .eq('username', username)
+      .eq('export_id', exportId)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // No rows found
+        return res.status(404).json({
+          success: false,
+          error: 'Export nicht gefunden'
+        });
+      }
+      console.error('[XL-Export-Detail] Abfragefehler:', error.message);
+      return res.status(500).json({
+        success: false,
+        error: 'Datenbankabfrage fehlgeschlagen'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      export: data
+    });
+  } catch (error) {
+    console.error('[XL-Export-Detail] Fehler:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'Interner Fehler'
+    });
+  }
+});
 
 app.listen(port, () => {
   console.log(`BoQ Backend laeuft auf Port ${port}`);
