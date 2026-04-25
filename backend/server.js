@@ -10,6 +10,41 @@ const { buildX83Model, buildX83Document, buildX83Filename } = require('./gaeb/x8
 const app = express();
 const port = 3001;
 
+function loadEnvFileIfPresent() {
+  const envPath = path.join(__dirname, '.env');
+  if (!fs.existsSync(envPath)) {
+    return;
+  }
+
+  const raw = fs.readFileSync(envPath, 'utf8');
+  const lines = raw.split(/\r?\n/);
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) {
+      continue;
+    }
+
+    const eqIndex = trimmed.indexOf('=');
+    if (eqIndex <= 0) {
+      continue;
+    }
+
+    const key = trimmed.slice(0, eqIndex).trim();
+    let value = trimmed.slice(eqIndex + 1).trim();
+
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+
+    if (!(key in process.env)) {
+      process.env[key] = value;
+    }
+  }
+}
+
+loadEnvFileIfPresent();
+
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 app.get('/', (req, res) => {
@@ -39,6 +74,44 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     app: 'BoQ',
+  });
+});
+
+app.post('/api/login', (req, res) => {
+  const username = typeof req.body?.username === 'string' ? req.body.username.trim() : '';
+  const password = typeof req.body?.password === 'string' ? req.body.password : '';
+
+  const envVarByUser = {
+    admin: 'ADMIN_PASSWORD',
+    testuser: 'TESTUSER_PASSWORD',
+  };
+
+  const passwordEnvName = envVarByUser[username];
+  if (!passwordEnvName) {
+    return res.status(401).json({
+      success: false,
+      message: 'Login fehlgeschlagen',
+    });
+  }
+
+  const configuredPassword = process.env[passwordEnvName];
+  if (!configuredPassword) {
+    return res.status(500).json({
+      success: false,
+      message: 'Login-Konfiguration fehlt',
+    });
+  }
+
+  if (password !== configuredPassword) {
+    return res.status(401).json({
+      success: false,
+      message: 'Login fehlgeschlagen',
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    username,
   });
 });
 
