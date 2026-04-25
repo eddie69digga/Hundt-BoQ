@@ -982,6 +982,7 @@
       elements.appContainer.classList.remove('hidden');
       elements.loginError.textContent = '';
       loadCloudExportOptions(username);
+      void tryAutoImportFromUrl();
     }
 
     function getStoredUsername() {
@@ -990,6 +991,88 @@
         return '';
       }
       return stored.trim();
+    }
+    function readAutoImportParams() {
+      const params = new URLSearchParams(window.location.search || '');
+      const exportId = String(params.get('export_id') || '').trim();
+      const username = String(params.get('username') || '').trim();
+
+      return {
+        exportId,
+        username,
+      };
+    }
+
+    let autoImportDone = false;
+
+    async function tryAutoImportFromUrl() {
+      if (autoImportDone) {
+        return;
+      }
+
+      const autoParams = readAutoImportParams();
+      if (!autoParams.exportId) {
+        return;
+      }
+
+      const storedUsername = getStoredUsername();
+      if (!storedUsername) {
+        // Auto-Import wird nach erfolgreichem Login erneut versucht.
+        return;
+      }
+
+      const effectiveUsername = autoParams.username || storedUsername;
+      if (!effectiveUsername) {
+        return;
+      }
+
+      if (autoParams.username && autoParams.username !== storedUsername) {
+        setStatus(
+          elements.importStatusCard,
+          elements.importStatus,
+          'error',
+          'URL-Benutzer passt nicht zum eingeloggten Benutzer. Bitte korrekt einloggen.'
+        );
+        autoImportDone = true;
+        return;
+      }
+
+      autoImportDone = true;
+      setStatus(elements.importStatusCard, elements.importStatus, 'idle', 'Projekt wird automatisch geladen...');
+
+      try {
+        const params = new URLSearchParams({ username: effectiveUsername });
+        const response = await fetch(
+          buildApiUrl(`/api/xl-exports/${encodeURIComponent(autoParams.exportId)}?${params.toString()}`)
+        );
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok || payload?.success !== true || !payload?.export || typeof payload.export !== 'object') {
+          throw new Error(payload?.error || 'Automatischer Cloud-Export konnte nicht geladen werden.');
+        }
+
+        const importData = extractCloudImportData(payload.export.data);
+        if (!importData) {
+          throw new Error('Automatischer Cloud-Export ist nicht mit dem BoQ-Importformat kompatibel.');
+        }
+
+        applyImportData(importData, 'Cloud-Export');
+        activatePage('positionen');
+
+        const exportLabel = `${fallbackValue(payload?.export?.project_number)} - ${fallbackValue(payload?.export?.project_name)}`;
+        elements.fileNameDisplay.textContent = exportLabel;
+        elements.fileNameDisplay.classList.add('has-file');
+
+        setStatus(elements.importStatusCard, elements.importStatus, 'success', 'Projekt automatisch geladen.');
+      } catch (error) {
+        clearImportViews();
+        setStatus(
+          elements.importStatusCard,
+          elements.importStatus,
+          'error',
+          error?.message || 'Automatischer Cloud-Export konnte nicht geladen werden.'
+        );
+      }
     }
 
     async function handleLoginSubmit(event) {
