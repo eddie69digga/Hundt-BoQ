@@ -1923,7 +1923,9 @@
         const projektnummer = document.getElementById('projektnummer')?.value || '';
         const projektname = document.getElementById('projektname')?.value || '';
 
-        const url = `/api/export-x83-test?projektnummer=${encodeURIComponent(projektnummer)}&projektname=${encodeURIComponent(projektname)}`;
+        const backendBaseUrl = 'https://boq-backend-qkfy.onrender.com';
+
+        const url = `${backendBaseUrl}/api/export-x83-test?projektnummer=${encodeURIComponent(projektnummer)}&projektname=${encodeURIComponent(projektname)}`;
 
         const response = await fetch(url, {
           method: 'POST'
