@@ -291,88 +291,102 @@ function buildPositionLangtext(position) {
   return parts.join('\n');
 }
 
-function buildNormalizedLvPositions(projectData) {
-  const lvPositionen = Array.isArray(projectData?.kalkulation?.lvPositionen)
-    ? projectData.kalkulation.lvPositionen
-    : [];
+function normalizeLvPosition(position, packageFallback = 'Sonstiges') {
+  return {
+    paket: firstNonEmptyString([position?.paket, packageFallback], 'Sonstiges'),
+    id: firstNonEmptyString([position?.id, position?.key, position?.lvTextKey, position?.roh?.name], ''),
+    bezeichnung: firstNonEmptyString([
+      position?.bezeichnung,
+      position?.roh?.bezeichnung,
+      position?.key,
+      position?.id,
+      position?.lvTextKey,
+    ], 'Position'),
+    menge: normalizeQuantity(position?.anzahl ?? position?.menge ?? position?.qty ?? position?.roh?.anzahl),
+    einheit: firstNonEmptyString([position?.einheit, position?.qu, position?.roh?.einheit], 'Stk'),
+    langtext: buildPositionLangtext(position),
+    lvTextKey: firstNonEmptyString([position?.lvTextKey, position?.key], ''),
+  };
+}
 
-  if (lvPositionen.length > 0) {
-    return lvPositionen.map((position) => ({
-      paket: firstNonEmptyString([position?.paket], 'Sonstiges'),
-      id: firstNonEmptyString([position?.id, position?.key, position?.lvTextKey], ''),
-      bezeichnung: firstNonEmptyString([position?.bezeichnung, position?.id, position?.lvTextKey], 'Position'),
-      menge: normalizeQuantity(position?.anzahl ?? position?.menge ?? position?.qty),
-      einheit: firstNonEmptyString([position?.einheit, position?.qu], 'Stk'),
-      langtext: buildPositionLangtext(position),
-      lvTextKey: firstNonEmptyString([position?.lvTextKey], ''),
-    }));
-  }
-
+function buildFallbackPositionsByPackage(projectData) {
+  const fallbackGroups = new Map();
   const paketSummen = Array.isArray(projectData?.kalkulation?.paketSummen)
     ? projectData.kalkulation.paketSummen
     : [];
 
-  const flattened = [];
   for (const paketEintrag of paketSummen) {
-    const paketName = firstNonEmptyString([paketEintrag?.paket], 'Sonstiges');
+    const packageKey = normalizePackageKey(paketEintrag?.paket);
     const positionen = Array.isArray(paketEintrag?.positionen) ? paketEintrag.positionen : [];
-
-    for (const position of positionen) {
-      flattened.push({
-        paket: paketName,
-        id: firstNonEmptyString([position?.id, position?.key], ''),
-        bezeichnung: firstNonEmptyString([position?.bezeichnung, position?.key, position?.id], 'Position'),
-        menge: normalizeQuantity(position?.anzahl ?? position?.menge ?? position?.qty),
-        einheit: firstNonEmptyString([position?.einheit, position?.roh?.einheit], 'Stk'),
-        langtext: buildPositionLangtext(position),
-        lvTextKey: firstNonEmptyString([position?.lvTextKey, position?.key], ''),
-      });
+    if (!positionen.length) {
+      continue;
     }
+
+    fallbackGroups.set(
+      packageKey,
+      positionen.map((position) => normalizeLvPosition(position, paketEintrag?.paket))
+    );
   }
 
-  return flattened;
+  return fallbackGroups;
 }
 
-function buildTitlesFromBoQ(projectData) {
-  const positions = buildNormalizedLvPositions(projectData);
-  if (!positions.length) {
-    return [];
+function buildPositionGroups(projectData) {
+  const lvPositionen = Array.isArray(projectData?.kalkulation?.lvPositionen)
+    ? projectData.kalkulation.lvPositionen
+    : [];
+  const groupedByPackage = new Map();
+
+  for (const rawPosition of lvPositionen) {
+    const normalizedPosition = normalizeLvPosition(rawPosition);
+    const packageKey = normalizePackageKey(normalizedPosition.paket);
+    if (!groupedByPackage.has(packageKey)) {
+      groupedByPackage.set(packageKey, {
+        key: packageKey,
+        label: packageLabelFromKey(packageKey, normalizedPosition.paket),
+        positions: [],
+      });
+    }
+
+    groupedByPackage.get(packageKey).positions.push(normalizedPosition);
   }
 
   const activePackages = Array.isArray(projectData?.pakete?.aktiv) ? projectData.pakete.aktiv : [];
-  const packageOrder = [];
-  const grouped = new Map();
-
+  const expectedOrder = [];
   for (const activePackage of activePackages) {
-    const key = normalizePackageKey(activePackage);
-    if (!packageOrder.includes(key)) {
-      packageOrder.push(key);
+    const packageKey = normalizePackageKey(activePackage);
+    if (packageKey && !expectedOrder.includes(packageKey)) {
+      expectedOrder.push(packageKey);
     }
   }
 
-  for (const position of positions) {
-    const key = normalizePackageKey(position.paket);
-    if (!grouped.has(key)) {
-      grouped.set(key, {
-        key,
-        label: packageLabelFromKey(key, position.paket),
-        items: [],
+  const fallbackGroups = buildFallbackPositionsByPackage(projectData);
+  for (const packageKey of expectedOrder) {
+    if (!groupedByPackage.has(packageKey) && fallbackGroups.has(packageKey)) {
+      groupedByPackage.set(packageKey, {
+        key: packageKey,
+        label: packageLabelFromKey(packageKey),
+        positions: fallbackGroups.get(packageKey),
       });
     }
-
-    grouped.get(key).items.push(position);
-    if (!packageOrder.includes(key)) {
-      packageOrder.push(key);
-    }
   }
 
-  return packageOrder
-    .filter((key) => grouped.has(key))
-    .map((key, titleIndex) => {
-      const group = grouped.get(key);
+  const remainingKeys = Array.from(groupedByPackage.keys()).filter((key) => !expectedOrder.includes(key));
+  const orderedKeys = [...expectedOrder.filter((key) => groupedByPackage.has(key)), ...remainingKeys];
+
+  return orderedKeys.map((key) => groupedByPackage.get(key));
+}
+
+function buildTitlesFromBoQ(projectData) {
+  const groups = buildPositionGroups(projectData);
+  if (!groups.length) {
+    return [];
+  }
+
+  return groups.map((group, titleIndex) => {
       const titleNo = String(titleIndex + 1).padStart(2, '0');
 
-      const items = group.items.map((position, itemIndex) => {
+      const items = group.positions.map((position, itemIndex) => {
         const itemNo = String(itemIndex + 1).padStart(2, '0');
         const kurztext = firstNonEmptyString([position.bezeichnung, position.id, position.lvTextKey], `Position ${itemNo}`);
 
@@ -444,6 +458,13 @@ function buildX83Model(projectData, options = {}) {
         titles: titlesFromBoQ,
       },
     };
+  }
+
+  // Wenn ein BoQ-Kalkulationskontext vorhanden ist, darf X83 nicht auf statische Test-/Legacy-Daten fallen.
+  if (projectData?.kalkulation) {
+    const error = new Error('Keine LV-Positionen im aktuellen BoQ-Datenstand vorhanden.');
+    error.statusCode = 422;
+    throw error;
   }
 
   const baseDir = options.baseDir || process.cwd();
