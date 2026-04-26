@@ -1906,7 +1906,7 @@
       const projectName = sanitizeFilenamePart(projekt.bauvorhaben || projekt.name || projekt.projektname, 'Projekt');
       const projectId = sanitizeFilenamePart(projekt.projektnummer || projekt.id || projekt.projektId, 'NR');
 
-      return `${yy}${mm}${dd}_${hh}${mi}${ss}_${projectName}_${projectId}_x83.xml`;
+      return `${yy}${mm}${dd}_${hh}${mi}${ss}_${projectName}_${projectId}.X83`;
     }
 
     async function triggerX83Export() {

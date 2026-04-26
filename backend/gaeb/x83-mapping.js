@@ -613,7 +613,7 @@ function buildX83Filename(lvMeta) {
   const timeToken = formatTimeForFilename();
   const projectName = sanitizeFilenamePart(lvMeta?.projektName, 'Projekt');
   const projectId = sanitizeFilenamePart(lvMeta?.projektId, 'NR');
-  return `${dateToken}_${timeToken}_${projectName}_${projectId}_x83.xml`;
+  return `${dateToken}_${timeToken}_${projectName}_${projectId}.X83`;
 }
 
 module.exports = {
