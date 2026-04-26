@@ -1929,7 +1929,15 @@
           method: 'POST'
         });
 
+        if (!response.ok) {
+          throw new Error(`HTTP Fehler: ${response.status}`);
+        }
+
         const blob = await response.blob();
+
+        if (blob.size === 0) {
+          throw new Error('Leere Datei vom Server erhalten');
+        }
 
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
@@ -1942,15 +1950,41 @@
         const dd = String(now.getDate()).padStart(2, '0');
         const hh = String(now.getHours()).padStart(2, '0');
         const min = String(now.getMinutes()).padStart(2, '0');
+        const sec = String(now.getSeconds()).padStart(2, '0');
 
-        const timestamp = `${yy}${mm}${dd}_${hh}${min}`;
+        const timestamp = `${yy}${mm}${dd}_${hh}${min}${sec}`;
 
-        const cleanProjektname = projektname.replace(/\s+/g, '_');
-        const cleanProjektnummer = projektnummer.replace(/\s+/g, '_');
+        const projektnameValue =
+          document.getElementById('projektname')?.value ||
+          document.getElementById('bauvorhaben')?.value ||
+          'Projekt';
 
-        link.download = `${timestamp}_${cleanProjektname}_${cleanProjektnummer}.x83`;
+        const ortValue =
+          document.getElementById('ort')?.value ||
+          document.getElementById('stadt')?.value ||
+          'Ort';
+
+        const projektIdValue =
+          document.getElementById('projektnummer')?.value ||
+          document.getElementById('projektId')?.value ||
+          document.getElementById('projekt-id')?.value ||
+          'ProjektID';
+
+        const sanitizeFilenamePart = (value) =>
+          String(value)
+            .trim()
+            .replace(/\s+/g, '_')
+            .replace(/[\\/:*?"<>|]/g, '')
+            .replace(/_+/g, '_');
+
+        const cleanProjektname = sanitizeFilenamePart(projektnameValue);
+        const cleanOrt = sanitizeFilenamePart(ortValue);
+        const cleanProjektId = sanitizeFilenamePart(projektIdValue);
+
+        link.download = `${timestamp}_${cleanProjektname}_${cleanOrt}_${cleanProjektId}.x83`;
 
         link.click();
+        window.URL.revokeObjectURL(link.href);
 
       } catch (err) {
         console.error('X83 Export Fehler:', err);
