@@ -37,6 +37,13 @@ function formatDateForFilename(date = new Date()) {
   return `${year}${month}${day}`;
 }
 
+function formatTimeForFilename(date = new Date()) {
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  return `${hours}${minutes}${seconds}`;
+}
+
 function buildInlineTextElements(text, indent) {
   const normalizedText = String(text || '').replaceAll('\r\n', '\n').replaceAll('\r', '\n');
   const parts = normalizedText.split('\n');
@@ -602,8 +609,11 @@ function buildX83Document(model) {
 }
 
 function buildX83Filename(lvMeta) {
-  const projectId = sanitizeFilenamePart(lvMeta?.projektId, 'projekt');
-  return `${projectId}_x83.xml`;
+  const dateToken = formatDateForFilename();
+  const timeToken = formatTimeForFilename();
+  const projectName = sanitizeFilenamePart(lvMeta?.projektName, 'Projekt');
+  const projectId = sanitizeFilenamePart(lvMeta?.projektId, 'NR');
+  return `${dateToken}_${timeToken}_${projectName}_${projectId}_x83.xml`;
 }
 
 module.exports = {
