@@ -1799,7 +1799,31 @@
       }
     }
 
-    function triggerSteuerungWordExport() {
+    function sanitizeFilenamePart(value) {
+      return String(value || '')
+        .trim()
+        .replaceAll(/[/\\:*?"<>|]/g, '')
+        .replaceAll(/\s+/g, '_')
+        .replaceAll(/_+/g, '_')
+        .replaceAll(/^_|_$/g, '');
+    }
+
+    function buildWordExportFallbackFilename() {
+      const now = new Date();
+      const yy = String(now.getFullYear()).slice(-2);
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const min = String(now.getMinutes()).padStart(2, '0');
+
+      const projekt = (currentData && currentData.projekt) || {};
+      const name = sanitizeFilenamePart(projekt.bauvorhaben || projekt.name || '') || 'Projekt';
+      const nummer = sanitizeFilenamePart(projekt.projektnummer || projekt.id || '') || 'NR';
+
+      return `${yy}${mm}${dd}_${hh}${min}_${name}_${nummer}.docx`;
+    }
+
+    async function triggerSteuerungWordExport() {
       const projekt = (currentData && currentData.projekt) || {};
       const anlage = (currentData && currentData.anlage) || {};
       const auftraggeber = (currentData && currentData.auftraggeber) || {};
@@ -1822,11 +1846,28 @@
       elements.positionsMeta.className = 'meta-row';
       elements.positionsMeta.textContent = 'Word-Export wird erstellt und als Download gestartet...';
 
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+      try {
+        const response = await fetch(downloadUrl);
+        if (!response.ok) {
+          throw new Error('Word-Export fehlgeschlagen.');
+        }
+
+        const fallbackFilename = buildWordExportFallbackFilename();
+        const headerFilename = readDownloadFilename(response.headers.get('Content-Disposition'), fallbackFilename);
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = headerFilename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(blobUrl);
+      } catch {
+        elements.positionsMeta.className = 'meta-row error';
+        elements.positionsMeta.textContent = 'Word-Export fehlgeschlagen. Bitte Backend-Verbindung pruefen.';
+      }
     }
 
     function readDownloadFilename(contentDisposition, fallbackName) {
