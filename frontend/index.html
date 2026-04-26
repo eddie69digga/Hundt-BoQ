@@ -1815,12 +1815,13 @@
       const dd = String(now.getDate()).padStart(2, '0');
       const hh = String(now.getHours()).padStart(2, '0');
       const min = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
 
       const projekt = (currentData && currentData.projekt) || {};
       const name = sanitizeFilenamePart(projekt.bauvorhaben || projekt.name || '') || 'Projekt';
       const nummer = sanitizeFilenamePart(projekt.projektnummer || projekt.id || '') || 'NR';
 
-      return `${yy}${mm}${dd}_${hh}${min}_${name}_${nummer}.docx`;
+      return `${yy}${mm}${dd}_${hh}${min}${ss}_${name}_${nummer}.docx`;
     }
 
     async function triggerSteuerungWordExport() {
@@ -1853,13 +1854,13 @@
         }
 
         const fallbackFilename = buildWordExportFallbackFilename();
-        const headerFilename = readDownloadFilename(response.headers.get('Content-Disposition'), fallbackFilename);
         const blob = await response.blob();
         const blobUrl = URL.createObjectURL(blob);
 
         const link = document.createElement('a');
         link.href = blobUrl;
-        link.download = headerFilename;
+        // Use client-side filename to ensure local timezone and consistent naming.
+        link.download = fallbackFilename;
         document.body.appendChild(link);
         link.click();
         link.remove();

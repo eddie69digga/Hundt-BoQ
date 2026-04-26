@@ -1709,8 +1709,9 @@ function buildExportFilename(query) {
   const dd = String(now.getDate()).padStart(2, '0');
   const hh = String(now.getHours()).padStart(2, '0');
   const min = String(now.getMinutes()).padStart(2, '0');
+  const ss = String(now.getSeconds()).padStart(2, '0');
   const datum = `${yy}${mm}${dd}`;
-  const uhrzeit = `${hh}${min}`;
+  const uhrzeit = `${hh}${min}${ss}`;
 
   const sanitize = (str) =>
     String(str || '')
