@@ -1768,7 +1768,7 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
   const lvEntries = getWordExportLvEntries(query);
   const projektnummer = String(query.projektnummer || query.projektId || '').trim() || 'NR';
   const projektname = String(query.projektname || '').trim() || 'Projekt';
-  const ort = String(query.ort || '').trim() || 'Ort';
+  const ort = String(query.ort || '').trim();
   const datum = new Date().toISOString().slice(0, 10);
 
   let laufendePosition = 1;
@@ -1829,7 +1829,22 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
 
 function handleX83TestExport(req, res) {
   try {
-    const requestData = normalizeRequestForX83(req);
+    console.log('--- X83 DEBUG START ---');
+    console.log('Query:', req.query);
+    console.log('Body:', req.body);
+    console.log('URL:', req.url);
+    console.log('--- X83 DEBUG END ---');
+
+    const projektnummer = req.query.projektnummer || req.query.projektId || 'NR';
+    const projektname = req.query.projektname || 'Projekt';
+    const ort = req.query.ort || '';
+
+    const requestData = {
+      ...normalizeRequestForX83(req),
+      projektnummer,
+      projektname,
+      ort,
+    };
     const xmlString = buildMinimalX83XmlFromWordSource(requestData);
 
     res.setHeader('Content-Type', 'application/xml');
