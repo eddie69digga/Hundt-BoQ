@@ -917,8 +917,6 @@
       <div class="export-actions">
         <button id="wordExportButton" class="btn-export-word" type="button">Word exportieren</button>
         <button id="gaebExportButton" class="btn-export-gaeb" type="button">X83 Export</button>
-        <button id="x83TestExportButton" class="btn-export-x83-test" type="button">ORCA Test-X83</button>
-        <button id="x83ValidateButton" class="btn-validate-x83" type="button">X83 Schema-Check</button>
       </div>
       <div id="positionsMeta" class="meta-row hidden"></div>
       <div id="positionsOverview" class="empty-state">Noch keine LV-Positionen geladen.</div>
@@ -966,8 +964,6 @@
       positionsMeta: document.getElementById('positionsMeta'),
       wordExportButton: document.getElementById('wordExportButton'),
       gaebExportButton: document.getElementById('gaebExportButton'),
-      x83TestExportButton: document.getElementById('x83TestExportButton'),
-      x83ValidateButton: document.getElementById('x83ValidateButton'),
     };
 
     function showLoginView(message = '') {
@@ -1936,76 +1932,6 @@
       }
     }
 
-    async function triggerX83TestExport() {
-      elements.positionsMeta.className = 'meta-row';
-      elements.positionsMeta.textContent = 'ORCA-Test-X83 wird erstellt und als Download gestartet...';
-
-      try {
-        const response = await fetch(buildApiUrl('/api/export-x83-test'));
-
-        if (!response.ok) {
-          let errorMessage = 'ORCA-Test-X83 Export fehlgeschlagen';
-          try {
-            const errorPayload = await response.json();
-            if (errorPayload && typeof errorPayload.error === 'string' && errorPayload.error.trim()) {
-              errorMessage = errorPayload.error.trim();
-            }
-          } catch {
-            // Ignore invalid JSON error payload.
-          }
-
-          throw new Error(errorMessage);
-        }
-
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = readDownloadFilename(response.headers.get('content-disposition'), 'TEST_ORCA_IMPORT.X83');
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        URL.revokeObjectURL(url);
-
-        elements.positionsMeta.textContent = 'ORCA-Test-X83 erfolgreich heruntergeladen.';
-      } catch (error) {
-        elements.positionsMeta.textContent = error?.message || 'ORCA-Test-X83 Export fehlgeschlagen';
-      }
-    }
-
-    async function triggerX83Validation() {
-      elements.positionsMeta.className = 'meta-row';
-      elements.positionsMeta.textContent = 'X83-Schema wird geprueft...';
-
-      if (!currentData) {
-        elements.positionsMeta.textContent = 'Bitte zuerst eine gueltige JSON-Datei importieren.';
-        return;
-      }
-
-      try {
-        const response = await fetch(buildApiUrl('/api/validate-x83'), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(currentData),
-        });
-
-        const payload = await response.json();
-
-        if (response.ok && payload?.isValid) {
-          elements.positionsMeta.textContent = `X83-Schema-Check erfolgreich (${payload.schemaFile}).`;
-          return;
-        }
-
-        const errors = Array.isArray(payload?.errors) ? payload.errors : [];
-        const firstErrors = errors.slice(0, 3).join(' | ');
-        elements.positionsMeta.textContent = firstErrors || payload?.error || 'X83-Schema-Check fehlgeschlagen.';
-      } catch (error) {
-        elements.positionsMeta.textContent = error?.message || 'X83-Schema-Check fehlgeschlagen.';
-      }
-    }
-
     globalThis.BoQApp = {
       validateImportData,
       applyImportData,
@@ -2031,8 +1957,6 @@
     elements.cloudExportSelect.addEventListener('change', handleCloudExportSelection);
     elements.wordExportButton.addEventListener('click', triggerSteuerungWordExport);
     elements.gaebExportButton.addEventListener('click', triggerX83Export);
-    elements.x83TestExportButton.addEventListener('click', triggerX83TestExport);
-    elements.x83ValidateButton.addEventListener('click', triggerX83Validation);
     elements.loginForm.addEventListener('submit', handleLoginSubmit);
     elements.logoutButton.addEventListener('click', handleLogout);
     elements.fileInput.addEventListener('change', () => {
