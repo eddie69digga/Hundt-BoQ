@@ -1769,6 +1769,7 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
   const projektnummer = String(query.projektnummer || query.projektId || '').trim() || 'NR';
   const projektname = String(query.projektname || '').trim() || 'Projekt';
   const datum = new Date().toISOString().slice(0, 10);
+  const versDate = '2021-05';
   const uhrzeit = new Date().toISOString().slice(11, 19);
 
   const buildParagraphsXml = (value, fallback = '') => {
@@ -1838,7 +1839,8 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
     '<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3">',
     '  <GAEBInfo>',
     '    <Version>3.3</Version>',
-    `    <VersDate>${escapeXml(datum)}</VersDate>`,
+    `    <VersDate>${escapeXml(versDate)}</VersDate>`,
+    `    <Date>${escapeXml(datum)}</Date>`,
     `    <Time>${escapeXml(uhrzeit)}</Time>`,
     '  </GAEBInfo>',
     '  <PrjInfo>',
