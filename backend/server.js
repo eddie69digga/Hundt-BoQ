@@ -1768,61 +1768,116 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
   const lvEntries = getWordExportLvEntries(query);
   const projektnummer = String(query.projektnummer || query.projektId || '').trim() || 'NR';
   const projektname = String(query.projektname || '').trim() || 'Projekt';
-  const ort = String(query.ort || '').trim();
   const datum = new Date().toISOString().slice(0, 10);
+  const uhrzeit = new Date().toISOString().slice(11, 19);
 
-  let laufendePosition = 1;
-  const titelXml = lvEntries
+  const buildParagraphsXml = (value, fallback = '') => {
+    const raw = String(value || '').trim() || String(fallback || '').trim();
+    if (!raw) {
+      return '<p><span/></p>';
+    }
+
+    const lines = raw.split(/\r?\n/).map((line) => line.trim()).filter((line) => line.length > 0);
+    if (!lines.length) {
+      return '<p><span/></p>';
+    }
+
+    return lines.map((line) => `<p><span>${escapeXml(line)}</span></p>`).join('');
+  };
+
+  const boqCategoriesXml = lvEntries
     .map((entry, titleIndex) => {
       const modules = Array.isArray(entry?.lv?.module) ? entry.lv.module : [];
-      const positionsXml = modules
+      const itemsXml = modules
         .map((modul, index) => {
           const kurztext = String(modul?.titel || '').trim() || `${entry.titel} Position ${index + 1}`;
           const detailText = String(modul?.text || '').trim() || kurztext;
           const mengeRaw = modul?.menge;
           const menge = Number.isFinite(Number(mengeRaw)) && Number(mengeRaw) > 0 ? String(mengeRaw) : '1';
           const einheit = String(modul?.einheit || '').trim() || 'Stk';
-          const posNr = String(laufendePosition++);
+          const itemNo = String(index + 1).padStart(4, '0');
+          const categoryNo = String(titleIndex + 1).padStart(2, '0');
 
           return [
-            '        <Position>',
-            `          <PosNr>${escapeXml(posNr)}</PosNr>`,
-            `          <Kurztext>${escapeXml(kurztext)}</Kurztext>`,
-            `          <Beschreibung>${escapeXml(detailText)}</Beschreibung>`,
-            `          <Menge>${escapeXml(menge)}</Menge>`,
-            `          <Einheit>${escapeXml(einheit)}</Einheit>`,
-            '        </Position>',
+            `          <Item ID="item-${escapeXml(categoryNo)}-${escapeXml(itemNo)}" RNoPart="${escapeXml(itemNo)}">`,
+            `            <Qty>${escapeXml(menge)}</Qty>`,
+            `            <QU>${escapeXml(einheit)}</QU>`,
+            '            <Description>',
+            '              <CompleteText>',
+            '                <OutlineText>',
+            '                  <OutlTxt>',
+            `                    <TextOutlTxt>${buildParagraphsXml(kurztext)}</TextOutlTxt>`,
+            '                  </OutlTxt>',
+            '                </OutlineText>',
+            '                <DetailTxt>',
+            `                  <Text>${buildParagraphsXml(detailText, kurztext)}</Text>`,
+            '                </DetailTxt>',
+            '              </CompleteText>',
+            '            </Description>',
+            '          </Item>',
           ].join('\n');
         })
         .join('\n');
 
       const titleLabel = entry.titel || entry.id || ('Titel ' + String(titleIndex + 1));
+      const categoryNo = String(titleIndex + 1).padStart(2, '0');
+      const fallbackTitle = 'Titel ' + String(titleIndex + 1);
       return [
-        `      <Titel Nr="${escapeXml(String(titleIndex + 1))}">`,
-        `        <Bezeichnung>${escapeXml(titleLabel)}</Bezeichnung>`,
-        '        <Positionen>',
-        positionsXml,
-        '        </Positionen>',
-        '      </Titel>',
+        `        <BoQCtgy ID="ctgy-${escapeXml(categoryNo)}" RNoPart="${escapeXml(categoryNo)}">`,
+        '          <LblTx>',
+        `            ${buildParagraphsXml(titleLabel, fallbackTitle)}`,
+        '          </LblTx>',
+        '          <BoQBody>',
+        '            <Itemlist>',
+        itemsXml,
+        '            </Itemlist>',
+        '          </BoQBody>',
+        '        </BoQCtgy>',
       ].join('\n');
     })
     .join('\n');
 
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<GAEB>',
+    '<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.2">',
     '  <GAEBInfo>',
-    '    <Version>3.3</Version>',
+    '    <Version>3.2</Version>',
     `    <Date>${escapeXml(datum)}</Date>`,
+    `    <Time>${escapeXml(uhrzeit)}</Time>`,
     '  </GAEBInfo>',
     '  <PrjInfo>',
-    `    <ProjektNr>${escapeXml(projektnummer)}</ProjektNr>`,
-    `    <ProjektName>${escapeXml(projektname)}</ProjektName>`,
-      `    <Ort>${escapeXml(ort)}</Ort>`,
+    `    <NamePrj>${escapeXml(projektname)}</NamePrj>`,
+    `    <LblPrj>${escapeXml(projektnummer)}</LblPrj>`,
+    '    <Cur>EUR</Cur>',
+    '    <CurLbl>Euro</CurLbl>',
     '  </PrjInfo>',
-    '  <Leistungsverzeichnis>',
-    titelXml,
-    '  </Leistungsverzeichnis>',
+    '  <Award>',
+    '    <DP>83</DP>',
+    '    <AwardInfo>',
+    '      <Cur>EUR</Cur>',
+    '      <CurLbl>Euro</CurLbl>',
+    '    </AwardInfo>',
+    '    <BoQ ID="boq-1">',
+    '      <BoQInfo>',
+    '        <Name>1</Name>',
+    '        <LblBoQ>Leistungsverzeichnis</LblBoQ>',
+    '        <OutlCompl>AllTxt</OutlCompl>',
+    '        <BoQBkdn>',
+    '          <Type>BoQLevel</Type>',
+    '          <Length>2</Length>',
+    '          <Num>Yes</Num>',
+    '        </BoQBkdn>',
+    '        <BoQBkdn>',
+    '          <Type>Item</Type>',
+    '          <Length>4</Length>',
+    '          <Num>Yes</Num>',
+    '        </BoQBkdn>',
+    '      </BoQInfo>',
+    '      <BoQBody>',
+    boqCategoriesXml,
+    '      </BoQBody>',
+    '    </BoQ>',
+    '  </Award>',
     '</GAEB>',
   ].join('\n');
 }
