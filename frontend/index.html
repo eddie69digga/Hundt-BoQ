@@ -886,6 +886,7 @@
       <h2 id="positions-heading">Positionsuebersicht</h2>
       <div class="export-actions">
         <button id="wordExportButton" class="btn-export-word" type="button">Word Export</button>
+        <button id="btnExportX83" type="button">X83 Export (Test)</button>
       </div>
       <div id="positionsMeta" class="meta-row hidden"></div>
       <div id="positionsOverview" class="empty-state">Noch keine LV-Positionen geladen.</div>
@@ -1917,6 +1918,45 @@
     elements.importButton.addEventListener('click', readSelectedFile);
     elements.cloudExportSelect.addEventListener('change', handleCloudExportSelection);
     elements.wordExportButton.addEventListener('click', triggerSteuerungWordExport);
+    document.getElementById('btnExportX83').addEventListener('click', async () => {
+      try {
+        const projektnummer = document.getElementById('projektnummer')?.value || '';
+        const projektname = document.getElementById('projektname')?.value || '';
+
+        const url = `/api/export-x83-test?projektnummer=${encodeURIComponent(projektnummer)}&projektname=${encodeURIComponent(projektname)}`;
+
+        const response = await fetch(url, {
+          method: 'POST'
+        });
+
+        const blob = await response.blob();
+
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+
+        // === Dateiname erzeugen ===
+        const now = new Date();
+
+        const yy = String(now.getFullYear()).slice(2);
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        const hh = String(now.getHours()).padStart(2, '0');
+        const min = String(now.getMinutes()).padStart(2, '0');
+
+        const timestamp = `${yy}${mm}${dd}_${hh}${min}`;
+
+        const cleanProjektname = projektname.replace(/\s+/g, '_');
+        const cleanProjektnummer = projektnummer.replace(/\s+/g, '_');
+
+        link.download = `${timestamp}_${cleanProjektname}_${cleanProjektnummer}.x83`;
+
+        link.click();
+
+      } catch (err) {
+        console.error('X83 Export Fehler:', err);
+        alert('Fehler beim X83 Export');
+      }
+    });
     elements.loginForm.addEventListener('submit', handleLoginSubmit);
     elements.logoutButton.addEventListener('click', handleLogout);
     elements.fileInput.addEventListener('change', () => {
