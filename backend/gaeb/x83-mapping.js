@@ -126,7 +126,7 @@ function normalizeRNoIndex(value) {
     return String(numericValue);
   }
 
-  return rawValue.charAt(rawValue.length - 1);
+  return rawValue.at(-1) || '';
 }
 
 function readJsonFile(filePath, label) {
@@ -202,10 +202,204 @@ function validateProjectData(projectData) {
   }
 }
 
+function firstNonEmptyString(values, fallback = '') {
+  for (const value of values) {
+    const normalized = String(value || '').trim();
+    if (normalized) {
+      return normalized;
+    }
+  }
+
+  return fallback;
+}
+
+function toTitleCaseLabel(value, fallback) {
+  const normalized = String(value || '').trim();
+  if (!normalized) {
+    return fallback;
+  }
+
+  return normalized
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function normalizePackageKey(value) {
+  const key = String(value || '').trim().toLowerCase();
+
+  if (!key) {
+    return 'sonstiges';
+  }
+
+  if (key === 'messungen' || key === 'abnahme' || key === 'zues' || key === 'züs') {
+    return 'abnahme';
+  }
+
+  return key;
+}
+
+function packageLabelFromKey(key, fallbackLabel = '') {
+  const normalizedKey = normalizePackageKey(key || fallbackLabel);
+
+  if (normalizedKey === 'steuerung') return 'Steuerung';
+  if (normalizedKey === 'abnahme') return 'Abnahme';
+  if (normalizedKey === 'antrieb') return 'Antrieb';
+
+  return toTitleCaseLabel(fallbackLabel || normalizedKey, 'Sonstiges');
+}
+
+function normalizeQuantity(value) {
+  const numberValue = Number(value);
+  if (Number.isFinite(numberValue) && numberValue > 0) {
+    return String(numberValue);
+  }
+
+  return '1';
+}
+
+function buildPositionLangtext(position) {
+  const directText = firstNonEmptyString([
+    position?.langtext,
+    position?.langText,
+    position?.text,
+    position?.beschreibung,
+    position?.bemerkung,
+  ]);
+
+  if (directText) {
+    return directText;
+  }
+
+  const parts = [];
+  const bezeichnung = firstNonEmptyString([position?.bezeichnung, position?.id], 'Position');
+  parts.push(bezeichnung);
+
+  const lvTextKey = firstNonEmptyString([position?.lvTextKey]);
+  if (lvTextKey) {
+    parts.push(`LV-Key: ${lvTextKey}`);
+  }
+
+  return parts.join('\n');
+}
+
+function buildNormalizedLvPositions(projectData) {
+  const lvPositionen = Array.isArray(projectData?.kalkulation?.lvPositionen)
+    ? projectData.kalkulation.lvPositionen
+    : [];
+
+  if (lvPositionen.length > 0) {
+    return lvPositionen.map((position) => ({
+      paket: firstNonEmptyString([position?.paket], 'Sonstiges'),
+      id: firstNonEmptyString([position?.id, position?.key, position?.lvTextKey], ''),
+      bezeichnung: firstNonEmptyString([position?.bezeichnung, position?.id, position?.lvTextKey], 'Position'),
+      menge: normalizeQuantity(position?.anzahl ?? position?.menge ?? position?.qty),
+      einheit: firstNonEmptyString([position?.einheit, position?.qu], 'Stk'),
+      langtext: buildPositionLangtext(position),
+      lvTextKey: firstNonEmptyString([position?.lvTextKey], ''),
+    }));
+  }
+
+  const paketSummen = Array.isArray(projectData?.kalkulation?.paketSummen)
+    ? projectData.kalkulation.paketSummen
+    : [];
+
+  const flattened = [];
+  for (const paketEintrag of paketSummen) {
+    const paketName = firstNonEmptyString([paketEintrag?.paket], 'Sonstiges');
+    const positionen = Array.isArray(paketEintrag?.positionen) ? paketEintrag.positionen : [];
+
+    for (const position of positionen) {
+      flattened.push({
+        paket: paketName,
+        id: firstNonEmptyString([position?.id, position?.key], ''),
+        bezeichnung: firstNonEmptyString([position?.bezeichnung, position?.key, position?.id], 'Position'),
+        menge: normalizeQuantity(position?.anzahl ?? position?.menge ?? position?.qty),
+        einheit: firstNonEmptyString([position?.einheit, position?.roh?.einheit], 'Stk'),
+        langtext: buildPositionLangtext(position),
+        lvTextKey: firstNonEmptyString([position?.lvTextKey, position?.key], ''),
+      });
+    }
+  }
+
+  return flattened;
+}
+
+function buildTitlesFromBoQ(projectData) {
+  const positions = buildNormalizedLvPositions(projectData);
+  if (!positions.length) {
+    return [];
+  }
+
+  const activePackages = Array.isArray(projectData?.pakete?.aktiv) ? projectData.pakete.aktiv : [];
+  const packageOrder = [];
+  const grouped = new Map();
+
+  for (const activePackage of activePackages) {
+    const key = normalizePackageKey(activePackage);
+    if (!packageOrder.includes(key)) {
+      packageOrder.push(key);
+    }
+  }
+
+  for (const position of positions) {
+    const key = normalizePackageKey(position.paket);
+    if (!grouped.has(key)) {
+      grouped.set(key, {
+        key,
+        label: packageLabelFromKey(key, position.paket),
+        items: [],
+      });
+    }
+
+    grouped.get(key).items.push(position);
+    if (!packageOrder.includes(key)) {
+      packageOrder.push(key);
+    }
+  }
+
+  return packageOrder
+    .filter((key) => grouped.has(key))
+    .map((key, titleIndex) => {
+      const group = grouped.get(key);
+      const titleNo = String(titleIndex + 1).padStart(2, '0');
+
+      const items = group.items.map((position, itemIndex) => {
+        const itemNo = String(itemIndex + 1).padStart(2, '0');
+        const kurztext = firstNonEmptyString([position.bezeichnung, position.id, position.lvTextKey], `Position ${itemNo}`);
+
+        return {
+          oz: `${titleNo}.${itemNo}`,
+          ozPart1: titleNo,
+          ozPart2: itemNo,
+          kurztext,
+          langtext: firstNonEmptyString([position.langtext], kurztext),
+          menge: position.menge,
+          einheit: position.einheit,
+        };
+      });
+
+      return {
+        titleNo,
+        titleName: group.label,
+        items,
+      };
+    });
+}
+
 function buildLvMeta(projectData) {
   const projekt = projectData.projekt || {};
-  const projektId = String(projekt.id || '').trim();
-  const projektName = String(projekt.name || '').trim();
+  const projektId = firstNonEmptyString([
+    projekt.id,
+    projekt.projektId,
+    projekt.projektnummer,
+  ]);
+  const projektName = firstNonEmptyString([
+    projekt.name,
+    projekt.projektname,
+    projekt.bauvorhaben,
+  ]);
 
   if (!projektId || !projektName) {
     const error = new Error('Projektdaten unvollstaendig: projekt.id und projekt.name sind erforderlich.');
@@ -213,12 +407,18 @@ function buildLvMeta(projectData) {
     throw error;
   }
 
+  const bauvorhabenLabel = `${projektId} - ${projektName}`;
+
   return {
     projektId,
     projektName,
-    bauvorhaben: projektName,
+    bauvorhaben: firstNonEmptyString([bauvorhabenLabel, projekt.bauvorhaben, projektName], projektName),
     lvNummer: '01',
-    lvBezeichnung: 'Aufzugsanlagen',
+    lvBezeichnung: firstNonEmptyString([
+      projectData?.anlage?.bezeichnung,
+      projekt?.anlagenbezeichnung,
+      'Aufzugsanlagen',
+    ]),
     waehrung: 'EUR',
     datum: formatDateIso(),
     phase: 'X83',
@@ -227,6 +427,17 @@ function buildLvMeta(projectData) {
 
 function buildX83Model(projectData, options = {}) {
   validateProjectData(projectData);
+
+  const titlesFromBoQ = buildTitlesFromBoQ(projectData);
+  if (titlesFromBoQ.length > 0) {
+    return {
+      lvMeta: buildLvMeta(projectData),
+      additionalTexts: [],
+      hierarchy: {
+        titles: titlesFromBoQ,
+      },
+    };
+  }
 
   const baseDir = options.baseDir || process.cwd();
   const steuerungPath = path.join(baseDir, 'lv', 'steuerung.json');
@@ -391,10 +602,8 @@ function buildX83Document(model) {
 }
 
 function buildX83Filename(lvMeta) {
-  const dateToken = formatDateForFilename();
-  const projectName = sanitizeFilenamePart(lvMeta?.projektName, 'Projekt');
-  const projectId = sanitizeFilenamePart(lvMeta?.projektId, 'NR');
-  return `${dateToken}_${projectName}_${projectId}.X83`;
+  const projectId = sanitizeFilenamePart(lvMeta?.projektId, 'projekt');
+  return `${projectId}_x83.xml`;
 }
 
 module.exports = {
