@@ -1779,6 +1779,8 @@ function cleanGaebDetailText(text) {
     .replace(/\r/g, '\n')
     .replace(/\u00ad/g, '')
     .replace(/([a-zäöüß])-\n([a-zäöüß])/gi, '$1$2')
+    .replace(/:\s{2,}/g, ': ')
+    .replace(/:\s*\n\s*/g, ': ')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
