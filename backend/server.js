@@ -1556,14 +1556,11 @@ async function createBoQDocxBuffer(query = {}) {
     });
 
   // Reihenfolge-Regel: Steuerung immer zuerst, Abnahme immer zuletzt, alles andere dazwischen.
+  const rankMap = { steuerung: 0, abnahme: 2 };
   lvEntries.sort((a, b) => {
-    const rank = (entry) => {
-      if (entry.id === 'steuerung') return 0;
-      if (entry.id === 'abnahme') return 2;
-      return 1;
-    };
-
-    const rankDiff = rank(a) - rank(b);
+    const rankA = Object.hasOwn(rankMap, a.id) ? rankMap[a.id] : 1;
+    const rankB = Object.hasOwn(rankMap, b.id) ? rankMap[b.id] : 1;
+    const rankDiff = rankA - rankB;
     if (rankDiff !== 0) {
       return rankDiff;
     }
@@ -1702,6 +1699,147 @@ async function createBoQDocxBuffer(query = {}) {
   }
 }
 
+function getWordExportLvEntries(query = {}) {
+  const steuerung = loadAndValidateLv('steuerung.json');
+  const antrieb = loadAndValidateLv('antrieb.json');
+  const abnahme = loadAndValidateLv('abnahme.json');
+
+  const { aktivePakete, aktiveBundles, hasSelections } = extractAktiveSelektionen(query);
+
+  const lvEntries = [
+    { id: normalizeToken(steuerung?.id || 'steuerung'), titel: String(steuerung?.titel || ''), lv: steuerung, force: true },
+    { id: normalizeToken(antrieb?.id || 'antrieb'), titel: String(antrieb?.titel || ''), lv: antrieb, aliases: ['antrieb', 'antriebseinheit'], bundleAliases: ['drive'] },
+    { id: normalizeToken(abnahme?.id || 'abnahme'), titel: String(abnahme?.titel || ''), lv: abnahme, force: true },
+  ]
+    .filter((entry) => {
+      if (entry.force) {
+        return true;
+      }
+
+      if (!hasSelections) {
+        // Legacy-Fallback: Wenn keine Paket/Buendel-Selektion uebergeben wird,
+        // werden vorhandene Zwischenpakete mit ausgegeben.
+        return true;
+      }
+
+      const packageKeys = [entry.id, ...(entry.aliases || [])].map((token) => normalizeToken(token));
+      const bundleKeys = (entry.bundleAliases || []).map((token) => normalizeToken(token));
+
+      const paketAktiv = packageKeys.some((key) => aktivePakete.has(key));
+      const bundleAktiv = bundleKeys.some((key) => aktiveBundles.has(key));
+      return paketAktiv || bundleAktiv;
+    });
+
+  // Reihenfolge-Regel: Steuerung immer zuerst, Abnahme immer zuletzt, alles andere dazwischen.
+  lvEntries.sort((a, b) => {
+    const rank = (entry) => {
+      if (entry.id === 'steuerung') return 0;
+      if (entry.id === 'abnahme') return 2;
+      return 1;
+    };
+
+    const rankDiff = rank(a) - rank(b);
+    if (rankDiff !== 0) {
+      return rankDiff;
+    }
+
+    return a.titel.localeCompare(b.titel, 'de', { sensitivity: 'base' });
+  });
+
+  return lvEntries;
+}
+
+function escapeXml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+}
+
+function normalizeRequestForX83(req) {
+  const query = req?.query && typeof req.query === 'object' ? req.query : {};
+  const body = req?.body && typeof req.body === 'object' && !Array.isArray(req.body) ? req.body : {};
+  return { ...query, ...body };
+}
+
+function buildMinimalX83XmlFromWordSource(query = {}) {
+  const lvEntries = getWordExportLvEntries(query);
+  const projektnummer = String(query.projektnummer || query.projektId || query.id || '').trim() || 'NR';
+  const projektname = String(query.projektname || query.projektName || query.bauvorhaben || '').trim() || 'Projekt';
+  const datum = new Date().toISOString().slice(0, 10);
+
+  let laufendePosition = 1;
+  const titelXml = lvEntries
+    .map((entry, titleIndex) => {
+      const modules = Array.isArray(entry?.lv?.module) ? entry.lv.module : [];
+      const positionsXml = modules
+        .map((modul, index) => {
+          const kurztext = String(modul?.titel || '').trim() || `${entry.titel} Position ${index + 1}`;
+          const detailText = String(modul?.text || '').trim() || kurztext;
+          const mengeRaw = modul?.menge;
+          const menge = Number.isFinite(Number(mengeRaw)) && Number(mengeRaw) > 0 ? String(mengeRaw) : '1';
+          const einheit = String(modul?.einheit || '').trim() || 'Stk';
+          const posNr = String(laufendePosition++);
+
+          return [
+            '        <Position>',
+            `          <PosNr>${escapeXml(posNr)}</PosNr>`,
+            `          <Kurztext>${escapeXml(kurztext)}</Kurztext>`,
+            `          <Beschreibung>${escapeXml(detailText)}</Beschreibung>`,
+            `          <Menge>${escapeXml(menge)}</Menge>`,
+            `          <Einheit>${escapeXml(einheit)}</Einheit>`,
+            '        </Position>',
+          ].join('\n');
+        })
+        .join('\n');
+
+      const titleLabel = entry.titel || entry.id || ('Titel ' + String(titleIndex + 1));
+      return [
+        `      <Titel Nr="${escapeXml(String(titleIndex + 1))}">`,
+        `        <Bezeichnung>${escapeXml(titleLabel)}</Bezeichnung>`,
+        '        <Positionen>',
+        positionsXml,
+        '        </Positionen>',
+        '      </Titel>',
+      ].join('\n');
+    })
+    .join('\n');
+
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<GAEB>',
+    '  <GAEBInfo>',
+    '    <Version>3.3</Version>',
+    `    <Date>${escapeXml(datum)}</Date>`,
+    '  </GAEBInfo>',
+    '  <PrjInfo>',
+    `    <ProjektNr>${escapeXml(projektnummer)}</ProjektNr>`,
+    `    <ProjektName>${escapeXml(projektname)}</ProjektName>`,
+    '  </PrjInfo>',
+    '  <Leistungsverzeichnis>',
+    titelXml,
+    '  </Leistungsverzeichnis>',
+    '</GAEB>',
+  ].join('\n');
+}
+
+function handleX83TestExport(req, res) {
+  try {
+    const requestData = normalizeRequestForX83(req);
+    const xmlString = buildMinimalX83XmlFromWordSource(requestData);
+
+    res.setHeader('Content-Type', 'application/xml');
+    res.setHeader('Content-Disposition', 'attachment; filename="export.x83"');
+    res.send(xmlString);
+  } catch (e) {
+    const statusCode = e && Number.isInteger(e.statusCode) ? e.statusCode : 500;
+    console.error('[Export X83 Test] ' + (e?.message || e));
+    res.status(statusCode).json({ error: e?.message || 'X83-Testexport fehlgeschlagen.' });
+  }
+}
+
 function buildExportFilename(query) {
   const now = new Date();
   const yy = String(now.getFullYear()).slice(-2);
@@ -1746,6 +1884,9 @@ app.get('/api/export/steuerung/docx', handleBoQWordDownload);
 
 // Primaerer Download-Endpunkt fuer den kombinierten Word-Export.
 app.get('/api/export/word/steuerung', handleBoQWordDownload);
+
+app.post('/api/export-x83-test', handleX83TestExport);
+app.get('/api/export-x83-test', handleX83TestExport);
 
 // --- Supabase XL-Exports API ---
 
