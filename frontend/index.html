@@ -908,6 +908,8 @@
     }
 
     let currentData = null;
+    let currentProject = null;
+    let selectedProject = null;
 
     const elements = {
       appContainer: document.getElementById('appContainer'),
@@ -946,8 +948,9 @@
       elements.loginContainer.classList.add('hidden');
       elements.appContainer.classList.remove('hidden');
       elements.loginError.textContent = '';
+      clearImportViews();
+      activatePage('import');
       loadCloudExportOptions(username);
-      void tryAutoImportFromUrl();
     }
 
     function getStoredUsername() {
@@ -1169,6 +1172,9 @@
     }
 
     function clearImportViews() {
+      currentData = null;
+      currentProject = null;
+      selectedProject = null;
       elements.projectOverview.className = 'empty-state';
       elements.projectOverview.textContent = 'Noch keine Projektdaten geladen.';
       elements.packageOverview.className = 'empty-state';
@@ -1637,6 +1643,8 @@
       logImportSnapshot(data, 'applyImportData');
 
       currentData = data;
+      currentProject = data?.projekt || null;
+      selectedProject = data?.projekt || null;
 
       renderProjectOverview(data);
       renderPackageOverview(data.pakete.aktiv);
