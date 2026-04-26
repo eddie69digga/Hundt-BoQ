@@ -1789,35 +1789,34 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
   const boqCategoriesXml = lvEntries
     .map((entry, titleIndex) => {
       const modules = Array.isArray(entry?.lv?.module) ? entry.lv.module : [];
-      const itemsXml = modules
-        .map((modul, index) => {
-          const kurztext = String(modul?.titel || '').trim() || `${entry.titel} Position ${index + 1}`;
-          const detailText = String(modul?.text || '').trim() || kurztext;
-          const detailTextWithKurztext = detailText === kurztext ? kurztext : `${kurztext}\n${detailText}`;
-          const mengeRaw = modul?.menge;
-          const menge = Number.isFinite(Number(mengeRaw)) && Number(mengeRaw) > 0 ? String(mengeRaw) : '1';
-          const einheit = String(modul?.einheit || '').trim() || 'Stk';
-          const itemNo = String(index + 1).padStart(4, '0');
-          const categoryNo = String(titleIndex + 1).padStart(2, '0');
-
-          return [
-            `          <Item ID="item-${escapeXml(categoryNo)}-${escapeXml(itemNo)}" RNoPart="${escapeXml(itemNo)}">`,
-            `            <Qty>${escapeXml(menge)}</Qty>`,
-            `            <QU>${escapeXml(einheit)}</QU>`,
-            '            <Description>',
-            '              <CompleteText>',
-            '                <DetailTxt>',
-            `                  <Text>${buildParagraphsXml(detailTextWithKurztext, kurztext)}</Text>`,
-            '                </DetailTxt>',
-            '              </CompleteText>',
-            '            </Description>',
-            '          </Item>',
-          ].join('\n');
-        })
-        .join('\n');
-
       const titleLabel = entry.titel || entry.id || ('Titel ' + String(titleIndex + 1));
       const categoryNo = String(titleIndex + 1).padStart(2, '0');
+
+      // Build combined DetailTxt from all modules: "01.01 Kurztext\n\nLangtext\n\n01.02 ..."
+      const combinedDetail = modules
+        .map((modul, index) => {
+          const subNo = `${categoryNo}.${String(index + 1).padStart(2, '0')}`;
+          const kurztext = String(modul?.titel || '').trim() || `${titleLabel} Position ${index + 1}`;
+          const langtext = String(modul?.text || '').trim();
+          return langtext ? `${subNo} ${kurztext}\n\n${langtext}` : `${subNo} ${kurztext}`;
+        })
+        .join('\n\n');
+
+      const paketKurztext = `Paket ${titleLabel} komplett`;
+
+      const itemsXml = [
+        `          <Item ID="item-${escapeXml(categoryNo)}-0001" RNoPart="0001">`,
+        '            <Qty>1</Qty>',
+        '            <QU>Stk</QU>',
+        '            <Description>',
+        '              <CompleteText>',
+        '                <DetailTxt>',
+        `                  <Text>${buildParagraphsXml(paketKurztext + (combinedDetail ? '\n\n' + combinedDetail : ''), paketKurztext)}</Text>`,
+        '                </DetailTxt>',
+        '              </CompleteText>',
+        '            </Description>',
+        '          </Item>',
+      ].join('\n');
       const fallbackTitle = 'Titel ' + String(titleIndex + 1);
       return [
         `        <BoQCtgy ID="ctgy-${escapeXml(categoryNo)}" RNoPart="${escapeXml(categoryNo)}">`,
