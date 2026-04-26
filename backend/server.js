@@ -1780,10 +1780,33 @@ function cleanGaebDetailText(text) {
     .replace(/\u00ad/g, '')
     .replace(/([a-zäöüß])-\n([a-zäöüß])/gi, '$1$2')
     .replace(/\n{3,}/g, '\n\n')
-    .replace(/([^\n])\n([^\n])/g, '$1 $2')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n[ \t]+/g, '\n')
     .replace(/[ \t]{2,}/g, ' ')
-    .replace(/ *\n */g, '\n')
     .trim();
+}
+
+function isPlaceholderPosition(pos) {
+  const text = [
+    pos?.title,
+    pos?.titel,
+    pos?.kurztext,
+    pos?.description,
+    pos?.beschreibung,
+    pos?.langtext,
+    pos?.text,
+  ]
+    .filter((value) => value !== null && value !== undefined)
+    .map((value) => String(value).trim())
+    .filter(Boolean)
+    .join(' ')
+    .trim()
+    .toLowerCase();
+
+  if (!text) return true;
+  if (text.includes('originaltext fehlt')) return true;
+
+  return false;
 }
 
 function normalizeRequestForX83(req) {
@@ -1845,14 +1868,24 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
       const titleLabel = entry.titel || entry.id || ('Titel ' + String(titleIndex + 1));
       const categoryNo = String(titleIndex + 1).padStart(2, '0');
 
-      // Build combined DetailTxt from all modules: "01.01 Kurztext\n\nLangtext\n\n01.02 ..."
       const combinedDetail = modules
-        .map((modul, index) => {
+        .map((modul, index) => ({ modul, index }))
+        .filter(({ modul }) => !isPlaceholderPosition(modul))
+        .map(({ modul, index }) => {
+          const langtextRaw = [modul?.langtext, modul?.text, modul?.beschreibung, modul?.description]
+            .find((value) => typeof value === 'string' && value.trim().length > 0) || '';
+          const langtext = cleanGaebDetailText(langtextRaw);
+
+          if (!langtext || langtext.toLowerCase().includes('originaltext fehlt')) {
+            return '';
+          }
+
           const subNo = `${categoryNo}.${String(index + 1).padStart(2, '0')}`;
-          const kurztext = String(modul?.titel || '').trim() || `${titleLabel} Position ${index + 1}`;
-          const langtext = cleanGaebDetailText(modul?.text);
-          return langtext ? `${subNo} ${kurztext}\n\n${langtext}` : `${subNo} ${kurztext}`;
+          const kurztext = String(modul?.titel || modul?.kurztext || modul?.title || '').trim();
+          const header = kurztext ? `${subNo} ${kurztext}` : subNo;
+          return `${header}\n\n${langtext}`;
         })
+        .filter(Boolean)
         .join('\n\n');
 
       const paketKurztext = `Paket ${titleLabel} komplett`;
