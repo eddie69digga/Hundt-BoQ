@@ -1707,7 +1707,10 @@ function buildExportFilename(query) {
   const yy = String(now.getFullYear()).slice(-2);
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const dd = String(now.getDate()).padStart(2, '0');
+  const hh = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
   const datum = `${yy}${mm}${dd}`;
+  const uhrzeit = `${hh}${min}`;
 
   const sanitize = (str) =>
     String(str || '')
@@ -1720,7 +1723,7 @@ function buildExportFilename(query) {
   const name = sanitize(query.projektname) || 'Projekt';
   const nummer = sanitize(query.projektnummer) || 'NR';
 
-  return `${datum}_${name}_${nummer}.docx`;
+  return `${datum}_${uhrzeit}_${name}_${nummer}.docx`;
 }
 
 async function handleBoQWordDownload(req, res) {
