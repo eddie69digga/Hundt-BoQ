@@ -1883,6 +1883,32 @@
       return fallbackName;
     }
 
+    function sanitizeFilenamePart(value, fallback) {
+      const cleaned = String(value || '')
+        .trim()
+        .replaceAll(/[\\/:*?"<>|]/g, '')
+        .replaceAll(/\s+/g, '_')
+        .replaceAll(/_+/g, '_')
+        .replaceAll(/^_|_$/g, '');
+
+      return cleaned || fallback;
+    }
+
+    function buildX83FallbackFilename(data) {
+      const now = new Date();
+      const yy = String(now.getFullYear()).slice(-2);
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mi = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+      const projekt = data?.projekt || {};
+      const projectName = sanitizeFilenamePart(projekt.bauvorhaben || projekt.name || projekt.projektname, 'Projekt');
+      const projectId = sanitizeFilenamePart(projekt.projektnummer || projekt.id || projekt.projektId, 'NR');
+
+      return `${yy}${mm}${dd}_${hh}${mi}${ss}_${projectName}_${projectId}_x83.xml`;
+    }
+
     async function triggerX83Export() {
       elements.positionsMeta.className = 'meta-row';
       elements.positionsMeta.textContent = 'X83-Export wird erstellt und als Download gestartet...';
@@ -1919,7 +1945,10 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = readDownloadFilename(response.headers.get('content-disposition'), 'LV_Export.X83');
+        link.download = readDownloadFilename(
+          response.headers.get('content-disposition'),
+          buildX83FallbackFilename(currentData)
+        );
         document.body.appendChild(link);
         link.click();
         link.remove();
