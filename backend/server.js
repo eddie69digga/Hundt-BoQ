@@ -1792,6 +1792,7 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
         .map((modul, index) => {
           const kurztext = String(modul?.titel || '').trim() || `${entry.titel} Position ${index + 1}`;
           const detailText = String(modul?.text || '').trim() || kurztext;
+          const detailTextWithKurztext = detailText === kurztext ? kurztext : `${kurztext}\n${detailText}`;
           const mengeRaw = modul?.menge;
           const menge = Number.isFinite(Number(mengeRaw)) && Number(mengeRaw) > 0 ? String(mengeRaw) : '1';
           const einheit = String(modul?.einheit || '').trim() || 'Stk';
@@ -1804,13 +1805,8 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
             `            <QU>${escapeXml(einheit)}</QU>`,
             '            <Description>',
             '              <CompleteText>',
-            '                <OutlineText>',
-            '                  <OutlTxt>',
-            `                    <TextOutlTxt>${buildParagraphsXml(kurztext)}</TextOutlTxt>`,
-            '                  </OutlTxt>',
-            '                </OutlineText>',
             '                <DetailTxt>',
-            `                  <Text>${buildParagraphsXml(detailText, kurztext)}</Text>`,
+            `                  <Text>${buildParagraphsXml(detailTextWithKurztext, kurztext)}</Text>`,
             '                </DetailTxt>',
             '              </CompleteText>',
             '            </Description>',
@@ -1842,7 +1838,7 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
     '<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3">',
     '  <GAEBInfo>',
     '    <Version>3.3</Version>',
-    `    <Date>${escapeXml(datum)}</Date>`,
+    `    <VersDate>${escapeXml(datum)}</VersDate>`,
     `    <Time>${escapeXml(uhrzeit)}</Time>`,
     '  </GAEBInfo>',
     '  <PrjInfo>',
