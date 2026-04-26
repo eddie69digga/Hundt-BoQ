@@ -916,8 +916,6 @@
       <h2 id="positions-heading">Positionsuebersicht</h2>
       <div class="export-actions">
         <button id="wordExportButton" class="btn-export-word" type="button">Word Export</button>
-        <button id="gaebExportButton" class="btn-export-gaeb" type="button">X83 Export</button>
-        <button id="x83ValidateButton" class="btn-validate-x83" type="button">X83 prüfen</button>
       </div>
       <div id="positionsMeta" class="meta-row hidden"></div>
       <div id="positionsOverview" class="empty-state">Noch keine LV-Positionen geladen.</div>
@@ -964,8 +962,6 @@
       positionsOverview: document.getElementById('positionsOverview'),
       positionsMeta: document.getElementById('positionsMeta'),
       wordExportButton: document.getElementById('wordExportButton'),
-      gaebExportButton: document.getElementById('gaebExportButton'),
-      x83ValidateButton: document.getElementById('x83ValidateButton'),
     };
 
     function showLoginView(message = '') {
@@ -2031,8 +2027,6 @@
     elements.importButton.addEventListener('click', readSelectedFile);
     elements.cloudExportSelect.addEventListener('change', handleCloudExportSelection);
     elements.wordExportButton.addEventListener('click', triggerSteuerungWordExport);
-    elements.gaebExportButton.addEventListener('click', triggerX83Export);
-    elements.x83ValidateButton.addEventListener('click', triggerX83Validation);
     elements.loginForm.addEventListener('submit', handleLoginSubmit);
     elements.logoutButton.addEventListener('click', handleLogout);
     elements.fileInput.addEventListener('change', () => {

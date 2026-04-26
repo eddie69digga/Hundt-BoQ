@@ -2290,17 +2290,7 @@ function handleX83TestSchemaValidation(req, res) {
   }
 }
 
-app.post('/api/export-x83', handleX83Export);
-app.get('/api/export-x83', handleX83Export);
-app.get('/api/export-x83-test', handleX83TestExport);
-app.post('/api/export-x83-test', handleX83TestExport);
-app.get('/api/validate-x83', handleX83SchemaValidation);
-app.post('/api/validate-x83', handleX83SchemaValidation);
-app.get('/api/validate-x83-test', handleX83TestSchemaValidation);
-app.post('/api/validate-x83-test', handleX83TestSchemaValidation);
-
-// Legacy alias mapped to the new X83 exporter for backwards compatibility.
-app.get('/api/export-gaeb', handleX83Export);
+// X83 routes temporarily deactivated.
 
 // --- Supabase XL-Exports API ---
 
