@@ -611,6 +611,7 @@ function buildX83Document(model) {
     '  <GAEBInfo>',
     '    <Version>3.3</Version>',
     '    <VersDate>2021-05</VersDate>',
+    '    <Phase>X83</Phase>',
     `    <Date>${formatDateIso()}</Date>`,
     '  </GAEBInfo>',
     '  <Award>',
