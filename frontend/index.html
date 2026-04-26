@@ -917,6 +917,7 @@
       <div class="export-actions">
         <button id="wordExportButton" class="btn-export-word" type="button">Word Export</button>
         <button id="gaebExportButton" class="btn-export-gaeb" type="button">X83 Export</button>
+        <button id="x83ValidateButton" class="btn-validate-x83" type="button">X83 prüfen</button>
       </div>
       <div id="positionsMeta" class="meta-row hidden"></div>
       <div id="positionsOverview" class="empty-state">Noch keine LV-Positionen geladen.</div>
@@ -964,6 +965,7 @@
       positionsMeta: document.getElementById('positionsMeta'),
       wordExportButton: document.getElementById('wordExportButton'),
       gaebExportButton: document.getElementById('gaebExportButton'),
+      x83ValidateButton: document.getElementById('x83ValidateButton'),
     };
 
     function showLoginView(message = '') {
@@ -1961,6 +1963,50 @@
       }
     }
 
+    function renderX83ValidationResult(payload) {
+      const issues = Array.isArray(payload?.issues) ? payload.issues : [];
+
+      if (payload?.success) {
+        elements.positionsMeta.className = 'meta-row';
+        elements.positionsMeta.innerHTML = '<span style="color:#198754;font-weight:600;">X83-Prüfung erfolgreich</span>';
+        return;
+      }
+
+      const message = payload?.message || 'X83-Prüfung fehlgeschlagen';
+      const issuesHtml = issues.length
+        ? `<br><span style="color:#b45309;">${issues.map((issue) => `- ${String(issue)}`).join('<br>')}</span>`
+        : '';
+
+      elements.positionsMeta.className = 'meta-row';
+      elements.positionsMeta.innerHTML = `<span style="color:#b91c1c;font-weight:600;">${message}</span>${issuesHtml}`;
+    }
+
+    async function triggerX83Validation() {
+      elements.positionsMeta.className = 'meta-row';
+      elements.positionsMeta.textContent = 'X83-Prüfung läuft...';
+
+      if (!currentData) {
+        elements.positionsMeta.innerHTML = '<span style="color:#b91c1c;font-weight:600;">Bitte zuerst eine gueltige JSON-Datei importieren.</span>';
+        return;
+      }
+
+      try {
+        const response = await fetch(buildApiUrl('/api/validate-x83'), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(currentData),
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        renderX83ValidationResult(payload);
+      } catch (error) {
+        elements.positionsMeta.className = 'meta-row';
+        elements.positionsMeta.innerHTML = `<span style="color:#b91c1c;font-weight:600;">${error?.message || 'X83-Prüfung fehlgeschlagen'}</span>`;
+      }
+    }
+
     globalThis.BoQApp = {
       validateImportData,
       applyImportData,
@@ -1986,6 +2032,7 @@
     elements.cloudExportSelect.addEventListener('change', handleCloudExportSelection);
     elements.wordExportButton.addEventListener('click', triggerSteuerungWordExport);
     elements.gaebExportButton.addEventListener('click', triggerX83Export);
+    elements.x83ValidateButton.addEventListener('click', triggerX83Validation);
     elements.loginForm.addEventListener('submit', handleLoginSubmit);
     elements.logoutButton.addEventListener('click', handleLogout);
     elements.fileInput.addEventListener('change', () => {

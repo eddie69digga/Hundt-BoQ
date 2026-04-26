@@ -2151,23 +2151,123 @@ function validateXmlAgainstXsd(xmlContent, schemaPath) {
   }
 }
 
+function getAllX83Items(x83Model) {
+  return (Array.isArray(x83Model?.hierarchy?.titles) ? x83Model.hierarchy.titles : [])
+    .flatMap((title) => (Array.isArray(title?.items) ? title.items : []));
+}
+
+function hasMissingOz(item) {
+  const hasOz = String(item?.oz || '').trim();
+  const hasParts = String(item?.ozPart1 || '').trim() && String(item?.ozPart2 || '').trim();
+  return !hasOz && !hasParts;
+}
+
+function hasMissingQty(item) {
+  return !String(item?.menge || '').trim();
+}
+
+function hasMissingUnit(item) {
+  return !String(item?.einheit || '').trim();
+}
+
+function containsForbiddenPriceFields(xmlContent) {
+  const pricePattern = /<UP>|<IT>|<GP>|<EP>|einheitspreis|gesamtpreis|kalkulationspreis|einzelpreis|summe/gi;
+  return pricePattern.test(xmlContent);
+}
+
+function hasIncomingBoQPositions(payload) {
+  const lvPositionen = payload?.kalkulation?.lvPositionen;
+  if (Array.isArray(lvPositionen)) {
+    return lvPositionen.length > 0;
+  }
+
+  const paketSummen = payload?.kalkulation?.paketSummen;
+  if (!Array.isArray(paketSummen)) {
+    return false;
+  }
+
+  return paketSummen.some((paket) => Array.isArray(paket?.positionen) && paket.positionen.length > 0);
+}
+
+function collectX83ValidationIssues(payload, x83Model, x83Xml) {
+  const issues = [];
+  const allItems = getAllX83Items(x83Model);
+
+  if (!hasIncomingBoQPositions(payload)) {
+    issues.push('Keine Positionen im aktuellen BoQ-Datenstand vorhanden.');
+  }
+
+  if (String(x83Model?.lvMeta?.phase || '').toUpperCase() !== 'X83') {
+    issues.push('Phase ist nicht X83.');
+  }
+
+  if (!x83Xml || typeof x83Xml !== 'string' || !x83Xml.trim()) {
+    issues.push('XML konnte nicht erzeugt werden.');
+    return issues;
+  }
+
+  if (!x83Xml.includes('<DP>83</DP>')) {
+    issues.push('X83-Kennung <DP>83</DP> fehlt.');
+  }
+
+  if (!allItems.length) {
+    issues.push('Keine Positionen vorhanden.');
+  }
+
+  if (allItems.some((item) => hasMissingOz(item))) {
+    issues.push('Ordnungszahlen fehlen in mindestens einer Position.');
+  }
+
+  if (allItems.some((item) => hasMissingQty(item))) {
+    issues.push('Mengen fehlen in mindestens einer Position.');
+  }
+
+  if (allItems.some((item) => hasMissingUnit(item))) {
+    issues.push('Mengeneinheiten fehlen in mindestens einer Position.');
+  }
+
+  if (containsForbiddenPriceFields(x83Xml)) {
+    issues.push('Preisfelder wurden im X83 gefunden, diese sind nicht erlaubt.');
+  }
+
+  return issues;
+}
+
 function handleX83SchemaValidation(req, res) {
   try {
     const payload = parseX83RequestPayload(req);
     const x83Model = buildX83Model(payload, { baseDir: __dirname });
     const x83Xml = buildX83Document(x83Model);
-    const validation = validateXmlAgainstXsd(x83Xml, DA83_SCHEMA_PATH);
+    const issues = collectX83ValidationIssues(payload, x83Model, x83Xml);
 
-    res.status(validation.isValid ? 200 : 422).json({
-      type: 'x83',
-      schemaFile: DA83_SCHEMA_FILE,
-      schemaPath: DA83_SCHEMA_PATH,
-      ...validation,
+    const schemaValidation = validateXmlAgainstXsd(x83Xml, DA83_SCHEMA_PATH);
+    if (!schemaValidation.isValid) {
+      issues.push('X83-Schema-Pruefung fehlgeschlagen.');
+      for (const schemaIssue of schemaValidation.errors.slice(0, 5)) {
+        issues.push(schemaIssue);
+      }
+    }
+
+    if (!issues.length) {
+      return res.status(200).json({
+        success: true,
+        message: 'X83-Pruefung erfolgreich',
+      });
+    }
+
+    return res.status(422).json({
+      success: false,
+      message: 'X83-Pruefung fehlgeschlagen',
+      issues,
     });
   } catch (e) {
     const statusCode = e && Number.isInteger(e.statusCode) ? e.statusCode : 500;
     console.error('[Validate X83] ' + (e?.message || e));
-    res.status(statusCode).json({ error: e?.message || 'X83 Validierung fehlgeschlagen' });
+    res.status(statusCode).json({
+      success: false,
+      message: e?.message || 'X83-Pruefung fehlgeschlagen',
+      issues: [e?.message || 'Unbekannter Fehler'],
+    });
   }
 }
 
