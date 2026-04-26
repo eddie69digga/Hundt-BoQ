@@ -1270,6 +1270,19 @@ function buildTechnischeDatenRows(query) {
   return rows;
 }
 
+function buildTechnischeDatenText(query) {
+  const rows = buildTechnischeDatenRows(query);
+  const textRows = rows
+    .filter((row) => row && typeof row.value === 'string' && row.value.trim() && row.value.trim() !== '–')
+    .map((row) => `${row.label}: ${row.value.trim()}`);
+
+  if (!textRows.length) {
+    return '';
+  }
+
+  return ['Technische Daten', ...textRows].join('\n');
+}
+
 function buildTechnischeDatenTable(rows, width = FORM_PAGE_WIDTH) {
   const labelWidth = 3000;
   const valueWidth = width - labelWidth;
@@ -1801,6 +1814,31 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
     return lines.map((line) => `<p><span>${escapeXml(line)}</span></p>`).join('');
   };
 
+  let vorbemerkungText = '';
+  try {
+    vorbemerkungText = loadVorbemerkungText();
+  } catch {
+    vorbemerkungText = '';
+  }
+
+  const technischeDatenText = buildTechnischeDatenText(query);
+  const vortextGesamt = [vorbemerkungText, technischeDatenText].filter(Boolean).join('\n\n');
+  const cleanedVortext = cleanGaebDetailText(vortextGesamt);
+
+  const boqRemarkXml = cleanedVortext
+    ? [
+      '        <Remark ID="remark-vortext">',
+      '          <Description>',
+      '            <CompleteText>',
+      '              <DetailTxt>',
+      `                <Text>${buildParagraphsXml(cleanedVortext, cleanedVortext)}</Text>`,
+      '              </DetailTxt>',
+      '            </CompleteText>',
+      '          </Description>',
+      '        </Remark>',
+    ].join('\n')
+    : '';
+
   const boqCategoriesXml = lvEntries
     .map((entry, titleIndex) => {
       const modules = Array.isArray(entry?.lv?.module) ? entry.lv.module : [];
@@ -1886,6 +1924,7 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
     '        </BoQBkdn>',
     '      </BoQInfo>',
     '      <BoQBody>',
+    boqRemarkXml,
     boqCategoriesXml,
     '      </BoQBody>',
     '    </BoQ>',
