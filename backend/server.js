@@ -1774,15 +1774,55 @@ function escapeXml(value) {
 function cleanGaebDetailText(text) {
   if (!text) return '';
 
-  return String(text)
+  const normalized = String(text)
     .replace(/\r\n/g, '\n')
     .replace(/\r/g, '\n')
     .replace(/\u00ad/g, '')
     .replace(/([a-zäöüß])-\n([a-zäöüß])/gi, '$1$2')
     .replace(/\n{3,}/g, '\n\n')
-    .replace(/[ \t]+\n/g, '\n')
-    .replace(/\n[ \t]+/g, '\n')
-    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
+
+  const lines = normalized
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const result = [];
+  let paragraph = [];
+
+  const flushParagraph = () => {
+    if (paragraph.length) {
+      result.push(paragraph.join(' ').replace(/[ \t]{2,}/g, ' '));
+      paragraph = [];
+    }
+  };
+
+  const isSubHeading = (line) => /^\d{2}\.\d{2}\s+/.test(line);
+  const isLabelValue = (line) => /^[A-Za-zÄÖÜäöüß0-9 /().,+-]{2,50}:\s+.+/.test(line);
+
+  for (const line of lines) {
+    if (isSubHeading(line)) {
+      flushParagraph();
+      result.push('');
+      result.push(line);
+      result.push('');
+      continue;
+    }
+
+    if (isLabelValue(line)) {
+      flushParagraph();
+      result.push(line);
+      continue;
+    }
+
+    paragraph.push(line);
+  }
+
+  flushParagraph();
+
+  return result
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
 
