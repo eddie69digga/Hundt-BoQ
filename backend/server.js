@@ -1758,6 +1758,21 @@ function escapeXml(value) {
     .replaceAll("'", '&apos;');
 }
 
+function cleanGaebDetailText(text) {
+  if (!text) return '';
+
+  return String(text)
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .replace(/\u00ad/g, '')
+    .replace(/([a-zäöüß])-\n([a-zäöüß])/gi, '$1$2')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/([^\n])\n([^\n])/g, '$1 $2')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/ *\n */g, '\n')
+    .trim();
+}
+
 function normalizeRequestForX83(req) {
   const query = req?.query && typeof req.query === 'object' ? req.query : {};
   const body = req?.body && typeof req.body === 'object' && !Array.isArray(req.body) ? req.body : {};
@@ -1797,7 +1812,7 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
         .map((modul, index) => {
           const subNo = `${categoryNo}.${String(index + 1).padStart(2, '0')}`;
           const kurztext = String(modul?.titel || '').trim() || `${titleLabel} Position ${index + 1}`;
-          const langtext = String(modul?.text || '').trim();
+          const langtext = cleanGaebDetailText(modul?.text);
           return langtext ? `${subNo} ${kurztext}\n\n${langtext}` : `${subNo} ${kurztext}`;
         })
         .join('\n\n');
