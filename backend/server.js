@@ -1766,8 +1766,9 @@ function normalizeRequestForX83(req) {
 
 function buildMinimalX83XmlFromWordSource(query = {}) {
   const lvEntries = getWordExportLvEntries(query);
-  const projektnummer = String(query.projektnummer || query.projektId || query.id || '').trim() || 'NR';
-  const projektname = String(query.projektname || query.projektName || query.bauvorhaben || '').trim() || 'Projekt';
+  const projektnummer = String(query.projektnummer || query.projektId || '').trim() || 'NR';
+  const projektname = String(query.projektname || '').trim() || 'Projekt';
+  const ort = String(query.ort || '').trim() || 'Ort';
   const datum = new Date().toISOString().slice(0, 10);
 
   let laufendePosition = 1;
@@ -1817,6 +1818,7 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
     '  <PrjInfo>',
     `    <ProjektNr>${escapeXml(projektnummer)}</ProjektNr>`,
     `    <ProjektName>${escapeXml(projektname)}</ProjektName>`,
+      `    <Ort>${escapeXml(ort)}</Ort>`,
     '  </PrjInfo>',
     '  <Leistungsverzeichnis>',
     titelXml,
