@@ -1841,6 +1841,23 @@ function buildGaebParagraphs(text) {
 
   if (!normalized) return '<p><span/></p>';
 
+  function buildLabelValueParagraph(line) {
+    const index = line.indexOf(':');
+
+    if (index === -1) {
+      return `<p><span>${escapeXml(line)}</span></p>`;
+    }
+
+    const label = line.slice(0, index + 1).trim();
+    const value = line.slice(index + 1).trim();
+
+    if (!label || !value) {
+      return `<p><span>${escapeXml(line)}</span></p>`;
+    }
+
+    return `<p><span>${escapeXml(label)}</span><span>&#160;&#160;&#160;&#160;</span><span>${escapeXml(value)}</span></p>`;
+  }
+
   const blocks = normalized
     .split(/\n{2,}/)
     .map((block) => block.trim())
@@ -1878,7 +1895,7 @@ function buildGaebParagraphs(text) {
       flush();
 
       return merged
-        .map((p) => `<p><span>${escapeXml(p)}</span></p>`)
+        .map((p) => (isLabelValue(p) ? buildLabelValueParagraph(p) : `<p><span>${escapeXml(p)}</span></p>`))
         .join('\n');
     })
     .filter(Boolean)
