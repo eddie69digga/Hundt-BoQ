@@ -1839,9 +1839,9 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
 
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.2">',
+    '<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3">',
     '  <GAEBInfo>',
-    '    <Version>3.2</Version>',
+    '    <Version>3.3</Version>',
     `    <Date>${escapeXml(datum)}</Date>`,
     `    <Time>${escapeXml(uhrzeit)}</Time>`,
     '  </GAEBInfo>',
