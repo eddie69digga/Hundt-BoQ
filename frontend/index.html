@@ -1920,12 +1920,14 @@
     elements.wordExportButton.addEventListener('click', triggerSteuerungWordExport);
     document.getElementById('btnExportX83').addEventListener('click', async () => {
       try {
-        const projektnummer = document.getElementById('projektnummer')?.value || '';
-        const projektname = document.getElementById('projektname')?.value || '';
+        const projekt = currentData?.projekt || {};
+        const projektnummer = String(projekt?.projektnummer || '').trim();
+        const projektname = String(projekt?.bauvorhaben || '').trim();
+        const ort = String(projekt?.stadt || currentData?.auftraggeber?.ort || '').trim();
 
         const backendBaseUrl = 'https://boq-backend-qkfy.onrender.com';
 
-        const url = `${backendBaseUrl}/api/export-x83-test?projektnummer=${encodeURIComponent(projektnummer)}&projektname=${encodeURIComponent(projektname)}`;
+        const url = `${backendBaseUrl}/api/export-x83-test?projektnummer=${encodeURIComponent(projektnummer)}&projektname=${encodeURIComponent(projektname)}&ort=${encodeURIComponent(ort)}`;
 
         const response = await fetch(url, {
           method: 'POST'
@@ -1956,21 +1958,9 @@
 
         const timestamp = `${yy}${mm}${dd}_${hh}${min}${sec}`;
 
-        const projektnameValue =
-          document.getElementById('projektname')?.value ||
-          document.getElementById('bauvorhaben')?.value ||
-          'Projekt';
-
-        const ortValue =
-          document.getElementById('ort')?.value ||
-          document.getElementById('stadt')?.value ||
-          'Ort';
-
-        const projektIdValue =
-          document.getElementById('projektnummer')?.value ||
-          document.getElementById('projektId')?.value ||
-          document.getElementById('projekt-id')?.value ||
-          'ProjektID';
+        const projektnameValue = projektname || 'Projekt';
+        const ortValue = ort || 'Ort';
+        const projektIdValue = projektnummer || 'ProjektID';
 
         const sanitizeFilenamePart = (value) =>
           String(value)
