@@ -1828,6 +1828,65 @@ function cleanGaebDetailText(text) {
     .trim();
 }
 
+function buildGaebParagraphs(text) {
+  if (!text) return '<p><span/></p>';
+
+  const normalized = String(text)
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .replace(/\u00ad/g, '')
+    .replace(/([a-zäöüß])-\n([a-zäöüß])/gi, '$1$2')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  if (!normalized) return '<p><span/></p>';
+
+  const blocks = normalized
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  const xml = blocks
+    .map((block) => {
+      const lines = block
+        .split('\n')
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+      const merged = [];
+      let paragraph = [];
+
+      const flush = () => {
+        if (paragraph.length) {
+          merged.push(paragraph.join(' '));
+          paragraph = [];
+        }
+      };
+
+      const isSubHeading = (line) => /^\d{2}\.\d{2}\s+/.test(line);
+      const isLabelValue = (line) => /^[^:]{2,50}:\s+.+/.test(line);
+
+      for (const line of lines) {
+        if (isSubHeading(line) || isLabelValue(line)) {
+          flush();
+          merged.push(line.replace(/:\s{2,}/g, ': ').replace(/:\s*\n\s*/g, ': '));
+        } else {
+          paragraph.push(line);
+        }
+      }
+
+      flush();
+
+      return merged
+        .map((p) => `<p><span>${escapeXml(p)}</span></p>`)
+        .join('\n');
+    })
+    .filter(Boolean)
+    .join('\n');
+
+  return xml || '<p><span/></p>';
+}
+
 function isPlaceholderPosition(pos) {
   const text = [
     pos?.title,
@@ -1939,8 +1998,17 @@ function buildMinimalX83XmlFromWordSource(query = {}) {
         '            <Description>',
         '              <CompleteText>',
         '                <DetailTxt>',
-        `                  <Text>${buildParagraphsXml(paketKurztext + (combinedDetail ? '\n\n' + combinedDetail : ''), paketKurztext)}</Text>`,
+        '                  <Text>',
+        `                    ${buildGaebParagraphs(combinedDetail || paketKurztext)}`,
+        '                  </Text>',
         '                </DetailTxt>',
+        '                <OutlineText>',
+        '                  <OutlTxt>',
+        '                    <TextOutlTxt>',
+        `                      <p><span>${escapeXml(paketKurztext)}</span></p>`,
+        '                    </TextOutlTxt>',
+        '                  </OutlTxt>',
+        '                </OutlineText>',
         '              </CompleteText>',
         '            </Description>',
         '          </Item>',
