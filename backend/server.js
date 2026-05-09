@@ -622,13 +622,15 @@ function buildDeckblatt(query) {
   ];
 
   // Logo einlesen (hundt-consult.png aus frontend/assets)
+  // Logo-Abmessungen: 1607x408px (Verhältnis 3.94:1)
+  // Word-Export proportional: 200x50.5 ≈ 200x51
   const logoPath = path.join(__dirname, '..', 'frontend', 'assets', 'hundt-consult.png');
   let logoImageRun = null;
   try {
     const logoData = fs.readFileSync(logoPath);
     logoImageRun = new ImageRun({
       data: logoData,
-      transformation: { width: 200, height: 80 },
+      transformation: { width: 200, height: 51 },
       type: 'png',
     });
   } catch {
