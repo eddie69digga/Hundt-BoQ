@@ -643,17 +643,9 @@ function buildDeckblatt(query) {
     ...(logoImageRun
       ? [new Paragraph({
           children: [logoImageRun],
-          spacing: { before: 0, after: 120, line: LINE_SPACING_SINGLE },
+          spacing: { before: 0, after: 160, line: LINE_SPACING_SINGLE },
         })]
       : []),
-    // BoQ Produktname
-    new Paragraph({
-      text: 'BoQ',
-      bold: true,
-      size: 32,
-      spacing: { before: 0, after: 160, line: LINE_SPACING_SINGLE },
-      alignment: AlignmentType.CENTER,
-    }),
     // Label
     buildDeckblattLeftPara('Planverfasser', 18, false, 80),
     // Firma
