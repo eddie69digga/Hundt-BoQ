@@ -1,0 +1,11 @@
+✓ Supabase Client initialisiert
+BoQ Backend laeuft auf Port 3001
+--- X83 DEBUG START ---
+Query: [Object: null prototype] {
+  projektnummer: '130-MEHD-10030',
+  projektname: 'HUNDT_CONSULT',
+  ort: 'Vienna'
+}
+Body: undefined
+URL: /api/export-x83-test?projektnummer=130-MEHD-10030&projektname=HUNDT_CONSULT&ort=Vienna
+--- X83 DEBUG END ---

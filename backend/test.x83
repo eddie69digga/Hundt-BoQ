@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GAEB xmlns="http://www.gaeb.de/GAEB_DA_XML/DA83/3.3">
+  <GAEBInfo>
+    <Version>3.3</Version>
+    <VersDate>2021-05</VersDate>
+    <Date>2026-04-26</Date>
+    <Time>12:47:03</Time>
+  </GAEBInfo>
+  <PrjInfo>
+    <NamePrj>HUNDT_CONSULT</NamePrj>
+    <LblPrj>130-MEHD-10030</LblPrj>
+    <Cur>EUR</Cur>
+    <CurLbl>Euro</CurLbl>
+  </PrjInfo>
+  <Award>
+    <DP>83</DP>
+    <AwardInfo>
+      <Cur>EUR</Cur>
+      <CurLbl>Euro</CurLbl>
+    </AwardInfo>
+    <BoQ ID="boq-1">
+      <BoQInfo>
+        <Name>1</Name>
+        <LblBoQ>Leistungsverzeichnis</LblBoQ>
+        <OutlCompl>AllTxt</OutlCompl>
+        <BoQBkdn>
+          <Type>BoQLevel</Type>
+          <Length>2</Length>
+          <Num>Yes</Num>
+        </BoQBkdn>
+        <BoQBkdn>
+          <Type>Item</Type>
+          <Length>4</Length>
+          <Num>Yes</Num>
+        </BoQBkdn>
+      </BoQInfo>
+      <BoQBody>
+        <Remark ID="remark-vortext">
+          <Description>
+            <CompleteText>
+              <DetailTxt>
+                <Text><p><span>Vorbemerkungen Ersatzanlagen / Teilmodernisierung Hinweise zum Leistungsverzeichnis Alle Preise und technische Daten, sowie Hersteller sind im beigefügtem Preis- und Komponentenblatt des Leistungsverzeichnisses anzugeben. Änderungen im Leistungsverzeichnis dürfen nur in vorheriger Absprache und schriftlicher Begründung (Abweichungsblatt) vorgenommen werden. Eigenständige Änderungen oder unvollständiges Ausfüllen, haben den möglichen Ausschluss des Angebotes zur Folge. Alle aufgeführten Positionen beinhalten das Liefern, ggf. Messen und Montieren der zu erbringenden Leistung. Nebenangebot Für die Angebotsabgabe ist das Leistungsverzeichnis verbindlich zu verwenden. Da es sich um eine öffentliche Ausschreibung handelt, wird hinsichtlich Nebenangeboten und Bieterfragen auf die einschlägigen Bestimmungen der VOB verwiesen. Ebenso wird auf die Vorgaben der einschlägigen Formblätter sowie der dort geforderten einzureichenden Unterlagen hingewiesen. Nebenangebote können auf einer gesonderten Anlage zum Angebot eingereicht werden. Nebenangebote sind nur in Verbindung mit einem wertbaren Hauptangebot zulässig. Dabei ist ein eindeutiger Bezug zu den jeweils betroffenen Positionen des Leistungsverzeichnisses herzustellen. Nebenangebote können zusätzlich in einem verschlossenen Umschlag eingereicht werden. Der Auftraggeber behält sich vor, diese bei Interesse zu berücksichtigen. Sofern der Bieter Bedenken gegen die vorgesehene Art der Ausführung hat, sind diese dem Angebot schriftlich beizufügen. Zahlungsbedingungen Der Zahlungsplan gilt pro Anlage oder Los. 30 % nach Auftragserteilung gegen Bürgschaft 30 % bei Montagestart (Material auf der Baustelle) 30 % nach Fertigstellung (Montageende) 10 % nach durchgeführter und mangelfreier VOB-Abnahme. 5 % Sicherheitseinbehalt für den Gewährleistungszeitraum von 5 Jahren, ablösbar gegen eine Gewährleistungsbürgschaft. Allgemeine Hinweise Die Leistung des AN umfasst sämtliche Leistungen, die zur Erstellung der betriebsfähigen Anlage und zur Erfüllung der behördlichen Auflagen erforderlich sind, mit Ausnahme, der in diesem Leistungsverzeichnis benannten, bauseitigen Leistungen. Die Arbeiten finden im bewohnten Zustand des Gebäudes statt. Es ist besonders darauf zu achten, dass sämtliche Fluchtwege, Flure und Türen freigehalten werden. Zudem ist insbesondere die UVV einzuhalten. Die Betriebsfähigkeit des Objektes muss erhalten bleiben. Alle Schachtmaße sind am Objekt zu kontrollieren. Lotprüfungen sowie Detailaufmaße sind nicht erfolgt. Die Arbeiten sind so auszuführen, dass eine weitgehende Schonung der Bausubstanz erfolgt. Bei Schäden ist die Bauleitung umgehend zu informieren. Idealerweise wird vor Beginn der Arbeiten eine Foto-Beweissicherung durch den AN erstellt. Termine Die W&amp;M-Planung (Anlagenzeichnung, Bauzeichnung) ist innerhalb von 3 Wochen nach Auftragserteilung dem AG zur Prüfung / Freigabe vorzulegen. Für die jeweiligen Freigaben durch den AG sind mindestens 2 Wochen zu berücksichtigen. Spätestens 4 Wochen nach Auftragserteilung sind die TÜV-Unterlagen sowie die übrigen Zeichnungen wie im Abschnitt &quot;Zeichnungen / Berichte / Anlagen&quot; beschrieben zu liefern und zur Prüfung / Freigabe vorzulegen. Spätestens 6 Wochen nach Auftragserteilung ist die Bemusterung zwischen AG und AN zu finalisieren und freizugeben. Wenn nicht anders vereinbart. Der AN hat spätestens 3 Wochen nach Vertragsabschluss in Abstimmung mit der Bauleitung einen detaillierten Terminplan aufzustellen und vorzulegen. Wenn nicht anders vereinbart. Die detaillierte Terminaufstellung muss die vertraglich vereinbarten Termine berücksichtigen. Erst nach Freigabe der Unterlagen und vollständiger technischer Klärung zwischen AG und AN darf die Aufzugsfertigung erfolgen. Nach technischer Klärung und Bestellung der Anlage beginnt die Lieferzeit der Aufzugsanlage. Zum vertraglichen Fertigstellungstermin muss eine mangelfreie (frei von wesentlichen Mängeln) Abnahme durch die ZÜS stattgefunden haben. Wird ein vertraglich vereinbarter Fertigstellungstermin durch Umstände, die der AN zu vertreten hat, nicht eingehalten, so wird der notwendig werdende provisorische Betrieb der jeweiligen Anlage kostenfrei und mit eigenen Mitteln vom AN sichergestellt. (z.B. Aufzugsführer) Zeichnungen / Berichte / Anlagen Alle Zeichnungen, Tagelohn-, Rapport- und Arbeitsberichte sind je 3-fach dem Auftraggeber zu übergeben. In Zeichnungen oder entsprechenden Tabellen müssen sämtliche technische Daten, Maße, Dimensionen, Anschlusswerte usw. eingetragen werden, die für Nebenarbeiten bekannt sein müssen. Es ist ggf. ein projektbezogener spezieller Zeichnungskopf zu verwenden, der dem AN bei Bedarf per Datei zur Verfügung gestellt wird. Der Zeichnungskopf aller Pläne muss so angeordnet und beschriftet sein, dass er bei gefalteten Pausen sofort erkennbar ist. In den Zeichnungskopf ist mindestens die dargestellte Aufzugsanlage oder Anlagenteile sowie Zeichnungsnummern und Änderungsindex anzugeben. Abweichungen in den Montage- und Werkplänen gegenüber den Ausschreibungsunterlagen bedürfen der schriftlichen Genehmigung des Auftraggebers und sind gesondert anzuzeigen. Die Unterlagen müssen projektgebunden und in deutscher Sprache bereitgestellt werden. Schaltpläne und Zeichnungen sind VDE- und DIN-gerecht zu erstellen. Die beigefügten Anlagen / Zeichnungen sind Bestandteil der Ausschreibung und basieren auf Grundlage der Bestandsunterlagen. Der AN erstellt je Aufzugsanlage folgende Zeichnungen: Anlagenzeichnung mind. DIN A2 Bauzeichnung mind. DIN A2 Fahrkorbzeichnung mind. DIN A2 Tableau-Zeichnung mind. DIN A3 Türansichtszeichnung mind. DIN A3 Zargen- / Portalzeichnung mind. DIN A3 Inverkehrbringung / Inbetriebnahme (PVI) Für die Inverkehrbringung der Aufzugsanlage gelten die aktuellen Bestimmungen der Verordnung zum Geräte- und Produktsicherheitsgesetz (GPSG). Alle geforderten Maßnahmen für die erfolgreiche Inverkehrbringung / Inbetriebnahme der Anlage wie, Genehmigungen, Gefahrenanalysen, Gebühren, Messgeräte, Prüfgewichte, Personal und Unterlagen sind durch den Angebotspreis abgegolten. Die Inverkehrbringung der Anlage erfolgt über eine ZÜS.</span></p><p><span>Alternativ: Sollte der AN über ein ISO-Zertifiziertes Qualitätsmanagement verfügen und darüber berechtigt sein, die Anlagen selbst in Verkehr bringen zu können, ist dies mit Zustimmung des AG möglich.</span></p><p><span>Die Inverkehrbringung der Aufzugsanlage ist mit Fang- und Lastproben in Gegenwart eines Sachverständigen einer ZÜS oder durch einen ISO-Zertifizierten AN durchzuführen. Nach Durchführung der zuvor beschriebenen Verfahren muss die Inbetriebnahme (PVI) durch einen Sachverständigen einer ZÜS erfolgen. Der AN begleitet die PVI. Voraussetzung zum Antrag auf Abnahme durch den AG ist die erfolgreiche Inverkehrbringung, Inbetriebnahme (PVI)* und Behebung aller wesentlichen Mängel der Aufzugsanlage. Des Weiteren ist die Übergabe der Dokumentation mit allen Dokumenten wie z.B. Konformitätserklärung und mangelfreier PVI-Bericht notwendig. *ausgenommen sind bauseitige PVI Mängel. Kundendokumentation / Prüfbuch (ZÜS) Mindestens folgender Dokumentationsinhalt ist bei Übergabe der Aufzugsanlagen zu übergeben: •	Konformitätserklärung •	PVI-Bericht (Mangelfrei) •	Beschreibung der Aufzugsanlage inkl. deren Hauptkomponenten •	Reinigungs- &amp; Schmieranweisungen •	Berechnungen, Prüfatteste und Bescheinigungen •	Anlagen-, Fahrkorb- und Tableauzeichnungen •	Antriebsbeschreibung •	Steuerungsbeschreibung •	Hinweise für Aufzugswärter •	Liste der verwendeten Schmiermittel •	Auflistung der auszuführenden Wartungs- und Revisionsarbeiten im Wartungsheft •	Bedienungsanleitung •	Notbefreiungsanleitung •	Notfallplan •	Gefährdungsbeurteilung Die Dokumentationsstruktur kann der AG durch eine eindeutige Vorlage vorgeben. Die Vorlage ist dem AN rechtzeitig zu übergeben. Anzahl und Form der Ausfertigung pro Anlage</span></p><p><span>Kundendokumentation:	1-fach in Papier</span></p><p><span>Prüfbuch(ZÜS): 1-fach in Papier	(optional)</span></p><p><span>CD oder USB-Stick: 1-fach digital	(optional)</span></p><p><span>Transport und Baustelleneinrichtung Für den Transport von schweren Anlagenteilen in das Gebäude bzw. zum Abladen stehen keine bauseitigen Hilfsmittel zur Verfügung und werden auch nicht gestellt. Alle erforderlichen Maßnahmen für das Abladen sowie für das Transportieren von Anlageteilen in das Gebäude, in den Fahrschacht und ggf. Triebwerksraum, sind durch den AN zu realisieren und entsprechend dem Angebotspreis zu berücksichtigen. Die Baustelleneinrichtung beinhaltet insbesondere alle erforderlichen Gerüste, Förder- und Transportanlagen, Geräte, Werkzeuge, Montagepläne, Mannschaftsunterkünfte, erforderliche Lagerräume, Aborte, Wasser- und E-Zuleitungen zu den Verbrauchsstellen, Schutz der Arbeiten vor Unfallgefahren und Witterungseinflüssen und Diebstahl. Arbeitsflächen In Anspruch genommene Lager-, Verkehrs- und Arbeitsflächen sind unmittelbar nach Gebrauch wieder in ihren ursprünglichen Zustand zu versetzen. Vor Anlieferung des Materials sind die erforderlichen Absprachen mit der örtlichen Bauleitung bezüglich eventuell erforderlicher Lagerungsstätten zu treffen. Die Reinigung der Montagestelle hat arbeitstäglich ohne besondere Anweisung zu erfolgen. Sollten Rauchmelder vorhanden sein, ist vor Arbeitsbeginn eine Klärung bezüglich Abschaltung notwendig. Abfallentsorgung Der AN verpflichtet sich, den aus seinen Leistungen anfallenden Schutt sowie alle sonstigen Abfälle und Rückstände unverzüglich (inner auf eigene Kosten gemäß den geltenden Vorschriften zu beseitigen und zu entsorgen. Kommt der AN seiner Verpflichtung auch nach entsprechender Aufforderung mit Fristsetzung nicht nach, so wird die Beseitigung und Entsorgung durch den AG auf Kosten des AN durchgeführt. Ein Entsorgungsnachweis ist mit der Kundendokumentation zu übergeben. Arbeitszeit Die Montagearbeiten finden an folgenden Tagen innerhalb der gesetzten Termine gemäß Terminplan statt: Montag bis Freitag von 7:00 bis maximal 20:00 Uhr Personaleinsatz / Allgemeine Montagehinweise Die mit der Ausführung und Überwachung beauftragten Personen des AN müssen berechtigt und in der Lage sein, Anordnungen der Bauleitung entgegenzunehmen und auszuführen. Ungeeignete Kräfte sind auf Verlangen auszuwechseln. Die Montagearbeiten müssen vom AN durch geschultes und erfahrenes Fachpersonal durchgeführt werden. Der AN verpflichtet sich über den gesamten Bauzeitraum einen deutschsprachigen Montageleiter auf der Baustelle zu beschäftigen. Zu den Baubesprechungsterminen ist die Teilnahme des zuständigen Montageleiters des AN verpflichtend. Bei öffentlichen Ausschreibungen kritisch, da Anzahl und Dauer der Baubesprechungen i.d.R. nicht bewertet werden können. Auf Anforderung der Bauleitung ist durch den AN ein Bautagebuch über die Montagearbeiten zu führen und wöchentlich vorzulegen. Alle Arbeiten müssen zügig und ohne Unterbrechung bis zur Beendigung durchgeführt werden. Eventuell erforderliche Schweiß-, Schneidarbeiten sind in Eigenverantwortung auszuführen und mit dem AG abzustimmen. Vorsorgemaßnahmen, brandschutztechnische Belange betreffend, sind vorzunehmen (Brandwache, Einfeuchten der Etagen etc.). Die Einrichtung und das Abräumen der Baustelle ist allein Sache des AN. Für die Montage sind alle notwendigen Werkzeuge, Verlängerungen, Leiter etc. vorzuhalten. Schutzmaßnahmen im Schacht gemäß DIN EN 81-20 sind einzuhalten, sofern erforderlich. Die Montageleitung liegt beim AN. Er ist für eine ordnungsgemäße, den geltenden Vorschriften und Vertragsbedingungen entsprechende Montageabwicklung verantwortlich. Einsatz von Nachunternehmern Der Einsatz von Nachunternehmern ist anzumelden und durch den AG freizugeben. Absperrungen / Montagegerüste Für die Montage eventuell notwendige Montagerüstungsbühnen müssen durch den AN gemäß DIN 4420 mit einer Punktlast von 250 kg hergestellt werden. Die Herstellung, Wartung, Unterhaltung und Verantwortung für eventuell erforderliche Abschrankungen von Schachtzugängen usw. liegen beim AN, sofern diese im Leistungssoll enthalten sind. Sollten die Absperrungen bauseits gestellt werden, übernimmt der AN nach Schachtübernahme die Verantwortung für die Sicherheit und Instandhaltung der Leistung im vollen Umfang. Wird es notwendig, anlässlich des Transportes von Materialien, Maschinen und dergleichen vorhandene Absperrungen, Abschrankungen und sonstige Sicherungen auch an anderen Stellen (z.B. Treppenhäuser) vorübergehend abzubauen, so ist der AN für die sichere Absperrung dieser Wege und für den ordentlichen Wiederaufbau verantwortlich. Reinigung Alle Anlagen sind nach Montageende und vor der Übergabe an den AG komplett zu reinigen und von Folien oder ähnlichem zu befreien. •	Maschinenraum (wenn vorhanden) •	Schacht •	Grube •	Fahrkorb •	Schachttüren Alle sichtbaren Edelstahloberflächen sind mit einem Spezialmittel einzupflegen. (wenn vorhanden) Einsatz von Stoffen Der Einsatz gefährlicher Stoffe ist untersagt. Ziel ist, dass keine Stoffe verwendet werden, deren Inhalt ganz oder teilweise als gefährlicher Stoff in der Gefahrenstoffordnung (Bundesgesetzblatt 1986, Nr 47, Seite 1470 ff) aufgeführt sind. Die Verwendung von asbesthaltigen Produkten ist nicht gestattet. Als Ersatz kommen vorzugsweise die in dem vom Bundesumweltamt herausgegebenen Ersatzstoffkatalog ausgeführten Stoffe in Betracht. Sollte während der gesamten Maßnahme Asbest gefunden werden, sind die Arbeiten einzustellen und die Bauleitung ist umgehend zu informieren. Akustische Forderungen Direkt am Aufzugsschacht angrenzend befinden sich keine schutzbedürftigen Räume. Es gilt keine besondere Schallschutzstufe (SSt) als vertraglich vereinbart. Die einzuhaltenden Schallemissionskennwerte der Aufzugsanlage(n) richten sich bei erhöhter Schallschutzstufe nach DIN 8989 - Tabelle 3 Sind keine erhöhten SSt vereinbart, richten sich die maximal zulässigen A-bewerteten Schalldruckpegel nach VDI 2566 Blatt 1 bei Aufzügen mit Triebwerksraum und nach VDI 2566 Blatt 2 bei Aufzügen ohne Triebwerksraum. Die Berechnung des Schallschutzpegels erfolgt auf Basis von L AF.max.nt. Der Auftragnehmer ist auf Verlangen verpflichtet, die von ihm gewählte Körperschalldämmung rechnerisch nachprüfbar nachzuweisen, wobei Art, Anzahl, Belastung und Federhärte (N/cm) der vorgesehenen Federelemente anzugeben sind. Anstrich / Korrosionsschutz Sämtliche Stahlteile mit Ausnahme der funktionsbedingten blanken Anlagenteile sind mit einem Korrosionsschutz zu versehen. Beschädigungen sind nach der Montage auszubessern. Edelstahlqualität</span></p><p><span>Zum Einsatz kommt der Edelstahl-Werkstoff: 1.4301</span></p><p><span>(bekannt als: X5CrNi18-10, AISI 304 oder V2A Stahl)</span></p><p><span>Muster Es sind auf Anforderung kostenfrei Handmuster (mind. DIN A 4) der Oberflächen vorzulegen. Andere Muster wie Befehlsgeber, Anzeiger, Handlauf oder Beleuchtungsmuster sind mit dem AG abzustimmen. Die Hersteller und oder Bezugsquellen sind ggf. anzugeben. Grundsätzliche Ausführungsbestimmungen für E-Anlagen Der Funkentstörgrad der Anlage muss eingehalten werden. Alle elektrischen Bauteile sind gemäß EG-Konformitätserklärung mit CE-Kennzeichnung zu liefern. Entsprechend der Verordnung über &quot;Allgemeine Bedingungen für die Elektrizitätsversorgung von Tarifkunden&quot; (AVBeltV) sowie den technischen Anschlussbestimmungen für den Anschluss an das Niederspannungsnetz&quot; (TAB) sind die elektrotechnischen Antriebe und Steuergeräte so zu betreiben, dass störende Rückwirkungen auf das vorhandene Elektronetz (z. B. durch Überlagerung von Oberschwingungsspannungen, Spannungsänderungen etc.) ausgeschlossen sind. Ein geeigneter Schutz gegen Überspannungen (z.B. Blitzeinschlag) ist an allen Steuerungseingängen vorzusehen. Elektrotechnische Bedingungen Zum Anschluss aller elektrischen Geräte und Motoren steht Drehstrom 230 / 400 V (50 Hz) am Standort des Steuerschranks zur Verfügung. Die Verlegung der Anschlusskabel und Steuerleitungen hat in gut zugänglichen Kabelkanälen zu erfolgen. Die vorhandenen Zuleitungen sind durch den AN eigenständig oder in Zusammenarbeit mit dem Gewerk Elektro (falls vorhanden) abzusprechen und aufzulegen. Der Aufzug ist an den im Schacht befindlichen Potentialausgleich anzuschließen. Sollte keine Potentialausgleichsschiene vorhanden sein, dann ist die Schiene zu liefern. Zubehör</span></p><p><span>Folgendes Zubehör, wie z.B.: 1 Schild je Haltestelle „Aufzug außer Betrieb“</span></p><p><span>2 Notentriegelungsschlüssel 1 Satz Schlüssel für Steuerschrank 1 komplette Beschilderung gemäß Vorschrift 1 Satz Schlüssel je Schließzylinder (falls notwendig) 1 Servicegerät (falls notwendig) ist durch AN zu liefern. Wartung, Notruf Es ist vorgesehen, dass der Montagebetrieb für den Zeitraum der Gewährleistung einen Wartungsvertrag und einen Vertrag für die Notrufbereitschaft erhält. Kennzeichnungen Alle drehenden Aufzugsteile müssen einen gelben Warnanstrich erhalten. Schmierstellen müssen rot gekennzeichnet sein. Alle erforderlichen Schilder für Fahrkorb, ggf. Maschinenraum / Schaltschrank und Schachtzugänge liefern und anbringen. Unvorhergesehene Arbeiten Für unvorhergesehene Leistungen, die nur nach Vereinbarung auszuführen sind, müssen über die vereinbarten Stundensätze angegeben werden. Stundenlohnzettel werden nur anerkannt, wenn diese von der Bauleitung/Fachplaner abgezeichnet und genehmigt sind. In den Stundenverrechnungssätzen müssen sämtliche Nebenkosten für Fahrzeit, Auslösung etc. bereits enthalten sein. Stundenlohnzettel sind spätestens mit der Schlussrechnung einzureichen, bei verspäteter Abgabe verfallen diese ersatzlos. Bauseitige Leistungen AG •	statische Prüfung Maschinenraumdecke •	statische Prüfung Schachtgrube Gewährleistung Die Gewährleistungsdauer beträgt 5 Jahre bei Abschluss eines Wartungsvertrages mit dem AN Aufzug. Anlagen 1 x Anlagenmatrix 1 x Anlagenkurzübersicht 1 x Montagereihenfolge 1 x Ausführungszeichnung 1 x Fahrkorbzeichnung (je Typ) 1 x Tableauzeichnung (je Typ 1 x Portal / Türansichtszeichnung (je Typ) Begriffsbestimmungen AG = Auftraggeber AN = Auftragnehmer LBO = Landesbauordnung PVI = Prüfung vor Inbetriebnahme IVB = Inverkehrbringung ZÜS = Zugelassene Überwachungsstelle W&amp;M = Werk- &amp; Montageplanung FU = Frequenzumrichter HK = Hängekabel TWR = Triebwerksraum / Triebwerksraum LV = Leistungsverzeichnis GLT = Gebäudeleittechnik SG = Schachtgrube SK = Schachtkopf FKT = Tiefe Kabine / Fahrkorb FKB = Breite Kabine / Fahrkorb FKH = Höhe Fahrkorb TH = Höhe Tür TB = Breite Tür</span></p></Text>
+              </DetailTxt>
+            </CompleteText>
+          </Description>
+        </Remark>
+        <BoQCtgy ID="ctgy-01" RNoPart="01">
+          <LblTx>
+            <p><span>Steuerung</span></p>
+          </LblTx>
+          <BoQBody>
+            <Itemlist>
+          <Item ID="item-01-0001" RNoPart="0001">
+            <Qty>1</Qty>
+            <QU>Stk</QU>
+            <Description>
+              <CompleteText>
+                <DetailTxt>
+                  <Text>
+                    <p><span>01.01 Schaltschrank</span></p>
+<p><span>Der Schaltschrank ist gemäß VDE als Stand- oder Wandschrank im Triebwerksraum, körperschallisoliert montiert, vorzusehen. Der Schaltschrank ist allseitig geschlossen und in stahlblechgekapselter Profilstahlkonstruktion (mind. IP 22) mit Fronttüren sowie Frontblenden und Sockel nach Erfordernis auszubilden. Der Schaltschrank soll mit sämtlichen Tragkonstruktionen für Einbauteile und erforderlichen Verbindern ggf. Dichtungen, Rück- und Seitenwänden, Anschlussstellen, Einführungsabdeckungen usw. ausgerüstet werden. Hinsichtlich der Verdrahtung des Schaltschrankes ist besonders darauf zu achten, dass alle zu- und abgehenden Leitungen übersichtlich angeordnet, einzeln zugentlastet und ordentlich befestigt auf die bezeichnenden Reihenklemmen geführt sind. Alle Leitungen sind an ihren Klemmstellen ausreichend zu kennzeichnen. Diese Kennzeichnung muss mit dem für Revisionszwecke mitgelieferten Schema bzw. Klemmenbelegungsplan übereinstimmen. Ausreichende Be- und Entlüftung ist zu gewährleisten.</span></p>
+<p><span>Hauptschalter:</span><span>&#160;&#160;&#160;&#160;</span><span>ja, in Tür integriert</span></p>
+<p><span>Fahrtenzähler:</span><span>&#160;&#160;&#160;&#160;</span><span>ja, in Tür integriert</span></p>
+<p><span>Betriebsstundenzähler:</span><span>&#160;&#160;&#160;&#160;</span><span>ja, in Tür integriert</span></p>
+<p><span>Plantasche:</span><span>&#160;&#160;&#160;&#160;</span><span>ja, in Tür integriert</span></p>
+<p><span>Belüftung:</span><span>&#160;&#160;&#160;&#160;</span><span>Lüfter (Zu-/Abluft)</span></p>
+<p><span>Reserve:</span><span>&#160;&#160;&#160;&#160;</span><span>min. 1 Hutschiene</span></p>
+<p><span>01.02 Steuerung</span></p>
+<p><span>Aufzugssteuerung in Mikroprozessortechnik aus EU-Produktion mit allen Bedienungs- und Anzeigeeinrichtungen. Kommunikation der Komponenten in Bus-Technik. Schütze und Relais sollen nur für die Bauteile eingesetzt werden, für die die DIN EN 81 dieses vorschreibt. Die zu liefernde Steuerung muss der elektromagnetischen Verträglichkeit gem. EN 12015 / 12016 entsprechen Die Steuerung muss ein fest verbautes Klartextdisplay enthalten, um auf besondere Hilfsmittel oder Werkzeuge für Wartung, Fehlersuche und Parameteranpassung in der Benutzer- Technikerebene verzichten zu können. Eine vollständige, deutschsprachige Ausfertigung der möglichen Fehlercodes ist im Rahmen der Dokumentation zu übergeben.</span></p>
+<p><span>Steuerungsart:</span><span>&#160;&#160;&#160;&#160;</span><span>1-KS / 2-KS</span></p>
+<p><span>Störmeldung:</span><span>&#160;&#160;&#160;&#160;</span><span>vorbereitet</span></p>
+<p><span>Potentialfreie Kontakte:</span><span>&#160;&#160;&#160;&#160;</span><span>mind. 3</span></p>
+<p><span>Überspannungsschutz:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja; gem. DIN EN 62305 (VDE</span></p>
+<p><span>185-305 (2007)</span></p>
+<p><span>01.03 Brandfallsteuerung</span></p>
+<p><span>Brandfalltyp:</span><span>&#160;&#160;&#160;&#160;</span><span>Erweitert statisch mit Ausweichhaltestelle, volldynamisch</span></p>
+<p><span>Hauptevakuierungshaltestelle:</span><span>&#160;&#160;&#160;&#160;</span><span>EG / 1.OG / Festlegung folgt</span></p>
+<p><span>Ausweichhaltestelle:</span><span>&#160;&#160;&#160;&#160;</span><span>1. OG</span></p>
+<p><span>Bei Fertigungsbeginn sind die Vorgaben des aktuellen, genehmigten Brandschutzkonzeptes diesbezüglich abzugleichen.</span></p>
+<p><span>01.04 Schachtkopierung</span></p>
+<p><span>Schachtkopierung kontaktlos in Absolutwertgeber Technik realisieren. Die Fahrstrecke ist mittels Absolutwertgeber zu vermessen und auszuwerten.</span></p>
+<p><span>Auflösung:</span><span>&#160;&#160;&#160;&#160;</span><span>Millimetergenaue Positionsbestimmung über die gesamte Fahrstrecke.</span></p>
+<p><span>Flexibilität:</span><span>&#160;&#160;&#160;&#160;</span><span>Geeignet für den Einsatz bei</span></p>
+<p><span>Variablen Fahrgeschwindig-keiten.</span></p>
+<p><span>Fahrkomfort:</span><span>&#160;&#160;&#160;&#160;</span><span>Einfahrt der Kabine in die</span></p>
+<p><span>Haltestellen mit Direktfahrt (ohne Nachjustierung).</span></p>
+<p><span>Schlupffreier Betrieb:</span><span>&#160;&#160;&#160;&#160;</span><span>Keine Abweichungen durch</span></p>
+<p><span>Seil- oder Riemenschlupf.</span></p>
+<p><span>Spannungsausfallsicherheit:</span><span>&#160;&#160;&#160;&#160;</span><span>Keine Referenzfahrt</span></p>
+<p><span>erforderlich, auch nach längerem Spannungsausfall.</span></p>
+<p><span>Geräuschloser Betrieb:</span><span>&#160;&#160;&#160;&#160;</span><span>Vermeidung von Geräuschentwicklung durch rotierende oder bewegliche Teile.</span></p>
+<p><span>Wartungsfrei:</span><span>&#160;&#160;&#160;&#160;</span><span>Kein Verschleiß durch</span></p>
+<p><span>berührungsloses Funktionsprinzip. Das System muss robust gegenüber Verschmutzungen, Vibrationen und elektromagnetischen Störungen sein. Bieterspezifische Abweichungen sind im Angebotsschreiben aufzuführen.</span></p>
+<p><span>01.05 Standby Betrieb</span></p>
+<p><span>Zur Reduzierung des Energiebedarfs ist ein Standby Betrieb für Aufzugssteuerung und -regelung sowie Signalisation vorzusehen. Die diesbezügliche technische Dokumentation ist mit dem Angebot einzureichen</span></p>
+<p><span>01.06 Fahrkorblichtabschaltung</span></p>
+<p><span>Das Fahrkorblicht wird 5 Minuten nach der Beendigung der letzten Fahrt bei geschlossenen Türen automatisch abgeschaltet. Die Zeit ist vor Ort einstellbar. Bei Rufgabe (innen / außen) wird das Fahrkorblicht wieder aktiviert.</span></p>
+<p><span>01.07 Parkhaltestelle</span></p>
+<p><span>Der Aufzug ist so zu konzipieren, dass eine Parkhaltestelle programmiert werden kann. Je nach Bedürfnis muss diese Parkhaltestelle in der Steuerung einstellbar sein, bzw. geändert werden können.</span></p>
+<p><span>01.08 Lastmesssystem</span></p>
+<p><span>Lieferung und Montage eines Messsystems zur Erfassung der Zuladung und Einbindung in die Steuerung Voll-Lastzustände müssen erkannt werden, vorliegende Außenrufe werden nicht bedient, bleiben jedoch gespeichert. Die Lastwiegeeinrichtung muss in der Lage sein, bei einer Fahrkorbauslastung von weniger als 40 kg nicht mehr als zwei Fahrkommandos anzunehmen.</span></p>
+<p><span>System Seilaufzug:</span><span>&#160;&#160;&#160;&#160;</span><span>Seilsensoren</span></p>
+<p><span>System Hydraulikaufzug:</span><span>&#160;&#160;&#160;&#160;</span><span>Drucksensor am Steuerblock</span></p>
+<p><span>Auswerteeinheit:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja</span></p>
+<p><span>01.09 Frequenzumrichter / Regelung</span></p>
+<p><span>Ein für die Wandmontage geeigneter FU mit festem oder mobilen Programmdisplay, Netzfilter sowie Leistungsreserve und Rückspeiseoption ins Netz. Alternativ, Frequenzumrichter im Schachtkopf platzieren. Elektronische, feldorientierte Regelung Das System soll die Motorspannung und die Motorfrequenz regeln. Durch die Regelung soll der Motor für alle Lastverhältnisse ein konstantes Drehmoment erzeugen. Ein ruckfreies, stufenloses Anfahren und Abbremsen müssen gewährleistet sein. Der Aufzug soll ohne Schleichfahrt mit einer Anhalte-Genauigkeit von +/- 5 mm direkt in die Haltestellen einfahren. Das System ist für …. Fahrten/Stunde auszulegen Die Regelung soll auch bei Netzspannungsschwankungen von +/- 10 % funktionsfähig bleiben. Entstör-Filter zur Vermeidung von Netzbeeinflussung sind vorzusehen.</span></p>
+<p><span>Leistungsreserve:</span><span>&#160;&#160;&#160;&#160;</span><span>mind. 10 %</span></p>
+<p><span>(Leistungsreserve muss nachgewiesen werden.)</span></p>
+<p><span>01.10 Schachtinstallation (Elektro)</span></p>
+<p><span>Installation erfolgt ausschließlich im Kabelkanal Im Wegebereich sind angeschrägte und trittfeste Kanäle vorzusehen, bzw. sind Kabelkanäle trittfest (reversibel) abzudecken.</span></p>
+<p><span>Kabelkanäle:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja- Dimensionierung nach</span></p>
+<p><span>Erfordernis</span></p>
+<p><span>Installation halogenfrei:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>Steckdose in Schachtgrube:</span><span>&#160;&#160;&#160;&#160;</span><span>ja</span></p>
+<p><span>Potentialausgleichsschiene:</span><span>&#160;&#160;&#160;&#160;</span><span>ja</span></p>
+<p><span>Unterkonstruktion für Kabelkanal</span></p>
+<p><span>bei Glasschächten:</span><span>&#160;&#160;&#160;&#160;</span><span>ja</span></p>
+<p><span>Material UK:</span><span>&#160;&#160;&#160;&#160;</span><span>Edelstahlblech</span></p>
+<p><span>01.11 Schachtbeleuchtung</span></p>
+<p><span>Schachtbeleuchtung in energieeffizienter LED-Technik als Tasterschaltung von drei Schaltstellen bedienbar ausführen.</span></p>
+<p><span>Bedienstellen:</span><span>&#160;&#160;&#160;&#160;</span><span>Fahrkorbdach</span></p>
+<p><span>Triebwerksraum / Steuerung Grube</span></p>
+<p><span>01.12 Verzögerungskontrollschaltung / Temporäre Schutzräume</span></p>
+<p><span>Systembedingte Maßnahmen zur Generierung temporärer Schutzräume (Schachtkopf / Schachtgrube) sowie benötigte Verzögerungskontrollschaltungen sind im Leistungsumfang enthalten.</span></p>
+<p><span>01.13 Elektroinstallation (Fahrkorb)</span></p>
+<p><span>Die Installation erfolgt in Kabelkanälen oder Installationsrohr. Im Wegebereich sind angeschrägte und trittfeste Kanäle bzw. reversible trittfeste Abdeckungen vorzusehen.</span></p>
+<p><span>Kabelkanäle:</span><span>&#160;&#160;&#160;&#160;</span><span>Kunststoff</span></p>
+<p><span>Installationsrohr:</span><span>&#160;&#160;&#160;&#160;</span><span>starr / flexibel</span></p>
+<p><span>Installation halogenfrei:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>Reservesteckdosen:</span><span>&#160;&#160;&#160;&#160;</span><span>2 Stück (separat abgesichert)</span></p>
+<p><span>01.18 Fahrkorbtableau vertikal</span></p>
+<p><span>Flächenbündiges aufgesetztes Vertikaltableau gemäß DIN EN 81-70 als raumhohes halbhohes Paneel mit sichtbarer verdeckter Befestigung und Punktmatrix TFT- Anzeige. Deckplatte</span></p>
+<p><span>Material:</span><span>&#160;&#160;&#160;&#160;</span><span>Edelstahl / Glas / Carbon</span></p>
+<p><span>Materialstärke:</span><span>&#160;&#160;&#160;&#160;</span><span>1,5 mm</span></p>
+<p><span>Dekor / Farbe:</span><span>&#160;&#160;&#160;&#160;</span><span>geschliffen / schwarz</span></p>
+<p><span>Breite:</span><span>&#160;&#160;&#160;&#160;</span><span>gemäß Hersteller</span></p>
+<p><span>Montageart:</span><span>&#160;&#160;&#160;&#160;</span><span>flächenbündig U-Form,</span></p>
+<p><span>aufgesetzt</span></p>
+<p><span>Befestigung:</span><span>&#160;&#160;&#160;&#160;</span><span>Sterntorx sichtbar</span></p>
+<p><span>Anzeige:</span><span>&#160;&#160;&#160;&#160;</span><span>Punktmatrix oder TFT-Display</span></p>
+<p><span>Anzeigegröße:</span><span>&#160;&#160;&#160;&#160;</span><span>gemäß Hersteller</span></p>
+<p><span>Kartenleser:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>Piktogramm:</span><span>&#160;&#160;&#160;&#160;</span><span>Brandfallsymbol / DIN EN 81-73 / graviert: Ja</span></p>
+<p><span>Norm:</span><span>&#160;&#160;&#160;&#160;</span><span>DIN EN 81-70 / DIN EN 81-71</span></p>
+<p><span>Kategorie 2 Tasterelement</span></p>
+<p><span>Form:</span><span>&#160;&#160;&#160;&#160;</span><span>Rund</span></p>
+<p><span>Grossflächentaster:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>Taktil:</span><span>&#160;&#160;&#160;&#160;</span><span>ja</span></p>
+<p><span>Brailleschrift:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>Tastkappe:</span><span>&#160;&#160;&#160;&#160;</span><span>gemäß Norm</span></p>
+<p><span>Quittung:</span><span>&#160;&#160;&#160;&#160;</span><span>Bicolor / weiss / rot</span></p>
+<p><span>Norm:</span><span>&#160;&#160;&#160;&#160;</span><span>DIN EN 81-70 / DIN EN 81-71</span></p>
+<p><span>Kategorie 2 Ausstattung</span></p>
+<p><span>Rufbezeichnung:</span><span>&#160;&#160;&#160;&#160;</span><span>E/1/2/3/4 usw.</span></p>
+<p><span>Tür auf / Tür zu:</span><span>&#160;&#160;&#160;&#160;</span><span>ja</span></p>
+<p><span>Hauptzugang:</span><span>&#160;&#160;&#160;&#160;</span><span>erhaben „grün&quot;</span></p>
+<p><span>Innenvorzug:</span><span>&#160;&#160;&#160;&#160;</span><span>ja, inkl. Eurozylinder</span></p>
+<p><span>Rufanordnung:</span><span>&#160;&#160;&#160;&#160;</span><span>1-reihig bzw. 2-reihig</span></p>
+<p><span>Notruftaster Höhe:</span><span>&#160;&#160;&#160;&#160;</span><span>min. 850 mm</span></p>
+<p><span>01.19 Infofeld neben den Etagentastern Fahrkorbtableau</span></p>
+<p><span>Infofeld mit Plexiglasabdeckung zur Aufnahme einer Folie mit bauseitig noch festzulegendem Text (Vorstand, Information etc.)</span></p>
+<p><span>Form:</span><span>&#160;&#160;&#160;&#160;</span><span>Eckig</span></p>
+<p><span>Hinterleuchtet:</span><span>&#160;&#160;&#160;&#160;</span><span>ja, LED</span></p>
+<p><span>01.20 Befehlsgeber (Außenruf)</span></p>
+<p><span>Befehlsgebertableau 2 mm aufgesetzt flächenbündig in Mauerumfassungszarge, Türzarge mit unsichtbarer sichtbarer Befestigung und Ruftastern inkl. graviertem Brandfallpiktogramm. Nicht mehr benötigte Öffnungen abgängiger Außenrufe / Anzeigen sind mit einem Edelstahlblech zu verschließen Ausführung gemäß DIN EN 81-71 Kategorie 2. Montage und Art der Befehlsgeber gemäß DIN EN 81-70. Deckplatte</span></p>
+<p><span>Material:</span><span>&#160;&#160;&#160;&#160;</span><span>Edelstahl / Bieterstandard / Glas</span></p>
+<p><span>/ Carbon</span></p>
+<p><span>Materialstärke:</span><span>&#160;&#160;&#160;&#160;</span><span>2 mm</span></p>
+<p><span>Dekor / Farbe:</span><span>&#160;&#160;&#160;&#160;</span><span>geschliffen / schwarz</span></p>
+<p><span>Breite:</span><span>&#160;&#160;&#160;&#160;</span><span>Bieterstandard / ca. 80 mm</span></p>
+<p><span>Höhe:</span><span>&#160;&#160;&#160;&#160;</span><span>Bieterstandard / ca. 150 mm</span></p>
+<p><span>Befestigung:</span><span>&#160;&#160;&#160;&#160;</span><span>Sterntorx / unsichtbar</span></p>
+<p><span>Norm:</span><span>&#160;&#160;&#160;&#160;</span><span>DIN EN 81-70 / DIN EN 81-73 /</span></p>
+<p><span>DIN EN 81-71 Kategorie 2</span></p>
+<p><span>Piktogramm:</span><span>&#160;&#160;&#160;&#160;</span><span>Brandfallsymbol graviert</span></p>
+<p><span>Anzahl Ruftaster:</span><span>&#160;&#160;&#160;&#160;</span><span>1 oder 2</span></p>
+<p><span>Schlüsselschalter:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>Tasterelement</span></p>
+<p><span>Form:</span><span>&#160;&#160;&#160;&#160;</span><span>Rund</span></p>
+<p><span>Grossflächentaster:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>Taktil:</span><span>&#160;&#160;&#160;&#160;</span><span>ja</span></p>
+<p><span>Brailleschrift:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>Tastkappe:</span><span>&#160;&#160;&#160;&#160;</span><span>gemäß Norm</span></p>
+<p><span>Quittung:</span><span>&#160;&#160;&#160;&#160;</span><span>Bieterstandard / Bicolor</span></p>
+<p><span>Norm:</span><span>&#160;&#160;&#160;&#160;</span><span>DIN EN 81-70 / DIN EN 81-71</span></p>
+<p><span>Kategorie 2</span></p>
+<p><span>Einbauhöhe Taster:</span><span>&#160;&#160;&#160;&#160;</span><span>min. 850 mm ab OKFF</span></p>
+<p><span>01.21 Stand- und Weiterfahrtanzeige Außen</span></p>
+<p><span>Display:</span><span>&#160;&#160;&#160;&#160;</span><span>Punktmatrix / TFT</span></p>
+<p><span>Größe:</span><span>&#160;&#160;&#160;&#160;</span><span>Bieterstandard</span></p>
+<p><span>Deckplatte:</span><span>&#160;&#160;&#160;&#160;</span><span>Edelstahl / Bieterstandard / Glas</span></p>
+<p><span>/ Carbon</span></p>
+<p><span>Dekor / Farbe:</span><span>&#160;&#160;&#160;&#160;</span><span>geschliffen / schwarz</span></p>
+<p><span>Befestigung:</span><span>&#160;&#160;&#160;&#160;</span><span>Bieterstandard / Verdeckt /</span></p>
+<p><span>Sterntorx</span></p>
+<p><span>Haltestellen:</span><span>&#160;&#160;&#160;&#160;</span><span>Alle Haltestellen,</span></p>
+<p><span>Hauptzugangsstelle</span></p>
+                  </Text>
+                </DetailTxt>
+                <OutlineText>
+                  <OutlTxt>
+                    <TextOutlTxt>
+                      <p><span>Paket Steuerung komplett</span></p>
+                    </TextOutlTxt>
+                  </OutlTxt>
+                </OutlineText>
+              </CompleteText>
+            </Description>
+          </Item>
+            </Itemlist>
+          </BoQBody>
+        </BoQCtgy>
+        <BoQCtgy ID="ctgy-02" RNoPart="02">
+          <LblTx>
+            <p><span>Antriebseinheit</span></p>
+          </LblTx>
+          <BoQBody>
+            <Itemlist>
+          <Item ID="item-02-0001" RNoPart="0001">
+            <Qty>1</Qty>
+            <QU>Stk</QU>
+            <Description>
+              <CompleteText>
+                <DetailTxt>
+                  <Text>
+                    <p><span>02.01 Antrieb Seil</span></p>
+<p><span>MRL - Seil Synchron Treibscheibenantrieb in getriebeloser Technologie mit Leistungsreserve auf einer koerperschallentkoppelten Lagerung. Der Antrieb steht auf einer mitzuliefernden Stahltraegerkonstruktion / Fuehrungsschienensystem.</span></p>
+<p><span>Antriebsart:</span><span>&#160;&#160;&#160;&#160;</span><span>getriebelos</span></p>
+<p><span>Antriebstyp:</span><span>&#160;&#160;&#160;&#160;</span><span>gemaess Bieterstandard</span></p>
+<p><span>Geregelt:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja</span></p>
+<p><span>Belueftung:</span><span>&#160;&#160;&#160;&#160;</span><span>ohne Fremdbelueftung</span></p>
+<p><span>Bremse:</span><span>&#160;&#160;&#160;&#160;</span><span>Zwei-Kreis Haltebremse</span></p>
+<p><span>Bremslueftung Notfall:</span><span>&#160;&#160;&#160;&#160;</span><span>Elektrisch</span></p>
+<p><span>Montageart:</span><span>&#160;&#160;&#160;&#160;</span><span>auf Unterkonstruktion</span></p>
+<p><span>Aufhaengung:</span><span>&#160;&#160;&#160;&#160;</span><span>s. techn. Daten</span></p>
+<p><span>Leistungsreserve:</span><span>&#160;&#160;&#160;&#160;</span><span>mind. 10 %</span></p>
+<p><span>(Leistungsreserve muss nachgewiesen werden.)</span></p>
+<p><span>02.02 Schutz gegen unkontrollierte Bewegung des Fahrkorbes (UCM)</span></p>
+<p><span>Die Aufzugsanlage muss mit einer Schutzeinrichtung - direkt auf die Treibscheibenwelle wirkend - gegen unbeabsichtigte Bewegung des Fahrkorbes von der Haltestelle weg ausgestattet sein.</span></p>
+<p><span>02.03 Umlenkrollen Gegengewicht</span></p>
+<p><span>Die Umlenkrollen sind neu zu lagern und zu erneuern.</span></p>
+<p><span>Anzahl:</span><span>&#160;&#160;&#160;&#160;</span><span>s. Anlagenzeichnung</span></p>
+<p><span>Durchmesser:</span><span>&#160;&#160;&#160;&#160;</span><span>s. Anlagenzeichnung</span></p>
+<p><span>Kunststoff:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>02.04 Gegengewichtsverkleidung</span></p>
+<p><span>Ausfuehrung entsprechend EN 81-20 5.2.5.5.1</span></p>
+<p><span>Hoehe:</span><span>&#160;&#160;&#160;&#160;</span><span>min. 2000 mm</span></p>
+<p><span>Material:</span><span>&#160;&#160;&#160;&#160;</span><span>Stahlblech verzinkt</span></p>
+<p><span>Ausfuehrung:</span><span>&#160;&#160;&#160;&#160;</span><span>Glattblech</span></p>
+<p><span>Materialstaerke:</span><span>&#160;&#160;&#160;&#160;</span><span>min. 1,5 mm</span></p>
+<p><span>02.05 Geschwindigkeitsbegrenzer im Aufzugsschacht</span></p>
+<p><span>Geschwindigkeitsbegrenzer zur Ausloesung der Fangvorrichtung bei Ueberschreitung der Nenngeschwindigkeit. Ausgestattet mit Sicherheitskontakten, Spanngewicht, Begrenzerseil sowie allen erforderlichen Befestigungsteilen und Schutzvorrichtungen.</span></p>
+<p><span>Spanngewicht:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja</span></p>
+<p><span>Begrenzerseil:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja</span></p>
+<p><span>Einfallschutz:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja</span></p>
+<p><span>Reglerspanngewichtsschalter:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja</span></p>
+<p><span>Seilabsprungsicherung:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja</span></p>
+<p><span>Befestigungsmaterial:</span><span>&#160;&#160;&#160;&#160;</span><span>Ja</span></p>
+<p><span>02.06 Oelauffangschalen</span></p>
+<p><span>Oelauffangschalen aus Kunststoff an den unteren Schienenenden liefern und montieren.</span></p>
+<p><span>02.07 Verzoegerungskontrollschaltung / Temporaere Schutzraeume</span></p>
+<p><span>Systembedingte Massnahmen zur Generierung temporaerer Schutzraeume (Schachtkopf / Schachtgrube) sowie benoetigte Verzoegerungskontrollschaltungen sind im Leistungsumfang enthalten.</span></p>
+<p><span>02.08 Umlenkrollen Fahrkorb</span></p>
+<p><span>Die Umlenkrollen sind neu zu lagern und zu reinigen.</span></p>
+<p><span>Anzahl:</span><span>&#160;&#160;&#160;&#160;</span><span>s. Anlagenzeichnung</span></p>
+<p><span>Durchmesser:</span><span>&#160;&#160;&#160;&#160;</span><span>s. Anlagenzeichnung</span></p>
+<p><span>Kunststoff:</span><span>&#160;&#160;&#160;&#160;</span><span>nein</span></p>
+<p><span>02.09 Tragmittel / Aufhaengung</span></p>
+<p><span>Die Tragmittel sind zu erneuern. Die Tragseile sind so auszulegen, dass eine hohe Standzeit erzielt wird. Die Auslegung der Tragseile erfolgt auf Basis den DIN 15020. Die Tragseile sind ueber separat nachspannbare Aufhaengungen am Fangrahmen und am Gegengewicht zu befestigen. Zur Befestigung der Tragmittel an Aufzuegen werden Seilenden mit Kausche nach DIN 3090 mithilfe einer Augenschraube bzw. Oesenstange, Druckfedern, Federtellern, Muttern und Splinten montiert und gegen Verdrehen gesichert.</span></p>
+<p><span>Tragmittel:</span><span>&#160;&#160;&#160;&#160;</span><span>Seil / Gurt</span></p>
+<p><span>Kunststoffummantelte Seile</span></p>
+<p><span>Zulaessig:</span><span>&#160;&#160;&#160;&#160;</span><span>ja / nein</span></p>
+<p><span>Anzahl:</span><span>&#160;&#160;&#160;&#160;</span><span>gemaess Auslegung</span></p>
+<p><span>Durchmesser:</span><span>&#160;&#160;&#160;&#160;</span><span>gemaess Auslegung</span></p>
+<p><span>Der Lebenszyklus der Gurte in Bezug auf Anzahl Fahrten oder Jahre ist ebenfalls anzugeben.</span></p>
+                  </Text>
+                </DetailTxt>
+                <OutlineText>
+                  <OutlTxt>
+                    <TextOutlTxt>
+                      <p><span>Paket Antriebseinheit komplett</span></p>
+                    </TextOutlTxt>
+                  </OutlTxt>
+                </OutlineText>
+              </CompleteText>
+            </Description>
+          </Item>
+            </Itemlist>
+          </BoQBody>
+        </BoQCtgy>
+        <BoQCtgy ID="ctgy-03" RNoPart="03">
+          <LblTx>
+            <p><span>Abnahme / Dokumentation / Einweisung</span></p>
+          </LblTx>
+          <BoQBody>
+            <Itemlist>
+          <Item ID="item-03-0001" RNoPart="0001">
+            <Qty>1</Qty>
+            <QU>Stk</QU>
+            <Description>
+              <CompleteText>
+                <DetailTxt>
+                  <Text>
+                    <p><span>03.01 Inverkehrbringung / Inbetriebnahme (PVI)</span></p>
+<p><span>Für die Inverkehrbringung der Aufzugsanlage gelten die aktuellen Bestimmungen der Verordnung zum Geräte- und Produktsicherheitsgesetz (GPSG). Alle geforderten Maßnahmen für die erfolgreiche Inverkehrbringung / Inbetriebnahme der Anlage wie, Genehmigungen, Gefahrenanalysen, Gebühren, Messgeräte, Prüfgewichte, Personal und Unterlagen sind durch den Angebotspreis abgegolten. Die Inverkehrbringung der Anlage erfolgt über eine ZÜS.</span></p>
+<p><span>Alternativ:</span><span>&#160;&#160;&#160;&#160;</span><span>Sollte der AN über ein ISO-Zertifiziertes Qualitätsmanagement verfügen und darüber berechtigt sein, die Anlagen selbst in Verkehr bringen zu können, ist dies mit Zustimmung des AG möglich.</span></p>
+<p><span>Die Inverkehrbringung der Aufzugsanlage ist mit Fang- und Lastproben in Gegenwart eines Sachverständigen einer ZÜS oder durch einen ISO-Zertifizierten AN durchzuführen. Nach Durchführung der zuvor beschriebenen Verfahren muss die Inbetriebnahme (PVI) durch einen Sachverständigen einer ZÜS erfolgen. Der AN begleitet die PVI. Voraussetzung zum Antrag auf Abnahme durch den AG ist die erfolgreiche Inverkehrbringung, Inbetriebnahme (PVI)* und Behebung aller wesentlichen Mängel der Aufzugsanlage. Des Weiteren ist die Übergabe der Dokumentation mit allen Dokumenten wie z.B. Konformitätserklärung und mangelfreier PVI-Bericht notwendig. *ausgenommen sind bauseitige PVI Mängel.</span></p>
+<p><span>03.02 Kundendokumentation / Prüfbuch (ZÜS)</span></p>
+<p><span>Mindestens folgender Dokumentationsinhalt ist bei Übergabe der Aufzugsanlagen zu übergeben: •	Konformitätserklärung •	PVI-Bericht (Mangelfrei) •	Beschreibung der Aufzugsanlage inkl. deren Hauptkomponenten •	Reinigungs- &amp; Schmieranweisungen •	Berechnungen, Prüfatteste und Bescheinigungen •	Anlagen-, Fahrkorb- und Tableauzeichnungen •	Antriebsbeschreibung •	Steuerungsbeschreibung •	Hinweise für Aufzugswärter •	Liste der verwendeten Schmiermittel •	Auflistung der auszuführenden Wartungs- und Revisionsarbeiten im Wartungsheft •	Bedienungsanleitung •	Notbefreiungsanleitung •	Notfallplan •	Gefährdungsbeurteilung Die Dokumentationsstruktur kann der AG durch eine eindeutige Vorlage vorgeben. Die Vorlage ist dem AN rechtzeitig zu übergeben. Anzahl und Form der Ausfertigung pro Anlage</span></p>
+<p><span>Kundendokumentation:</span><span>&#160;&#160;&#160;&#160;</span><span>1-fach in Papier</span></p>
+<p><span>Prüfbuch(ZÜS):</span><span>&#160;&#160;&#160;&#160;</span><span>1-fach in Papier	(optional)</span></p>
+<p><span>CD oder USB-Stick:</span><span>&#160;&#160;&#160;&#160;</span><span>1-fach digital	(optional)</span></p>
+<p><span>03.03 Einweisung Haustechnik in die Aufzugsanlage</span></p>
+<p><span>Einweisung des Haustechnikers in die Grundlagen, Bedienung und Sicherheitsaspekte der Aufzugsanlage. Vermittlung von Kenntnissen zur Befreiung eingeschlossener Personen, Nutzung und Pflege der technischen Dokumentation sowie Einhaltung der geltenden Sicherheitsvorschriften.</span></p>
+<p><span>Inhalt der Einweisung:</span><span>&#160;&#160;&#160;&#160;</span><span>Grundlagen und Bedienung der</span></p>
+<p><span>Aufzugsanlage Hinweise und Vorgehensweise zur Befreiung eingeschlossener Personen</span></p>
+<p><span>Dokumentation:</span><span>&#160;&#160;&#160;&#160;</span><span>firmeneigenes Dokument</span></p>
+<p><span>Dauer je Einweisung:</span><span>&#160;&#160;&#160;&#160;</span><span>ca. 2 Stunden</span></p>
+<p><span>Anzahl der Einweisungen:</span><span>&#160;&#160;&#160;&#160;</span><span>2</span></p>
+<p><span>Durchführung:</span><span>&#160;&#160;&#160;&#160;</span><span>Qualifiziertes Fachpersonal gemäß geltenden Sicherheitsvorschriften und spezifischen Anforderungen der Anlage</span></p>
+                  </Text>
+                </DetailTxt>
+                <OutlineText>
+                  <OutlTxt>
+                    <TextOutlTxt>
+                      <p><span>Paket Abnahme / Dokumentation / Einweisung komplett</span></p>
+                    </TextOutlTxt>
+                  </OutlTxt>
+                </OutlineText>
+              </CompleteText>
+            </Description>
+          </Item>
+            </Itemlist>
+          </BoQBody>
+        </BoQCtgy>
+      </BoQBody>
+    </BoQ>
+  </Award>
+</GAEB>

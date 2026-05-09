@@ -621,14 +621,14 @@ function buildDeckblatt(query) {
     buildDeckblattBox('Seiten ohne Anlage(n)', '-', W),
   ];
 
-  // Logo einlesen (logo.png aus backend/assets)
-  const logoPath = path.join(__dirname, 'assets', 'logo.png');
+  // Logo einlesen (hundt-consult.png aus frontend/assets)
+  const logoPath = path.join(__dirname, '..', 'frontend', 'assets', 'hundt-consult.png');
   let logoImageRun = null;
   try {
     const logoData = fs.readFileSync(logoPath);
     logoImageRun = new ImageRun({
       data: logoData,
-      transformation: { width: 238, height: 173 },
+      transformation: { width: 200, height: 80 },
       type: 'png',
     });
   } catch {
@@ -641,9 +641,17 @@ function buildDeckblatt(query) {
     ...(logoImageRun
       ? [new Paragraph({
           children: [logoImageRun],
-          spacing: { before: 0, after: 160, line: LINE_SPACING_SINGLE },
+          spacing: { before: 0, after: 120, line: LINE_SPACING_SINGLE },
         })]
       : []),
+    // BoQ Produktname
+    new Paragraph({
+      text: 'BoQ',
+      bold: true,
+      size: 32,
+      spacing: { before: 0, after: 160, line: LINE_SPACING_SINGLE },
+      alignment: AlignmentType.CENTER,
+    }),
     // Label
     buildDeckblattLeftPara('Planverfasser', 18, false, 80),
     // Firma
