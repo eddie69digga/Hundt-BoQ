@@ -1094,6 +1094,14 @@
     }
 
     function initializeAuthGate() {
+      const autoParams = readAutoImportParams();
+      const urlUsername = typeof autoParams?.username === 'string' ? autoParams.username.trim() : '';
+      if (urlUsername) {
+        localStorage.setItem(AUTH_STORAGE_KEY, urlUsername);
+        showAppView(urlUsername);
+        return;
+      }
+
       const storedUsername = getStoredUsername();
       if (storedUsername) {
         showAppView(storedUsername);
