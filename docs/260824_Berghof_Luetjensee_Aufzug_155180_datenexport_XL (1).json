@@ -1,0 +1,3447 @@
+{
+  "username": "eddie",
+  "ownerId": "eddie",
+  "sessionProjectId": "f2706e85-ca8a-4ef5-aeb2-beba65a6bbae",
+  "projektdaten": {
+    "projektnummer": "Berghof Lütjensee",
+    "projektnameOderNummer": "Berghof Lütjensee",
+    "bauvorhaben": "Aufzug 155180",
+    "stadt": "Lütjensee",
+    "postleitzahl": "22952",
+    "strasse": "Deepenstegen 1+4",
+    "projektart": "Teilmodernisierung",
+    "anlagenbezeichnung": "Aufzug Fa. KOCH",
+    "kunde": "Burchard Führer GmbH",
+    "kundenadresse": "Junkersstraße 52",
+    "kundePostleitzahl": "06847",
+    "kundeOrt": "Dessau-Roßlau",
+    "ansprechpartner": "",
+    "telefon": "",
+    "email": ""
+  },
+  "technischeParameter": {
+    "aufzugstyp": "hydraulik",
+    "antriebTyp": "hydraulik-direkt",
+    "vnenn": "0.63",
+    "tragfaehigkeit": "630",
+    "aufhaengung": "2:1",
+    "durchladung": "Nein",
+    "tuerart": "2-fluegelig",
+    "haltestellenanzahl": "2",
+    "schachtzugaenge": "2",
+    "foerderhoehe": "3",
+    "kostenMontagestunde": "82"
+  },
+  "aktivePakete": [
+    "antrieb",
+    "steuerung",
+    "schacht",
+    "fahrkorb",
+    "messungen"
+  ],
+  "aktiveBundles": [
+    "drive",
+    "door_plus",
+    "nice_plus"
+  ],
+  "projekt": {
+    "projektnameOderNummer": "Berghof Lütjensee",
+    "projektnummer": "Berghof Lütjensee",
+    "bauvorhaben": "Aufzug 155180",
+    "stadt": "Lütjensee",
+    "postleitzahl": "22952",
+    "strasse": "Deepenstegen 1+4",
+    "projektart": "Teilmodernisierung",
+    "anlagenbezeichnung": "Aufzug Fa. KOCH",
+    "updatedAt": "2026-08-24T07:31:29.205Z",
+    "alleProjektdaten": {
+      "projektnummer": "Berghof Lütjensee",
+      "projektnameOderNummer": "Berghof Lütjensee",
+      "bauvorhaben": "Aufzug 155180",
+      "stadt": "Lütjensee",
+      "postleitzahl": "22952",
+      "strasse": "Deepenstegen 1+4",
+      "projektart": "Teilmodernisierung",
+      "anlagenbezeichnung": "Aufzug Fa. KOCH",
+      "kunde": "Burchard Führer GmbH",
+      "kundenadresse": "Junkersstraße 52",
+      "kundePostleitzahl": "06847",
+      "kundeOrt": "Dessau-Roßlau",
+      "ansprechpartner": "",
+      "telefon": "",
+      "email": ""
+    }
+  },
+  "auftraggeber": {
+    "kunde": "Burchard Führer GmbH",
+    "adresse": "Junkersstraße 52",
+    "plz": "06847",
+    "ort": "Dessau-Roßlau",
+    "ansprechpartner": "",
+    "telefon": "",
+    "email": "",
+    "alleAuftraggeberdaten": {
+      "kunde": "Burchard Führer GmbH",
+      "kundenadresse": "Junkersstraße 52",
+      "kundePostleitzahl": "06847",
+      "kundeOrt": "Dessau-Roßlau",
+      "ansprechpartner": "",
+      "telefon": "",
+      "email": ""
+    }
+  },
+  "anlage": {
+    "bezeichnung": "Aufzug Fa. KOCH",
+    "aktivePaketeStatusKeys": [
+      "antrieb",
+      "steuerung",
+      "schacht",
+      "fahrkorb",
+      "messungen"
+    ],
+    "aktivePaketeUi": [
+      {
+        "id": "antrieb",
+        "titel": "01 Paket Antrieb neu"
+      },
+      {
+        "id": "steuerung",
+        "titel": "02 Paket Steuerung neu"
+      },
+      {
+        "id": "fahrschacht",
+        "titel": "03 Paket Fahrschacht / Schachttüren / Gegengewicht"
+      },
+      {
+        "id": "fahrkorb",
+        "titel": "04 Paket Fahrkorb / Fahrkorbtüren"
+      },
+      {
+        "id": "messungen",
+        "titel": "05 Paket ZÜS / Abnahmen"
+      }
+    ],
+    "paketStatus": {
+      "antriebAktiv": true,
+      "antriebTyp": "hydraulik-direkt",
+      "steuerung": true,
+      "fahrschacht": true,
+      "fahrkorb": true,
+      "messungen": true,
+      "steuerungOptionen": {
+        "inkrementalgeber": false,
+        "fahrkorbtableauSonder": false,
+        "aussenruftableau": false,
+        "standanzeigeAussen": false,
+        "notrufNachruesten": false,
+        "kabelkanaele": false
+      }
+    },
+    "rohAusKalkulationsdaten": {
+      "steuerung": {
+        "steuerung": {
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "bemerkung": "",
+          "anzahl": 1
+        },
+        "frequenzumrichter": {
+          "bezeichnung": "frequenzumrichter",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "bremswiderstand": {
+          "bezeichnung": "bremswiderstand",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "verbindungsleitungen": {
+          "bezeichnung": "verbindungsleitungen",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "fahrkorbtableau": {
+          "bezeichnung": "Fahrkorbtableau",
+          "bemerkung": "",
+          "anzahl": 1
+        },
+        "aussenruftableau": {
+          "bezeichnung": "Außenruftableau",
+          "bemerkung": "",
+          "anzahl": 2
+        },
+        "standanzeige": {
+          "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+          "bemerkung": "",
+          "anzahl": 2
+        },
+        "lastmessung": {
+          "bezeichnung": "lastmessung",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "schachtbeleuchtung": {
+          "bezeichnung": "Schachtbeleuchtung",
+          "bemerkung": "",
+          "anzahl": 1
+        },
+        "kontakt_regler": {
+          "bezeichnung": "kontakt_regler",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "notruf": {
+          "bezeichnung": "Notruf",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "kabelkanaele": {
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "bemerkung": "",
+          "anzahl": 1
+        },
+        "ausschnitte": {
+          "bezeichnung": "ausschnitte",
+          "bemerkung": "",
+          "anzahl": 0
+        }
+      },
+      "antrieb": {
+        "maschine_standardrahmen": {
+          "bezeichnung": "Hydraulikaggregat",
+          "bemerkung": "Grobe Indikation für Tragfähigkeit: 630 kg",
+          "anzahl": 1
+        },
+        "hydraulikschlauch": {
+          "bezeichnung": "Hydraulikschlauch",
+          "bemerkung": "pauschal 1.500 €",
+          "anzahl": 1
+        },
+        "hydraulikoel": {
+          "bezeichnung": "Hydrauliköl",
+          "bemerkung": "Menge in Liter",
+          "anzahl": 293
+        },
+        "frequenzregelung": {
+          "bezeichnung": "Frequenzregelung",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "adapterrahmen": {
+          "bezeichnung": "adapterrahmen",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "tragseile": {
+          "bezeichnung": "tragseile",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "seilkauschen": {
+          "bezeichnung": "seilkauschen",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "seilaufhaengung": {
+          "bezeichnung": "seilaufhaengung",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "ablenkrolle": {
+          "bezeichnung": "ablenkrolle",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "montage_schachtkopf_grube": {
+          "bezeichnung": "Montagezubehör Schachtkopf/Grube",
+          "bemerkung": "zusätzliche Rüstlage",
+          "anzahl": 0
+        }
+      },
+      "fahrschacht": {
+        "tuerfuehrungen": {
+          "bezeichnung": "Türführungen",
+          "bemerkung": "2-flügelig: 2 Flügel × 2 Führungen = 4 je Tür",
+          "anzahl": 8
+        },
+        "tuerlaufrollen": {
+          "bezeichnung": "Türlaufrollen",
+          "bemerkung": "2-flügelig: 2 Flügel × 2 Rollen = 4 je Tür",
+          "anzahl": 8
+        },
+        "gegenrollen": {
+          "bezeichnung": "Gegenrollen",
+          "bemerkung": "2-flügelig: 2 Flügel × 2 Rollen = 4 je Tür",
+          "anzahl": 0
+        },
+        "tuerkontakte": {
+          "bezeichnung": "Türkontakte",
+          "bemerkung": "1 je Tür",
+          "anzahl": 2
+        },
+        "tuerseile": {
+          "bezeichnung": "Türseile",
+          "bemerkung": "2 je Tür",
+          "anzahl": 4
+        },
+        "tuerfedern": {
+          "bezeichnung": "Türfedern",
+          "bemerkung": "2 je Tür",
+          "anzahl": 0
+        },
+        "schiebetuer_2tlg": {
+          "bezeichnung": "Schachtschiebetür 2-teilig Edelstahl geschliffen ohne Demontage",
+          "bemerkung": "2-flügelig je Haltestelle",
+          "anzahl": 0
+        },
+        "demontage_schiebetuer_2tlg": {
+          "bezeichnung": "Demontage Schachtschiebetür 2-teilig",
+          "bemerkung": "Demontage Bestand je Tür",
+          "anzahl": 0
+        },
+        "schiebetuer_4flg": {
+          "bezeichnung": "schiebetuer_4flg",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "demontage_schiebetuer_4flg": {
+          "bezeichnung": "demontage_schiebetuer_4flg",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "schiebetuer_6flg": {
+          "bezeichnung": "schiebetuer_6flg",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "demontage_schiebetuer_6flg": {
+          "bezeichnung": "demontage_schiebetuer_6flg",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "muz_standard": {
+          "bezeichnung": "MUZ Standard",
+          "bemerkung": "je Tür",
+          "anzahl": 0
+        },
+        "antrittsblech": {
+          "bezeichnung": "Antrittsblech",
+          "bemerkung": "je Tür",
+          "anzahl": 0
+        },
+        "zargenbeleuchtung": {
+          "bezeichnung": "Zargenbeleuchtung",
+          "bemerkung": "je Tür",
+          "anzahl": 0
+        },
+        "umlenkrolle_schachtkopf_gegengewicht": {
+          "bezeichnung": "Umlenkrolle Schachtkopf / Gegengewicht",
+          "bemerkung": "Zusätzliche Montagevorrüstungen beachten",
+          "anzahl": 0
+        },
+        "begrenzer_inkl_seil_spanngewicht": {
+          "bezeichnung": "Begrenzer inkl. Seil und Spanngewicht",
+          "bemerkung": "inkl. Geschwindigkeitsbegrenzer, Seil und Spanngewicht",
+          "anzahl": 0
+        },
+        "schachtabtrennung_lochblech": {
+          "bezeichnung": "Schachtabtrennung Lochblech",
+          "bemerkung": "Quadratmeter aus Schachttiefe × Schachthöhe ermitteln und eintragen",
+          "anzahl": 0
+        },
+        "anstrich_schachtgrube": {
+          "bezeichnung": "Anstrich Schachtgrube",
+          "bemerkung": "Preis abhängig von Tragfähigkeit (linear interpoliert)",
+          "anzahl": 1
+        }
+      },
+      "fahrkorb": {
+        "fahrkorbeinsatz_fremdmontage": {
+          "bezeichnung": "Fahrkorbrahmen neu - Eigenmontage",
+          "bemerkung": "Grober Indikationspreis für gewählte Tragfähigkeit",
+          "anzahl": 0
+        },
+        "fahrkorbeinsatz_eigenmontage": {
+          "bezeichnung": "Fahrkorbeinsatz erneuern, Eigenmontage",
+          "bemerkung": "Grober Indikationspreis für gewählte Tragfähigkeit: 630 kg",
+          "anzahl": 0
+        },
+        "fahrkorbauskleidung": {
+          "bezeichnung": "Fahrkorbauskleidung",
+          "bemerkung": "Aufgrund der Ausstattungsvarianten separate Kalkulation notwendig",
+          "anzahl": 0
+        },
+        "led_flaechenlicht_fahrkorb": {
+          "bezeichnung": "LED Flächenlicht über komplette Fahrkorbfläche",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "lichtgitter_vorhandene_fahrkorbschiebetuer": {
+          "bezeichnung": "Lichtgitter bei vorhandener Fahrkorbschiebetür",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "schutzmatten": {
+          "bezeichnung": "Schutzmatten",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "fangvorrichtung": {
+          "bezeichnung": "Fangvorrichtung",
+          "bemerkung": "Grober Indikationspreis abhängig von der Tragfähigkeit in den Projektdaten",
+          "anzahl": 0
+        },
+        "fuehrungsschuheinlagen_fahrkorb": {
+          "bezeichnung": "Führungsschuheinlagen Fahrkorb",
+          "bemerkung": "Annahme: 4 Stück Einlagen je Fahrkorb",
+          "anzahl": 0
+        },
+        "fuehrungsschuheinlagen_gegengewicht": {
+          "bezeichnung": "Führungsschuheinlagen Gegengewicht",
+          "bemerkung": "Annahme: 4 Stück Einlagen am Gegengewicht",
+          "anzahl": 0
+        },
+        "oeler_fahrkorb": {
+          "bezeichnung": "Öler Fahrkorb",
+          "bemerkung": "Annahme: 2 Stück Öler je Fahrkorb",
+          "anzahl": 0
+        },
+        "oeler_gegengewicht": {
+          "bezeichnung": "Öler Gegengewicht",
+          "bemerkung": "Annahme: 2 Stück Öler am Gegengewicht",
+          "anzahl": 0
+        },
+        "teil_umbaukit_schiebetueren": {
+          "bezeichnung": "Teil-Umbaukit für automatische Schiebetüren z.B. Langer & Laumann",
+          "bemerkung": "Nur eine Variante wählen",
+          "anzahl": 1
+        },
+        "komplett_umbaukit_schiebetueren": {
+          "bezeichnung": "Komplett-Umbaukit für automatische Schiebetüren z.B. Meiller",
+          "bemerkung": "Nur eine Variante wählen – inkl. pauschal 1200 € Schlosserkosten",
+          "anzahl": 0
+        },
+        "sicherheitslichtgitter_ein_zugang": {
+          "bezeichnung": "Nachrüstung Sicherheitslichtgitter (CEDES) ein Zugang",
+          "bemerkung": "Nur eine Variante wählen",
+          "anzahl": 0
+        },
+        "sicherheitslichtgitter_zwei_zugaenge": {
+          "bezeichnung": "Nachrüstung Sicherheitslichtgitter (CEDES) zwei Zugänge",
+          "bemerkung": "Nur eine Variante wählen",
+          "anzahl": 0
+        },
+        "nice_plus_fahrkorbauskleidung_preis": 6500
+      },
+      "messungen": {
+        "zues_kosten_vorpruefung": {
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "bemerkung": "Bei Bedarf abwählen",
+          "anzahl": 1
+        },
+        "zues_kosten_abnahme": {
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "bemerkung": "Bei Bedarf abwählen",
+          "anzahl": 1
+        },
+        "zues_begleitung_durch_an_aufzug": {
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "bemerkung": "Bei Bedarf abwählen",
+          "anzahl": 1
+        },
+        "pruefgewichte": {
+          "bezeichnung": "Prüfgewichte",
+          "bemerkung": "Bei Bedarf abwählen",
+          "anzahl": 1
+        },
+        "transport_allgemein_baustelle_lager": {
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "bemerkung": "Bei Bedarf abwählen",
+          "anzahl": 1
+        },
+        "schachtzugaenge_vollflaechig_sichern": {
+          "bezeichnung": "Schachtzugänge vollflächig sichern",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "befestigungsmaterial_schachttueren": {
+          "bezeichnung": "Befestigungsmaterial Schachttüren",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "hst_duebel_schachttueren": {
+          "bezeichnung": "HST Dübel Schachttüren",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "chemieduebel_schachttueren": {
+          "bezeichnung": "Chemiedübel Schachttüren",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "auszugsversuch_mauerwerksschaechten": {
+          "bezeichnung": "Auszugsversuch bei Mauerwerkschächten",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "montageruestung": {
+          "bezeichnung": "Montagerüstung",
+          "bemerkung": "",
+          "anzahl": 0
+        },
+        "korrekturwert_1": {
+          "bezeichnung": "Korrekturwert 1",
+          "bemerkung": "Erneuerung der Heberdichtung",
+          "anzahl": 2400
+        },
+        "korrekturwert_2": {
+          "bezeichnung": "Korrekturwert 2",
+          "bemerkung": "Erneuerung Laufrollen Fahrkorb",
+          "anzahl": 2000
+        },
+        "korrekturwert_3": {
+          "bezeichnung": "Korrekturwert 3",
+          "bemerkung": "Zuschlag Fahrkorbtürantrieb komplett ",
+          "anzahl": 1800
+        },
+        "korrekturwert_4": {
+          "bezeichnung": "Korrekturwert 4",
+          "bemerkung": "",
+          "anzahl": 0
+        }
+      }
+    }
+  },
+  "technik": {
+    "technischeParameter": {
+      "aufzugstyp": "hydraulik",
+      "antriebTyp": "hydraulik-direkt",
+      "vnenn": "0.63",
+      "tragfaehigkeit": "630",
+      "aufhaengung": "2:1",
+      "durchladung": "Nein",
+      "tuerart": "2-fluegelig",
+      "haltestellenanzahl": "2",
+      "schachtzugaenge": "2",
+      "foerderhoehe": "3",
+      "kostenMontagestunde": "82"
+    },
+    "technischeParameterAusBerechnung": {
+      "aufzugstyp": "hydraulik",
+      "tragfaehigkeit": "630",
+      "haltestellenanzahl": "2",
+      "schachtzugaenge": "2",
+      "durchladung": "Nein",
+      "vnenn": "0.63",
+      "aufhaengung": "2:1",
+      "tuerart": "2-fluegelig",
+      "foerderhoehe": "3",
+      "kostenMontagestunde": "82",
+      "maschinenart": ""
+    },
+    "technischeParameterAusLetzterKalkulation": {
+      "aufzugstyp": "hydraulik",
+      "tragfaehigkeit": "630",
+      "haltestellenanzahl": "2",
+      "schachtzugaenge": "2",
+      "durchladung": "Nein",
+      "vnenn": "0.63",
+      "aufhaengung": "2:1",
+      "tuerart": "2-fluegelig",
+      "foerderhoehe": "3",
+      "kostenMontagestunde": "82",
+      "maschinenart": ""
+    }
+  },
+  "pakete": {
+    "aktiv": [
+      "antrieb",
+      "steuerung",
+      "schacht",
+      "fahrkorb",
+      "messungen"
+    ],
+    "aktivDetail": [
+      {
+        "id": "antrieb",
+        "titel": "01 Paket Antrieb neu"
+      },
+      {
+        "id": "steuerung",
+        "titel": "02 Paket Steuerung neu"
+      },
+      {
+        "id": "fahrschacht",
+        "titel": "03 Paket Fahrschacht / Schachttüren / Gegengewicht"
+      },
+      {
+        "id": "fahrkorb",
+        "titel": "04 Paket Fahrkorb / Fahrkorbtüren"
+      },
+      {
+        "id": "messungen",
+        "titel": "05 Paket ZÜS / Abnahmen"
+      }
+    ],
+    "kalkulationsEingaben": {
+      "bemerkung_maschine_standardrahmen": {
+        "typ": "text",
+        "value": "Grobe Indikation für Tragfähigkeit: 630 kg"
+      },
+      "anzahl_maschine_standardrahmen": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_hydraulikschlauch": {
+        "typ": "text",
+        "value": "pauschal 1.500 €"
+      },
+      "anzahl_hydraulikschlauch": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_hydraulikoel": {
+        "typ": "text",
+        "value": "Menge in Liter"
+      },
+      "anzahl_hydraulikoel": {
+        "typ": "number",
+        "value": "293"
+      },
+      "bemerkung_frequenzregelung": {
+        "typ": "text",
+        "value": ""
+      },
+      "bemerkung_montage_schachtkopf_grube": {
+        "typ": "text",
+        "value": "zusätzliche Rüstlage"
+      },
+      "anzahl_montage_schachtkopf_grube": {
+        "typ": "number",
+        "value": "0"
+      },
+      "steuerung_tragfaehigkeit_anzeige": {
+        "typ": "text",
+        "value": "630"
+      },
+      "steuerung_geschwindigkeit_anzeige": {
+        "typ": "text",
+        "value": "0.63"
+      },
+      "steuerung_aufhaengung_anzeige": {
+        "typ": "text",
+        "value": "2:1"
+      },
+      "steuerung_foerderhoehe_anzeige": {
+        "typ": "text",
+        "value": "3"
+      },
+      "steuerung_schachtzugaenge_anzeige": {
+        "typ": "text",
+        "value": "2"
+      },
+      "bemerkung_steuerung": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_steuerung": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_fahrkorbtableau": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_fahrkorbtableau": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_aussenruftableau": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_aussenruftableau": {
+        "typ": "number",
+        "value": "2"
+      },
+      "bemerkung_standanzeige": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_standanzeige": {
+        "typ": "number",
+        "value": "2"
+      },
+      "bemerkung_schachtbeleuchtung": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_schachtbeleuchtung": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_notruf": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_notruf": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_kabelkanaele": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_kabelkanaele": {
+        "typ": "number",
+        "value": "1"
+      },
+      "fahrschacht_schachtzugaenge_anzeige": {
+        "typ": "text",
+        "value": "2"
+      },
+      "fahrschacht_tuerart_anzeige": {
+        "typ": "text",
+        "value": "2-flügelig"
+      },
+      "fahrschacht_massnahmenart": {
+        "typ": "select-one",
+        "value": "ersatzteile"
+      },
+      "bemerkung_fahrschacht_tuerfuehrungen": {
+        "typ": "text",
+        "value": "2-flügelig: 2 Flügel × 2 Führungen = 4 je Tür"
+      },
+      "anzahl_fahrschacht_tuerfuehrungen": {
+        "typ": "number",
+        "value": "8"
+      },
+      "bemerkung_fahrschacht_tuerlaufrollen": {
+        "typ": "text",
+        "value": "2-flügelig: 2 Flügel × 2 Rollen = 4 je Tür"
+      },
+      "anzahl_fahrschacht_tuerlaufrollen": {
+        "typ": "number",
+        "value": "8"
+      },
+      "bemerkung_fahrschacht_gegenrollen": {
+        "typ": "text",
+        "value": "2-flügelig: 2 Flügel × 2 Rollen = 4 je Tür"
+      },
+      "anzahl_fahrschacht_gegenrollen": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrschacht_tuerkontakte": {
+        "typ": "text",
+        "value": "1 je Tür"
+      },
+      "anzahl_fahrschacht_tuerkontakte": {
+        "typ": "number",
+        "value": "2"
+      },
+      "bemerkung_fahrschacht_tuerseile": {
+        "typ": "text",
+        "value": "2 je Tür"
+      },
+      "anzahl_fahrschacht_tuerseile": {
+        "typ": "number",
+        "value": "4"
+      },
+      "bemerkung_fahrschacht_tuerfedern": {
+        "typ": "text",
+        "value": "2 je Tür"
+      },
+      "anzahl_fahrschacht_tuerfedern": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrschacht_schiebetuer_2tlg": {
+        "typ": "text",
+        "value": "2-flügelig je Haltestelle"
+      },
+      "anzahl_fahrschacht_schiebetuer_2tlg": {
+        "typ": "number",
+        "value": "2"
+      },
+      "bemerkung_fahrschacht_demontage_schiebetuer_2tlg": {
+        "typ": "text",
+        "value": "Demontage Bestand je Tür"
+      },
+      "anzahl_fahrschacht_demontage_schiebetuer_2tlg": {
+        "typ": "number",
+        "value": "2"
+      },
+      "bemerkung_fahrschacht_muz_standard": {
+        "typ": "text",
+        "value": "je Tür"
+      },
+      "anzahl_fahrschacht_muz_standard": {
+        "typ": "number",
+        "value": "2"
+      },
+      "bemerkung_fahrschacht_antrittsblech": {
+        "typ": "text",
+        "value": "je Tür"
+      },
+      "anzahl_fahrschacht_antrittsblech": {
+        "typ": "number",
+        "value": "2"
+      },
+      "bemerkung_fahrschacht_zargenbeleuchtung": {
+        "typ": "text",
+        "value": "je Tür"
+      },
+      "anzahl_fahrschacht_zargenbeleuchtung": {
+        "typ": "number",
+        "value": "2"
+      },
+      "bemerkung_fahrschacht_umlenkrolle_schachtkopf_gegengewicht": {
+        "typ": "text",
+        "value": "Zusätzliche Montagevorrüstungen beachten"
+      },
+      "anzahl_fahrschacht_umlenkrolle_schachtkopf_gegengewicht": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrschacht_begrenzer_inkl_seil_spanngewicht": {
+        "typ": "text",
+        "value": "inkl. Geschwindigkeitsbegrenzer, Seil und Spanngewicht"
+      },
+      "anzahl_fahrschacht_begrenzer_inkl_seil_spanngewicht": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrschacht_schachtabtrennung_lochblech": {
+        "typ": "text",
+        "value": "Quadratmeter aus Schachttiefe × Schachthöhe ermitteln und eintragen"
+      },
+      "anzahl_fahrschacht_schachtabtrennung_lochblech": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrschacht_anstrich_schachtgrube": {
+        "typ": "text",
+        "value": "Preis abhängig von Tragfähigkeit (linear interpoliert)"
+      },
+      "anzahl_fahrschacht_anstrich_schachtgrube": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_fahrkorb_fahrkorbeinsatz_fremdmontage": {
+        "typ": "text",
+        "value": "Grober Indikationspreis für gewählte Tragfähigkeit"
+      },
+      "anzahl_fahrkorb_fahrkorbeinsatz_fremdmontage": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_fahrkorbeinsatz_eigenmontage": {
+        "typ": "text",
+        "value": "Grober Indikationspreis für gewählte Tragfähigkeit: 630 kg"
+      },
+      "anzahl_fahrkorb_fahrkorbeinsatz_eigenmontage": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_fahrkorbauskleidung": {
+        "typ": "text",
+        "value": "Aufgrund der Ausstattungsvarianten separate Kalkulation notwendig"
+      },
+      "bemerkung_fahrkorb_led_flaechenlicht_fahrkorb": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_fahrkorb_led_flaechenlicht_fahrkorb": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_lichtgitter_vorhandene_fahrkorbschiebetuer": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_fahrkorb_lichtgitter_vorhandene_fahrkorbschiebetuer": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_schutzmatten": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_fahrkorb_schutzmatten": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_fangvorrichtung": {
+        "typ": "text",
+        "value": "Grober Indikationspreis abhängig von der Tragfähigkeit in den Projektdaten"
+      },
+      "anzahl_fahrkorb_fangvorrichtung": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_fuehrungsschuheinlagen_fahrkorb": {
+        "typ": "text",
+        "value": "Annahme: 4 Stück Einlagen je Fahrkorb"
+      },
+      "anzahl_fahrkorb_fuehrungsschuheinlagen_fahrkorb": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_fuehrungsschuheinlagen_gegengewicht": {
+        "typ": "text",
+        "value": "Annahme: 4 Stück Einlagen am Gegengewicht"
+      },
+      "anzahl_fahrkorb_fuehrungsschuheinlagen_gegengewicht": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_oeler_fahrkorb": {
+        "typ": "text",
+        "value": "Annahme: 2 Stück Öler je Fahrkorb"
+      },
+      "anzahl_fahrkorb_oeler_fahrkorb": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_oeler_gegengewicht": {
+        "typ": "text",
+        "value": "Annahme: 2 Stück Öler am Gegengewicht"
+      },
+      "anzahl_fahrkorb_oeler_gegengewicht": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_teil_umbaukit_schiebetueren": {
+        "typ": "text",
+        "value": "Nur eine Variante wählen"
+      },
+      "anzahl_fahrkorb_teil_umbaukit_schiebetueren": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_fahrkorb_komplett_umbaukit_schiebetueren": {
+        "typ": "text",
+        "value": "Nur eine Variante wählen – inkl. pauschal 1200 € Schlosserkosten"
+      },
+      "anzahl_fahrkorb_komplett_umbaukit_schiebetueren": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_sicherheitslichtgitter_ein_zugang": {
+        "typ": "text",
+        "value": "Nur eine Variante wählen"
+      },
+      "anzahl_fahrkorb_sicherheitslichtgitter_ein_zugang": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_fahrkorb_sicherheitslichtgitter_zwei_zugaenge": {
+        "typ": "text",
+        "value": "Nur eine Variante wählen"
+      },
+      "anzahl_fahrkorb_sicherheitslichtgitter_zwei_zugaenge": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_messungen_zues_kosten_vorpruefung": {
+        "typ": "text",
+        "value": "Bei Bedarf abwählen"
+      },
+      "anzahl_messungen_zues_kosten_vorpruefung": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_messungen_zues_kosten_abnahme": {
+        "typ": "text",
+        "value": "Bei Bedarf abwählen"
+      },
+      "anzahl_messungen_zues_kosten_abnahme": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_messungen_zues_begleitung_durch_an_aufzug": {
+        "typ": "text",
+        "value": "Bei Bedarf abwählen"
+      },
+      "anzahl_messungen_zues_begleitung_durch_an_aufzug": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_messungen_pruefgewichte": {
+        "typ": "text",
+        "value": "Bei Bedarf abwählen"
+      },
+      "anzahl_messungen_pruefgewichte": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_messungen_transport_allgemein_baustelle_lager": {
+        "typ": "text",
+        "value": "Bei Bedarf abwählen"
+      },
+      "anzahl_messungen_transport_allgemein_baustelle_lager": {
+        "typ": "number",
+        "value": "1"
+      },
+      "bemerkung_messungen_schachtzugaenge_vollflaechig_sichern": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_messungen_schachtzugaenge_vollflaechig_sichern": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_messungen_befestigungsmaterial_schachttueren": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_messungen_befestigungsmaterial_schachttueren": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_messungen_hst_duebel_schachttueren": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_messungen_hst_duebel_schachttueren": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_messungen_chemieduebel_schachttueren": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_messungen_chemieduebel_schachttueren": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_messungen_auszugsversuch_mauerwerksschaechten": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_messungen_auszugsversuch_mauerwerksschaechten": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_messungen_montageruestung": {
+        "typ": "text",
+        "value": ""
+      },
+      "anzahl_messungen_montageruestung": {
+        "typ": "number",
+        "value": "0"
+      },
+      "bemerkung_messungen_korrekturwert_1": {
+        "typ": "text",
+        "value": "Erneuerung der Heberdichtung"
+      },
+      "wert_messungen_korrekturwert_1": {
+        "typ": "number",
+        "value": "2400"
+      },
+      "bemerkung_messungen_korrekturwert_2": {
+        "typ": "text",
+        "value": "Erneuerung Laufrollen Fahrkorb"
+      },
+      "wert_messungen_korrekturwert_2": {
+        "typ": "number",
+        "value": "2000"
+      },
+      "bemerkung_messungen_korrekturwert_3": {
+        "typ": "text",
+        "value": "Zuschlag Fahrkorbtürantrieb komplett "
+      },
+      "wert_messungen_korrekturwert_3": {
+        "typ": "number",
+        "value": "1800"
+      },
+      "bemerkung_messungen_korrekturwert_4": {
+        "typ": "text",
+        "value": ""
+      },
+      "wert_messungen_korrekturwert_4": {
+        "typ": "number",
+        "value": "0"
+      }
+    },
+    "offenePakete": []
+  },
+  "kalkulation": {
+    "vorhanden": true,
+    "summen": {
+      "material": 28054.949455662863,
+      "montage": 12121.24,
+      "gesamt": 40176.18945566287
+    },
+    "paketSummen": [
+      {
+        "paket": "steuerung",
+        "aktiv": true,
+        "summeMaterial": 10080,
+        "summeMontage": 7740.8,
+        "summeMontagestunden": 94.4,
+        "summeGesamt": 17820.8,
+        "positionen": [
+          {
+            "id": "steuerung",
+            "key": "steuerung",
+            "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 88.4,
+            "einzelpreis": 8000,
+            "summe": 8000,
+            "roh": {
+              "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+              "name": "steuerung",
+              "anzahl": 1,
+              "einzelpreis": 8000,
+              "summe": 8000,
+              "stundenProEinheit": 88.4,
+              "stundenGesamtPosition": 88.4
+            }
+          },
+          {
+            "id": "fahrkorbtableau",
+            "key": "fahrkorbtableau",
+            "bezeichnung": "Fahrkorbtableau",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 950,
+            "summe": 950,
+            "roh": {
+              "bezeichnung": "Fahrkorbtableau",
+              "name": "fahrkorbtableau",
+              "anzahl": 1,
+              "einzelpreis": 950,
+              "summe": 950,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          },
+          {
+            "id": "aussenruftableau",
+            "key": "aussenruftableau",
+            "bezeichnung": "Außenruftableau",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 2,
+            "stundenProEinheit": 0,
+            "einzelpreis": 150,
+            "summe": 300,
+            "roh": {
+              "bezeichnung": "Außenruftableau",
+              "name": "aussenruftableau",
+              "anzahl": 2,
+              "einzelpreis": 150,
+              "summe": 300,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          },
+          {
+            "id": "standanzeige",
+            "key": "standanzeige",
+            "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 2,
+            "stundenProEinheit": 0,
+            "einzelpreis": 240,
+            "summe": 480,
+            "roh": {
+              "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+              "name": "standanzeige",
+              "anzahl": 2,
+              "einzelpreis": 240,
+              "summe": 480,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          },
+          {
+            "id": "schachtbeleuchtung",
+            "key": "schachtbeleuchtung",
+            "bezeichnung": "Schachtbeleuchtung",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 4,
+            "einzelpreis": 250,
+            "summe": 250,
+            "roh": {
+              "bezeichnung": "Schachtbeleuchtung",
+              "name": "schachtbeleuchtung",
+              "anzahl": 1,
+              "einzelpreis": 250,
+              "summe": 250,
+              "stundenProEinheit": 4,
+              "stundenGesamtPosition": 4
+            }
+          },
+          {
+            "id": "kabelkanaele",
+            "key": "kabelkanaele",
+            "bezeichnung": "Kabelkanäle / Elektromaterial",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 2,
+            "einzelpreis": 100,
+            "summe": 100,
+            "roh": {
+              "bezeichnung": "Kabelkanäle / Elektromaterial",
+              "name": "kabelkanaele",
+              "anzahl": 1,
+              "einzelpreis": 100,
+              "summe": 100,
+              "stundenProEinheit": 2,
+              "stundenGesamtPosition": 2
+            }
+          }
+        ],
+        "roh": {
+          "paket": "steuerung",
+          "aktiv": true,
+          "summeMaterial": 10080,
+          "summeMontagestunden": 94.4,
+          "summeMontage": 7740.8,
+          "summeGesamt": 17820.8,
+          "positionen": [
+            {
+              "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+              "name": "steuerung",
+              "anzahl": 1,
+              "einzelpreis": 8000,
+              "summe": 8000,
+              "stundenProEinheit": 88.4,
+              "stundenGesamtPosition": 88.4
+            },
+            {
+              "bezeichnung": "Fahrkorbtableau",
+              "name": "fahrkorbtableau",
+              "anzahl": 1,
+              "einzelpreis": 950,
+              "summe": 950,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Außenruftableau",
+              "name": "aussenruftableau",
+              "anzahl": 2,
+              "einzelpreis": 150,
+              "summe": 300,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+              "name": "standanzeige",
+              "anzahl": 2,
+              "einzelpreis": 240,
+              "summe": 480,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Schachtbeleuchtung",
+              "name": "schachtbeleuchtung",
+              "anzahl": 1,
+              "einzelpreis": 250,
+              "summe": 250,
+              "stundenProEinheit": 4,
+              "stundenGesamtPosition": 4
+            },
+            {
+              "bezeichnung": "Kabelkanäle / Elektromaterial",
+              "name": "kabelkanaele",
+              "anzahl": 1,
+              "einzelpreis": 100,
+              "summe": 100,
+              "stundenProEinheit": 2,
+              "stundenGesamtPosition": 2
+            }
+          ],
+          "warnungen": []
+        }
+      },
+      {
+        "paket": "antrieb",
+        "aktiv": true,
+        "summeMaterial": 5744.370000000001,
+        "summeMontage": 1772.8400000000001,
+        "summeMontagestunden": 21.62,
+        "summeGesamt": 7517.210000000001,
+        "positionen": [
+          {
+            "id": "maschine_standardrahmen",
+            "key": "maschine_standardrahmen",
+            "bezeichnung": "Hydraulikaggregat",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 21.62,
+            "einzelpreis": 2927.94,
+            "summe": 2927.94,
+            "roh": {
+              "bezeichnung": "Hydraulikaggregat",
+              "name": "maschine_standardrahmen",
+              "anzahl": 1,
+              "einzelpreis": 2927.94,
+              "summe": 2927.94,
+              "stundenProEinheit": 21.62,
+              "stundenGesamtPosition": 21.62
+            }
+          },
+          {
+            "id": "hydraulikschlauch",
+            "key": "hydraulikschlauch",
+            "bezeichnung": "Hydraulikschlauch",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 1500,
+            "summe": 1500,
+            "roh": {
+              "bezeichnung": "Hydraulikschlauch",
+              "name": "hydraulikschlauch",
+              "anzahl": 1,
+              "einzelpreis": 1500,
+              "summe": 1500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          },
+          {
+            "id": "hydraulikoel",
+            "key": "hydraulikoel",
+            "bezeichnung": "Hydrauliköl",
+            "bemerkung": "Menge linear aus Tragfähigkeit (630 kg) berechnet",
+            "einheit": "Liter",
+            "anzahl": 292.54,
+            "stundenProEinheit": 0,
+            "einzelpreis": 4.5,
+            "summe": 1316.43,
+            "roh": {
+              "bezeichnung": "Hydrauliköl",
+              "name": "hydraulikoel",
+              "anzahl": 292.54,
+              "einheit": "Liter",
+              "einzelpreis": 4.5,
+              "summe": 1316.43,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Menge linear aus Tragfähigkeit (630 kg) berechnet"
+            }
+          }
+        ],
+        "roh": {
+          "paket": "antrieb",
+          "aktiv": true,
+          "summeMaterial": 5744.370000000001,
+          "summeMontagestunden": 21.62,
+          "summeMontage": 1772.8400000000001,
+          "summeGesamt": 7517.210000000001,
+          "positionen": [
+            {
+              "bezeichnung": "Hydraulikaggregat",
+              "name": "maschine_standardrahmen",
+              "anzahl": 1,
+              "einzelpreis": 2927.94,
+              "summe": 2927.94,
+              "stundenProEinheit": 21.62,
+              "stundenGesamtPosition": 21.62
+            },
+            {
+              "bezeichnung": "Hydraulikschlauch",
+              "name": "hydraulikschlauch",
+              "anzahl": 1,
+              "einzelpreis": 1500,
+              "summe": 1500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Hydrauliköl",
+              "name": "hydraulikoel",
+              "anzahl": 292.54,
+              "einheit": "Liter",
+              "einzelpreis": 4.5,
+              "summe": 1316.43,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Menge linear aus Tragfähigkeit (630 kg) berechnet"
+            }
+          ],
+          "warnungen": []
+        }
+      },
+      {
+        "paket": "fahrschacht",
+        "aktiv": true,
+        "summeMaterial": 1639.402985074627,
+        "summeMontage": 967.6,
+        "summeMontagestunden": 11.8,
+        "summeGesamt": 2607.002985074627,
+        "positionen": [
+          {
+            "id": "tuerfuehrungen",
+            "key": "tuerfuehrungen",
+            "bezeichnung": "Türführungen",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 8,
+            "stundenProEinheit": 0.1,
+            "einzelpreis": 10,
+            "summe": 80,
+            "roh": {
+              "bezeichnung": "Türführungen",
+              "name": "tuerfuehrungen",
+              "anzahl": 8,
+              "einzelpreis": 10,
+              "summe": 80,
+              "stundenProEinheit": 0.1,
+              "stundenGesamtPosition": 0.8
+            }
+          },
+          {
+            "id": "tuerlaufrollen",
+            "key": "tuerlaufrollen",
+            "bezeichnung": "Türlaufrollen",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 8,
+            "stundenProEinheit": 0.25,
+            "einzelpreis": 70,
+            "summe": 560,
+            "roh": {
+              "bezeichnung": "Türlaufrollen",
+              "name": "tuerlaufrollen",
+              "anzahl": 8,
+              "einzelpreis": 70,
+              "summe": 560,
+              "stundenProEinheit": 0.25,
+              "stundenGesamtPosition": 2
+            }
+          },
+          {
+            "id": "tuerkontakte",
+            "key": "tuerkontakte",
+            "bezeichnung": "Türkontakte",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 2,
+            "stundenProEinheit": 0.5,
+            "einzelpreis": 95,
+            "summe": 190,
+            "roh": {
+              "bezeichnung": "Türkontakte",
+              "name": "tuerkontakte",
+              "anzahl": 2,
+              "einzelpreis": 95,
+              "summe": 190,
+              "stundenProEinheit": 0.5,
+              "stundenGesamtPosition": 1
+            }
+          },
+          {
+            "id": "tuerseile",
+            "key": "tuerseile",
+            "bezeichnung": "Türseile",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 4,
+            "stundenProEinheit": 0.5,
+            "einzelpreis": 60,
+            "summe": 240,
+            "roh": {
+              "bezeichnung": "Türseile",
+              "name": "tuerseile",
+              "anzahl": 4,
+              "einzelpreis": 60,
+              "summe": 240,
+              "stundenProEinheit": 0.5,
+              "stundenGesamtPosition": 2
+            }
+          },
+          {
+            "id": "anstrich_schachtgrube",
+            "key": "anstrich_schachtgrube",
+            "bezeichnung": "Anstrich Schachtgrube",
+            "bemerkung": "Preis abhängig von Tragfähigkeit (linear interpoliert)",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 6,
+            "einzelpreis": 569.4029850746268,
+            "summe": 569.4029850746268,
+            "roh": {
+              "bezeichnung": "Anstrich Schachtgrube",
+              "name": "anstrich_schachtgrube",
+              "anzahl": 1,
+              "einzelpreis": 569.4029850746268,
+              "summe": 569.4029850746268,
+              "stundenProEinheit": 6,
+              "stundenGesamtPosition": 6,
+              "bemerkung": "Preis abhängig von Tragfähigkeit (linear interpoliert)"
+            }
+          }
+        ],
+        "roh": {
+          "paket": "fahrschacht",
+          "aktiv": true,
+          "summeMaterial": 1639.402985074627,
+          "summeMontagestunden": 11.8,
+          "summeMontage": 967.6,
+          "summeGesamt": 2607.002985074627,
+          "positionen": [
+            {
+              "bezeichnung": "Türführungen",
+              "name": "tuerfuehrungen",
+              "anzahl": 8,
+              "einzelpreis": 10,
+              "summe": 80,
+              "stundenProEinheit": 0.1,
+              "stundenGesamtPosition": 0.8
+            },
+            {
+              "bezeichnung": "Türlaufrollen",
+              "name": "tuerlaufrollen",
+              "anzahl": 8,
+              "einzelpreis": 70,
+              "summe": 560,
+              "stundenProEinheit": 0.25,
+              "stundenGesamtPosition": 2
+            },
+            {
+              "bezeichnung": "Türkontakte",
+              "name": "tuerkontakte",
+              "anzahl": 2,
+              "einzelpreis": 95,
+              "summe": 190,
+              "stundenProEinheit": 0.5,
+              "stundenGesamtPosition": 1
+            },
+            {
+              "bezeichnung": "Türseile",
+              "name": "tuerseile",
+              "anzahl": 4,
+              "einzelpreis": 60,
+              "summe": 240,
+              "stundenProEinheit": 0.5,
+              "stundenGesamtPosition": 2
+            },
+            {
+              "bezeichnung": "Anstrich Schachtgrube",
+              "name": "anstrich_schachtgrube",
+              "anzahl": 1,
+              "einzelpreis": 569.4029850746268,
+              "summe": 569.4029850746268,
+              "stundenProEinheit": 6,
+              "stundenGesamtPosition": 6,
+              "bemerkung": "Preis abhängig von Tragfähigkeit (linear interpoliert)"
+            }
+          ],
+          "warnungen": []
+        }
+      },
+      {
+        "paket": "fahrkorb",
+        "aktiv": true,
+        "summeMaterial": 1900,
+        "summeMontage": 1312,
+        "summeMontagestunden": 16,
+        "summeGesamt": 3212,
+        "positionen": [
+          {
+            "id": "teil_umbaukit_schiebetueren",
+            "key": "teil_umbaukit_schiebetueren",
+            "bezeichnung": "Teil-Umbaukit für automatische Schiebetüren z.B. Langer & Laumann",
+            "bemerkung": "",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 16,
+            "einzelpreis": 1900,
+            "summe": 1900,
+            "roh": {
+              "bezeichnung": "Teil-Umbaukit für automatische Schiebetüren z.B. Langer & Laumann",
+              "name": "teil_umbaukit_schiebetueren",
+              "anzahl": 1,
+              "einzelpreis": 1900,
+              "summe": 1900,
+              "stundenProEinheit": 16,
+              "stundenGesamtPosition": 16
+            }
+          }
+        ],
+        "roh": {
+          "paket": "fahrkorb",
+          "aktiv": true,
+          "summeMaterial": 1900,
+          "summeMontagestunden": 16,
+          "summeMontage": 1312,
+          "summeGesamt": 3212,
+          "positionen": [
+            {
+              "bezeichnung": "Teil-Umbaukit für automatische Schiebetüren z.B. Langer & Laumann",
+              "name": "teil_umbaukit_schiebetueren",
+              "anzahl": 1,
+              "einzelpreis": 1900,
+              "summe": 1900,
+              "stundenProEinheit": 16,
+              "stundenGesamtPosition": 16
+            }
+          ],
+          "warnungen": []
+        }
+      },
+      {
+        "paket": "messungen",
+        "aktiv": true,
+        "summeMaterial": 8691.176470588234,
+        "summeMontage": 328,
+        "summeMontagestunden": 4,
+        "summeGesamt": 9019.176470588234,
+        "positionen": [
+          {
+            "id": "zues_kosten_vorpruefung",
+            "key": "zues_kosten_vorpruefung",
+            "bezeichnung": "ZÜS Kosten Vorprüfung",
+            "bemerkung": "Bei Bedarf abwählen",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 800,
+            "summe": 800,
+            "roh": {
+              "bezeichnung": "ZÜS Kosten Vorprüfung",
+              "name": "zues_kosten_vorpruefung",
+              "anzahl": 1,
+              "einzelpreis": 800,
+              "summe": 800,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            }
+          },
+          {
+            "id": "zues_kosten_abnahme",
+            "key": "zues_kosten_abnahme",
+            "bezeichnung": "ZÜS Kosten Abnahme",
+            "bemerkung": "Bei Bedarf abwählen",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 500,
+            "summe": 500,
+            "roh": {
+              "bezeichnung": "ZÜS Kosten Abnahme",
+              "name": "zues_kosten_abnahme",
+              "anzahl": 1,
+              "einzelpreis": 500,
+              "summe": 500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            }
+          },
+          {
+            "id": "zues_begleitung_durch_an_aufzug",
+            "key": "zues_begleitung_durch_an_aufzug",
+            "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+            "bemerkung": "Bei Bedarf abwählen",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 4,
+            "einzelpreis": 0,
+            "summe": 0,
+            "roh": {
+              "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+              "name": "zues_begleitung_durch_an_aufzug",
+              "anzahl": 1,
+              "einzelpreis": 0,
+              "summe": 0,
+              "stundenProEinheit": 4,
+              "stundenGesamtPosition": 4,
+              "bemerkung": "Bei Bedarf abwählen"
+            }
+          },
+          {
+            "id": "pruefgewichte",
+            "key": "pruefgewichte",
+            "bezeichnung": "Prüfgewichte",
+            "bemerkung": "Bei Bedarf abwählen",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 691.1764705882352,
+            "summe": 691.1764705882352,
+            "roh": {
+              "bezeichnung": "Prüfgewichte",
+              "name": "pruefgewichte",
+              "anzahl": 1,
+              "einzelpreis": 691.1764705882352,
+              "summe": 691.1764705882352,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            }
+          },
+          {
+            "id": "transport_allgemein_baustelle_lager",
+            "key": "transport_allgemein_baustelle_lager",
+            "bezeichnung": "Transport allgemein Baustelle Lager",
+            "bemerkung": "Bei Bedarf abwählen",
+            "einheit": "",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 500,
+            "summe": 500,
+            "roh": {
+              "bezeichnung": "Transport allgemein Baustelle Lager",
+              "name": "transport_allgemein_baustelle_lager",
+              "anzahl": 1,
+              "einzelpreis": 500,
+              "summe": 500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            }
+          },
+          {
+            "id": "korrekturwert_1",
+            "key": "korrekturwert_1",
+            "bezeichnung": "Erneuerung der Heberdichtung",
+            "bemerkung": "",
+            "einheit": "€",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 2400,
+            "summe": 2400,
+            "roh": {
+              "bezeichnung": "Erneuerung der Heberdichtung",
+              "name": "korrekturwert_1",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 2400,
+              "summe": 2400,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          },
+          {
+            "id": "korrekturwert_2",
+            "key": "korrekturwert_2",
+            "bezeichnung": "Erneuerung Laufrollen Fahrkorb",
+            "bemerkung": "",
+            "einheit": "€",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 2000,
+            "summe": 2000,
+            "roh": {
+              "bezeichnung": "Erneuerung Laufrollen Fahrkorb",
+              "name": "korrekturwert_2",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 2000,
+              "summe": 2000,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          },
+          {
+            "id": "korrekturwert_3",
+            "key": "korrekturwert_3",
+            "bezeichnung": "Zuschlag Fahrkorbtürantrieb komplett",
+            "bemerkung": "",
+            "einheit": "€",
+            "anzahl": 1,
+            "stundenProEinheit": 0,
+            "einzelpreis": 1800,
+            "summe": 1800,
+            "roh": {
+              "bezeichnung": "Zuschlag Fahrkorbtürantrieb komplett",
+              "name": "korrekturwert_3",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 1800,
+              "summe": 1800,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          }
+        ],
+        "roh": {
+          "paket": "messungen",
+          "aktiv": true,
+          "summeMaterial": 8691.176470588234,
+          "summeMontagestunden": 4,
+          "summeMontage": 328,
+          "summeGesamt": 9019.176470588234,
+          "positionen": [
+            {
+              "bezeichnung": "ZÜS Kosten Vorprüfung",
+              "name": "zues_kosten_vorpruefung",
+              "anzahl": 1,
+              "einzelpreis": 800,
+              "summe": 800,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "ZÜS Kosten Abnahme",
+              "name": "zues_kosten_abnahme",
+              "anzahl": 1,
+              "einzelpreis": 500,
+              "summe": 500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+              "name": "zues_begleitung_durch_an_aufzug",
+              "anzahl": 1,
+              "einzelpreis": 0,
+              "summe": 0,
+              "stundenProEinheit": 4,
+              "stundenGesamtPosition": 4,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "Prüfgewichte",
+              "name": "pruefgewichte",
+              "anzahl": 1,
+              "einzelpreis": 691.1764705882352,
+              "summe": 691.1764705882352,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "Transport allgemein Baustelle Lager",
+              "name": "transport_allgemein_baustelle_lager",
+              "anzahl": 1,
+              "einzelpreis": 500,
+              "summe": 500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "Erneuerung der Heberdichtung",
+              "name": "korrekturwert_1",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 2400,
+              "summe": 2400,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Erneuerung Laufrollen Fahrkorb",
+              "name": "korrekturwert_2",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 2000,
+              "summe": 2000,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Zuschlag Fahrkorbtürantrieb komplett",
+              "name": "korrekturwert_3",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 1800,
+              "summe": 1800,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          ],
+          "warnungen": []
+        }
+      }
+    ],
+    "ergebnisseRoh": [
+      {
+        "paket": "steuerung",
+        "aktiv": true,
+        "summeMaterial": 10080,
+        "summeMontagestunden": 94.4,
+        "summeMontage": 7740.8,
+        "summeGesamt": 17820.8,
+        "positionen": [
+          {
+            "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+            "name": "steuerung",
+            "anzahl": 1,
+            "einzelpreis": 8000,
+            "summe": 8000,
+            "stundenProEinheit": 88.4,
+            "stundenGesamtPosition": 88.4
+          },
+          {
+            "bezeichnung": "Fahrkorbtableau",
+            "name": "fahrkorbtableau",
+            "anzahl": 1,
+            "einzelpreis": 950,
+            "summe": 950,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0
+          },
+          {
+            "bezeichnung": "Außenruftableau",
+            "name": "aussenruftableau",
+            "anzahl": 2,
+            "einzelpreis": 150,
+            "summe": 300,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0
+          },
+          {
+            "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+            "name": "standanzeige",
+            "anzahl": 2,
+            "einzelpreis": 240,
+            "summe": 480,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0
+          },
+          {
+            "bezeichnung": "Schachtbeleuchtung",
+            "name": "schachtbeleuchtung",
+            "anzahl": 1,
+            "einzelpreis": 250,
+            "summe": 250,
+            "stundenProEinheit": 4,
+            "stundenGesamtPosition": 4
+          },
+          {
+            "bezeichnung": "Kabelkanäle / Elektromaterial",
+            "name": "kabelkanaele",
+            "anzahl": 1,
+            "einzelpreis": 100,
+            "summe": 100,
+            "stundenProEinheit": 2,
+            "stundenGesamtPosition": 2
+          }
+        ],
+        "warnungen": []
+      },
+      {
+        "paket": "antrieb",
+        "aktiv": true,
+        "summeMaterial": 5744.370000000001,
+        "summeMontagestunden": 21.62,
+        "summeMontage": 1772.8400000000001,
+        "summeGesamt": 7517.210000000001,
+        "positionen": [
+          {
+            "bezeichnung": "Hydraulikaggregat",
+            "name": "maschine_standardrahmen",
+            "anzahl": 1,
+            "einzelpreis": 2927.94,
+            "summe": 2927.94,
+            "stundenProEinheit": 21.62,
+            "stundenGesamtPosition": 21.62
+          },
+          {
+            "bezeichnung": "Hydraulikschlauch",
+            "name": "hydraulikschlauch",
+            "anzahl": 1,
+            "einzelpreis": 1500,
+            "summe": 1500,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0
+          },
+          {
+            "bezeichnung": "Hydrauliköl",
+            "name": "hydraulikoel",
+            "anzahl": 292.54,
+            "einheit": "Liter",
+            "einzelpreis": 4.5,
+            "summe": 1316.43,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0,
+            "bemerkung": "Menge linear aus Tragfähigkeit (630 kg) berechnet"
+          }
+        ],
+        "warnungen": []
+      },
+      {
+        "paket": "fahrschacht",
+        "aktiv": true,
+        "summeMaterial": 1639.402985074627,
+        "summeMontagestunden": 11.8,
+        "summeMontage": 967.6,
+        "summeGesamt": 2607.002985074627,
+        "positionen": [
+          {
+            "bezeichnung": "Türführungen",
+            "name": "tuerfuehrungen",
+            "anzahl": 8,
+            "einzelpreis": 10,
+            "summe": 80,
+            "stundenProEinheit": 0.1,
+            "stundenGesamtPosition": 0.8
+          },
+          {
+            "bezeichnung": "Türlaufrollen",
+            "name": "tuerlaufrollen",
+            "anzahl": 8,
+            "einzelpreis": 70,
+            "summe": 560,
+            "stundenProEinheit": 0.25,
+            "stundenGesamtPosition": 2
+          },
+          {
+            "bezeichnung": "Türkontakte",
+            "name": "tuerkontakte",
+            "anzahl": 2,
+            "einzelpreis": 95,
+            "summe": 190,
+            "stundenProEinheit": 0.5,
+            "stundenGesamtPosition": 1
+          },
+          {
+            "bezeichnung": "Türseile",
+            "name": "tuerseile",
+            "anzahl": 4,
+            "einzelpreis": 60,
+            "summe": 240,
+            "stundenProEinheit": 0.5,
+            "stundenGesamtPosition": 2
+          },
+          {
+            "bezeichnung": "Anstrich Schachtgrube",
+            "name": "anstrich_schachtgrube",
+            "anzahl": 1,
+            "einzelpreis": 569.4029850746268,
+            "summe": 569.4029850746268,
+            "stundenProEinheit": 6,
+            "stundenGesamtPosition": 6,
+            "bemerkung": "Preis abhängig von Tragfähigkeit (linear interpoliert)"
+          }
+        ],
+        "warnungen": []
+      },
+      {
+        "paket": "fahrkorb",
+        "aktiv": true,
+        "summeMaterial": 1900,
+        "summeMontagestunden": 16,
+        "summeMontage": 1312,
+        "summeGesamt": 3212,
+        "positionen": [
+          {
+            "bezeichnung": "Teil-Umbaukit für automatische Schiebetüren z.B. Langer & Laumann",
+            "name": "teil_umbaukit_schiebetueren",
+            "anzahl": 1,
+            "einzelpreis": 1900,
+            "summe": 1900,
+            "stundenProEinheit": 16,
+            "stundenGesamtPosition": 16
+          }
+        ],
+        "warnungen": []
+      },
+      {
+        "paket": "messungen",
+        "aktiv": true,
+        "summeMaterial": 8691.176470588234,
+        "summeMontagestunden": 4,
+        "summeMontage": 328,
+        "summeGesamt": 9019.176470588234,
+        "positionen": [
+          {
+            "bezeichnung": "ZÜS Kosten Vorprüfung",
+            "name": "zues_kosten_vorpruefung",
+            "anzahl": 1,
+            "einzelpreis": 800,
+            "summe": 800,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0,
+            "bemerkung": "Bei Bedarf abwählen"
+          },
+          {
+            "bezeichnung": "ZÜS Kosten Abnahme",
+            "name": "zues_kosten_abnahme",
+            "anzahl": 1,
+            "einzelpreis": 500,
+            "summe": 500,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0,
+            "bemerkung": "Bei Bedarf abwählen"
+          },
+          {
+            "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+            "name": "zues_begleitung_durch_an_aufzug",
+            "anzahl": 1,
+            "einzelpreis": 0,
+            "summe": 0,
+            "stundenProEinheit": 4,
+            "stundenGesamtPosition": 4,
+            "bemerkung": "Bei Bedarf abwählen"
+          },
+          {
+            "bezeichnung": "Prüfgewichte",
+            "name": "pruefgewichte",
+            "anzahl": 1,
+            "einzelpreis": 691.1764705882352,
+            "summe": 691.1764705882352,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0,
+            "bemerkung": "Bei Bedarf abwählen"
+          },
+          {
+            "bezeichnung": "Transport allgemein Baustelle Lager",
+            "name": "transport_allgemein_baustelle_lager",
+            "anzahl": 1,
+            "einzelpreis": 500,
+            "summe": 500,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0,
+            "bemerkung": "Bei Bedarf abwählen"
+          },
+          {
+            "bezeichnung": "Erneuerung der Heberdichtung",
+            "name": "korrekturwert_1",
+            "anzahl": 1,
+            "einheit": "€",
+            "einzelpreis": 2400,
+            "summe": 2400,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0
+          },
+          {
+            "bezeichnung": "Erneuerung Laufrollen Fahrkorb",
+            "name": "korrekturwert_2",
+            "anzahl": 1,
+            "einheit": "€",
+            "einzelpreis": 2000,
+            "summe": 2000,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0
+          },
+          {
+            "bezeichnung": "Zuschlag Fahrkorbtürantrieb komplett",
+            "name": "korrekturwert_3",
+            "anzahl": 1,
+            "einheit": "€",
+            "einzelpreis": 1800,
+            "summe": 1800,
+            "stundenProEinheit": 0,
+            "stundenGesamtPosition": 0
+          }
+        ],
+        "warnungen": []
+      }
+    ],
+    "letzteKalkulationRoh": {
+      "ok": true,
+      "ergebnisse": [
+        {
+          "paket": "steuerung",
+          "aktiv": true,
+          "summeMaterial": 10080,
+          "summeMontagestunden": 94.4,
+          "summeMontage": 7740.8,
+          "summeGesamt": 17820.8,
+          "positionen": [
+            {
+              "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+              "name": "steuerung",
+              "anzahl": 1,
+              "einzelpreis": 8000,
+              "summe": 8000,
+              "stundenProEinheit": 88.4,
+              "stundenGesamtPosition": 88.4
+            },
+            {
+              "bezeichnung": "Fahrkorbtableau",
+              "name": "fahrkorbtableau",
+              "anzahl": 1,
+              "einzelpreis": 950,
+              "summe": 950,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Außenruftableau",
+              "name": "aussenruftableau",
+              "anzahl": 2,
+              "einzelpreis": 150,
+              "summe": 300,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+              "name": "standanzeige",
+              "anzahl": 2,
+              "einzelpreis": 240,
+              "summe": 480,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Schachtbeleuchtung",
+              "name": "schachtbeleuchtung",
+              "anzahl": 1,
+              "einzelpreis": 250,
+              "summe": 250,
+              "stundenProEinheit": 4,
+              "stundenGesamtPosition": 4
+            },
+            {
+              "bezeichnung": "Kabelkanäle / Elektromaterial",
+              "name": "kabelkanaele",
+              "anzahl": 1,
+              "einzelpreis": 100,
+              "summe": 100,
+              "stundenProEinheit": 2,
+              "stundenGesamtPosition": 2
+            }
+          ],
+          "warnungen": []
+        },
+        {
+          "paket": "antrieb",
+          "aktiv": true,
+          "summeMaterial": 5744.370000000001,
+          "summeMontagestunden": 21.62,
+          "summeMontage": 1772.8400000000001,
+          "summeGesamt": 7517.210000000001,
+          "positionen": [
+            {
+              "bezeichnung": "Hydraulikaggregat",
+              "name": "maschine_standardrahmen",
+              "anzahl": 1,
+              "einzelpreis": 2927.94,
+              "summe": 2927.94,
+              "stundenProEinheit": 21.62,
+              "stundenGesamtPosition": 21.62
+            },
+            {
+              "bezeichnung": "Hydraulikschlauch",
+              "name": "hydraulikschlauch",
+              "anzahl": 1,
+              "einzelpreis": 1500,
+              "summe": 1500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Hydrauliköl",
+              "name": "hydraulikoel",
+              "anzahl": 292.54,
+              "einheit": "Liter",
+              "einzelpreis": 4.5,
+              "summe": 1316.43,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Menge linear aus Tragfähigkeit (630 kg) berechnet"
+            }
+          ],
+          "warnungen": []
+        },
+        {
+          "paket": "fahrschacht",
+          "aktiv": true,
+          "summeMaterial": 1639.402985074627,
+          "summeMontagestunden": 11.8,
+          "summeMontage": 967.6,
+          "summeGesamt": 2607.002985074627,
+          "positionen": [
+            {
+              "bezeichnung": "Türführungen",
+              "name": "tuerfuehrungen",
+              "anzahl": 8,
+              "einzelpreis": 10,
+              "summe": 80,
+              "stundenProEinheit": 0.1,
+              "stundenGesamtPosition": 0.8
+            },
+            {
+              "bezeichnung": "Türlaufrollen",
+              "name": "tuerlaufrollen",
+              "anzahl": 8,
+              "einzelpreis": 70,
+              "summe": 560,
+              "stundenProEinheit": 0.25,
+              "stundenGesamtPosition": 2
+            },
+            {
+              "bezeichnung": "Türkontakte",
+              "name": "tuerkontakte",
+              "anzahl": 2,
+              "einzelpreis": 95,
+              "summe": 190,
+              "stundenProEinheit": 0.5,
+              "stundenGesamtPosition": 1
+            },
+            {
+              "bezeichnung": "Türseile",
+              "name": "tuerseile",
+              "anzahl": 4,
+              "einzelpreis": 60,
+              "summe": 240,
+              "stundenProEinheit": 0.5,
+              "stundenGesamtPosition": 2
+            },
+            {
+              "bezeichnung": "Anstrich Schachtgrube",
+              "name": "anstrich_schachtgrube",
+              "anzahl": 1,
+              "einzelpreis": 569.4029850746268,
+              "summe": 569.4029850746268,
+              "stundenProEinheit": 6,
+              "stundenGesamtPosition": 6,
+              "bemerkung": "Preis abhängig von Tragfähigkeit (linear interpoliert)"
+            }
+          ],
+          "warnungen": []
+        },
+        {
+          "paket": "fahrkorb",
+          "aktiv": true,
+          "summeMaterial": 1900,
+          "summeMontagestunden": 16,
+          "summeMontage": 1312,
+          "summeGesamt": 3212,
+          "positionen": [
+            {
+              "bezeichnung": "Teil-Umbaukit für automatische Schiebetüren z.B. Langer & Laumann",
+              "name": "teil_umbaukit_schiebetueren",
+              "anzahl": 1,
+              "einzelpreis": 1900,
+              "summe": 1900,
+              "stundenProEinheit": 16,
+              "stundenGesamtPosition": 16
+            }
+          ],
+          "warnungen": []
+        },
+        {
+          "paket": "messungen",
+          "aktiv": true,
+          "summeMaterial": 8691.176470588234,
+          "summeMontagestunden": 4,
+          "summeMontage": 328,
+          "summeGesamt": 9019.176470588234,
+          "positionen": [
+            {
+              "bezeichnung": "ZÜS Kosten Vorprüfung",
+              "name": "zues_kosten_vorpruefung",
+              "anzahl": 1,
+              "einzelpreis": 800,
+              "summe": 800,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "ZÜS Kosten Abnahme",
+              "name": "zues_kosten_abnahme",
+              "anzahl": 1,
+              "einzelpreis": 500,
+              "summe": 500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+              "name": "zues_begleitung_durch_an_aufzug",
+              "anzahl": 1,
+              "einzelpreis": 0,
+              "summe": 0,
+              "stundenProEinheit": 4,
+              "stundenGesamtPosition": 4,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "Prüfgewichte",
+              "name": "pruefgewichte",
+              "anzahl": 1,
+              "einzelpreis": 691.1764705882352,
+              "summe": 691.1764705882352,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "Transport allgemein Baustelle Lager",
+              "name": "transport_allgemein_baustelle_lager",
+              "anzahl": 1,
+              "einzelpreis": 500,
+              "summe": 500,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0,
+              "bemerkung": "Bei Bedarf abwählen"
+            },
+            {
+              "bezeichnung": "Erneuerung der Heberdichtung",
+              "name": "korrekturwert_1",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 2400,
+              "summe": 2400,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Erneuerung Laufrollen Fahrkorb",
+              "name": "korrekturwert_2",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 2000,
+              "summe": 2000,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            },
+            {
+              "bezeichnung": "Zuschlag Fahrkorbtürantrieb komplett",
+              "name": "korrekturwert_3",
+              "anzahl": 1,
+              "einheit": "€",
+              "einzelpreis": 1800,
+              "summe": 1800,
+              "stundenProEinheit": 0,
+              "stundenGesamtPosition": 0
+            }
+          ],
+          "warnungen": []
+        }
+      ],
+      "warnungen": [],
+      "lvPositionen": [
+        {
+          "paket": "Steuerung",
+          "id": "steuerung_grundpreis",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "anzahl": 1,
+          "einheit": "Stk",
+          "einzelpreis": 8000,
+          "lvTextKey": "LV_STEUERUNG_GRUNDPREIS",
+          "gesamtpreis": 8000
+        },
+        {
+          "paket": "Steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "anzahl": 1,
+          "einheit": "Stk",
+          "einzelpreis": 950,
+          "lvTextKey": "LV_FAHRKORBTABLEAU",
+          "gesamtpreis": 950
+        },
+        {
+          "paket": "Steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "anzahl": 2,
+          "einheit": "Stk",
+          "einzelpreis": 150,
+          "lvTextKey": "LV_AUSSENRUFTABLEAU",
+          "gesamtpreis": 300
+        },
+        {
+          "paket": "Steuerung",
+          "id": "stand_und_weiterfahrtsanzeige",
+          "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+          "anzahl": 2,
+          "einheit": "Stk",
+          "einzelpreis": 240,
+          "lvTextKey": "LV_STANDANZEIGE",
+          "gesamtpreis": 480
+        },
+        {
+          "paket": "Abnahme & Co",
+          "id": "zues_vorpruefung",
+          "bezeichnung": "ZÜS Vorprüfung",
+          "anzahl": 1,
+          "einheit": "Stk",
+          "einzelpreis": 800,
+          "lvTextKey": "LV_ZUES_VORPRUEFUNG",
+          "gesamtpreis": 800
+        },
+        {
+          "paket": "Abnahme & Co",
+          "id": "zues_abnahme",
+          "bezeichnung": "ZÜS Abnahme",
+          "anzahl": 1,
+          "einheit": "Stk",
+          "einzelpreis": 500,
+          "lvTextKey": "LV_ZUES_ABNAHME",
+          "gesamtpreis": 500
+        },
+        {
+          "paket": "Abnahme & Co",
+          "id": "zues_begleitung",
+          "bezeichnung": "ZÜS Begleitung",
+          "anzahl": 1,
+          "einheit": "Stk",
+          "einzelpreis": 0,
+          "lvTextKey": "LV_ZUES_BEGLEITUNG",
+          "gesamtpreis": 0
+        },
+        {
+          "paket": "Abnahme & Co",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "anzahl": 1,
+          "einheit": "Stk",
+          "einzelpreis": 691.1764705882352,
+          "lvTextKey": "LV_PRUEFGEWICHTE",
+          "gesamtpreis": 691.1764705882352
+        },
+        {
+          "paket": "Abnahme & Co",
+          "id": "transport",
+          "bezeichnung": "Transport",
+          "anzahl": 1,
+          "einheit": "Stk",
+          "einzelpreis": 500,
+          "lvTextKey": "LV_TRANSPORT",
+          "gesamtpreis": 500
+        }
+      ],
+      "projektdaten": {
+        "projektnummer": "Berghof Lütjensee",
+        "projektnameOderNummer": "Berghof Lütjensee",
+        "bauvorhaben": "Aufzug 155180",
+        "stadt": "Lütjensee",
+        "strasse": "Deepenstegen 1+4",
+        "projektart": "Teilmodernisierung"
+      },
+      "officeUsage": {
+        "date": "2026-08-24",
+        "ownerId": "eddie",
+        "role": "office",
+        "unlimited": true,
+        "limit": null,
+        "count": 0,
+        "remaining": null,
+        "limitReached": false,
+        "message": ""
+      }
+    },
+    "letzteKalkulationsdaten": {
+      "projektdaten": {
+        "projektnummer": "Berghof Lütjensee",
+        "projektnameOderNummer": "Berghof Lütjensee",
+        "bauvorhaben": "Aufzug 155180",
+        "stadt": "Lütjensee",
+        "strasse": "Deepenstegen 1+4",
+        "projektart": "Teilmodernisierung"
+      },
+      "technischeParameter": {
+        "aufzugstyp": "hydraulik",
+        "tragfaehigkeit": "630",
+        "haltestellenanzahl": "2",
+        "schachtzugaenge": "2",
+        "durchladung": "Nein",
+        "vnenn": "0.63",
+        "aufhaengung": "2:1",
+        "tuerart": "2-fluegelig",
+        "foerderhoehe": "3",
+        "kostenMontagestunde": "82",
+        "maschinenart": ""
+      },
+      "aktivePakete": [
+        "antrieb",
+        "steuerung",
+        "schacht",
+        "fahrkorb",
+        "messungen"
+      ],
+      "pakete": {
+        "steuerung": {
+          "steuerung": {
+            "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+            "bemerkung": "",
+            "anzahl": 1
+          },
+          "frequenzumrichter": {
+            "bezeichnung": "frequenzumrichter",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "bremswiderstand": {
+            "bezeichnung": "bremswiderstand",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "verbindungsleitungen": {
+            "bezeichnung": "verbindungsleitungen",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "fahrkorbtableau": {
+            "bezeichnung": "Fahrkorbtableau",
+            "bemerkung": "",
+            "anzahl": 1
+          },
+          "aussenruftableau": {
+            "bezeichnung": "Außenruftableau",
+            "bemerkung": "",
+            "anzahl": 2
+          },
+          "standanzeige": {
+            "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+            "bemerkung": "",
+            "anzahl": 2
+          },
+          "lastmessung": {
+            "bezeichnung": "lastmessung",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "schachtbeleuchtung": {
+            "bezeichnung": "Schachtbeleuchtung",
+            "bemerkung": "",
+            "anzahl": 1
+          },
+          "kontakt_regler": {
+            "bezeichnung": "kontakt_regler",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "notruf": {
+            "bezeichnung": "Notruf",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "kabelkanaele": {
+            "bezeichnung": "Kabelkanäle / Elektromaterial",
+            "bemerkung": "",
+            "anzahl": 1
+          },
+          "ausschnitte": {
+            "bezeichnung": "ausschnitte",
+            "bemerkung": "",
+            "anzahl": 0
+          }
+        },
+        "antrieb": {
+          "maschine_standardrahmen": {
+            "bezeichnung": "Hydraulikaggregat",
+            "bemerkung": "Grobe Indikation für Tragfähigkeit: 630 kg",
+            "anzahl": 1
+          },
+          "hydraulikschlauch": {
+            "bezeichnung": "Hydraulikschlauch",
+            "bemerkung": "pauschal 1.500 €",
+            "anzahl": 1
+          },
+          "hydraulikoel": {
+            "bezeichnung": "Hydrauliköl",
+            "bemerkung": "Menge in Liter",
+            "anzahl": 293
+          },
+          "frequenzregelung": {
+            "bezeichnung": "Frequenzregelung",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "adapterrahmen": {
+            "bezeichnung": "adapterrahmen",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "tragseile": {
+            "bezeichnung": "tragseile",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "seilkauschen": {
+            "bezeichnung": "seilkauschen",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "seilaufhaengung": {
+            "bezeichnung": "seilaufhaengung",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "ablenkrolle": {
+            "bezeichnung": "ablenkrolle",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "montage_schachtkopf_grube": {
+            "bezeichnung": "Montagezubehör Schachtkopf/Grube",
+            "bemerkung": "zusätzliche Rüstlage",
+            "anzahl": 0
+          }
+        },
+        "fahrschacht": {
+          "tuerfuehrungen": {
+            "bezeichnung": "Türführungen",
+            "bemerkung": "2-flügelig: 2 Flügel × 2 Führungen = 4 je Tür",
+            "anzahl": 8
+          },
+          "tuerlaufrollen": {
+            "bezeichnung": "Türlaufrollen",
+            "bemerkung": "2-flügelig: 2 Flügel × 2 Rollen = 4 je Tür",
+            "anzahl": 8
+          },
+          "gegenrollen": {
+            "bezeichnung": "Gegenrollen",
+            "bemerkung": "2-flügelig: 2 Flügel × 2 Rollen = 4 je Tür",
+            "anzahl": 0
+          },
+          "tuerkontakte": {
+            "bezeichnung": "Türkontakte",
+            "bemerkung": "1 je Tür",
+            "anzahl": 2
+          },
+          "tuerseile": {
+            "bezeichnung": "Türseile",
+            "bemerkung": "2 je Tür",
+            "anzahl": 4
+          },
+          "tuerfedern": {
+            "bezeichnung": "Türfedern",
+            "bemerkung": "2 je Tür",
+            "anzahl": 0
+          },
+          "schiebetuer_2tlg": {
+            "bezeichnung": "Schachtschiebetür 2-teilig Edelstahl geschliffen ohne Demontage",
+            "bemerkung": "2-flügelig je Haltestelle",
+            "anzahl": 0
+          },
+          "demontage_schiebetuer_2tlg": {
+            "bezeichnung": "Demontage Schachtschiebetür 2-teilig",
+            "bemerkung": "Demontage Bestand je Tür",
+            "anzahl": 0
+          },
+          "schiebetuer_4flg": {
+            "bezeichnung": "schiebetuer_4flg",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "demontage_schiebetuer_4flg": {
+            "bezeichnung": "demontage_schiebetuer_4flg",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "schiebetuer_6flg": {
+            "bezeichnung": "schiebetuer_6flg",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "demontage_schiebetuer_6flg": {
+            "bezeichnung": "demontage_schiebetuer_6flg",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "muz_standard": {
+            "bezeichnung": "MUZ Standard",
+            "bemerkung": "je Tür",
+            "anzahl": 0
+          },
+          "antrittsblech": {
+            "bezeichnung": "Antrittsblech",
+            "bemerkung": "je Tür",
+            "anzahl": 0
+          },
+          "zargenbeleuchtung": {
+            "bezeichnung": "Zargenbeleuchtung",
+            "bemerkung": "je Tür",
+            "anzahl": 0
+          },
+          "umlenkrolle_schachtkopf_gegengewicht": {
+            "bezeichnung": "Umlenkrolle Schachtkopf / Gegengewicht",
+            "bemerkung": "Zusätzliche Montagevorrüstungen beachten",
+            "anzahl": 0
+          },
+          "begrenzer_inkl_seil_spanngewicht": {
+            "bezeichnung": "Begrenzer inkl. Seil und Spanngewicht",
+            "bemerkung": "inkl. Geschwindigkeitsbegrenzer, Seil und Spanngewicht",
+            "anzahl": 0
+          },
+          "schachtabtrennung_lochblech": {
+            "bezeichnung": "Schachtabtrennung Lochblech",
+            "bemerkung": "Quadratmeter aus Schachttiefe × Schachthöhe ermitteln und eintragen",
+            "anzahl": 0
+          },
+          "anstrich_schachtgrube": {
+            "bezeichnung": "Anstrich Schachtgrube",
+            "bemerkung": "Preis abhängig von Tragfähigkeit (linear interpoliert)",
+            "anzahl": 1
+          }
+        },
+        "fahrkorb": {
+          "fahrkorbeinsatz_fremdmontage": {
+            "bezeichnung": "Fahrkorbrahmen neu - Eigenmontage",
+            "bemerkung": "Grober Indikationspreis für gewählte Tragfähigkeit",
+            "anzahl": 0
+          },
+          "fahrkorbeinsatz_eigenmontage": {
+            "bezeichnung": "Fahrkorbeinsatz erneuern, Eigenmontage",
+            "bemerkung": "Grober Indikationspreis für gewählte Tragfähigkeit: 630 kg",
+            "anzahl": 0
+          },
+          "fahrkorbauskleidung": {
+            "bezeichnung": "Fahrkorbauskleidung",
+            "bemerkung": "Aufgrund der Ausstattungsvarianten separate Kalkulation notwendig",
+            "anzahl": 0
+          },
+          "led_flaechenlicht_fahrkorb": {
+            "bezeichnung": "LED Flächenlicht über komplette Fahrkorbfläche",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "lichtgitter_vorhandene_fahrkorbschiebetuer": {
+            "bezeichnung": "Lichtgitter bei vorhandener Fahrkorbschiebetür",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "schutzmatten": {
+            "bezeichnung": "Schutzmatten",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "fangvorrichtung": {
+            "bezeichnung": "Fangvorrichtung",
+            "bemerkung": "Grober Indikationspreis abhängig von der Tragfähigkeit in den Projektdaten",
+            "anzahl": 0
+          },
+          "fuehrungsschuheinlagen_fahrkorb": {
+            "bezeichnung": "Führungsschuheinlagen Fahrkorb",
+            "bemerkung": "Annahme: 4 Stück Einlagen je Fahrkorb",
+            "anzahl": 0
+          },
+          "fuehrungsschuheinlagen_gegengewicht": {
+            "bezeichnung": "Führungsschuheinlagen Gegengewicht",
+            "bemerkung": "Annahme: 4 Stück Einlagen am Gegengewicht",
+            "anzahl": 0
+          },
+          "oeler_fahrkorb": {
+            "bezeichnung": "Öler Fahrkorb",
+            "bemerkung": "Annahme: 2 Stück Öler je Fahrkorb",
+            "anzahl": 0
+          },
+          "oeler_gegengewicht": {
+            "bezeichnung": "Öler Gegengewicht",
+            "bemerkung": "Annahme: 2 Stück Öler am Gegengewicht",
+            "anzahl": 0
+          },
+          "teil_umbaukit_schiebetueren": {
+            "bezeichnung": "Teil-Umbaukit für automatische Schiebetüren z.B. Langer & Laumann",
+            "bemerkung": "Nur eine Variante wählen",
+            "anzahl": 1
+          },
+          "komplett_umbaukit_schiebetueren": {
+            "bezeichnung": "Komplett-Umbaukit für automatische Schiebetüren z.B. Meiller",
+            "bemerkung": "Nur eine Variante wählen – inkl. pauschal 1200 € Schlosserkosten",
+            "anzahl": 0
+          },
+          "sicherheitslichtgitter_ein_zugang": {
+            "bezeichnung": "Nachrüstung Sicherheitslichtgitter (CEDES) ein Zugang",
+            "bemerkung": "Nur eine Variante wählen",
+            "anzahl": 0
+          },
+          "sicherheitslichtgitter_zwei_zugaenge": {
+            "bezeichnung": "Nachrüstung Sicherheitslichtgitter (CEDES) zwei Zugänge",
+            "bemerkung": "Nur eine Variante wählen",
+            "anzahl": 0
+          },
+          "nice_plus_fahrkorbauskleidung_preis": 6500
+        },
+        "messungen": {
+          "zues_kosten_vorpruefung": {
+            "bezeichnung": "ZÜS Kosten Vorprüfung",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "zues_kosten_abnahme": {
+            "bezeichnung": "ZÜS Kosten Abnahme",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "zues_begleitung_durch_an_aufzug": {
+            "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "pruefgewichte": {
+            "bezeichnung": "Prüfgewichte",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "transport_allgemein_baustelle_lager": {
+            "bezeichnung": "Transport allgemein Baustelle Lager",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "schachtzugaenge_vollflaechig_sichern": {
+            "bezeichnung": "Schachtzugänge vollflächig sichern",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "befestigungsmaterial_schachttueren": {
+            "bezeichnung": "Befestigungsmaterial Schachttüren",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "hst_duebel_schachttueren": {
+            "bezeichnung": "HST Dübel Schachttüren",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "chemieduebel_schachttueren": {
+            "bezeichnung": "Chemiedübel Schachttüren",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "auszugsversuch_mauerwerksschaechten": {
+            "bezeichnung": "Auszugsversuch bei Mauerwerkschächten",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "montageruestung": {
+            "bezeichnung": "Montagerüstung",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "korrekturwert_1": {
+            "bezeichnung": "Korrekturwert 1",
+            "bemerkung": "Erneuerung der Heberdichtung",
+            "anzahl": 2400
+          },
+          "korrekturwert_2": {
+            "bezeichnung": "Korrekturwert 2",
+            "bemerkung": "Erneuerung Laufrollen Fahrkorb",
+            "anzahl": 2000
+          },
+          "korrekturwert_3": {
+            "bezeichnung": "Korrekturwert 3",
+            "bemerkung": "Zuschlag Fahrkorbtürantrieb komplett ",
+            "anzahl": 1800
+          },
+          "korrekturwert_4": {
+            "bezeichnung": "Korrekturwert 4",
+            "bemerkung": "",
+            "anzahl": 0
+          }
+        }
+      },
+      "sessionProjectId": "f2706e85-ca8a-4ef5-aeb2-beba65a6bbae",
+      "ownerId": "eddie"
+    },
+    "kalkulationsAnfrageRoh": {
+      "projektdaten": {
+        "projektnummer": "Berghof Lütjensee",
+        "projektnameOderNummer": "Berghof Lütjensee",
+        "bauvorhaben": "Aufzug 155180",
+        "stadt": "Lütjensee",
+        "strasse": "Deepenstegen 1+4",
+        "projektart": "Teilmodernisierung"
+      },
+      "technischeParameter": {
+        "aufzugstyp": "hydraulik",
+        "tragfaehigkeit": "630",
+        "haltestellenanzahl": "2",
+        "schachtzugaenge": "2",
+        "durchladung": "Nein",
+        "vnenn": "0.63",
+        "aufhaengung": "2:1",
+        "tuerart": "2-fluegelig",
+        "foerderhoehe": "3",
+        "kostenMontagestunde": "82",
+        "maschinenart": ""
+      },
+      "aktivePakete": [
+        "antrieb",
+        "steuerung",
+        "schacht",
+        "fahrkorb",
+        "messungen"
+      ],
+      "pakete": {
+        "steuerung": {
+          "steuerung": {
+            "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+            "bemerkung": "",
+            "anzahl": 1
+          },
+          "frequenzumrichter": {
+            "bezeichnung": "frequenzumrichter",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "bremswiderstand": {
+            "bezeichnung": "bremswiderstand",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "verbindungsleitungen": {
+            "bezeichnung": "verbindungsleitungen",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "fahrkorbtableau": {
+            "bezeichnung": "Fahrkorbtableau",
+            "bemerkung": "",
+            "anzahl": 1
+          },
+          "aussenruftableau": {
+            "bezeichnung": "Außenruftableau",
+            "bemerkung": "",
+            "anzahl": 2
+          },
+          "standanzeige": {
+            "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+            "bemerkung": "",
+            "anzahl": 2
+          },
+          "lastmessung": {
+            "bezeichnung": "lastmessung",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "schachtbeleuchtung": {
+            "bezeichnung": "Schachtbeleuchtung",
+            "bemerkung": "",
+            "anzahl": 1
+          },
+          "kontakt_regler": {
+            "bezeichnung": "kontakt_regler",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "notruf": {
+            "bezeichnung": "Notruf",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "kabelkanaele": {
+            "bezeichnung": "Kabelkanäle / Elektromaterial",
+            "bemerkung": "",
+            "anzahl": 1
+          },
+          "ausschnitte": {
+            "bezeichnung": "ausschnitte",
+            "bemerkung": "",
+            "anzahl": 0
+          }
+        },
+        "antrieb": {
+          "maschine_standardrahmen": {
+            "bezeichnung": "Hydraulikaggregat",
+            "bemerkung": "Grobe Indikation für Tragfähigkeit: 630 kg",
+            "anzahl": 1
+          },
+          "hydraulikschlauch": {
+            "bezeichnung": "Hydraulikschlauch",
+            "bemerkung": "pauschal 1.500 €",
+            "anzahl": 1
+          },
+          "hydraulikoel": {
+            "bezeichnung": "Hydrauliköl",
+            "bemerkung": "Menge in Liter",
+            "anzahl": 293
+          },
+          "frequenzregelung": {
+            "bezeichnung": "Frequenzregelung",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "adapterrahmen": {
+            "bezeichnung": "adapterrahmen",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "tragseile": {
+            "bezeichnung": "tragseile",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "seilkauschen": {
+            "bezeichnung": "seilkauschen",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "seilaufhaengung": {
+            "bezeichnung": "seilaufhaengung",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "ablenkrolle": {
+            "bezeichnung": "ablenkrolle",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "montage_schachtkopf_grube": {
+            "bezeichnung": "Montagezubehör Schachtkopf/Grube",
+            "bemerkung": "zusätzliche Rüstlage",
+            "anzahl": 0
+          }
+        },
+        "fahrschacht": {
+          "tuerfuehrungen": {
+            "bezeichnung": "Türführungen",
+            "bemerkung": "2-flügelig: 2 Flügel × 2 Führungen = 4 je Tür",
+            "anzahl": 8
+          },
+          "tuerlaufrollen": {
+            "bezeichnung": "Türlaufrollen",
+            "bemerkung": "2-flügelig: 2 Flügel × 2 Rollen = 4 je Tür",
+            "anzahl": 8
+          },
+          "gegenrollen": {
+            "bezeichnung": "Gegenrollen",
+            "bemerkung": "2-flügelig: 2 Flügel × 2 Rollen = 4 je Tür",
+            "anzahl": 0
+          },
+          "tuerkontakte": {
+            "bezeichnung": "Türkontakte",
+            "bemerkung": "1 je Tür",
+            "anzahl": 2
+          },
+          "tuerseile": {
+            "bezeichnung": "Türseile",
+            "bemerkung": "2 je Tür",
+            "anzahl": 4
+          },
+          "tuerfedern": {
+            "bezeichnung": "Türfedern",
+            "bemerkung": "2 je Tür",
+            "anzahl": 0
+          },
+          "schiebetuer_2tlg": {
+            "bezeichnung": "Schachtschiebetür 2-teilig Edelstahl geschliffen ohne Demontage",
+            "bemerkung": "2-flügelig je Haltestelle",
+            "anzahl": 0
+          },
+          "demontage_schiebetuer_2tlg": {
+            "bezeichnung": "Demontage Schachtschiebetür 2-teilig",
+            "bemerkung": "Demontage Bestand je Tür",
+            "anzahl": 0
+          },
+          "schiebetuer_4flg": {
+            "bezeichnung": "schiebetuer_4flg",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "demontage_schiebetuer_4flg": {
+            "bezeichnung": "demontage_schiebetuer_4flg",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "schiebetuer_6flg": {
+            "bezeichnung": "schiebetuer_6flg",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "demontage_schiebetuer_6flg": {
+            "bezeichnung": "demontage_schiebetuer_6flg",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "muz_standard": {
+            "bezeichnung": "MUZ Standard",
+            "bemerkung": "je Tür",
+            "anzahl": 0
+          },
+          "antrittsblech": {
+            "bezeichnung": "Antrittsblech",
+            "bemerkung": "je Tür",
+            "anzahl": 0
+          },
+          "zargenbeleuchtung": {
+            "bezeichnung": "Zargenbeleuchtung",
+            "bemerkung": "je Tür",
+            "anzahl": 0
+          },
+          "umlenkrolle_schachtkopf_gegengewicht": {
+            "bezeichnung": "Umlenkrolle Schachtkopf / Gegengewicht",
+            "bemerkung": "Zusätzliche Montagevorrüstungen beachten",
+            "anzahl": 0
+          },
+          "begrenzer_inkl_seil_spanngewicht": {
+            "bezeichnung": "Begrenzer inkl. Seil und Spanngewicht",
+            "bemerkung": "inkl. Geschwindigkeitsbegrenzer, Seil und Spanngewicht",
+            "anzahl": 0
+          },
+          "schachtabtrennung_lochblech": {
+            "bezeichnung": "Schachtabtrennung Lochblech",
+            "bemerkung": "Quadratmeter aus Schachttiefe × Schachthöhe ermitteln und eintragen",
+            "anzahl": 0
+          },
+          "anstrich_schachtgrube": {
+            "bezeichnung": "Anstrich Schachtgrube",
+            "bemerkung": "Preis abhängig von Tragfähigkeit (linear interpoliert)",
+            "anzahl": 1
+          }
+        },
+        "fahrkorb": {
+          "fahrkorbeinsatz_fremdmontage": {
+            "bezeichnung": "Fahrkorbrahmen neu - Eigenmontage",
+            "bemerkung": "Grober Indikationspreis für gewählte Tragfähigkeit",
+            "anzahl": 0
+          },
+          "fahrkorbeinsatz_eigenmontage": {
+            "bezeichnung": "Fahrkorbeinsatz erneuern, Eigenmontage",
+            "bemerkung": "Grober Indikationspreis für gewählte Tragfähigkeit: 630 kg",
+            "anzahl": 0
+          },
+          "fahrkorbauskleidung": {
+            "bezeichnung": "Fahrkorbauskleidung",
+            "bemerkung": "Aufgrund der Ausstattungsvarianten separate Kalkulation notwendig",
+            "anzahl": 0
+          },
+          "led_flaechenlicht_fahrkorb": {
+            "bezeichnung": "LED Flächenlicht über komplette Fahrkorbfläche",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "lichtgitter_vorhandene_fahrkorbschiebetuer": {
+            "bezeichnung": "Lichtgitter bei vorhandener Fahrkorbschiebetür",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "schutzmatten": {
+            "bezeichnung": "Schutzmatten",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "fangvorrichtung": {
+            "bezeichnung": "Fangvorrichtung",
+            "bemerkung": "Grober Indikationspreis abhängig von der Tragfähigkeit in den Projektdaten",
+            "anzahl": 0
+          },
+          "fuehrungsschuheinlagen_fahrkorb": {
+            "bezeichnung": "Führungsschuheinlagen Fahrkorb",
+            "bemerkung": "Annahme: 4 Stück Einlagen je Fahrkorb",
+            "anzahl": 0
+          },
+          "fuehrungsschuheinlagen_gegengewicht": {
+            "bezeichnung": "Führungsschuheinlagen Gegengewicht",
+            "bemerkung": "Annahme: 4 Stück Einlagen am Gegengewicht",
+            "anzahl": 0
+          },
+          "oeler_fahrkorb": {
+            "bezeichnung": "Öler Fahrkorb",
+            "bemerkung": "Annahme: 2 Stück Öler je Fahrkorb",
+            "anzahl": 0
+          },
+          "oeler_gegengewicht": {
+            "bezeichnung": "Öler Gegengewicht",
+            "bemerkung": "Annahme: 2 Stück Öler am Gegengewicht",
+            "anzahl": 0
+          },
+          "teil_umbaukit_schiebetueren": {
+            "bezeichnung": "Teil-Umbaukit für automatische Schiebetüren z.B. Langer & Laumann",
+            "bemerkung": "Nur eine Variante wählen",
+            "anzahl": 1
+          },
+          "komplett_umbaukit_schiebetueren": {
+            "bezeichnung": "Komplett-Umbaukit für automatische Schiebetüren z.B. Meiller",
+            "bemerkung": "Nur eine Variante wählen – inkl. pauschal 1200 € Schlosserkosten",
+            "anzahl": 0
+          },
+          "sicherheitslichtgitter_ein_zugang": {
+            "bezeichnung": "Nachrüstung Sicherheitslichtgitter (CEDES) ein Zugang",
+            "bemerkung": "Nur eine Variante wählen",
+            "anzahl": 0
+          },
+          "sicherheitslichtgitter_zwei_zugaenge": {
+            "bezeichnung": "Nachrüstung Sicherheitslichtgitter (CEDES) zwei Zugänge",
+            "bemerkung": "Nur eine Variante wählen",
+            "anzahl": 0
+          },
+          "nice_plus_fahrkorbauskleidung_preis": 6500
+        },
+        "messungen": {
+          "zues_kosten_vorpruefung": {
+            "bezeichnung": "ZÜS Kosten Vorprüfung",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "zues_kosten_abnahme": {
+            "bezeichnung": "ZÜS Kosten Abnahme",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "zues_begleitung_durch_an_aufzug": {
+            "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "pruefgewichte": {
+            "bezeichnung": "Prüfgewichte",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "transport_allgemein_baustelle_lager": {
+            "bezeichnung": "Transport allgemein Baustelle Lager",
+            "bemerkung": "Bei Bedarf abwählen",
+            "anzahl": 1
+          },
+          "schachtzugaenge_vollflaechig_sichern": {
+            "bezeichnung": "Schachtzugänge vollflächig sichern",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "befestigungsmaterial_schachttueren": {
+            "bezeichnung": "Befestigungsmaterial Schachttüren",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "hst_duebel_schachttueren": {
+            "bezeichnung": "HST Dübel Schachttüren",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "chemieduebel_schachttueren": {
+            "bezeichnung": "Chemiedübel Schachttüren",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "auszugsversuch_mauerwerksschaechten": {
+            "bezeichnung": "Auszugsversuch bei Mauerwerkschächten",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "montageruestung": {
+            "bezeichnung": "Montagerüstung",
+            "bemerkung": "",
+            "anzahl": 0
+          },
+          "korrekturwert_1": {
+            "bezeichnung": "Korrekturwert 1",
+            "bemerkung": "Erneuerung der Heberdichtung",
+            "anzahl": 2400
+          },
+          "korrekturwert_2": {
+            "bezeichnung": "Korrekturwert 2",
+            "bemerkung": "Erneuerung Laufrollen Fahrkorb",
+            "anzahl": 2000
+          },
+          "korrekturwert_3": {
+            "bezeichnung": "Korrekturwert 3",
+            "bemerkung": "Zuschlag Fahrkorbtürantrieb komplett ",
+            "anzahl": 1800
+          },
+          "korrekturwert_4": {
+            "bezeichnung": "Korrekturwert 4",
+            "bemerkung": "",
+            "anzahl": 0
+          }
+        }
+      },
+      "sessionProjectId": "f2706e85-ca8a-4ef5-aeb2-beba65a6bbae",
+      "ownerId": "eddie"
+    },
+    "lvPositionen": [
+      {
+        "paket": "Steuerung",
+        "id": "steuerung_grundpreis",
+        "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+        "anzahl": 1,
+        "einheit": "Stk",
+        "einzelpreis": 8000,
+        "lvTextKey": "LV_STEUERUNG_GRUNDPREIS",
+        "gesamtpreis": 8000
+      },
+      {
+        "paket": "Steuerung",
+        "id": "fahrkorbtableau",
+        "bezeichnung": "Fahrkorbtableau",
+        "anzahl": 1,
+        "einheit": "Stk",
+        "einzelpreis": 950,
+        "lvTextKey": "LV_FAHRKORBTABLEAU",
+        "gesamtpreis": 950
+      },
+      {
+        "paket": "Steuerung",
+        "id": "aussenruftableau",
+        "bezeichnung": "Außenruftableau",
+        "anzahl": 2,
+        "einheit": "Stk",
+        "einzelpreis": 150,
+        "lvTextKey": "LV_AUSSENRUFTABLEAU",
+        "gesamtpreis": 300
+      },
+      {
+        "paket": "Steuerung",
+        "id": "stand_und_weiterfahrtsanzeige",
+        "bezeichnung": "Stand- und Weiterfahrtsanzeige",
+        "anzahl": 2,
+        "einheit": "Stk",
+        "einzelpreis": 240,
+        "lvTextKey": "LV_STANDANZEIGE",
+        "gesamtpreis": 480
+      },
+      {
+        "paket": "Abnahme & Co",
+        "id": "zues_vorpruefung",
+        "bezeichnung": "ZÜS Vorprüfung",
+        "anzahl": 1,
+        "einheit": "Stk",
+        "einzelpreis": 800,
+        "lvTextKey": "LV_ZUES_VORPRUEFUNG",
+        "gesamtpreis": 800
+      },
+      {
+        "paket": "Abnahme & Co",
+        "id": "zues_abnahme",
+        "bezeichnung": "ZÜS Abnahme",
+        "anzahl": 1,
+        "einheit": "Stk",
+        "einzelpreis": 500,
+        "lvTextKey": "LV_ZUES_ABNAHME",
+        "gesamtpreis": 500
+      },
+      {
+        "paket": "Abnahme & Co",
+        "id": "zues_begleitung",
+        "bezeichnung": "ZÜS Begleitung",
+        "anzahl": 1,
+        "einheit": "Stk",
+        "einzelpreis": 0,
+        "lvTextKey": "LV_ZUES_BEGLEITUNG",
+        "gesamtpreis": 0
+      },
+      {
+        "paket": "Abnahme & Co",
+        "id": "pruefgewichte",
+        "bezeichnung": "Prüfgewichte",
+        "anzahl": 1,
+        "einheit": "Stk",
+        "einzelpreis": 691.1764705882352,
+        "lvTextKey": "LV_PRUEFGEWICHTE",
+        "gesamtpreis": 691.1764705882352
+      },
+      {
+        "paket": "Abnahme & Co",
+        "id": "transport",
+        "bezeichnung": "Transport",
+        "anzahl": 1,
+        "einheit": "Stk",
+        "einzelpreis": 500,
+        "lvTextKey": "LV_TRANSPORT",
+        "gesamtpreis": 500
+      }
+    ]
+  },
+  "meta": {
+    "exportTyp": "XL",
+    "version": "1.0",
+    "quelle": "Components",
+    "erstelltAm": "2026-08-24T07:31:29.206Z",
+    "hinweis": "Voll-Export mit Projekt-, Technik-, Paket- und Kalkulationsdaten inklusive Preise, soweit im Frontend vorhanden."
+  }
+}

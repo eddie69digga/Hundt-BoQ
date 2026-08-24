@@ -157,6 +157,47 @@ Das ist der zentrale fachliche und technische Bruch im aktuellen Ansatz:
 - Fehlende Mappings dürfen nicht durch fachlich falsche Fallbacks ersetzt werden.
 - Mehrere Kalkulationspositionen können auf einen gemeinsamen LV-Baustein führen.
 
+## Positionsgenauer Modus und Mapping-Logik
+
+Der aktuelle produktive LV-Export unterscheidet zwischen zwei Modi:
+
+- Positionsgenauer Modus: aktiv, sobald positive Positionsdaten aus `kalkulation.paketSummen[*].positionen` vorliegen.
+- Legacy-Modus: nur aktiv, wenn keine geeignete Positionsstruktur vorhanden ist.
+
+Im positionsgenauen Modus gilt folgende Reihenfolge:
+
+1. Nur Positionen mit Menge > 0 werden berücksichtigt.
+2. Der technische Kontext wird aus `technischeParameter` / `projekt` / `aufzugstyp` / `projektart` gelesen.
+3. Die Zuordnung erfolgt auf bestätigte LV-Bibliotheks-IDs.
+4. Mehrere Positionen auf dieselbe Ziel-LV-ID werden dedupliziert.
+5. Unbekannte Positionen bleiben als `open` stehen und erzeugen keinen fachlich falschen Fallback.
+6. Beim neuen Components-Export wird kein statischer Gesamtpaket-Fallback mehr verwendet.
+7. Bei Hydraulik bleibt der Seil-/MRL-Fallback ausgeschlossen.
+
+Bestätigte Abbildungen:
+
+- `hydraulikschlauch` + `hydraulikoel` → `LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL`
+- `steuerung` → `LV_12_02_STEUERUNG`
+- `fahrkorbtableau` → `LV_10_20_FAHRKORBTABLEAU_VERTIKAL`
+- `aussenruftableau` → `LV_11_16_BEFEHLSGEBER_AUSSENRUF`
+- `standanzeige` → `LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN`
+- `schachtbeleuchtung` → `LV_09_02_SCHACHTBELEUCHTUNG`
+- `kabelkanaele` → `LV_09_01_SCHACHTINSTALLATION_ELEKTRO`
+- `anstrich_schachtgrube` → `LV_07_05_MALERARBEITEN_SCHACHTGRUBE`
+- `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` bei `projektart = Teilmodernisierung`
+- `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` bei `projektart = Teilmodernisierung`
+
+Offen bleiben:
+
+- `maschine_standardrahmen`
+- `tuerfuehrungen`
+- `tuerlaufrollen`
+- `tuerkontakte`
+- `tuerseile`
+- `teil_umbaukit_schiebetueren`
+
+Die Legacy-Abgrenzung ist bewusst: Nur wenn keine passende Positionsstruktur vorliegt, fallen die bisherigen statischen Paketdateien aus `backend/lv` in den Fallback. Im neuen Components-Export wird dieser Fallback nicht mehr genutzt, damit fachlich falsche Texte wie `Antrieb Seil` oder `MRL - Seil Synchron` bei Hydraulik vollständig ausgeschlossen sind.
+
 ## Modulare LV-Bibliothek
 
 Die neue modulare LV-Bibliothek liegt unter `docs`:

@@ -154,7 +154,48 @@ Das gewünschte Zielbild ist eine sachlich saubere, datengetriebene LV-Erzeugung
 
 Das Ziel ist nicht, statische Paketdateien vollständig zu entfernen, sondern die fachlichen Aussagen aus der Bibliothek und den positionenbasierten Daten sauber miteinander zu verbinden.
 
-## 9. Rolle der modularen LV-Bibliothek
+## 9. Positionsgenauer Modus und Bibliotheks-Mapping
+
+Der produktive Export unterscheidet seit dem aktuellen Stand zwischen zwei Modi:
+
+- positionsgenauer Modus: aktiv, sobald positive Positionen aus `kalkulation.paketSummen[*].positionen` vorliegen
+- Legacy-Modus: nur aktiv, wenn keine passende Positionsstruktur verfügbar ist
+
+Im positionsgenauen Modus gelten die folgenden Regeln:
+
+- nur Mengen > 0 werden berücksichtigt
+- die technische Kontextprüfung erfolgt aus `technischeParameter`, `projekt` und `aufzugstyp` / `projektart`
+- die Zuordnung läuft auf bestätigte Bibliotheks-IDs
+- gleiche Ziel-LV-ID werden dedupliziert
+- nicht bekannte Positionen verbleiben als `open`
+- kein statischer Paket-Fallback mehr innerhalb neuer Components-Exporte
+- kein Seil-/MRL-Fallback bei Hydraulik
+
+Bestätigte Mappings:
+
+- `hydraulikschlauch` + `hydraulikoel` → `LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL`
+- `steuerung` → `LV_12_02_STEUERUNG`
+- `fahrkorbtableau` → `LV_10_20_FAHRKORBTABLEAU_VERTIKAL`
+- `aussenruftableau` → `LV_11_16_BEFEHLSGEBER_AUSSENRUF`
+- `standanzeige` → `LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN`
+- `schachtbeleuchtung` → `LV_09_02_SCHACHTBELEUCHTUNG`
+- `kabelkanaele` → `LV_09_01_SCHACHTINSTALLATION_ELEKTRO`
+- `anstrich_schachtgrube` → `LV_07_05_MALERARBEITEN_SCHACHTGRUBE`
+- `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` bei `projektart = Teilmodernisierung`
+- `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` bei `projektart = Teilmodernisierung`
+
+Offen bleiben:
+
+- `maschine_standardrahmen`
+- `tuerfuehrungen`
+- `tuerlaufrollen`
+- `tuerkontakte`
+- `tuerseile`
+- `teil_umbaukit_schiebetueren`
+
+Die Legacy-Abgrenzung ist bewusst und technisch sauber: Wenn kein neues Components-Export mit passender Positionsbasis vorliegt, kann die bisherige statische LV-Logik weiterverwendet werden. Bei einem echten Components-Export mit positiven Positionen ist dieser statische Fallback jedoch nicht mehr erlaubt.
+
+## 10. Rolle der modularen LV-Bibliothek
 
 Die modulare LV-Bibliothek unter `docs` ist der fachliche Referenzbestand für zukünftige LV-Texterzeugung:
 

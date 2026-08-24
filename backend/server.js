@@ -1540,6 +1540,341 @@ function extractAktiveSelektionen(query = {}) {
   };
 }
 
+const POSITION_MAPPING_RULES = Object.freeze([
+  {
+    groupKey: 'hydraulik-antrieb',
+    componentsIds: ['hydraulikschlauch', 'hydraulikoel'],
+    bibliotheksId: 'LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL',
+    staticEntryId: 'antrieb',
+    status: 'mapped',
+    technicalCondition: (technical) => normalizeToken(technical?.aufzugstyp || '') === 'hydraulik',
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'steuerung-gesamt',
+    componentsIds: ['steuerung'],
+    bibliotheksId: 'LV_12_02_STEUERUNG',
+    staticEntryId: 'steuerung',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'fahrkorbtableau',
+    componentsIds: ['fahrkorbtableau'],
+    bibliotheksId: 'LV_10_20_FAHRKORBTABLEAU_VERTIKAL',
+    staticEntryId: 'steuerung',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'aussenruftableau',
+    componentsIds: ['aussenruftableau'],
+    bibliotheksId: 'LV_11_16_BEFEHLSGEBER_AUSSENRUF',
+    staticEntryId: 'steuerung',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'standanzeige',
+    componentsIds: ['standanzeige'],
+    bibliotheksId: 'LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN',
+    staticEntryId: 'steuerung',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'schachtbeleuchtung',
+    componentsIds: ['schachtbeleuchtung'],
+    bibliotheksId: 'LV_09_02_SCHACHTBELEUCHTUNG',
+    staticEntryId: 'steuerung',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'kabelkanaele',
+    componentsIds: ['kabelkanaele'],
+    bibliotheksId: 'LV_09_01_SCHACHTINSTALLATION_ELEKTRO',
+    staticEntryId: 'steuerung',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'schachtgrube-anstrich',
+    componentsIds: ['anstrich_schachtgrube'],
+    bibliotheksId: 'LV_07_05_MALERARBEITEN_SCHACHTGRUBE',
+    staticEntryId: 'abnahme',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'pvi-teilmodernisierung',
+    componentsIds: ['zues_kosten_vorpruefung', 'zues_kosten_abnahme', 'zues_begleitung_durch_an_aufzug', 'pruefgewichte'],
+    bibliotheksId: 'LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI',
+    staticEntryId: 'abnahme',
+    status: 'mapped',
+    technicalCondition: (technical) => normalizeToken(technical?.projektart || '') === 'teilmodernisierung',
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'transport-teilmodernisierung',
+    componentsIds: ['transport_allgemein_baustelle_lager'],
+    bibliotheksId: 'LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG',
+    staticEntryId: 'abnahme',
+    status: 'mapped',
+    technicalCondition: (technical) => normalizeToken(technical?.projektart || '') === 'teilmodernisierung',
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'open-aggregate',
+    componentsIds: ['maschine_standardrahmen'],
+    bibliotheksId: null,
+    staticEntryId: null,
+    status: 'open',
+    technicalCondition: () => true,
+    canRemainOpen: true,
+  },
+  {
+    groupKey: 'open-fahrschacht',
+    componentsIds: ['tuerfuehrungen', 'tuerlaufrollen', 'tuerkontakte', 'tuerseile'],
+    bibliotheksId: null,
+    staticEntryId: null,
+    status: 'open',
+    technicalCondition: () => true,
+    canRemainOpen: true,
+  },
+  {
+    groupKey: 'open-fahrkorb',
+    componentsIds: ['teil_umbaukit_schiebetueren'],
+    bibliotheksId: null,
+    staticEntryId: null,
+    status: 'open',
+    technicalCondition: () => true,
+    canRemainOpen: true,
+  },
+]);
+
+function parseStructuredPayload(value) {
+  if (!value) {
+    return null;
+  }
+
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value);
+      return parsed && typeof parsed === 'object' ? parsed : null;
+    } catch {
+      return null;
+    }
+  }
+
+  return value && typeof value === 'object' ? value : null;
+}
+
+function readPositiveComponentsFromQuery(query = {}) {
+  const payload = parseStructuredPayload(query.payload) || parseStructuredPayload(query.data) || {};
+  const kalkulation = parseStructuredPayload(query.kalkulation) || payload?.kalkulation || {};
+  const paketSummen = Array.isArray(kalkulation.paketSummen) ? kalkulation.paketSummen : (Array.isArray(payload?.kalkulation?.paketSummen) ? payload.kalkulation.paketSummen : []);
+  const positives = [];
+
+  for (const paket of paketSummen) {
+    if (!paket || typeof paket !== 'object') {
+      continue;
+    }
+
+    const positionen = Array.isArray(paket.positionen) ? paket.positionen : [];
+    for (const position of positionen) {
+      if (!position || typeof position !== 'object') {
+        continue;
+      }
+
+      const rawMenge = position.anzahl ?? position.menge ?? position.qty ?? position.anzahlPos ?? position.anzahl_positiv;
+      const menge = Number(rawMenge);
+      if (!Number.isFinite(menge) || menge <= 0) {
+        continue;
+      }
+
+      const id = normalizeToken(position.id || position.name || position.key || position.bezeichnung || '');
+      if (!id) {
+        continue;
+      }
+
+      positives.push({
+        id,
+        paket: normalizeToken(paket.paket || position.paket || ''),
+        bezeichnung: String(position.bezeichnung || position.name || position.id || '').trim(),
+        menge,
+        einheit: String(position.einheit || '').trim() || 'Stk',
+      });
+    }
+  }
+
+  return positives;
+}
+
+function readTechnischeKontext(query = {}) {
+  const payload = parseStructuredPayload(query.payload) || parseStructuredPayload(query.data) || {};
+  const technikSource = parseStructuredPayload(query.technik_json) || parseStructuredPayload(query.technischeParameter_json) || parseStructuredPayload(query.technischeDaten_json) || payload?.technischeParameter || payload?.technik || {};
+  const direct = {
+    aufzugstyp: query.aufzugstyp || query.aufzugstypText || query.aufzugstyp_name || (typeof payload?.technischeParameter?.aufzugstyp === 'string' ? payload.technischeParameter.aufzugstyp : ''),
+    antriebTyp: query.antriebTyp || query.antriebtyp || (typeof payload?.technischeParameter?.antriebTyp === 'string' ? payload.technischeParameter.antriebTyp : ''),
+    projektart: query.projektart || query.projektArt || (typeof payload?.projekt?.projektart === 'string' ? payload.projekt.projektart : ''),
+  };
+
+  return {
+    ...direct,
+    ...technikSource,
+  };
+}
+
+function dedupeMappingEntries(entries = []) {
+  const seen = new Set();
+
+  return entries.filter((entry) => {
+    const key = entry?.bibliotheksId || entry?.groupKey || entry?.staticEntryId || JSON.stringify(entry?.componentsIds || []);
+    if (!key || seen.has(key)) {
+      return false;
+    }
+
+    seen.add(key);
+    return true;
+  });
+}
+
+function buildPositionMappingReport(query = {}) {
+  const positives = readPositiveComponentsFromQuery(query);
+  const technical = readTechnischeKontext(query);
+  const byId = new Map();
+
+  for (const position of positives) {
+    const existing = byId.get(position.id);
+    if (!existing || position.menge > existing.menge) {
+      byId.set(position.id, position);
+    }
+  }
+
+  const mapped = [];
+  const open = [];
+
+  for (const rule of POSITION_MAPPING_RULES) {
+    const hasMatch = rule.componentsIds.some((id) => byId.has(id));
+    if (!hasMatch) {
+      continue;
+    }
+
+    const matches = rule.componentsIds.filter((id) => byId.has(id));
+    if (rule.status === 'mapped') {
+      if (!rule.technicalCondition(technical)) {
+        continue;
+      }
+      mapped.push({
+        componentsIds: matches,
+        bibliotheksId: rule.bibliotheksId,
+        staticEntryId: rule.staticEntryId,
+        groupKey: rule.groupKey,
+        status: 'mapped',
+      });
+      continue;
+    }
+
+    open.push({
+      componentsIds: matches,
+      bibliotheksId: null,
+      staticEntryId: null,
+      groupKey: rule.groupKey,
+      status: 'open',
+    });
+  }
+
+  return {
+    technical,
+    positives,
+    mapped: dedupeMappingEntries(mapped),
+    open: dedupeMappingEntries(open),
+  };
+}
+
+function resolveMappedStaticLvEntries(query = {}, lvEntries = []) {
+  const mappingReport = buildPositionMappingReport(query);
+  const mappedEntries = mappingReport.mapped || [];
+  const mappedIds = new Set(mappedEntries.map((entry) => entry.staticEntryId).filter(Boolean));
+  if (mappingReport.positives.length > 0 && (!mappedEntries.length || mappedIds.size === 0)) {
+    return [];
+  }
+
+  if (!mappedEntries.length || mappedIds.size === 0) {
+    return lvEntries;
+  }
+
+  const staticLookup = {
+    steuerung: { id: normalizeToken('steuerung'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'steuerung')?.lv || null },
+    antrieb: { id: normalizeToken('antrieb'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'antrieb')?.lv || null },
+    abnahme: { id: normalizeToken('abnahme'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'abnahme')?.lv || null },
+  };
+
+  const selected = [];
+  const order = ['steuerung', 'antrieb', 'abnahme'];
+  const sameExportPositionMode = mappingReport.positives.length > 0;
+
+  for (const key of order) {
+    const entry = staticLookup[key];
+    if (!entry || !entry.lv) {
+      continue;
+    }
+
+    if (sameExportPositionMode && key === 'antrieb') {
+      continue;
+    }
+
+    const mappedRule = mappedEntries.some((item) => item.staticEntryId === key);
+    if (mappedRule) {
+      selected.push({ id: entry.id, titel: String(entry.lv?.titel || key), lv: entry.lv, force: true });
+    }
+  }
+
+  return selected.length > 0 ? selected : lvEntries;
+}
+
+function resolveLegacyLvEntriesFromMapping(query = {}, lvEntries = []) {
+  const mappingReport = buildPositionMappingReport(query);
+  const mappedIds = new Set(mappingReport.mapped.map((entry) => entry.staticEntryId).filter(Boolean));
+  if (!mappingReport.mapped.length || mappedIds.size === 0) {
+    return lvEntries;
+  }
+
+  const staticLookup = {
+    steuerung: { id: normalizeToken('steuerung'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'steuerung')?.lv || null },
+    antrieb: { id: normalizeToken('antrieb'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'antrieb')?.lv || null },
+    abnahme: { id: normalizeToken('abnahme'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'abnahme')?.lv || null },
+  };
+
+  const selected = [];
+  const order = ['steuerung', 'antrieb', 'abnahme'];
+  const sameExportPositionMode = mappingReport.positives.length > 0;
+
+  for (const key of order) {
+    const entry = staticLookup[key];
+    if (!entry || !entry.lv) {
+      continue;
+    }
+    if (sameExportPositionMode && key === 'antrieb') {
+      continue;
+    }
+    const mappedRule = mappingReport.mapped.some((item) => item.staticEntryId === key);
+    if (mappedRule) {
+      selected.push({ id: entry.id, titel: String(entry.lv?.titel || key), lv: entry.lv, force: true });
+    }
+  }
+
+  return selected.length > 0 ? selected : lvEntries;
+}
+
 async function createBoQDocxBuffer(query = {}) {
   const steuerung = loadAndValidateLv('steuerung.json');
   const antrieb = loadAndValidateLv('antrieb.json');
@@ -1570,6 +1905,21 @@ async function createBoQDocxBuffer(query = {}) {
       const bundleAktiv = bundleKeys.some((key) => aktiveBundles.has(key));
       return paketAktiv || bundleAktiv;
     });
+
+  const mappingReport = buildPositionMappingReport(query);
+  const hasPositivePositionData = mappingReport.positives.length > 0;
+  const shouldUsePositionMapping =
+    query.usePositionMapping === true ||
+    query.usePositionMapping === 'true' ||
+    query.usePositionMapping === '1' ||
+    hasPositivePositionData;
+
+  if (shouldUsePositionMapping) {
+    const mappedEntries = resolveMappedStaticLvEntries(query, lvEntries);
+    if (mappedEntries.length > 0) {
+      lvEntries.splice(0, lvEntries.length, ...mappedEntries);
+    }
+  }
 
   // Reihenfolge-Regel: Steuerung immer zuerst, Abnahme immer zuletzt, alles andere dazwischen.
   const rankMap = { steuerung: 0, abnahme: 2 };
@@ -1745,6 +2095,21 @@ function getWordExportLvEntries(query = {}) {
       const bundleAktiv = bundleKeys.some((key) => aktiveBundles.has(key));
       return paketAktiv || bundleAktiv;
     });
+
+  const mappingReport = buildPositionMappingReport(query);
+  const hasPositivePositionData = mappingReport.positives.length > 0;
+  const shouldUsePositionMapping =
+    query.usePositionMapping === true ||
+    query.usePositionMapping === 'true' ||
+    query.usePositionMapping === '1' ||
+    hasPositivePositionData;
+
+  if (shouldUsePositionMapping) {
+    const mappedEntries = resolveMappedStaticLvEntries(query, lvEntries);
+    if (mappedEntries.length > 0 || hasPositivePositionData) {
+      return mappedEntries;
+    }
+  }
 
   // Reihenfolge-Regel: Steuerung immer zuerst, Abnahme immer zuletzt, alles andere dazwischen.
   lvEntries.sort((a, b) => {
