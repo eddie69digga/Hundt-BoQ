@@ -224,6 +224,44 @@ WICHTIG
 - Du kommunizierst dies klar und eindeutig
 
 ----------------------------------------
+TERMINAL / AUTO-APPROVAL / WORKSPACE-SICHERHEIT
+----------------------------------------
+
+GILT VERBINDLICH FÜR ALLE ZUKÜNFTIGEN ARBEITEN IN DIESEM WORKSPACE.
+
+Workspace-Grenze:
+- Alle Projektarbeiten erfolgen innerhalb von: C:\Users\Administrator\OneDrive\Programmieren Test_reload_online
+- Keine absichtlichen Schreibzugriffe außerhalb dieses Workspace.
+- Keine temporären Arbeits- oder Analyse-Dateien außerhalb dieses Workspace erzeugen.
+- Insbesondere keine Hilfsdateien unter %TEMP%, AppData, C:\Users\Administrator\.copilot\... oder anderen Verzeichnissen außerhalb des Workspace.
+- Wenn eine Hilfsdatei erforderlich ist: innerhalb des jeweiligen Projektordners, vorzugsweise in einem passenden tmp- oder Projekt-Unterordner anlegen.
+
+Shell:
+- Wir arbeiten unter Windows mit PowerShell.
+
+Python im Terminal:
+- Für Python ausschließlich die Form `python -c "..."` verwenden.
+- Nicht verwenden: PowerShell-Here-Strings, `@' ... '@ | python -`, Bash-Heredocs, `python - <<'PY'`, vorgeschaltete PowerShell-Variablen wie `$path=...; python ...` und andere abweichende Python-Aufrufformen.
+- Längere Analysen nach Möglichkeit als einen einzigen `python -c "..."`-Aufruf formulieren.
+- Wenn ein benötigter Schritt mit `python -c` nicht sinnvoll möglich ist: nicht selbstständig eine neue Terminal-Syntax verwenden; kurz erklären, warum; erst danach auf Freigabe warten.
+
+Git-Aufrufe:
+- Für Git möglichst die bereits freigegebenen Standardformen verwenden: `git status`, `git diff`, `git log`, `git add`, `git commit`, `git push`.
+- Keine unnötigen alternativen Aufrufformen erzeugen, wenn die Standardform ausreicht.
+
+Genehmigungen:
+- Terminalbefehle so formulieren, dass sie zu den bestehenden Workspace-Auto-Approval-Regeln passen.
+- Nicht bei jeder Analyse eine neue Befehlssyntax erfinden, die erneut eine Genehmigung auslöst.
+- Wenn ein notwendiger Schritt mit den freigegebenen Formen nicht möglich ist:
+  1. nicht eigenständig eine neue Befehlsform verwenden,
+  2. kurz erklären, warum,
+  3. erst danach auf eine Freigabe warten.
+
+Sicherheit:
+- Keine Passwörter, Tokens, Secrets oder Zugangsdaten im Klartext ausgeben.
+- Die bestehende Sicherheitsgrenze für Schreibzugriffe außerhalb des Workspace bleibt erhalten.
+
+----------------------------------------
 PROMPT-STRUKTUR (BLEIBT UNVERÄNDERT)
 ----------------------------------------
 
