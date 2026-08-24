@@ -1540,12 +1540,18 @@ function extractAktiveSelektionen(query = {}) {
   };
 }
 
+// contentSource: 'static' => Position wird aus dem vorhandenen statischen Paket (steuerung.json /
+// abnahme.json) abgedeckt, dessen Module diesen Bibliotheks-Baustein bereits real enthalten.
+// contentSource: 'bibliothek' => Es existiert KEIN passendes Modul in den statischen Paketen
+// (insbesondere: antrieb.json enthaelt nur den Seil-/MRL-Text und darf hierfuer nicht verwendet
+// werden). Der Baustein wird stattdessen direkt aus backend/lv/bibliothek.json aufgeloest.
 const POSITION_MAPPING_RULES = Object.freeze([
   {
     groupKey: 'hydraulik-antrieb',
     componentsIds: ['hydraulikschlauch', 'hydraulikoel'],
     bibliotheksId: 'LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL',
-    staticEntryId: 'antrieb',
+    staticEntryId: null,
+    contentSource: 'bibliothek',
     status: 'mapped',
     technicalCondition: (technical) => normalizeToken(technical?.aufzugstyp || '') === 'hydraulik',
     canRemainOpen: false,
@@ -1555,6 +1561,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['steuerung'],
     bibliotheksId: 'LV_12_02_STEUERUNG',
     staticEntryId: 'steuerung',
+    contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
     canRemainOpen: false,
@@ -1564,6 +1571,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['fahrkorbtableau'],
     bibliotheksId: 'LV_10_20_FAHRKORBTABLEAU_VERTIKAL',
     staticEntryId: 'steuerung',
+    contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
     canRemainOpen: false,
@@ -1573,6 +1581,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['aussenruftableau'],
     bibliotheksId: 'LV_11_16_BEFEHLSGEBER_AUSSENRUF',
     staticEntryId: 'steuerung',
+    contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
     canRemainOpen: false,
@@ -1582,6 +1591,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['standanzeige'],
     bibliotheksId: 'LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN',
     staticEntryId: 'steuerung',
+    contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
     canRemainOpen: false,
@@ -1591,6 +1601,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['schachtbeleuchtung'],
     bibliotheksId: 'LV_09_02_SCHACHTBELEUCHTUNG',
     staticEntryId: 'steuerung',
+    contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
     canRemainOpen: false,
@@ -1600,6 +1611,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['kabelkanaele'],
     bibliotheksId: 'LV_09_01_SCHACHTINSTALLATION_ELEKTRO',
     staticEntryId: 'steuerung',
+    contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
     canRemainOpen: false,
@@ -1608,7 +1620,8 @@ const POSITION_MAPPING_RULES = Object.freeze([
     groupKey: 'schachtgrube-anstrich',
     componentsIds: ['anstrich_schachtgrube'],
     bibliotheksId: 'LV_07_05_MALERARBEITEN_SCHACHTGRUBE',
-    staticEntryId: 'abnahme',
+    staticEntryId: null,
+    contentSource: 'bibliothek',
     status: 'mapped',
     technicalCondition: () => true,
     canRemainOpen: false,
@@ -1618,6 +1631,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['zues_kosten_vorpruefung', 'zues_kosten_abnahme', 'zues_begleitung_durch_an_aufzug', 'pruefgewichte'],
     bibliotheksId: 'LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI',
     staticEntryId: 'abnahme',
+    contentSource: 'static',
     status: 'mapped',
     technicalCondition: (technical) => normalizeToken(technical?.projektart || '') === 'teilmodernisierung',
     canRemainOpen: false,
@@ -1626,7 +1640,8 @@ const POSITION_MAPPING_RULES = Object.freeze([
     groupKey: 'transport-teilmodernisierung',
     componentsIds: ['transport_allgemein_baustelle_lager'],
     bibliotheksId: 'LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG',
-    staticEntryId: 'abnahme',
+    staticEntryId: null,
+    contentSource: 'bibliothek',
     status: 'mapped',
     technicalCondition: (technical) => normalizeToken(technical?.projektart || '') === 'teilmodernisierung',
     canRemainOpen: false,
@@ -1777,6 +1792,7 @@ function buildPositionMappingReport(query = {}) {
         componentsIds: matches,
         bibliotheksId: rule.bibliotheksId,
         staticEntryId: rule.staticEntryId,
+        contentSource: rule.contentSource,
         groupKey: rule.groupKey,
         status: 'mapped',
       });
@@ -1800,79 +1816,114 @@ function buildPositionMappingReport(query = {}) {
   };
 }
 
+let bibliothekCache = null;
+
+function loadBibliothek() {
+  if (bibliothekCache) {
+    return bibliothekCache;
+  }
+
+  const bibliothekPath = path.join(__dirname, 'lv', 'bibliothek.json');
+  try {
+    bibliothekCache = JSON.parse(fs.readFileSync(bibliothekPath, 'utf8'));
+  } catch {
+    bibliothekCache = {};
+  }
+
+  return bibliothekCache;
+}
+
+// Baut aus einem Bibliotheks-Baustein (backend/lv/bibliothek.json) ein LV-Objekt im selben
+// Format wie die statischen Paketdateien, damit buildPositionBlock() es unveraendert rendern kann.
+function resolveBibliothekEntryAsLv(bibliotheksId) {
+  const bibliothek = loadBibliothek();
+  const entry = bibliothek[bibliotheksId];
+  if (!entry || !entry.titel || !entry.text) {
+    return null;
+  }
+
+  return {
+    id: normalizeToken(bibliotheksId),
+    titel: entry.titel,
+    mengeneinheit: 'Stk',
+    module: [
+      {
+        id: normalizeToken(bibliotheksId),
+        titel: entry.titel,
+        typ: 'pflicht',
+        text: entry.text,
+      },
+    ],
+  };
+}
+
+// Baut aus den bestaetigten Mappingtreffern (mappingReport.mapped) die tatsaechliche
+// Word-Export-Auswahl auf. Jede bestaetigte Bibliotheks-ID wird entweder ueber ein vorhandenes
+// statisches Paket (steuerung/abnahme) oder ueber einen dedizierten Bibliotheksbaustein
+// (backend/lv/bibliothek.json) aufgeloest. antrieb.json (Seil-/MRL-Text) wird im
+// positionsgenauen Modus grundsaetzlich nicht verwendet - auch nicht ersatzweise.
 function resolveMappedStaticLvEntries(query = {}, lvEntries = []) {
   const mappingReport = buildPositionMappingReport(query);
   const mappedEntries = mappingReport.mapped || [];
-  const mappedIds = new Set(mappedEntries.map((entry) => entry.staticEntryId).filter(Boolean));
-  if (mappingReport.positives.length > 0 && (!mappedEntries.length || mappedIds.size === 0)) {
+  const sameExportPositionMode = mappingReport.positives.length > 0;
+
+  if (!sameExportPositionMode) {
+    return lvEntries;
+  }
+
+  if (!mappedEntries.length) {
     return [];
   }
 
-  if (!mappedEntries.length || mappedIds.size === 0) {
-    return lvEntries;
-  }
-
   const staticLookup = {
-    steuerung: { id: normalizeToken('steuerung'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'steuerung')?.lv || null },
-    antrieb: { id: normalizeToken('antrieb'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'antrieb')?.lv || null },
-    abnahme: { id: normalizeToken('abnahme'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'abnahme')?.lv || null },
+    steuerung: lvEntries.find((entry) => normalizeToken(entry.id) === 'steuerung')?.lv || null,
+    abnahme: lvEntries.find((entry) => normalizeToken(entry.id) === 'abnahme')?.lv || null,
   };
 
   const selected = [];
-  const order = ['steuerung', 'antrieb', 'abnahme'];
-  const sameExportPositionMode = mappingReport.positives.length > 0;
+  const addedStaticIds = new Set();
+  const addedBibliotheksIds = new Set();
 
-  for (const key of order) {
-    const entry = staticLookup[key];
-    if (!entry || !entry.lv) {
+  for (const entry of mappedEntries) {
+    if (entry.contentSource === 'bibliothek') {
+      if (!entry.bibliotheksId || addedBibliotheksIds.has(entry.bibliotheksId)) {
+        continue;
+      }
+
+      const bibliothekLv = resolveBibliothekEntryAsLv(entry.bibliotheksId);
+      if (!bibliothekLv) {
+        // Resolver findet keinen Baustein: Position bleibt bewusst ohne erfundenen Ersatztext.
+        continue;
+      }
+
+      selected.push({ id: normalizeToken(entry.bibliotheksId), titel: bibliothekLv.titel, lv: bibliothekLv, force: true });
+      addedBibliotheksIds.add(entry.bibliotheksId);
       continue;
     }
 
-    if (sameExportPositionMode && key === 'antrieb') {
+    const staticKey = entry.staticEntryId;
+    if (!staticKey || staticKey === 'antrieb' || addedStaticIds.has(staticKey) || !staticLookup[staticKey]) {
       continue;
     }
 
-    const mappedRule = mappedEntries.some((item) => item.staticEntryId === key);
-    if (mappedRule) {
-      selected.push({ id: entry.id, titel: String(entry.lv?.titel || key), lv: entry.lv, force: true });
-    }
+    selected.push({ id: staticKey, titel: String(staticLookup[staticKey]?.titel || staticKey), lv: staticLookup[staticKey], force: true });
+    addedStaticIds.add(staticKey);
   }
 
-  return selected.length > 0 ? selected : lvEntries;
-}
-
-function resolveLegacyLvEntriesFromMapping(query = {}, lvEntries = []) {
-  const mappingReport = buildPositionMappingReport(query);
-  const mappedIds = new Set(mappingReport.mapped.map((entry) => entry.staticEntryId).filter(Boolean));
-  if (!mappingReport.mapped.length || mappedIds.size === 0) {
-    return lvEntries;
-  }
-
-  const staticLookup = {
-    steuerung: { id: normalizeToken('steuerung'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'steuerung')?.lv || null },
-    antrieb: { id: normalizeToken('antrieb'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'antrieb')?.lv || null },
-    abnahme: { id: normalizeToken('abnahme'), lv: lvEntries.find((entry) => normalizeToken(entry.id) === 'abnahme')?.lv || null },
-  };
-
-  const selected = [];
-  const order = ['steuerung', 'antrieb', 'abnahme'];
-  const sameExportPositionMode = mappingReport.positives.length > 0;
-
-  for (const key of order) {
-    const entry = staticLookup[key];
-    if (!entry || !entry.lv) {
-      continue;
+  // Reihenfolge-Regel: Steuerung immer zuerst, Abnahme immer zuletzt, alles andere dazwischen.
+  const rankMap = { steuerung: 0, abnahme: 2 };
+  selected.sort((a, b) => {
+    const rankA = Object.hasOwn(rankMap, a.id) ? rankMap[a.id] : 1;
+    const rankB = Object.hasOwn(rankMap, b.id) ? rankMap[b.id] : 1;
+    const rankDiff = rankA - rankB;
+    if (rankDiff !== 0) {
+      return rankDiff;
     }
-    if (sameExportPositionMode && key === 'antrieb') {
-      continue;
-    }
-    const mappedRule = mappingReport.mapped.some((item) => item.staticEntryId === key);
-    if (mappedRule) {
-      selected.push({ id: entry.id, titel: String(entry.lv?.titel || key), lv: entry.lv, force: true });
-    }
-  }
 
-  return selected.length > 0 ? selected : lvEntries;
+    return a.titel.localeCompare(b.titel, 'de', { sensitivity: 'base' });
+  });
+
+  return selected;
 }
 
 async function createBoQDocxBuffer(query = {}) {
@@ -1916,9 +1967,7 @@ async function createBoQDocxBuffer(query = {}) {
 
   if (shouldUsePositionMapping) {
     const mappedEntries = resolveMappedStaticLvEntries(query, lvEntries);
-    if (mappedEntries.length > 0) {
-      lvEntries.splice(0, lvEntries.length, ...mappedEntries);
-    }
+    lvEntries.splice(0, lvEntries.length, ...mappedEntries);
   }
 
   // Reihenfolge-Regel: Steuerung immer zuerst, Abnahme immer zuletzt, alles andere dazwischen.
@@ -2687,7 +2736,24 @@ app.get('/api/xl-exports/:exportId', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`BoQ Backend laeuft auf Port ${port}`);
-});
+// require.main-Guard: Beim direkten Start (node server.js) laeuft der Server normal.
+// Beim require() aus einem Testskript (z. B. backend/test/mapping-contract.test.js)
+// wird kein Port geoeffnet; stattdessen stehen die exportierten Funktionen fuer
+// reproduzierbare Contract-Tests zur Verfuegung.
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`BoQ Backend laeuft auf Port ${port}`);
+  });
+}
+
+module.exports = {
+  app,
+  buildPositionMappingReport,
+  resolveMappedStaticLvEntries,
+  resolveBibliothekEntryAsLv,
+  loadBibliothek,
+  getWordExportLvEntries,
+  createBoQDocxBuffer,
+  POSITION_MAPPING_RULES,
+};
 

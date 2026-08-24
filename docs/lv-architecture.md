@@ -177,18 +177,22 @@ Im positionsgenauen Modus gelten die folgenden Regeln:
 - kein statischer Paket-Fallback mehr innerhalb neuer Components-Exporte
 - kein Seil-/MRL-Fallback bei Hydraulik
 
-Bestätigte Mappings:
+Bestätigte Mappings (`bibliotheksId` → `contentSource`):
 
-- `hydraulikschlauch` + `hydraulikoel` → `LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL`
-- `steuerung` → `LV_12_02_STEUERUNG`
-- `fahrkorbtableau` → `LV_10_20_FAHRKORBTABLEAU_VERTIKAL`
-- `aussenruftableau` → `LV_11_16_BEFEHLSGEBER_AUSSENRUF`
-- `standanzeige` → `LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN`
-- `schachtbeleuchtung` → `LV_09_02_SCHACHTBELEUCHTUNG`
-- `kabelkanaele` → `LV_09_01_SCHACHTINSTALLATION_ELEKTRO`
-- `anstrich_schachtgrube` → `LV_07_05_MALERARBEITEN_SCHACHTGRUBE`
-- `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` bei `projektart = Teilmodernisierung`
-- `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` bei `projektart = Teilmodernisierung`
+- `hydraulikschlauch` + `hydraulikoel` → `LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL` (`bibliothek`)
+- `steuerung` → `LV_12_02_STEUERUNG` (`static`, Paket `steuerung.json`)
+- `fahrkorbtableau` → `LV_10_20_FAHRKORBTABLEAU_VERTIKAL` (`static`, Paket `steuerung.json`)
+- `aussenruftableau` → `LV_11_16_BEFEHLSGEBER_AUSSENRUF` (`static`, Paket `steuerung.json`)
+- `standanzeige` → `LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN` (`static`, Paket `steuerung.json`)
+- `schachtbeleuchtung` → `LV_09_02_SCHACHTBELEUCHTUNG` (`static`, Paket `steuerung.json`)
+- `kabelkanaele` → `LV_09_01_SCHACHTINSTALLATION_ELEKTRO` (`static`, Paket `steuerung.json`)
+- `anstrich_schachtgrube` → `LV_07_05_MALERARBEITEN_SCHACHTGRUBE` (`bibliothek`)
+- `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` (`static`, Paket `abnahme.json`) bei `projektart = Teilmodernisierung`
+- `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` (`bibliothek`) bei `projektart = Teilmodernisierung`
+
+`contentSource: 'static'` bedeutet: Der Bibliotheks-Baustein ist bereits real als Modul in `steuerung.json` bzw. `abnahme.json` enthalten und wird ueber das gesamte statische Paket ausgegeben.
+
+`contentSource: 'bibliothek'` bedeutet: Es existiert KEIN passendes Modul in den statischen Paketen (insbesondere `antrieb.json` enthaelt ausschliesslich den Seil-/MRL-Text und darf hierfuer nicht verwendet werden). Der Baustein wird stattdessen dediziert aus `backend/lv/bibliothek.json` aufgeloest und als eigene LV-Position ausgegeben.
 
 Offen bleiben:
 
@@ -199,9 +203,45 @@ Offen bleiben:
 - `tuerseile`
 - `teil_umbaukit_schiebetueren`
 
-Die Legacy-Abgrenzung ist bewusst und technisch sauber: Wenn kein neues Components-Export mit passender Positionsbasis vorliegt, kann die bisherige statische LV-Logik weiterverwendet werden. Bei einem echten Components-Export mit positiven Positionen ist dieser statische Fallback jedoch nicht mehr erlaubt.
+Die Legacy-Abgrenzung ist bewusst und technisch sauber: Wenn kein neues Components-Export mit passender Positionsbasis vorliegt, kann die bisherige statische LV-Logik weiterverwendet werden. Bei einem echten Components-Export mit positiven Positionen ist dieser statische Fallback jedoch nicht mehr erlaubt (auch nicht als leerer Rueckfall, wenn eine Bibliotheks-ID sich nicht aufloesen laesst).
 
-## 10. Rolle der modularen LV-Bibliothek
+## 9a. Bibliotheksresolver (`backend/lv/bibliothek.json`)
+
+Fuer Bibliotheks-IDs ohne passendes Modul in den statischen Paketen (`LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL`, `LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG`) existiert ein dedizierter Bibliotheksresolver:
+
+- Quelle: `docs/260824_LV_Bibliothek_Components_modular.docx` (Titel + Fliesstext je Bibliotheks-ID, wortgetreu uebernommen, nicht umformuliert).
+- Kompilat: `backend/lv/bibliothek.json` (Objekt keyed nach Bibliotheks-ID mit `titel` und `text`).
+- Zugriff im Code: `loadBibliothek()` / `resolveBibliothekEntryAsLv(bibliotheksId)` in `backend/server.js`.
+- `backend/lv/bibliothek.json` enthaelt zusaetzlich Titel/Text fuer alle 10 bestaetigten IDs (auch die `static`-Faelle), damit der Contract-Test (siehe unten) fuer jede ID eine kanonische, aus der Bibliothek stammende Referenz zum Abgleich hat - unabhaengig davon, ob der eigentliche Exporttext aus dem statischen Paket oder aus der Bibliothek stammt.
+
+Bekannter, bereits behobener Fehler: Bis zur Korrektur wurde `contentSource` zwar in den Mapping-Regeln definiert, aber beim Aufbau von `mapped` in `buildPositionMappingReport()` nicht in den Report kopiert. Dadurch griff `resolveMappedStaticLvEntries()` fuer alle Regeln implizit auf den `static`-Zweig zurueck, und `staticEntryId: null` fuehrte dazu, dass `LV_14_05`, `LV_07_05` und `LV_02_09` in der Export-Auswahl komplett fehlten (nicht durch falschen Text ersetzt, sondern schlicht nicht vorhanden). Fix: `contentSource: rule.contentSource` wird jetzt explizit in jeden `mapped`-Eintrag geschrieben.
+
+## 9b. Contract-Test-Standard (verbindlich fuer positionsgenaue LV-Exporte)
+
+Für positionsgenaue LV-Exporte gilt ab sofort ein verschärfter Teststandard. `gruen` bedeutet NICHT:
+
+- HTTP 200
+- DOCX vorhanden
+- Stichprobe (einzelne Substring-Treffer) okay
+
+`gruen` bedeutet:
+
+- vollständiger Soll-Ist-Abgleich aller bestätigten Mapping-IDs
+- offene Positionen nachvollziehbar
+- Negativliste (Seil/MRL) bestanden
+- keine erwartete gemappte Position geht verloren
+
+Umgesetzt in `backend/test/mapping-contract.test.js` (`npm test` im Verzeichnis `backend/`), geprüft in 5 Stufen gegen den realen Referenzfall Berghof (`docs/260824_Berghof_Luetjensee_Aufzug_155180_datenexport_XL (3).json`):
+
+- **Stufe A (Input):** positive Positionen aus `kalkulation.paketSummen[*].positionen` sowie technischer Kontext (`aufzugstyp = hydraulik`) werden erkannt.
+- **Stufe B (Mapping):** `buildPositionMappingReport()` liefert alle 10 bestätigten Ziel-LV-IDs in `mapped`; die 6 bewusst offenen Components-Positionen erscheinen korrekt in `open`.
+- **Stufe C (Resolution):** `resolveMappedStaticLvEntries()` löst jede der 10 IDs tatsächlich in ein Modul mit dem kanonischen Bibliotheks-Titel auf (Abgleich gegen `backend/lv/bibliothek.json`); kein `antrieb`-Eintrag (Seil/MRL) in der Auswahl.
+- **Stufe D (Export):** Steuerung und Abnahme sind in der finalen Word-Export-Auswahl enthalten.
+- **Stufe E (DOCX-Inhalt):** Das erzeugte DOCX enthält für jede der 10 IDs den kanonischen Titel als Text; die Seil-/MRL-Negativliste ist vollständig abwesend.
+
+Schlägt eine Stufe fehl, benennt der Test explizit, auf welcher Stufe der Datenpfad gebrochen ist (z. B. "STUFE C GEBROCHEN: ... nicht in aufgeloester Export-Auswahl gefunden"), statt nur pauschal "Test fehlgeschlagen" zu melden.
+
+
 
 Die modulare LV-Bibliothek unter `docs` ist der fachliche Referenzbestand für zukünftige LV-Texterzeugung:
 
@@ -248,6 +288,7 @@ Das ist erforderlich, da standardisierte Texte in den statischen LV-Paketen die 
 Projekt:
 
 - `Berghof Lütjensee / Aufzug 155180`
+- Referenzdatei: `docs/260824_Berghof_Luetjensee_Aufzug_155180_datenexport_XL (3).json`
 
 Technik:
 
@@ -258,21 +299,28 @@ Technik:
 - 2 Haltestellen
 - 2 Schachtzugänge
 - Förderhöhe 3,00 m
+- Projektart: Teilmodernisierung
 
-Bekannter Fehler:
+Status: behoben und durch `backend/test/mapping-contract.test.js` reproduzierbar abgesichert. Der zuvor bekannte Fehler (Seilantrieb / `MRL - Seil Synchron` trotz Hydraulik-Kontext) ist nicht mehr reproduzierbar; zusätzlich wurde ein zweiter, unabhängiger Fehler behoben (siehe 9a): drei bestätigte Ziel-LV-IDs (`LV_14_05`, `LV_07_05`, `LV_02_09`) fehlten in der Export-Auswahl vollständig, weil `contentSource` nicht in den Mapping-Report übernommen wurde.
 
-- Im aktuellen LV erscheint trotzdem ein Seilantrieb / `MRL - Seil Synchron`.
-
-Damit ist dieser Fall ein sauberer Referenz-Test für die Weiterentwicklung der LV-Logik. Er soll künftig sicherstellen, dass die fachliche Variante korrekt erkannt und eine passende LV-Bibliothekszuordnung gefunden wird.
+Dieser Fall bleibt der verbindliche Contract-Test für die Weiterentwicklung der LV-Logik (siehe 9b).
 
 ## 14. Offene Punkte
 
-- exakte Zuordnung von `lvPositionen` zu Bibliotheks-IDs: `offen`
-- fachliche Unterscheidung zwischen Varianten und Paketaktivitäten: `offen`
-- genaue Regel, wie 0-Mengen in der finalen LV-Erzeugung behandelt werden: `offen`
-- Mappings für Hydraulik, Seil, Steuerung, Schacht, Fahrkorb, ZÜS: `offen`
-- vollständige Integration der modularen LV-Bibliothek in den aktuellen Exportpfad: `offen`
+- fachliche Zuordnung der 6 bewusst offenen Components-Positionen (`maschine_standardrahmen`, `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren`) zu Bibliotheks-IDs: `offen`
+- vollständige Integration der modularen LV-Bibliothek für alle übrigen (noch nicht bestätigten) Bausteine: `offen`
+- Datenkonsistenz zwischen `pakete.kalkulationsEingaben` und `kalkulation.paketSummen` im Components-Export: siehe 16 (Diagnose + kleine Korrektur in Components umgesetzt)
 
 ## 15. Kurzfazit
 
-Der aktuelle Datenfluss zeigt bereits die richtigen Komponenten: Components liefert Kalkulationsdaten, BoQ verarbeitet sie und das Backend erzeugt DOCX-Exporte. Der fachliche Bruch liegt aber in der fehlenden Verknüpfung zwischen Kalkulationsstruktur und LV-Struktur. Die modulare LV-Bibliothek unter `docs` bildet den logischen nächsten Schritt für eine fachlich robuste, positionsgenaue Weiterentwicklung.
+Der aktuelle Datenfluss zeigt bereits die richtigen Komponenten: Components liefert Kalkulationsdaten, BoQ verarbeitet sie und das Backend erzeugt DOCX-Exporte. Die positionsgenaue Mappinglogik verbindet Kalkulationsstruktur und LV-Struktur für 10 bestätigte Bibliotheks-IDs; ein Contract-Test sichert diesen Zustand gegen Regressionen ab. Die modulare LV-Bibliothek unter `docs` ist als Bibliotheksresolver für Bausteine ohne statische Paketentsprechung angebunden (`backend/lv/bibliothek.json`).
+
+## 16. Diagnose: `kalkulationsEingaben` vs. `paketSummen` (Components-Export)
+
+Im Referenz-Export `(3).json` wurde festgestellt, dass `pakete.kalkulationsEingaben` positive Werte (`anzahl_fahrschacht_schiebetuer_2tlg`, `anzahl_fahrschacht_demontage_schiebetuer_2tlg`, `anzahl_fahrschacht_muz_standard`, `anzahl_fahrschacht_antrittsblech`, `anzahl_fahrschacht_zargenbeleuchtung`, jeweils `2`) enthält, die in `kalkulation.paketSummen[*].positionen` NICHT als positive Positionen erscheinen.
+
+Ursache (verifiziert über `kalkulation.letzteKalkulationsdaten.pakete.fahrschacht`, den Eingabe-Snapshot der zuletzt ausgeführten Kalkulation): Zum Zeitpunkt der letzten Berechnung standen diese 5 Felder noch auf `anzahl: 0`. Die Werte wurden danach im Frontend auf `2` geändert, ohne dass vor dem XL-Export erneut kalkuliert wurde. `paketSummen` basiert auf `status.letzteKalkulation` (dem zwischengespeicherten Ergebnis der letzten Berechnung) und war damit zum Exportzeitpunkt veraltet.
+
+Das ist kein Fehler der BoQ-Mappinglogik (diese arbeitet bewusst mit `paketSummen`), sondern ein Timing-Problem auf Components-Seite: Eingaben können nach der letzten Kalkulation geändert werden, ohne dass der Export dies erkennt oder kennzeichnet.
+
+Kleine, sichere Korrektur (Components, `01_Components_reload/frontend/index.html`, Funktion `fuehreXlExportAus`): Vor dem Aufbau des Export-Payloads wird jetzt `await bereiteKalkulationVor()` aufgerufen. Diese Funktion existiert bereits im Code (Signatur-Cache, kein unnötiger Request bei unverändertem Stand) und wird auch an anderer Stelle vor der Ergebnisanzeige verwendet. Schlägt die Kalkulation fehl, wird der Export nicht blockiert, sondern mit dem zuletzt verfügbaren Stand fortgesetzt (Warnung im Log). Damit ist sichergestellt, dass `paketSummen` beim XL-Export den aktuellen Eingabestand widerspiegelt, sofern die Kalkulation erfolgreich durchgeführt werden kann.

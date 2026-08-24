@@ -42,13 +42,15 @@ Ziel ist die Erstellung und Weiterverarbeitung von Leistungsverzeichnissen mit n
 ### Zentrale Dateien
 
 - `frontend/index.html` – UI, Import-/Render-Logik, Projekt-, Paket- und Positionsübersicht
-- `backend/server.js` – Auth, Supabase, Word-Export, LV-Lade- und -Render-Logik
+- `backend/server.js` – Auth, Supabase, Word-Export, positionsgenaue Mappinglogik, LV-Lade- und -Render-Logik
 - `backend/lv/steuerung.json` – statische Steuerungs-LV-Paketdaten
-- `backend/lv/antrieb.json` – statische Antriebs-LV-Paketdaten
+- `backend/lv/antrieb.json` – statische Antriebs-LV-Paketdaten (nur Seil-/MRL-Text; im positionsgenauen Modus nicht verwendet)
 - `backend/lv/abnahme.json` – statische Abnahme-/Messdaten-LV-Paketdaten
+- `backend/lv/bibliothek.json` – Bibliotheksresolver für Bausteine ohne statische Paketentsprechung
 - `backend/lv/vorbemerkung.txt` – Vorbemerkungstext für Export
+- `backend/test/mapping-contract.test.js` – Contract-Test (`npm test`)
 - `docs/auth-users.md` – Benutzer-/Auth-Dokumentation
-- `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (fachliche Textquelle, vorbereitet für spätere Verbindung)
+- `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (fachliche Quelle für `bibliothek.json`)
 
 ### API-Kommunikation
 
@@ -82,7 +84,8 @@ Ziel ist die Erstellung und Weiterverarbeitung von Leistungsverzeichnissen mit n
 
 - Das Backend generiert DOCX-Dateien mit `docx`.
 - Die Exporte bestehen aus Deckblatt, Projekt-/Formularseiten, technischen Daten, Vorbemerkung und LV-Abschnitten.
-- Die aktuelle Umsetzung lädt weitgehend statische LV-Paketdateien aus `backend/lv` und setzt diese zu einem Dokument zusammen.
+- Im positionsgenauen Modus setzt sich der LV-Teil aus statischen Paketmodulen (`steuerung.json`, `abnahme.json`) und dedizierten Bibliotheksbausteinen (`backend/lv/bibliothek.json`) zusammen, abhängig vom bestätigten `contentSource` jeder Bibliotheks-ID.
+- Im Legacy-Modus (keine positiven Positionsdaten) lädt die Umsetzung weiterhin die statischen LV-Paketdateien aus `backend/lv` vollständig.
 
 ## Hosting
 
@@ -133,17 +136,15 @@ Diese Strukturen sind im aktuellen Stand als Übergang zwischen Components-Daten
 
 Der aktuelle IST-Zustand ist nach Projektlage wie folgt:
 
-- Components besitzt positionsgenaue Kalkulationsdaten.
-- `lvPositionen` werden derzeit nur teilweise erzeugt bzw. genutzt.
-- BoQ verwendet beim Word-Export die positionsgenauen Daten noch nicht vollständig.
-- Das Backend lädt aktuell weitgehend statische LV-Paketdateien aus `backend/lv`.
-- Dadurch können fachlich falsche Pakettexte entstehen.
-- Beispiel: Ein Hydraulikaufzug erhält aktuell einen Seilantriebstext.
+- Components besitzt positionsgenaue Kalkulationsdaten (`kalkulation.paketSummen[*].positionen`).
+- BoQ verwendet beim Word-/X83-Export den positionsgenauen Modus, sobald positive Positionsdaten vorliegen (siehe unten).
+- Bausteine ohne passendes Modul in den statischen Paketdateien (`backend/lv/*.json`) werden über einen dedizierten Bibliotheksresolver (`backend/lv/bibliothek.json`) aufgelöst, nicht über einen erfundenen oder falschen Paketfallback.
+- Ein Hydraulikaufzug erhält dadurch keinen Seilantriebstext (`Antrieb Seil` / `MRL - Seil Synchron`) mehr; dies ist durch einen automatisierten Contract-Test abgesichert (`backend/test/mapping-contract.test.js`).
 
 Abgeleitet daraus gilt:
 
-- Die fachliche Qualität der LV-Texte hängt derzeit noch stark von den statischen Paketdateien und den vorhandenen Fallbacks ab.
-- Das ist sinnvoll für den aktuellen Stand, aber kein stabiles Endziel.
+- Die fachliche Qualität der LV-Texte für die 10 bestätigten Bibliotheks-IDs ist durch den Contract-Test gegen Regressionen abgesichert.
+- Für alle anderen (noch nicht bestätigten) Positionen gilt weiterhin der Legacy-Pfad bzw. `open`.
 
 ## Bekannter Architekturfehler
 
@@ -176,18 +177,20 @@ Im positionsgenauen Modus gilt folgende Reihenfolge:
 6. Beim neuen Components-Export wird kein statischer Gesamtpaket-Fallback mehr verwendet.
 7. Bei Hydraulik bleibt der Seil-/MRL-Fallback ausgeschlossen.
 
-Bestätigte Abbildungen:
+Bestätigte Abbildungen (`bibliotheksId` → `contentSource`):
 
-- `hydraulikschlauch` + `hydraulikoel` → `LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL`
-- `steuerung` → `LV_12_02_STEUERUNG`
-- `fahrkorbtableau` → `LV_10_20_FAHRKORBTABLEAU_VERTIKAL`
-- `aussenruftableau` → `LV_11_16_BEFEHLSGEBER_AUSSENRUF`
-- `standanzeige` → `LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN`
-- `schachtbeleuchtung` → `LV_09_02_SCHACHTBELEUCHTUNG`
-- `kabelkanaele` → `LV_09_01_SCHACHTINSTALLATION_ELEKTRO`
-- `anstrich_schachtgrube` → `LV_07_05_MALERARBEITEN_SCHACHTGRUBE`
-- `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` bei `projektart = Teilmodernisierung`
-- `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` bei `projektart = Teilmodernisierung`
+- `hydraulikschlauch` + `hydraulikoel` → `LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL` (`bibliothek`)
+- `steuerung` → `LV_12_02_STEUERUNG` (`static`)
+- `fahrkorbtableau` → `LV_10_20_FAHRKORBTABLEAU_VERTIKAL` (`static`)
+- `aussenruftableau` → `LV_11_16_BEFEHLSGEBER_AUSSENRUF` (`static`)
+- `standanzeige` → `LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN` (`static`)
+- `schachtbeleuchtung` → `LV_09_02_SCHACHTBELEUCHTUNG` (`static`)
+- `kabelkanaele` → `LV_09_01_SCHACHTINSTALLATION_ELEKTRO` (`static`)
+- `anstrich_schachtgrube` → `LV_07_05_MALERARBEITEN_SCHACHTGRUBE` (`bibliothek`)
+- `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` (`static`) bei `projektart = Teilmodernisierung`
+- `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` (`bibliothek`) bei `projektart = Teilmodernisierung`
+
+`static` = bereits reales Modul in `steuerung.json`/`abnahme.json`. `bibliothek` = kein passendes statisches Modul vorhanden; Baustein wird dediziert aus `backend/lv/bibliothek.json` aufgelöst (Quelle: `docs/260824_LV_Bibliothek_Components_modular.docx`, wortgetreu übernommen).
 
 Offen bleiben:
 
@@ -199,6 +202,14 @@ Offen bleiben:
 - `teil_umbaukit_schiebetueren`
 
 Die Legacy-Abgrenzung ist bewusst: Nur wenn keine passende Positionsstruktur vorliegt, fallen die bisherigen statischen Paketdateien aus `backend/lv` in den Fallback. Im neuen Components-Export wird dieser Fallback nicht mehr genutzt, damit fachlich falsche Texte wie `Antrieb Seil` oder `MRL - Seil Synchron` bei Hydraulik vollständig ausgeschlossen sind.
+
+## Contract-Test-Standard (verbindlich für positionsgenaue LV-Exporte)
+
+`grün` bedeutet NICHT: HTTP 200, DOCX vorhanden, Stichprobe okay.
+
+`grün` bedeutet: vollständiger Soll-Ist-Abgleich aller bestätigten Mapping-IDs, offene Positionen nachvollziehbar, Negativliste (Seil/MRL) bestanden, keine erwartete gemappte Position geht verloren.
+
+Umgesetzt in `backend/test/mapping-contract.test.js` (Ausführung: `npm test` im Verzeichnis `backend/`). Der Test prüft 5 Stufen (Input → Mapping → Resolution → Export → DOCX-Inhalt) gegen den realen Referenzfall Berghof und benennt bei einem Fehlschlag explizit, auf welcher Stufe der Datenpfad gebrochen ist. Details siehe `docs/lv-architecture.md`, Abschnitt 9b.
 
 ## Modulare LV-Bibliothek
 
@@ -217,6 +228,7 @@ Diese Bibliothek ist der geplante fachliche Basisbestand, der die statische Pake
 Projekt:
 
 - `Berghof Lütjensee / Aufzug 155180`
+- Referenzdatei: `docs/260824_Berghof_Luetjensee_Aufzug_155180_datenexport_XL (3).json`
 
 Technik:
 
@@ -227,27 +239,32 @@ Technik:
 - 2 Haltestellen
 - 2 Schachtzugänge
 - Förderhöhe 3,00 m
+- Projektart: Teilmodernisierung
 
-Bekannter Fehler:
+Status: behoben, durch `backend/test/mapping-contract.test.js` reproduzierbar abgesichert. Zwei unabhängige Fehler wurden auf dem Weg dahin behoben:
 
-- Im aktuell erzeugten LV erscheint trotzdem ein Seilantrieb / `MRL - Seil Synchron`.
+1. Der Word-Export-Button im Frontend sendete ursprünglich keine Kalkulationsdaten mit, wodurch immer der Legacy-Fallback (inkl. Seiltext) griff.
+2. `contentSource` wurde in den Mapping-Regeln definiert, aber nicht in den Mapping-Report übernommen, wodurch 3 bestätigte Bibliotheks-IDs (`LV_14_05`, `LV_07_05`, `LV_02_09`) in der Export-Auswahl komplett fehlten.
 
-Dieser Testfall ist als Referenz für die zukünftige LV-Weiterentwicklung vorgesehen. Er sollte künftig die fachlich korrekte Variante- und Mappinglogik absichern.
+Zusätzlich diagnostiziert (siehe `docs/lv-architecture.md`, Abschnitt 16): `pakete.kalkulationsEingaben` im Components-Export kann neuer sein als `kalkulation.paketSummen`, wenn nach der letzten Berechnung Eingaben geändert wurden, ohne dass vor dem Export erneut kalkuliert wurde. Kleine Korrektur in Components umgesetzt: `fuehreXlExportAus()` ruft jetzt vor dem Aufbau des Export-Payloads `bereiteKalkulationVor()` auf.
 
 ## Wichtige Dateien
 
 ### Components-Seite
 
-- Die relevanten Export-/Handoff-Stellen liegen in der Components-Anwendung außerhalb dieses BoQ-Repos.
+- Die relevanten Export-/Handoff-Stellen liegen in der Components-Anwendung außerhalb dieses BoQ-Repos (`01_Components_reload/frontend/index.html`, Funktion `fuehreXlExportAus`).
 - Für BoQ relevant ist der Exportpfad mit personenbezogener Zuordnung und der spätere Import über `username` + `export_id`.
 
 ### BoQ
 
-- `frontend/index.html` – UI und Import-/Render-Logik
-- `backend/server.js` – Auth, Supabase, DOCX-Export, statische LV-Erzeugung
-- `backend/lv/*` – aktuelle statische LV-Paketdateien
-- `docs/auth-users.md` – Auth-/Nutzer-Details
-- `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek
+- `frontend/index.html` – UI und Import-/Render-Logik; Word-Export sendet `POST` mit voller Kalkulationsstruktur im Body.
+- `backend/server.js` – Auth, Supabase, DOCX-Export, positionsgenaue Mappinglogik, Bibliotheksresolver.
+- `backend/lv/*.json` – statische LV-Paketdateien (`steuerung.json`, `antrieb.json`, `abnahme.json`).
+- `backend/lv/bibliothek.json` – Bibliotheksresolver für Bausteine ohne statische Paketentsprechung.
+- `backend/test/mapping-contract.test.js` – Contract-Test (`npm test`), 5-stufiger Soll-Ist-Abgleich gegen den Referenzfall Berghof.
+- `docs/auth-users.md` – Auth-/Nutzer-Details.
+- `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (Quelle für `bibliothek.json`).
+- `docs/260824_Berghof_Luetjensee_Aufzug_155180_datenexport_XL (3).json` – reale Referenzdatei für den Contract-Test.
 
 ## Workflow
 
@@ -255,7 +272,7 @@ Aktuell gibt es keinen Branch-/Staging-Prozess in diesem Projekt. Der Standardab
 
 1. bestehendes Projekt analysieren
 2. Änderung umsetzen
-3. Tests durchführen
+3. Tests durchführen (`npm test` in `backend/`)
 4. Projektdokumentation prüfen
 5. Commit
 6. Push auf `main`
@@ -263,20 +280,15 @@ Aktuell gibt es keinen Branch-/Staging-Prozess in diesem Projekt. Der Standardab
 
 ## Nächste fachliche Schritte
 
-Noch keine Umsetzung wurde hier ausgelöst, aber die nächsten geplanten fachlichen Schritte sind:
-
-1. Positionsgenaue Datenkette herstellen: Components-Kalkulation → positive LV-relevante Positionen → BoQ → Word
-2. 0-Mengen und Paket-Fallbacks sauber behandeln
-3. Danach modulare LV-Bibliothek anbinden
-4. Mappingregeln für Hydraulik, Seil, Steuerung, Schacht, Fahrkorb, ZÜS usw. schrittweise definieren
-5. Referenzfall Berghof Lütjensee erneut testen
+1. Fachliche Zuordnung der 6 bewusst offenen Components-Positionen zu Bibliotheks-IDs definieren.
+2. Weitere Bibliotheks-IDs aus der modularen LV-Bibliothek schrittweise bestätigen und in `POSITION_MAPPING_RULES` sowie `backend/lv/bibliothek.json` aufnehmen.
+3. Contract-Test (`backend/test/mapping-contract.test.js`) bei jeder neuen Bestätigung um die jeweilige ID erweitern.
 
 ## Offene Punkte
 
-- Genaues Mapping zwischen Components-Kalkulationsstruktur und BoQ-LV-Struktur ist noch offen.
-- Übergangslogik zwischen statischen Paketdateien und modularer Bibliothek muss weiter differenziert werden.
-- Welche Komponenten/Positionen aus `lvPositionen` in welchem Umfang tatsächlich LV-relevant sind, ist noch nicht fachlich abschließend definiert.
+- Fachliche Zuordnung der 6 bewusst offenen Components-Positionen (`maschine_standardrahmen`, `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren`) ist noch offen.
+- Vollständige Integration der modularen LV-Bibliothek für alle übrigen (noch nicht bestätigten) Bausteine ist noch offen.
 
 ## Kurzfazit
 
-Der aktuelle BoQ-Stand funktioniert als produktiver Übergangszustand, aber die fachliche Zuordnung zwischen Kalkulationspositionen und LV-Textbausteinen ist noch nicht sauber modelliert. Die modulare LV-Bibliothek unter `docs` ist der passende nächste fachliche Bezugspunkt für die Weiterentwicklung.
+Für die 10 aktuell bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch einen automatisierten Contract-Test (5 Stufen: Input, Mapping, Resolution, Export, DOCX-Inhalt) gegen Regressionen abgesichert. Für alle anderen Positionen bleibt der Legacy-Pfad bzw. `open` bestehen. Die modulare LV-Bibliothek unter `docs` ist als Bibliotheksresolver angebunden und der Bezugspunkt für weitere Bestätigungen.

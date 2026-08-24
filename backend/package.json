@@ -4,11 +4,15 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node test/mapping-contract.test.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.1",
     "docx": "^9.6.1",
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jszip": "^3.10.1"
   }
 }

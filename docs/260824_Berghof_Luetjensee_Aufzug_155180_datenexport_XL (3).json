@@ -53,7 +53,7 @@
     "strasse": "Deepenstegen 1+4",
     "projektart": "Teilmodernisierung",
     "anlagenbezeichnung": "Aufzug Fa. KOCH",
-    "updatedAt": "2026-08-24T07:31:29.205Z",
+    "updatedAt": "2026-08-24T17:12:18.796Z",
     "alleProjektdaten": {
       "projektnummer": "Berghof Lütjensee",
       "projektnameOderNummer": "Berghof Lütjensee",
@@ -3441,7 +3441,7 @@
     "exportTyp": "XL",
     "version": "1.0",
     "quelle": "Components",
-    "erstelltAm": "2026-08-24T07:31:29.206Z",
+    "erstelltAm": "2026-08-24T17:12:18.796Z",
     "hinweis": "Voll-Export mit Projekt-, Technik-, Paket- und Kalkulationsdaten inklusive Preise, soweit im Frontend vorhanden."
   }
 }
