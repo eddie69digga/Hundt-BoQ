@@ -1841,7 +1841,7 @@
       const anlage = (currentData && currentData.anlage) || {};
       const auftraggeber = (currentData && currentData.auftraggeber) || {};
       const technik = (currentData && currentData.technik) || {};
-      const params = new URLSearchParams({
+      const requestBody = {
         projektname: projekt.bauvorhaben || projekt.name || '',
         projektnummer: projekt.projektnummer || projekt.id || '',
         projektart: projekt.projektart || '',
@@ -1854,13 +1854,21 @@
         agplz: currentData?.auftraggeber?.plz || auftraggeber.plz || '',
         aort: currentData?.auftraggeber?.ort || auftraggeber.ort || '',
         technik_json: JSON.stringify(technik),
-      });
-      const downloadUrl = `${buildApiUrl('/api/export/word/steuerung')}?${params.toString()}`;
+        // Die vollstaendige Kalkulationsstruktur (kalkulation.paketSummen[*].positionen)
+        // wird mitgesendet, damit das Backend die positionsgenaue Mappinglogik statt des
+        // statischen Legacy-Fallbacks (u.a. Seil-/MRL-Antrieb) verwenden kann.
+        data: currentData || {},
+      };
+      const downloadUrl = buildApiUrl('/api/export/word/steuerung');
       elements.positionsMeta.className = 'meta-row';
       elements.positionsMeta.textContent = 'Word-Export wird erstellt und als Download gestartet...';
 
       try {
-        const response = await fetch(downloadUrl);
+        const response = await fetch(downloadUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody),
+        });
         if (!response.ok) {
           throw new Error('Word-Export fehlgeschlagen.');
         }

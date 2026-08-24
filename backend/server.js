@@ -2516,10 +2516,23 @@ function buildExportFilename(query) {
   return `${datum}_${uhrzeit}_${name}_${nummer}.docx`;
 }
 
+// Der Word-Export benoetigt neben den Formular-/Deckblatt-Feldern (via Query)
+// auch die vollstaendige Kalkulationsstruktur (kalkulation.paketSummen[*].positionen),
+// damit die positionsgenaue Mappinglogik ausgewertet werden kann. Diese Struktur ist
+// per GET-Query zu gross/unhandlich, daher wird sie ueber POST im Body uebertragen.
+// GET bleibt fuer Abwaertskompatibilitaet erhalten, faellt mangels Positionsdaten aber
+// automatisch auf den Legacy-Modus zurueck.
+function mergeWordExportRequestData(req) {
+  const query = req?.query && typeof req.query === 'object' ? req.query : {};
+  const body = req?.body && typeof req.body === 'object' && !Array.isArray(req.body) ? req.body : {};
+  return { ...query, ...body };
+}
+
 async function handleBoQWordDownload(req, res) {
   try {
-    const buffer = await createBoQDocxBuffer(req.query);
-    const filename = buildExportFilename(req.query);
+    const requestData = mergeWordExportRequestData(req);
+    const buffer = await createBoQDocxBuffer(requestData);
+    const filename = buildExportFilename(requestData);
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     res.send(buffer);
@@ -2532,9 +2545,11 @@ async function handleBoQWordDownload(req, res) {
 
 // Bestehender Endpunkt bleibt kompatibel und nutzt jetzt den kombinierten BoQ-Export.
 app.get('/api/export/steuerung/docx', handleBoQWordDownload);
+app.post('/api/export/steuerung/docx', handleBoQWordDownload);
 
 // Primaerer Download-Endpunkt fuer den kombinierten Word-Export.
 app.get('/api/export/word/steuerung', handleBoQWordDownload);
+app.post('/api/export/word/steuerung', handleBoQWordDownload);
 
 app.post('/api/export-x83-test', handleX83TestExport);
 app.get('/api/export-x83-test', handleX83TestExport);

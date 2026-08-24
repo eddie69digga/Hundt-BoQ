@@ -56,9 +56,11 @@ Ziel ist die Erstellung und Weiterverarbeitung von Leistungsverzeichnissen mit n
 - Nach erfolgreichem Login werden Cloud-Exports über `GET /api/xl-exports` und `GET /api/xl-exports/:exportId` abgerufen.
 - Der Benutzername wird dabei serverseitig als freigegebener Nutzer validiert.
 - Der Word-Export läuft über Endpunkte wie:
-  - `GET /api/export/word/steuerung`
-  - `GET /api/export/steuerung/docx`
+  - `POST /api/export/word/steuerung` (primär, sendet die vollständige Kalkulationsstruktur im Body als `data`)
+  - `GET /api/export/word/steuerung` (Abwärtskompatibilität, ohne Positionsdaten → Legacy-Modus)
+  - `POST /api/export/steuerung/docx` / `GET /api/export/steuerung/docx` (Alias, gleiches Verhalten)
 - Die Exporte werden aus den vorhandenen Datenstrukturen zusammengebaut und als DOCX ausgeliefert.
+- Wichtig: Nur wenn `kalkulation.paketSummen[*].positionen` im Request (Body oder Query) vorhanden ist, aktiviert sich die positionsgenaue Mappinglogik. Fehlt diese Struktur (z. B. bei einem reinen GET ohne Body), greift automatisch der Legacy-Fallback mit den statischen Paketdateien.
 
 ### Cloud-Export
 

@@ -108,24 +108,30 @@ Damit ist der aktuelle Zustand fachlich klar nachvollziehbar: Der Text stammt au
 
 ## 6. Aktuelles Word-Export-Verhalten
 
-Der Word-Export wird im Backend über `createBoQDocxBuffer` und die Endpunkte `GET /api/export/word/steuerung` bzw. `GET /api/export/steuerung/docx` ausgelöst.
+Der Word-Export wird im Backend über `createBoQDocxBuffer` und die Endpunkte `POST /api/export/word/steuerung` (primär) bzw. `POST /api/export/steuerung/docx` ausgelöst. Die GET-Varianten bleiben aus Kompatibilitätsgründen erhalten.
 
 Der aktuelle Ablauf:
 
-1. `getWordExportLvEntries(query)` lädt die Standard-LV-Pakete:
-   - Steuerung
-   - Antrieb
-   - Abnahme
-2. Es prüft `extractAktiveSelektionen(query)` und entscheidet, welche Pakete aktiv sind.
-3. Die Pakete werden als Reihenfolge `Steuerung` → `Antrieb` → `Abnahme` zusammengeführt.
-4. `buildMinimalX83XmlFromWordSource` bzw. `createBoQDocxBuffer` bauen daraus das Word-/XML-Dokument.
-5. Die Textinhalte kommen aktuell weitgehend aus den statischen JSON-Paketen und `vorbemerkung.txt`.
+1. Das Frontend sendet die vollständige Kalkulationsstruktur (`currentData`, inkl. `kalkulation.paketSummen[*].positionen`) im POST-Body unter dem Feld `data`.
+2. `getWordExportLvEntries(query)` bzw. `createBoQDocxBuffer(query)` prüfen zuerst über `buildPositionMappingReport`, ob positive Positionsdaten vorhanden sind.
+3. Liegen positive Positionen vor, wird ausschließlich `resolveMappedStaticLvEntries` verwendet: Es werden nur die durch die Mappingregeln bestätigten statischen Einträge (`steuerung`, `abnahme`) ausgewählt; `antrieb` (mit dem Seil-/MRL-Text) wird in diesem Modus grundsätzlich ausgeschlossen, unabhängig von `aktivePakete`/`aktiveBundles`.
+4. Fehlen positive Positionsdaten (z. B. bei einem GET-Request ohne Body oder bei alten Datensätzen), greift der Legacy-Pfad: `extractAktiveSelektionen(query)` entscheidet, welche Pakete aktiv sind, und alle Standardpakete (Steuerung, Antrieb, Abnahme) werden nach der bisherigen Logik zusammengeführt.
+5. `buildMinimalX83XmlFromWordSource` bzw. `createBoQDocxBuffer` bauen daraus das Word-/XML-Dokument.
 
 Wesentlicher Effekt:
 
-- Das Dokument ist funktional nutzbar,
-- aber der fachliche Text ist an den aktuellen static-packages-Stand gekoppelt,
-- nicht an die tatsächliche varianterkennende Kalkulationslogik.
+- Im positionsgenauen Modus ist der ausgegebene Text an die tatsächlich bestätigten Bibliotheks-Mappings gekoppelt; ein fachlich falscher Seil-/MRL-Antriebstext bei Hydraulikanlagen kann nicht mehr entstehen.
+- Der Legacy-Pfad bleibt ausschließlich für Altdaten ohne geeignete Positionsstruktur bestehen.
+
+## 6a. Bekannte frühere Fehlerursache (behoben)
+
+Der Word-Export-Button im Frontend (`triggerSteuerungWordExport`) übermittelte ursprünglich nur Formular-/Deckblattfelder sowie `technik_json` als GET-Query-Parameter, nicht aber `kalkulation.paketSummen`. Dadurch erkannte `readPositiveComponentsFromQuery` niemals positive Positionen, `shouldUsePositionMapping` blieb `false`, und der Export lief immer über den Legacy-Fallback ohne aktive Paket-/Bündel-Selektion – dieser gibt standardmäßig alle Pakete inklusive des statischen `antrieb.json` (Seil-/MRL-Text) aus. Das erklärte, warum trotz korrekt erkannter Hydraulik-Technik weiterhin `Antrieb Seil` / `MRL - Seil Synchron` im Dokument erschien.
+
+Behoben durch:
+
+- Umstellung des Frontend-Exports auf `POST` mit der vollständigen `currentData`-Struktur im Body (Feld `data`).
+- Backend-Endpunkte akzeptieren jetzt zusätzlich `POST` und verschmelzen Query und Body (`mergeWordExportRequestData`).
+- `resolveMappedStaticLvEntries` schließt `antrieb` explizit aus, sobald positive Positionsdaten vorliegen (`sameExportPositionMode`).
 
 ## 7. Bekannte Brüche im Datenfluss
 
