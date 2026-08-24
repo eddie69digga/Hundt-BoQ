@@ -42,6 +42,12 @@ function loadEnvFileIfPresent() {
 
 loadEnvFileIfPresent();
 
+const PASSWORD_ENV_BY_USERNAME = Object.freeze({
+  admin: 'ADMIN_PASSWORD',
+  testuser: 'TESTUSER_PASSWORD',
+  eddie: 'EDDIE_PASSWORD',
+});
+
 // --- Supabase Initialization ---
 let supabase = null;
 const supabaseUrl = process.env.SUPABASE_URL;
@@ -92,12 +98,7 @@ app.post('/api/login', (req, res) => {
   const username = typeof req.body?.username === 'string' ? req.body.username.trim() : '';
   const password = typeof req.body?.password === 'string' ? req.body.password : '';
 
-  const envVarByUser = {
-    admin: 'ADMIN_PASSWORD',
-    testuser: 'TESTUSER_PASSWORD',
-  };
-
-  const passwordEnvName = envVarByUser[username];
+  const passwordEnvName = PASSWORD_ENV_BY_USERNAME[username];
   if (!passwordEnvName) {
     return res.status(401).json({
       success: false,
@@ -2177,8 +2178,7 @@ app.get('/api/export-x83-test', handleX83TestExport);
 
 // Helper: Validate username
 function validateUsername(username) {
-  const allowedUsers = ['admin', 'testuser'];
-  return allowedUsers.includes(username);
+  return Object.hasOwn(PASSWORD_ENV_BY_USERNAME, username);
 }
 
 // Endpoint: List all XL exports for a user

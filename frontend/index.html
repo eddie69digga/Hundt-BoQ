@@ -901,7 +901,7 @@
     const API_BASE_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
       ? LOCAL_BACKEND_BASE_URL
       : LIVE_BACKEND_BASE_URL;
-    const AUTH_STORAGE_KEY = 'boq_logged_in_username';
+    const LEGACY_AUTH_STORAGE_KEY = 'boq_logged_in_username';
 
     function buildApiUrl(path) {
       const normalizedPath = path.startsWith('/') ? path : `/${path}`;
@@ -911,6 +911,7 @@
     let currentData = null;
     let currentProject = null;
     let selectedProject = null;
+    let authenticatedUsername = '';
 
     const elements = {
       appContainer: document.getElementById('appContainer'),
@@ -955,12 +956,8 @@
       void tryAutoImportFromUrl();
     }
 
-    function getStoredUsername() {
-      const stored = localStorage.getItem(AUTH_STORAGE_KEY);
-      if (typeof stored !== 'string') {
-        return '';
-      }
-      return stored.trim();
+    function getAuthenticatedUsername() {
+      return authenticatedUsername;
     }
     function readAutoImportParams() {
       const params = new URLSearchParams(window.location.search || '');
@@ -985,18 +982,18 @@
         return;
       }
 
-      const storedUsername = getStoredUsername();
-      if (!storedUsername) {
+      const loggedInUsername = getAuthenticatedUsername();
+      if (!loggedInUsername) {
         // Auto-Import wird nach erfolgreichem Login erneut versucht.
         return;
       }
 
-      const effectiveUsername = autoParams.username || storedUsername;
+      const effectiveUsername = autoParams.username || loggedInUsername;
       if (!effectiveUsername) {
         return;
       }
 
-      if (autoParams.username && autoParams.username !== storedUsername) {
+      if (autoParams.username && autoParams.username !== loggedInUsername) {
         setStatus(
           elements.importStatusCard,
           elements.importStatus,
@@ -1071,9 +1068,9 @@
 
         const payload = await response.json().catch(() => ({}));
         if (response.ok && payload?.success === true && typeof payload.username === 'string') {
-          localStorage.setItem(AUTH_STORAGE_KEY, payload.username);
+          authenticatedUsername = payload.username.trim();
           elements.loginPassword.value = '';
-          showAppView(payload.username);
+          showAppView(authenticatedUsername);
           return;
         }
 
@@ -1087,25 +1084,21 @@
     }
 
     function handleLogout() {
-      localStorage.removeItem(AUTH_STORAGE_KEY);
+      authenticatedUsername = '';
+      localStorage.removeItem(LEGACY_AUTH_STORAGE_KEY);
       elements.loginPassword.value = '';
       resetCloudExportOptions('Bitte zuerst einloggen');
       showLoginView('');
     }
 
     function initializeAuthGate() {
+      authenticatedUsername = '';
+      localStorage.removeItem(LEGACY_AUTH_STORAGE_KEY);
+
       const autoParams = readAutoImportParams();
       const urlUsername = typeof autoParams?.username === 'string' ? autoParams.username.trim() : '';
       if (urlUsername) {
-        localStorage.setItem(AUTH_STORAGE_KEY, urlUsername);
-        showAppView(urlUsername);
-        return;
-      }
-
-      const storedUsername = getStoredUsername();
-      if (storedUsername) {
-        showAppView(storedUsername);
-        return;
+        elements.loginUsername.value = urlUsername;
       }
 
       showLoginView('');
@@ -1142,7 +1135,7 @@
       }
     }
 
-    async function loadCloudExportOptions(username = getStoredUsername()) {
+    async function loadCloudExportOptions(username = getAuthenticatedUsername()) {
       const normalizedUsername = typeof username === 'string' ? username.trim() : '';
 
       if (!normalizedUsername) {
@@ -1697,7 +1690,7 @@
 
     async function handleCloudExportSelection(event) {
       const exportId = event.target.value;
-      const username = getStoredUsername();
+      const username = getAuthenticatedUsername();
 
       if (!exportId) {
         return;
