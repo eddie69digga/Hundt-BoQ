@@ -192,7 +192,7 @@ Bestätigte Mappings (`bibliotheksId` → `contentSource`):
 - `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` (`static`, Paket `abnahme.json`) bei `projektart = Teilmodernisierung`
 - `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` (`bibliothek`) bei `projektart = Teilmodernisierung`
 
-`contentSource: 'static'` bedeutet: Der Bibliotheks-Baustein ist bereits real als Modul in `steuerung.json` bzw. `abnahme.json` enthalten und wird ueber das gesamte statische Paket ausgegeben.
+`contentSource: 'static'` bedeutet: Der Bibliotheks-Baustein ist bereits real als EINZELNES Modul in `steuerung.json` bzw. `abnahme.json` enthalten. Jede Regel mit `contentSource: 'static'` traegt zusaetzlich `staticModuleId` (die Modul-`id` innerhalb des Pakets). Aufgeloest wird ausschliesslich GENAU DIESES EINE Modul als eigene LV-Position - niemals das gesamte statische Paket.
 
 `contentSource: 'bibliothek'` bedeutet: Es existiert KEIN passendes Modul in den statischen Paketen (insbesondere `antrieb.json` enthaelt ausschliesslich den Seil-/MRL-Text und darf hierfuer nicht verwendet werden). Der Baustein wird stattdessen dediziert aus `backend/lv/bibliothek.json` aufgeloest und als eigene LV-Position ausgegeben.
 
@@ -206,6 +206,18 @@ Offen bleiben:
 - `teil_umbaukit_schiebetueren`
 
 Die Legacy-Abgrenzung ist bewusst und technisch sauber: Wenn kein neues Components-Export mit passender Positionsbasis vorliegt, kann die bisherige statische LV-Logik weiterverwendet werden. Bei einem echten Components-Export mit positiven Positionen ist dieser statische Fallback jedoch nicht mehr erlaubt (auch nicht als leerer Rueckfall, wenn eine Bibliotheks-ID sich nicht aufloesen laesst).
+
+### 9.1 Behobenes Granularitaetsproblem (Schritt E)
+
+Bis zur Korrektur wurde bei `contentSource: 'static'` das GESAMTE statische Paket (`steuerung.json` mit allen ~20 Modulen bzw. `abnahme.json`) dedupliziert unter dem Paket-Schluessel (`staticEntryId`, z. B. `steuerung`) eingefuegt, sobald IRGENDEINE der 6 auf dasselbe Paket zeigenden Regeln (`steuerung`, `fahrkorbtableau`, `aussenruftableau`, `standanzeige`, `schachtbeleuchtung`, `kabelkanaele`) positiv war. Dadurch erschienen automatisch auch nicht bestaetigte, nicht positive Module desselben Pakets im LV (z. B. Frequenzumrichter/Regelung, Lastmesssystem, Schaltschrank, Brandfallsteuerung, Schachtkopierung, Parkhaltestelle) - ein Verstoss gegen `Kalkulationsstruktur != LV-Struktur`.
+
+Fix (`backend/server.js`, `resolveMappedStaticLvEntries()` / `resolveStaticModuleEntryAsLv()`):
+
+- Jede Regel mit `contentSource: 'static'` traegt jetzt `staticModuleId` (das genaue Modul innerhalb des Pakets, z. B. `schachtbeleuchtung` → Modul-ID `schachtbeleuchtung`, `aussenruftableau` → Modul-ID `befehlsgeber_aussenruf`).
+- Aufgeloest wird ein synthetisches LV-Objekt mit genau diesem einen Modul (analog zu `resolveBibliothekEntryAsLv()`), nicht mehr das komplette Paket.
+- Dedupliziert wird ausschliesslich ueber die Ziel-Bibliotheks-ID (`bibliotheksId`), nicht mehr ueber den Paket-Schluessel. Dadurch fuehren mehrere Regeln, die auf dasselbe Paket zeigen (z. B. alle 6 Steuerung-Positionen), zu jeweils EIGENEN LV-Positionen, wenn sie einzeln positiv sind - und zu GAR KEINER Ausgabe, wenn sie es nicht sind.
+- Fachlich richtige Ausgaben bleiben erhalten: Der Modultext in `steuerung.json`/`abnahme.json` ist inhaltlich identisch mit dem entsprechenden `backend/lv/bibliothek.json`-Eintrag (verifiziert; einzige Unterschiede sind Tabulatur-Formatierung ohne Renderingauswirkung sowie ein Anfuehrungszeichen-Encoding-Artefakt bei `fahrkorbtableau_vertikal`).
+- Abgesichert durch `backend/test/granularity-contract.test.js` (positive Granularitaet, Negativpruefung auf DOCX-Ebene mit eindeutigen Textfragmenten, Dedup-Pruefung, Vollstaendigkeitspruefung fuer alle 6 Steuerung-Positionen, Offen-Pruefung ohne erfundenen Ersatztext).
 
 ## 9a. Bibliotheksresolver (`backend/lv/bibliothek.json`)
 

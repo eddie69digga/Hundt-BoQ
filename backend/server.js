@@ -1540,8 +1540,11 @@ function extractAktiveSelektionen(query = {}) {
   };
 }
 
-// contentSource: 'static' => Position wird aus dem vorhandenen statischen Paket (steuerung.json /
-// abnahme.json) abgedeckt, dessen Module diesen Bibliotheks-Baustein bereits real enthalten.
+// contentSource: 'static' => Der Bibliotheks-Baustein ist bereits real als EINZELNES Modul in
+// steuerung.json / abnahme.json enthalten (siehe staticModuleId). Es wird ausschliesslich dieses
+// eine Modul als eigene LV-Position aufgeloest - NIEMALS das gesamte statische Paket. Eine positive
+// Position darf dadurch keine weiteren, nicht bestaetigten Module desselben Pakets (z. B.
+// Frequenzumrichter, Notruf/Lastmesssystem, Schaltschrank) automatisch mit in das LV ziehen.
 // contentSource: 'bibliothek' => Es existiert KEIN passendes Modul in den statischen Paketen
 // (insbesondere: antrieb.json enthaelt nur den Seil-/MRL-Text und darf hierfuer nicht verwendet
 // werden). Der Baustein wird stattdessen direkt aus backend/lv/bibliothek.json aufgeloest.
@@ -1551,6 +1554,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['hydraulikschlauch', 'hydraulikoel'],
     bibliotheksId: 'LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL',
     staticEntryId: null,
+    staticModuleId: null,
     contentSource: 'bibliothek',
     status: 'mapped',
     technicalCondition: (technical) => normalizeToken(technical?.aufzugstyp || '') === 'hydraulik',
@@ -1561,6 +1565,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['steuerung'],
     bibliotheksId: 'LV_12_02_STEUERUNG',
     staticEntryId: 'steuerung',
+    staticModuleId: 'steuerung',
     contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
@@ -1571,6 +1576,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['fahrkorbtableau'],
     bibliotheksId: 'LV_10_20_FAHRKORBTABLEAU_VERTIKAL',
     staticEntryId: 'steuerung',
+    staticModuleId: 'fahrkorbtableau_vertikal',
     contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
@@ -1581,6 +1587,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['aussenruftableau'],
     bibliotheksId: 'LV_11_16_BEFEHLSGEBER_AUSSENRUF',
     staticEntryId: 'steuerung',
+    staticModuleId: 'befehlsgeber_aussenruf',
     contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
@@ -1591,6 +1598,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['standanzeige'],
     bibliotheksId: 'LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN',
     staticEntryId: 'steuerung',
+    staticModuleId: 'standanzeige_aussen',
     contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
@@ -1601,6 +1609,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['schachtbeleuchtung'],
     bibliotheksId: 'LV_09_02_SCHACHTBELEUCHTUNG',
     staticEntryId: 'steuerung',
+    staticModuleId: 'schachtbeleuchtung',
     contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
@@ -1611,6 +1620,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['kabelkanaele'],
     bibliotheksId: 'LV_09_01_SCHACHTINSTALLATION_ELEKTRO',
     staticEntryId: 'steuerung',
+    staticModuleId: 'schachtinstallation_elektro',
     contentSource: 'static',
     status: 'mapped',
     technicalCondition: () => true,
@@ -1621,6 +1631,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['anstrich_schachtgrube'],
     bibliotheksId: 'LV_07_05_MALERARBEITEN_SCHACHTGRUBE',
     staticEntryId: null,
+    staticModuleId: null,
     contentSource: 'bibliothek',
     status: 'mapped',
     technicalCondition: () => true,
@@ -1631,6 +1642,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['zues_kosten_vorpruefung', 'zues_kosten_abnahme', 'zues_begleitung_durch_an_aufzug', 'pruefgewichte'],
     bibliotheksId: 'LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI',
     staticEntryId: 'abnahme',
+    staticModuleId: 'inverkehrbringung_pvi',
     contentSource: 'static',
     status: 'mapped',
     technicalCondition: (technical) => normalizeToken(technical?.projektart || '') === 'teilmodernisierung',
@@ -1641,6 +1653,7 @@ const POSITION_MAPPING_RULES = Object.freeze([
     componentsIds: ['transport_allgemein_baustelle_lager'],
     bibliotheksId: 'LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG',
     staticEntryId: null,
+    staticModuleId: null,
     contentSource: 'bibliothek',
     status: 'mapped',
     technicalCondition: (technical) => normalizeToken(technical?.projektart || '') === 'teilmodernisierung',
@@ -1667,6 +1680,19 @@ const POSITION_MAPPING_RULES = Object.freeze([
   {
     groupKey: 'open-fahrkorb',
     componentsIds: ['teil_umbaukit_schiebetueren'],
+    bibliotheksId: null,
+    staticEntryId: null,
+    status: 'open',
+    technicalCondition: () => true,
+    canRemainOpen: true,
+  },
+  {
+    // Diese Steuerung-Paket-Keys werden bei Hydraulik per Code-Filter in Components entfernt,
+    // koennen bei Seil aber positiv sein (siehe docs/components-boq-begriffsmatrix.md). Ohne
+    // diese Regel wuerden sie bei Menge > 0 weder in "mapped" noch in "open" auftauchen und
+    // damit fachlich unberuecksichtigt bleiben. Es wird bewusst KEINE Bibliotheks-ID vermutet.
+    groupKey: 'open-steuerung-antriebsregelung',
+    componentsIds: ['frequenzumrichter', 'bremswiderstand', 'verbindungsleitungen', 'lastmessung', 'kontakt_regler', 'inkrementalgeber', 'notruf'],
     bibliotheksId: null,
     staticEntryId: null,
     status: 'open',
@@ -1792,6 +1818,7 @@ function buildPositionMappingReport(query = {}) {
         componentsIds: matches,
         bibliotheksId: rule.bibliotheksId,
         staticEntryId: rule.staticEntryId,
+        staticModuleId: rule.staticModuleId,
         contentSource: rule.contentSource,
         groupKey: rule.groupKey,
         status: 'mapped',
@@ -1857,11 +1884,37 @@ function resolveBibliothekEntryAsLv(bibliotheksId) {
   };
 }
 
+// Baut aus GENAU EINEM Modul eines statischen Pakets (steuerung.json / abnahme.json) ein
+// eigenstaendiges LV-Objekt mit nur diesem einen Modul - analog zu resolveBibliothekEntryAsLv().
+// Damit kann eine bestaetigte Bibliotheks-ID niemals das gesamte Paket (inkl. nicht bestaetigter
+// Module wie Frequenzumrichter, Lastmesssystem, Notruf usw.) mit in das LV ziehen.
+function resolveStaticModuleEntryAsLv(bibliotheksId, sourceLv, staticModuleId) {
+  if (!sourceLv || !staticModuleId) {
+    return null;
+  }
+
+  const modules = Array.isArray(sourceLv.module) ? sourceLv.module : [];
+  const modul = modules.find((m) => normalizeToken(m?.id) === normalizeToken(staticModuleId));
+  if (!modul || !hasRealModuleText(modul.text)) {
+    return null;
+  }
+
+  return {
+    id: normalizeToken(bibliotheksId),
+    titel: modul.titel,
+    mengeneinheit: sourceLv.mengeneinheit || 'Stk',
+    module: [modul],
+  };
+}
+
 // Baut aus den bestaetigten Mappingtreffern (mappingReport.mapped) die tatsaechliche
-// Word-Export-Auswahl auf. Jede bestaetigte Bibliotheks-ID wird entweder ueber ein vorhandenes
-// statisches Paket (steuerung/abnahme) oder ueber einen dedizierten Bibliotheksbaustein
-// (backend/lv/bibliothek.json) aufgeloest. antrieb.json (Seil-/MRL-Text) wird im
-// positionsgenauen Modus grundsaetzlich nicht verwendet - auch nicht ersatzweise.
+// Word-Export-Auswahl auf. Jede bestaetigte Bibliotheks-ID wird entweder ueber GENAU EIN Modul
+// eines vorhandenen statischen Pakets (steuerung/abnahme, siehe staticModuleId) oder ueber einen
+// dedizierten Bibliotheksbaustein (backend/lv/bibliothek.json) aufgeloest - niemals ueber das
+// gesamte statische Paket. antrieb.json (Seil-/MRL-Text) wird im positionsgenauen Modus
+// grundsaetzlich nicht verwendet - auch nicht ersatzweise. Dedupliziert wird ausschliesslich
+// ueber die Ziel-Bibliotheks-ID: Mehrere Components-Positionen, die auf dieselbe Bibliotheks-ID
+// zeigen, erzeugen genau eine LV-Position.
 function resolveMappedStaticLvEntries(query = {}, lvEntries = []) {
   const mappingReport = buildPositionMappingReport(query);
   const mappedEntries = mappingReport.mapped || [];
@@ -1881,33 +1934,39 @@ function resolveMappedStaticLvEntries(query = {}, lvEntries = []) {
   };
 
   const selected = [];
-  const addedStaticIds = new Set();
   const addedBibliotheksIds = new Set();
 
   for (const entry of mappedEntries) {
-    if (entry.contentSource === 'bibliothek') {
-      if (!entry.bibliotheksId || addedBibliotheksIds.has(entry.bibliotheksId)) {
-        continue;
-      }
+    if (!entry.bibliotheksId || addedBibliotheksIds.has(entry.bibliotheksId)) {
+      continue;
+    }
 
+    if (entry.contentSource === 'bibliothek') {
       const bibliothekLv = resolveBibliothekEntryAsLv(entry.bibliotheksId);
       if (!bibliothekLv) {
         // Resolver findet keinen Baustein: Position bleibt bewusst ohne erfundenen Ersatztext.
         continue;
       }
 
-      selected.push({ id: normalizeToken(entry.bibliotheksId), titel: bibliothekLv.titel, lv: bibliothekLv, force: true });
+      selected.push({ id: entry.staticEntryId || normalizeToken(entry.bibliotheksId), titel: bibliothekLv.titel, lv: bibliothekLv, force: true });
       addedBibliotheksIds.add(entry.bibliotheksId);
       continue;
     }
 
     const staticKey = entry.staticEntryId;
-    if (!staticKey || staticKey === 'antrieb' || addedStaticIds.has(staticKey) || !staticLookup[staticKey]) {
+    if (!staticKey || staticKey === 'antrieb') {
       continue;
     }
 
-    selected.push({ id: staticKey, titel: String(staticLookup[staticKey]?.titel || staticKey), lv: staticLookup[staticKey], force: true });
-    addedStaticIds.add(staticKey);
+    const moduleLv = resolveStaticModuleEntryAsLv(entry.bibliotheksId, staticLookup[staticKey], entry.staticModuleId);
+    if (!moduleLv) {
+      // Kein granularer Baustein auflösbar: Position bleibt offen, kein Fallback auf das
+      // gesamte statische Paket.
+      continue;
+    }
+
+    selected.push({ id: staticKey, titel: moduleLv.titel, lv: moduleLv, force: true });
+    addedBibliotheksIds.add(entry.bibliotheksId);
   }
 
   // Reihenfolge-Regel: Steuerung immer zuerst, Abnahme immer zuletzt, alles andere dazwischen.
@@ -2751,6 +2810,7 @@ module.exports = {
   buildPositionMappingReport,
   resolveMappedStaticLvEntries,
   resolveBibliothekEntryAsLv,
+  resolveStaticModuleEntryAsLv,
   loadBibliothek,
   getWordExportLvEntries,
   createBoQDocxBuffer,

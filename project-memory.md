@@ -49,6 +49,7 @@ Ziel ist die Erstellung und Weiterverarbeitung von Leistungsverzeichnissen mit n
 - `backend/lv/bibliothek.json` – Bibliotheksresolver für Bausteine ohne statische Paketentsprechung
 - `backend/lv/vorbemerkung.txt` – Vorbemerkungstext für Export
 - `backend/test/mapping-contract.test.js` – Contract-Test (`npm test`)
+- `backend/test/granularity-contract.test.js` – Granularitäts-Contract-Test (`npm test`)
 - `docs/auth-users.md` – Benutzer-/Auth-Dokumentation
 - `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (fachliche Quelle für `bibliothek.json`)
 
@@ -139,7 +140,9 @@ Der aktuelle IST-Zustand ist nach Projektlage wie folgt:
 - Components besitzt positionsgenaue Kalkulationsdaten (`kalkulation.paketSummen[*].positionen`).
 - BoQ verwendet beim Word-/X83-Export den positionsgenauen Modus, sobald positive Positionsdaten vorliegen (siehe unten).
 - Bausteine ohne passendes Modul in den statischen Paketdateien (`backend/lv/*.json`) werden über einen dedizierten Bibliotheksresolver (`backend/lv/bibliothek.json`) aufgelöst, nicht über einen erfundenen oder falschen Paketfallback.
+- Bausteine MIT passendem Modul in einem statischen Paket (`contentSource: 'static'`) werden über genau dieses eine Modul aufgelöst (`staticModuleId`), niemals über das gesamte Paket (behobenes Granularitätsproblem, siehe `docs/lv-architecture.md` Abschnitt 9.1).
 - Ein Hydraulikaufzug erhält dadurch keinen Seilantriebstext (`Antrieb Seil` / `MRL - Seil Synchron`) mehr; dies ist durch einen automatisierten Contract-Test abgesichert (`backend/test/mapping-contract.test.js`).
+- Eine positive Steuerungsposition zieht keine weiteren, nicht bestätigten Steuerungsbausteine (z. B. Frequenzumrichter, Lastmesssystem, Schaltschrank) mehr automatisch mit in das LV; abgesichert durch `backend/test/granularity-contract.test.js`.
 
 Abgeleitet daraus gilt:
 
@@ -266,6 +269,7 @@ Zusätzlich diagnostiziert (siehe `docs/lv-architecture.md`, Abschnitt 16): `pak
 - `backend/lv/*.json` – statische LV-Paketdateien (`steuerung.json`, `antrieb.json`, `abnahme.json`).
 - `backend/lv/bibliothek.json` – Bibliotheksresolver für Bausteine ohne statische Paketentsprechung.
 - `backend/test/mapping-contract.test.js` – Contract-Test (`npm test`), 5-stufiger Soll-Ist-Abgleich gegen den Referenzfall Berghof.
+- `backend/test/granularity-contract.test.js` – Granularitäts-Contract-Test (`npm test`): sichert die Modul-genaue Auflösung von `contentSource: 'static'` ab (kein Paket-Fallback mehr).
 - `docs/auth-users.md` – Auth-/Nutzer-Details.
 - `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (Quelle für `bibliothek.json`).
 - `docs/260824_Berghof_Luetjensee_Aufzug_155180_datenexport_XL (3).json` – reale Referenzdatei für den Contract-Test.
@@ -282,11 +286,22 @@ Aktuell gibt es keinen Branch-/Staging-Prozess in diesem Projekt. Der Standardab
 6. Push auf `main`
 7. produktiver Live-Test
 
+## Arbeitsphase: Granulare, validierte, wartbare LV-Bibliotheks-/Mappingstruktur
+
+Verbindliche Zielreihenfolge (siehe Architekturentscheidung): E → B → I → G → H → C → D → F.
+
+- **E – Granularitätsproblem `contentSource: 'static'` (behoben):** `resolveMappedStaticLvEntries()` löst pro Regel genau ein Modul (`staticModuleId`) auf statt eines ganzen Pakets; Dedup erfolgt über die Ziel-Bibliotheks-ID. Abgesichert durch `backend/test/granularity-contract.test.js`. Details: `docs/lv-architecture.md` Abschnitt 9.1.
+- **B, I, G, H, C, D, F:** siehe `docs/lv-architecture.md` für den jeweiligen Umsetzungsstand.
+
 ## Nächste fachliche Schritte
 
-1. Fachliche Zuordnung der 6 bewusst offenen Components-Positionen zu Bibliotheks-IDs definieren.
-2. Weitere Bibliotheks-IDs aus der modularen LV-Bibliothek schrittweise bestätigen und in `POSITION_MAPPING_RULES` sowie `backend/lv/bibliothek.json` aufnehmen.
-3. Contract-Test (`backend/test/mapping-contract.test.js`) bei jeder neuen Bestätigung um die jeweilige ID erweitern.
+1. Bibliotheksschema (Schritt B) festlegen/dokumentieren und bestehende Bibliothekseinträge migrieren.
+2. Validierungsprozess (Schritt I) für Bibliothek und Mappingregeln aufbauen.
+3. Mappingmodell um Variantenbedingungen erweitern (Schritt G), insbesondere `hydraulikRegelungsart`.
+4. Nur fachlich eindeutig ableitbare offene Mappings schließen (Schritt H); Türtechnik-Hersteller-dimension und `hydraulikRegelungsart = 'konventionell'` bleiben ohne bestätigten Bibliotheksbaustein offen.
+5. Kontrollierten Word-Import (Schritt C) aufbauen, sobald Schema und Validierung stabil sind.
+6. Übrige Word-Bausteine automatisiert übernehmen (Schritt D).
+7. Mappinglogik ggf. aus `server.js` auslagern (Schritt F), erst wenn ein echter Wartbarkeitsgewinn besteht.
 
 ## Offene Punkte
 
@@ -295,4 +310,4 @@ Aktuell gibt es keinen Branch-/Staging-Prozess in diesem Projekt. Der Standardab
 
 ## Kurzfazit
 
-Für die 10 aktuell bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch einen automatisierten Contract-Test (5 Stufen: Input, Mapping, Resolution, Export, DOCX-Inhalt) gegen Regressionen abgesichert. Für alle anderen Positionen bleibt der Legacy-Pfad bzw. `open` bestehen. Die modulare LV-Bibliothek unter `docs` ist als Bibliotheksresolver angebunden und der Bezugspunkt für weitere Bestätigungen.
+Für die 10 aktuell bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch einen automatisierten Contract-Test (5 Stufen: Input, Mapping, Resolution, Export, DOCX-Inhalt) gegen Regressionen abgesichert. Für alle anderen Positionen bleibt der Legacy-Pfad bzw. `open` bestehen. Die modulare LV-Bibliothek unter `docs` ist als Bibliotheksresolver angebunden und der Bezugspunkt für weitere Bestätigungen. Das Granularitätsproblem bei `contentSource: 'static'` (ganzes Paket statt einzelnem Modul) ist behoben und regressionsgetestet.
