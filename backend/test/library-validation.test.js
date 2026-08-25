@@ -57,6 +57,15 @@ function runSelfTests() {
   assertContains(invalidFieldResult.errors, 'ungueltiger typ', 'ungueltiger typ');
   assertContains(invalidFieldResult.errors, 'ungueltiger status', 'ungueltiger status');
 
+  // 2b. Fehlender Fliesstext ist NUR ein Bericht, kein Fehler - reine Gruppierungsknoten
+  // (z. B. ein Baustein, dessen Inhalt vollstaendig in Varianten steht) duerfen leer bleiben.
+  const missingTextResult = validateLibrary({
+    entries: [{ id: 'LV_GRUPPENKNOTEN', struktur: '10.08', kapitel: '10', titel: 'Gruppenknoten', typ: 'Baustein', status: 'entwurf' }],
+    rules: [],
+  });
+  assertEmpty(missingTextResult.errors, 'fehlender Fliesstext darf keinen Fehler erzeugen');
+  assertContains(missingTextResult.warnings, 'kein Fliesstext vorhanden', 'fehlender Fliesstext als Bericht');
+
   // 3. Mapping auf nicht existente Bibliotheks-ID (Waisen-Mapping, contentSource: bibliothek)
   const orphanBibliothekResult = validateLibrary({
     entries: [],

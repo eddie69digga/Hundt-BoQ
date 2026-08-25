@@ -49,10 +49,13 @@ Ziel ist die Erstellung und Weiterverarbeitung von Leistungsverzeichnissen mit n
 - `backend/lv/bibliothek.json` – Bibliotheksresolver für Bausteine ohne statische Paketentsprechung
 - `backend/lv/vorbemerkung.txt` – Vorbemerkungstext für Export
 - `backend/lib/library-validation.js` – Validierungsprozess für Bibliothek + Mappingregeln (Schritt I)
+- `backend/lib/word-library-extractor.js` – Extrahiert strukturierte Bibliothekseinträge aus der Word-Quelle (Schritt C)
+- `backend/scripts/import-word-library.js` – Kontrollierter Importprozess Word → Bibliothek (Schritt C/D, `--apply` zum Schreiben)
 - `backend/test/mapping-contract.test.js` – Contract-Test (`npm test`)
 - `backend/test/granularity-contract.test.js` – Granularitäts-Contract-Test (`npm test`)
 - `backend/test/library-validation.test.js` – Validierungs-Contract-Test (`npm test`)
 - `backend/test/variant-mapping.test.js` – Varianten-Contract-Test (`npm test`): `maschine_standardrahmen` je `hydraulikRegelungsart`
+- `backend/test/word-import.test.js` – Word-Import-Contract-Test (`npm test`)
 - `docs/auth-users.md` – Benutzer-/Auth-Dokumentation
 - `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (fachliche Quelle für `bibliothek.json`)
 
@@ -270,9 +273,15 @@ Zusätzlich diagnostiziert (siehe `docs/lv-architecture.md`, Abschnitt 16): `pak
 - `frontend/index.html` – UI und Import-/Render-Logik; Word-Export sendet `POST` mit voller Kalkulationsstruktur im Body.
 - `backend/server.js` – Auth, Supabase, DOCX-Export, positionsgenaue Mappinglogik, Bibliotheksresolver.
 - `backend/lv/*.json` – statische LV-Paketdateien (`steuerung.json`, `antrieb.json`, `abnahme.json`).
-- `backend/lv/bibliothek.json` – Bibliotheksresolver für Bausteine ohne statische Paketentsprechung.
+- `backend/lv/bibliothek.json` – strukturierte LV-Bibliothek (311 Einträge, Schema siehe `docs/lv-architecture.md` Abschnitt 17).
+- `backend/lib/library-validation.js` – Validierungsprozess (Schritt I).
+- `backend/lib/word-library-extractor.js` – Word-Extraktor (Schritt C).
+- `backend/scripts/import-word-library.js` – Importprozess Word → Bibliothek (Schritt C/D).
 - `backend/test/mapping-contract.test.js` – Contract-Test (`npm test`), 5-stufiger Soll-Ist-Abgleich gegen den Referenzfall Berghof.
 - `backend/test/granularity-contract.test.js` – Granularitäts-Contract-Test (`npm test`): sichert die Modul-genaue Auflösung von `contentSource: 'static'` ab (kein Paket-Fallback mehr).
+- `backend/test/library-validation.test.js` – Validierungs-Contract-Test (`npm test`).
+- `backend/test/variant-mapping.test.js` – Varianten-Contract-Test (`npm test`).
+- `backend/test/word-import.test.js` – Word-Import-Contract-Test (`npm test`).
 - `docs/auth-users.md` – Auth-/Nutzer-Details.
 - `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (Quelle für `bibliothek.json`).
 - `docs/260824_Berghof_Luetjensee_Aufzug_155180_datenexport_XL (3).json` – reale Referenzdatei für den Contract-Test.
@@ -298,20 +307,22 @@ Verbindliche Zielreihenfolge (siehe Architekturentscheidung): E → B → I → 
 - **I – Validierungsprozess (aufgebaut):** `backend/lib/library-validation.js` (`validateLibrary()`) prüft Bibliothek und Mappingregeln auf doppelte IDs, fehlende Pflichtfelder, ungültige Status-/Typ-Werte, Waisen-Mappings, ungültige Variantenbedingungen, überlappende Regeln (Bericht), ungenutzte Einträge (Bericht) und auffällig identische Texte (Bericht). Abgesichert durch `backend/test/library-validation.test.js` inkl. Selbsttests mit bewusst fehlerhaften Daten. Details: `docs/lv-architecture.md` Abschnitt 18.
 - **G – Variantenfähiges Mapping (aufgebaut):** `POSITION_MAPPING_RULES` unterstützt jetzt Variantengruppen (`variantGroup`-Feld): mehrere `mapped`-Regeln mit denselben `componentsIds`, unterschiedlicher `bibliotheksId` und sich gegenseitig ausschließender `technicalCondition`, plus eine abschließende `open`-Regel für nicht abgedeckte Kontexte. Determinismus wird durch Enumeration repräsentativer technischer Kontexte in `validateVariantGroupDeterminism()` hart geprüft (Fehler bei Überlappung). Details: `docs/lv-architecture.md` Abschnitt 19.
 - **H – gezielt geschlossene Mappings:** `maschine_standardrahmen` ist jetzt teilweise geschlossen (Variantengruppe `antrieb-standardrahmen`): Hydraulik + `frequenzgeregelt` → `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER`, Hydraulik + `softstart` → `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE` (beide IDs/Texte 1:1 aus der Word-Quelle verifiziert). Bewusst weiterhin offen: Hydraulik + `konventionell` (kein Baustein in Kapitel 14 vorhanden) und Seil (keine eindeutige 1:1-Zuordnung). Türtechnik und `teil_umbaukit_schiebetueren` bleiben unverändert offen (Herstellerdimension ungeklärt). Abgesichert durch `backend/test/variant-mapping.test.js`. Details: `docs/lv-architecture.md` Abschnitt 20.
-- **C, D, F:** siehe `docs/lv-architecture.md` für den jeweiligen Umsetzungsstand.
+- **C – Word-Import (aufgebaut):** `backend/lib/word-library-extractor.js` extrahiert Bibliothekseinträge direkt aus der Word-Metadatenzeile; `backend/scripts/import-word-library.js` (`planImport()`) gleicht gegen den bestehenden Bestand ab, ändert bestehende IDs nie still, markiert neue Einträge als `status: 'entwurf'` und schreibt nur nach erfolgreicher Validierung (`--apply`). Abgesichert durch `backend/test/word-import.test.js`. Details: `docs/lv-architecture.md` Abschnitt 21.
+- **D – Vollübernahme (durchgeführt, 2026-08-25):** `backend/lv/bibliothek.json` enthält jetzt alle 311 Word-Bibliothekseinträge (12 `bestaetigt`, 299 `entwurf`). 0 Fehler, 258 Berichte (27 Gruppierungsknoten ohne eigenen Text, 17 auffällig identische Texte, 214 noch ungenutzte Einträge - erwartet, da noch keine Mapping-Regel existiert). Details: `docs/lv-architecture.md` Abschnitt 22.
+- **F:** siehe `docs/lv-architecture.md` für den Umsetzungsstand (noch offen, siehe unten).
 
 ## Nächste fachliche Schritte
 
-1. Kontrollierten Word-Import (Schritt C) aufbauen, sobald Schema und Validierung stabil sind (sind sie: siehe B/I oben).
-2. Übrige Word-Bausteine automatisiert übernehmen (Schritt D).
-3. Mappinglogik ggf. aus `server.js` auslagern (Schritt F), erst wenn ein echter Wartbarkeitsgewinn besteht.
-4. Verbleibende offene fachliche Entscheidungen klären (siehe `docs/components-boq-begriffsmatrix.md`, Abschnitt "Offene fachliche Entscheidungen"): `hydraulikRegelungsart = 'konventionell'`, Seil-Zuordnung für `maschine_standardrahmen`, Herstellerdimension Türtechnik, `frequenzregelung`-Mapping, doppelt geführtes `aufhaengung`-Feld.
+1. Prüfen, ob Schritt F (Auslagerung der Mappinglogik aus `server.js`) jetzt einen echten Wartbarkeitsgewinn bringt (311 Bibliothekseinträge vorhanden, `POSITION_MAPPING_RULES` aber weiterhin nur 16 Regeln groß).
+2. Verbleibende offene fachliche Entscheidungen klären (siehe `docs/components-boq-begriffsmatrix.md`, Abschnitt "Offene fachliche Entscheidungen"): `hydraulikRegelungsart = 'konventionell'`, Seil-Zuordnung für `maschine_standardrahmen`, Herstellerdimension Türtechnik, `frequenzregelung`-Mapping, doppelt geführtes `aufhaengung`-Feld.
+3. Bei Bedarf weitere Components-Positionen gegen die jetzt vollständige Bibliothek (311 Einträge) mappen - nur nach fachlicher Bestätigung, nicht automatisiert (siehe Anti-Try-and-Error-Regel).
 
 ## Offene Punkte
 
 - Fachliche Zuordnung von `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren` (Herstellerdimension) sowie der verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) ist noch offen - siehe `docs/components-boq-begriffsmatrix.md`.
-- Vollständige Integration der modularen LV-Bibliothek für alle übrigen (noch nicht bestätigten) Bausteine ist noch offen (Schritt C/D).
+- 3 bestehende Bibliothekseinträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_...`, `LV_14_02_...`) weichen minimal von einer frischen Word-Extraktion ab (siehe `docs/lv-architecture.md` Abschnitt 21) - bewusst nicht automatisch übernommen, fachliche Entscheidung offen.
+- Schritt F (Auslagerung Mappinglogik) ist noch nicht entschieden/umgesetzt.
 
 ## Kurzfazit
 
-Für die 10 aktuell bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch einen automatisierten Contract-Test (5 Stufen: Input, Mapping, Resolution, Export, DOCX-Inhalt) gegen Regressionen abgesichert. Für alle anderen Positionen bleibt der Legacy-Pfad bzw. `open` bestehen. Die modulare LV-Bibliothek unter `docs` ist als Bibliotheksresolver angebunden und der Bezugspunkt für weitere Bestätigungen. Das Granularitätsproblem bei `contentSource: 'static'` (ganzes Paket statt einzelnem Modul) ist behoben und regressionsgetestet.
+Für die 10 ursprünglich bestätigten Bibliotheks-IDs (jetzt 12, inkl. der beiden Hydraulik-Varianten aus Schritt H) ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch automatisierte Contract-Tests (5 Testsuiten: Mapping-Contract, Granularität, Validierung, Variantenmapping, Word-Import) gegen Regressionen abgesichert. Die strukturierte LV-Bibliothek (`backend/lv/bibliothek.json`) enthält jetzt alle 311 Bausteine aus der Word-Quelle (299 davon `entwurf`, fachlich ungeprüft) und ist über einen kontrollierten, validierten Importprozess wiederholbar reproduzierbar. Das Granularitätsproblem bei `contentSource: 'static'` ist behoben; Mapping unterstützt jetzt deterministische Varianten. Offen bleiben mehrere klar benannte fachliche Entscheidungen (Herstellerdimension, Seil-Zuordnung, `konventionell`-Text) sowie Schritt F.

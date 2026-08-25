@@ -106,9 +106,13 @@ function validateLibraryEntries(entries) {
       }
     }
 
-    // Kategorie-Eintraege (reine Kapitelueberschriften) duerfen ohne Fliesstext bleiben.
-    if (entry?.typ !== 'Kategorie' && !entry?.text) {
-      errors.push(`Eintrag ${label}: Pflichtfeld "text" fehlt (Typ "${entry?.typ}").`);
+    // Text kann bei reinen Gruppierungsknoten leer sein - nicht nur bei `typ: 'Kategorie'`,
+    // sondern auch bei einem `Baustein`/`Variante`, dessen eigentlicher Inhalt vollstaendig in
+    // untergeordneten Eintraegen (`struktur`-Praefix) steht (verifiziert an der realen Word-Quelle,
+    // z. B. `LV_10_08_WANDBELAGE` als reiner Sammelknoten fuer die Varianten `LV_10_08_01`..`03`).
+    // Fehlender Text ist daher ein Bericht, kein harter Fehler.
+    if (!entry?.text) {
+      warnings.push(`Eintrag ${label}: kein Fliesstext vorhanden (Typ "${entry?.typ}") - pruefen, ob dies ein reiner Gruppierungsknoten ist.`);
     }
 
     if (entry?.typ && !VALID_TYP.has(entry.typ)) {

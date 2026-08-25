@@ -437,4 +437,43 @@ Abgesichert durch `backend/test/variant-mapping.test.js` (alle 5 Kontexte: frequ
 
 Türtechnik (`tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`) und `teil_umbaukit_schiebetueren` wurden NICHT geschlossen: Die vorhandenen Bibliothekskandidaten sind herstellerspezifisch (Wittur) formuliert, Components kennt aktuell keine Herstellerdimension - das ist eine echte, in `docs/components-boq-begriffsmatrix.md` dokumentierte offene fachliche Entscheidung (siehe dort, Abschnitt "Offene fachliche Entscheidungen").
 
+## 21. Word-Import (Schritt C)
+
+`backend/lib/word-library-extractor.js` extrahiert strukturierte Bibliothekseinträge direkt aus `word/document.xml` der DOCX-Quelle. Grundlage ist dieselbe maschinenlesbare Metadatenzeile wie in Abschnitt 17 beschrieben (`Struktur <nr> | Typ <typ> | Bibliotheks-ID <id>`, Absatzformat `LVBibliothekMetadaten`):
+
+- Titel: der nächste nicht-leere Absatz **vor** der Metadatenzeile.
+- Fliesstext: alle Absätze zwischen der Metadatenzeile (exklusive) und der nächsten Metadatenzeile (exklusive deren Titel-Absatz), zeilenweise `trimEnd()`, mehr als 2 aufeinanderfolgende Leerzeilen werden auf eine doppelte Leerzeile reduziert.
+- `kapitel`: erstes Struktur-Segment. `kategorie`: ID des zum Kapitel gehörenden `Kategorie`-Eintrags (nicht bei `typ: 'Kategorie'` selbst).
+
+Der Extraktor trifft **keine** fachlichen Entscheidungen: kein Mapping, kein Erraten von Varianten, keine Umformulierung.
+
+`backend/scripts/import-word-library.js` (`planImport()`) gleicht den frischen Extrakt gegen den bestehenden `backend/lv/bibliothek.json`-Bestand ab:
+
+- Bestehende IDs werden **niemals** verändert - auch nicht, wenn der frische Word-Extrakt abweicht. Eine Abweichung wird als Bericht (`diff`) ausgegeben, damit ein Mensch entscheiden kann, ob die bestehende, bereits fachlich geprüfte Kuration aktualisiert werden soll.
+- Neue IDs werden mit `status: 'entwurf'` ergänzt (fachlich ungeprüft), nie mit `bestaetigt`.
+- Vor jedem Schreibvorgang läuft `validateLibrary()` über den gesamten Merge-Bestand; bei Fehlern wird **nicht** geschrieben (`node scripts/import-word-library.js`, ohne `--apply`, ist der Standard-Dry-Run).
+
+Bekannter, bewusst nicht automatisch übernommener Befund: 3 der 12 ursprünglich manuell kuratierten Einträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER`, `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE`) weichen im Feld `text` minimal von einer frischen Word-Extraktion ab (Trailing-Whitespace-Bereinigung bei den beiden `LV_14_*`-Einträgen; bei `LV_07_05` enthält die Word-Quelle einen zusätzlichen, sichtbar unvollständigen, grün eingefärbten Entwurfssatz "Schachtgrubenanstrich - ölfest in 2-K", der im ursprünglich kuratierten Text bewusst nicht enthalten ist). Diese 3 Fälle werden bei jedem Importlauf weiterhin als Bericht angezeigt, aber **nicht** automatisch überschrieben - das ist eine fachliche Entscheidung (Wortlaut übernehmen oder nicht), die hier offen bleibt.
+
+Abgesichert durch `backend/test/word-import.test.js`: 311 Einträge werden aus der Word-Quelle extrahiert (keine Duplikate, alle Kernfelder vorhanden), alle bestehenden Einträge bleiben im Merge-Ergebnis byte-identisch, neue Einträge erhalten ausnahmslos `status: 'entwurf'`, keine ID-Kollision, und der resultierende Merge-Bestand ist validierungsfehlerfrei (Voraussetzung für Schritt D).
+
+## 22. Vollübernahme (Schritt D)
+
+Am 2026-08-25 mit `node scripts/import-word-library.js --apply` durchgeführt. Ergebnis:
+
+- Word-Quelle: 311 Einträge (24 Kategorien, 226 Bausteine, 22 Varianten, 32 Unterbausteine, 7 Unterabschnitte).
+- Bereits bestehend (unverändert übernommen): 12 Einträge (`status: 'bestaetigt'`).
+- Neu importiert (`status: 'entwurf'`): 299 Einträge.
+- Duplikate: 0. Fehler: 0.
+- Bestehende Einträge mit Bericht (Abweichung zur Word-Quelle, nicht automatisch übernommen): 3 (siehe Abschnitt 21).
+- `backend/lv/bibliothek.json` enthält jetzt 311 Einträge.
+
+Validierungsbericht des Merge-Bestands (258 Berichte, 0 Fehler):
+
+- 27 × "kein Fliesstext vorhanden" - reine Gruppierungsknoten, deren Inhalt vollständig in untergeordneten `Variante`/`Unterbaustein`-Einträgen steht (z. B. `LV_10_08_WANDBELAGE` mit den Varianten `LV_10_08_01_GLAS`/`_02_EDELSTAHL`/`_03_HPL...`).
+- 17 × "auffällig identischer Text in mehreren Einträgen" - u. a. weil Kapitel 01 (Vorbemerkungen Neuanlagen) und Kapitel 02 (Vorbemerkungen Ersatzanlagen/Teilmodernisierung) zahlreiche wortgleiche Klauseln enthalten (z. B. `LV_01_07`/`LV_02_07` beide "Inverkehrbringung / Inbetriebnahme (PVI)").
+- 214 × "wird von keiner Mapping-Regel verwendet" - erwartet, da für die 299 neuen Einträge noch keine Mapping-Regel existiert; das ist **keine** Aufforderung, jetzt automatisch neue Mappings zu ergänzen (siehe Anti-Try-and-Error-Regel: Kalkulationsstruktur bestimmt, welche Bausteine tatsächlich gebraucht werden, nicht die Bibliotheksgröße).
+
+Wichtig: Der Vollimport erweitert ausschließlich die **Bibliothek** (die Menge verfügbarer, potenziell referenzierbarer LV-Bausteine). Er verändert `POSITION_MAPPING_RULES` nicht und schließt keine weiteren offenen Components-Positionen. Die 299 neu importierten Einträge sind `entwurf` (fachlich ungeprüft) und werden erst nach einer bestätigten fachlichen Zuordnung überhaupt referenziert.
+
 
