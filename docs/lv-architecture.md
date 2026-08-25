@@ -476,4 +476,14 @@ Validierungsbericht des Merge-Bestands (258 Berichte, 0 Fehler):
 
 Wichtig: Der Vollimport erweitert ausschließlich die **Bibliothek** (die Menge verfügbarer, potenziell referenzierbarer LV-Bausteine). Er verändert `POSITION_MAPPING_RULES` nicht und schließt keine weiteren offenen Components-Positionen. Die 299 neu importierten Einträge sind `entwurf` (fachlich ungeprüft) und werden erst nach einer bestätigten fachlichen Zuordnung überhaupt referenziert.
 
+## 23. Auslagerung Mappinglogik (Schritt F) - geprüft, bewusst zurückgestellt
+
+Geprüft am 2026-08-25, nach Abschluss der Vollübernahme (Schritt D):
+
+- `backend/server.js` umfasst aktuell ca. 2.550 Zeilen (Auth, Supabase, DOCX-Erzeugung, GAEB/X83-Export, positionsgenaue Mappinglogik).
+- `POSITION_MAPPING_RULES` umfasst weiterhin nur 16 Regeln - die Vollübernahme (Schritt D) hat bewusst nur die Bibliothek erweitert (311 Einträge), nicht die Mappingregeln (siehe Abschnitt 22, Anti-Try-and-Error-Regel). Der ursprünglich erwartete Auslöser für Schritt F ("wenn nach der Mengenausweitung ein echter Wartbarkeitsgewinn besteht") ist damit **nicht** eingetreten: Die Mengenausweitung betraf die Bibliothek, nicht die Mappinglogik.
+- Die reine Mapping-/Resolutionslogik (`POSITION_MAPPING_RULES`, `buildPositionMappingReport()`, `resolveMappedStaticLvEntries()`, `resolveBibliothekEntryAsLv()`, `resolveStaticModuleEntryAsLv()`, `loadBibliothek()`/`loadBibliothekEntries()`) ist bereits räumlich zusammenhängend innerhalb von `server.js` und über eine klare Testgrenze (`backend/test/mapping-contract.test.js`, `granularity-contract.test.js`, `variant-mapping.test.js`) abgesichert - unabhängig davon, ob sie in einer eigenen Datei liegt.
+
+Entscheidung: Schritt F wird **bewusst zurückgestellt**, nicht durchgeführt. Ein Auslagern in ein eigenes Modul (analog zu `backend/lib/library-validation.js` und `backend/lib/word-library-extractor.js`) wäre risikoarm und architektonisch naheliegend, aber bei nur 16 Regeln kein Schritt mit "echtem" Wartbarkeitsgewinn im Sinne des Architekturauftrags - er würde `server.js` verkleinern, ohne eine bestehende Wartbarkeitsschwierigkeit zu lösen. Erneut zu prüfen, sobald `POSITION_MAPPING_RULES` durch weitere fachlich bestätigte Mappings spürbar wächst (z. B. > 40-50 Regeln) oder `server.js` aus anderen Gründen unübersichtlich wird.
+
 

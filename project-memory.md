@@ -309,19 +309,19 @@ Verbindliche Zielreihenfolge (siehe Architekturentscheidung): E → B → I → 
 - **H – gezielt geschlossene Mappings:** `maschine_standardrahmen` ist jetzt teilweise geschlossen (Variantengruppe `antrieb-standardrahmen`): Hydraulik + `frequenzgeregelt` → `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER`, Hydraulik + `softstart` → `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE` (beide IDs/Texte 1:1 aus der Word-Quelle verifiziert). Bewusst weiterhin offen: Hydraulik + `konventionell` (kein Baustein in Kapitel 14 vorhanden) und Seil (keine eindeutige 1:1-Zuordnung). Türtechnik und `teil_umbaukit_schiebetueren` bleiben unverändert offen (Herstellerdimension ungeklärt). Abgesichert durch `backend/test/variant-mapping.test.js`. Details: `docs/lv-architecture.md` Abschnitt 20.
 - **C – Word-Import (aufgebaut):** `backend/lib/word-library-extractor.js` extrahiert Bibliothekseinträge direkt aus der Word-Metadatenzeile; `backend/scripts/import-word-library.js` (`planImport()`) gleicht gegen den bestehenden Bestand ab, ändert bestehende IDs nie still, markiert neue Einträge als `status: 'entwurf'` und schreibt nur nach erfolgreicher Validierung (`--apply`). Abgesichert durch `backend/test/word-import.test.js`. Details: `docs/lv-architecture.md` Abschnitt 21.
 - **D – Vollübernahme (durchgeführt, 2026-08-25):** `backend/lv/bibliothek.json` enthält jetzt alle 311 Word-Bibliothekseinträge (12 `bestaetigt`, 299 `entwurf`). 0 Fehler, 258 Berichte (27 Gruppierungsknoten ohne eigenen Text, 17 auffällig identische Texte, 214 noch ungenutzte Einträge - erwartet, da noch keine Mapping-Regel existiert). Details: `docs/lv-architecture.md` Abschnitt 22.
-- **F:** siehe `docs/lv-architecture.md` für den Umsetzungsstand (noch offen, siehe unten).
+- **F – Auslagerung Mappinglogik (geprüft, bewusst zurückgestellt):** `POSITION_MAPPING_RULES` ist nach der Vollübernahme weiterhin nur 16 Regeln groß (Schritt D hat bewusst nur die Bibliothek erweitert, nicht die Mappingregeln) - kein echter Wartbarkeitsgewinn durch Auslagerung aktuell. Erneut prüfen, wenn die Regelanzahl spürbar wächst. Details: `docs/lv-architecture.md` Abschnitt 23.
 
 ## Nächste fachliche Schritte
 
-1. Prüfen, ob Schritt F (Auslagerung der Mappinglogik aus `server.js`) jetzt einen echten Wartbarkeitsgewinn bringt (311 Bibliothekseinträge vorhanden, `POSITION_MAPPING_RULES` aber weiterhin nur 16 Regeln groß).
-2. Verbleibende offene fachliche Entscheidungen klären (siehe `docs/components-boq-begriffsmatrix.md`, Abschnitt "Offene fachliche Entscheidungen"): `hydraulikRegelungsart = 'konventionell'`, Seil-Zuordnung für `maschine_standardrahmen`, Herstellerdimension Türtechnik, `frequenzregelung`-Mapping, doppelt geführtes `aufhaengung`-Feld.
-3. Bei Bedarf weitere Components-Positionen gegen die jetzt vollständige Bibliothek (311 Einträge) mappen - nur nach fachlicher Bestätigung, nicht automatisiert (siehe Anti-Try-and-Error-Regel).
+1. Verbleibende offene fachliche Entscheidungen klären (siehe `docs/components-boq-begriffsmatrix.md`, Abschnitt "Offene fachliche Entscheidungen"): `hydraulikRegelungsart = 'konventionell'`, Seil-Zuordnung für `maschine_standardrahmen`, Herstellerdimension Türtechnik, `frequenzregelung`-Mapping, doppelt geführtes `aufhaengung`-Feld.
+2. Bei Bedarf weitere Components-Positionen gegen die jetzt vollständige Bibliothek (311 Einträge) mappen - nur nach fachlicher Bestätigung, nicht automatisiert (siehe Anti-Try-and-Error-Regel).
+3. Schritt F erneut bewerten, sobald `POSITION_MAPPING_RULES` spürbar wächst.
 
 ## Offene Punkte
 
 - Fachliche Zuordnung von `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren` (Herstellerdimension) sowie der verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) ist noch offen - siehe `docs/components-boq-begriffsmatrix.md`.
 - 3 bestehende Bibliothekseinträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_...`, `LV_14_02_...`) weichen minimal von einer frischen Word-Extraktion ab (siehe `docs/lv-architecture.md` Abschnitt 21) - bewusst nicht automatisch übernommen, fachliche Entscheidung offen.
-- Schritt F (Auslagerung Mappinglogik) ist noch nicht entschieden/umgesetzt.
+- Schritt F (Auslagerung Mappinglogik) wurde geprüft und bewusst zurückgestellt (siehe `docs/lv-architecture.md` Abschnitt 23) - kein offener Punkt, sondern eine dokumentierte Entscheidung.
 
 ## Kurzfazit
 
