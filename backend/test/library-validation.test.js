@@ -99,6 +99,70 @@ function runSelfTests() {
   });
   assertContains(invalidConditionResult.errors, 'ungueltige Variantenbedingung', 'ungueltige technicalCondition');
 
+  // 5b. Nicht-deterministische Variantengruppe (zwei Regeln matchen fuer denselben Kontext gleichzeitig)
+  const nonDeterministicResult = validateLibrary({
+    entries: [
+      { id: 'LV_VARIANT_A', struktur: '14.01', kapitel: '14', titel: 'A', typ: 'Baustein', text: 'Text A', status: 'bestaetigt' },
+      { id: 'LV_VARIANT_B', struktur: '14.02', kapitel: '14', titel: 'B', typ: 'Baustein', text: 'Text B', status: 'bestaetigt' },
+    ],
+    rules: [
+      {
+        groupKey: 'variant-a',
+        variantGroup: 'test-variant-group',
+        componentsIds: ['irrelevant'],
+        bibliotheksId: 'LV_VARIANT_A',
+        contentSource: 'bibliothek',
+        status: 'mapped',
+        technicalCondition: (t) => t.aufzugstyp === 'hydraulik',
+      },
+      {
+        // Ueberlappt bewusst NICHT ausschliesslich mit variant-a (matcht auch bei
+        // aufzugstyp === 'hydraulik' unabhaengig von hydraulikRegelungsart) - muss als
+        // nicht-deterministisch erkannt werden.
+        groupKey: 'variant-b',
+        variantGroup: 'test-variant-group',
+        componentsIds: ['irrelevant'],
+        bibliotheksId: 'LV_VARIANT_B',
+        contentSource: 'bibliothek',
+        status: 'mapped',
+        technicalCondition: (t) => t.aufzugstyp === 'hydraulik' && t.hydraulikRegelungsart === 'softstart',
+      },
+    ],
+  });
+  assertContains(nonDeterministicResult.errors, 'nicht deterministisch', 'nicht-deterministische Variantengruppe');
+
+  // 5c. Deterministische Variantengruppe (sich gegenseitig ausschliessende Bedingungen) => kein Fehler
+  const deterministicResult = validateLibrary({
+    entries: [
+      { id: 'LV_VARIANT_A', struktur: '14.01', kapitel: '14', titel: 'A', typ: 'Baustein', text: 'Text A', status: 'bestaetigt' },
+      { id: 'LV_VARIANT_B', struktur: '14.02', kapitel: '14', titel: 'B', typ: 'Baustein', text: 'Text B', status: 'bestaetigt' },
+    ],
+    rules: [
+      {
+        groupKey: 'variant-a',
+        variantGroup: 'test-variant-group-2',
+        componentsIds: ['irrelevant'],
+        bibliotheksId: 'LV_VARIANT_A',
+        contentSource: 'bibliothek',
+        status: 'mapped',
+        technicalCondition: (t) => t.aufzugstyp === 'hydraulik' && t.hydraulikRegelungsart === 'frequenzgeregelt',
+      },
+      {
+        groupKey: 'variant-b',
+        variantGroup: 'test-variant-group-2',
+        componentsIds: ['irrelevant'],
+        bibliotheksId: 'LV_VARIANT_B',
+        contentSource: 'bibliothek',
+        status: 'mapped',
+        technicalCondition: (t) => t.aufzugstyp === 'hydraulik' && t.hydraulikRegelungsart === 'softstart',
+      },
+    ],
+  });
+  assertEmpty(
+    deterministicResult.errors.filter((e) => e.includes('nicht deterministisch')),
+    'deterministische Variantengruppe darf keinen Determinismus-Fehler erzeugen'
+  );
+
   // 6. Ungenutzter Bibliothekseintrag => Bericht (warning), kein Fehler
   const unusedResult = validateLibrary({
     entries: [{ id: 'LV_UNUSED', struktur: '01.01', kapitel: '01', titel: 'Unbenutzt', typ: 'Baustein', text: 'Text', status: 'bestaetigt' }],

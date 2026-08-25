@@ -1659,13 +1659,57 @@ const POSITION_MAPPING_RULES = Object.freeze([
     technicalCondition: (technical) => normalizeToken(technical?.projektart || '') === 'teilmodernisierung',
     canRemainOpen: false,
   },
+  // Variantengruppe 'antrieb-standardrahmen': maschine_standardrahmen zeigt je nach technischer
+  // Bedingung (hydraulikRegelungsart) auf unterschiedliche Bibliotheks-IDs. antriebTyp (mechanische
+  // Aufhaengungsart) und hydraulikRegelungsart (Regelungselektronik) bleiben bewusst getrennte
+  // Dimensionen (siehe docs/components-boq-begriffsmatrix.md) - hier wird ausschliesslich nach
+  // hydraulikRegelungsart unterschieden. Fuer 'konventionell' existiert kein bestaetigter
+  // Bibliotheksbaustein (siehe Kapitel 14 der Word-Bibliothek) - bewusst kein erfundener Text.
+  // Fuer Seil bleibt die Zuordnung mangels eindeutigem Bibliothekskandidat offen (siehe
+  // docs/components-boq-begriffsmatrix.md, offene fachliche Entscheidung).
   {
-    groupKey: 'open-aggregate',
+    groupKey: 'antrieb-standardrahmen-hydraulik-frequenzgeregelt',
+    variantGroup: 'antrieb-standardrahmen',
+    componentsIds: ['maschine_standardrahmen'],
+    bibliotheksId: 'LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: (technical) =>
+      normalizeToken(technical?.aufzugstyp || '') === 'hydraulik' &&
+      normalizeToken(technical?.hydraulikRegelungsart || '') === 'frequenzgeregelt',
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'antrieb-standardrahmen-hydraulik-softstart',
+    variantGroup: 'antrieb-standardrahmen',
+    componentsIds: ['maschine_standardrahmen'],
+    bibliotheksId: 'LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: (technical) =>
+      normalizeToken(technical?.aufzugstyp || '') === 'hydraulik' &&
+      normalizeToken(technical?.hydraulikRegelungsart || '') === 'softstart',
+    canRemainOpen: false,
+  },
+  {
+    // Bleibt offen fuer: Seil (jede Regelungsart/antriebTyp) sowie Hydraulik mit
+    // hydraulikRegelungsart = 'konventionell' oder unbekannt/leer - fuer diese Faelle existiert
+    // kein bestaetigter Bibliotheksbaustein, daher kein erfundener Ersatztext.
+    groupKey: 'antrieb-standardrahmen-offen',
+    variantGroup: 'antrieb-standardrahmen',
     componentsIds: ['maschine_standardrahmen'],
     bibliotheksId: null,
     staticEntryId: null,
     status: 'open',
-    technicalCondition: () => true,
+    technicalCondition: (technical) =>
+      !(
+        normalizeToken(technical?.aufzugstyp || '') === 'hydraulik' &&
+        ['frequenzgeregelt', 'softstart'].includes(normalizeToken(technical?.hydraulikRegelungsart || ''))
+      ),
     canRemainOpen: true,
   },
   {
@@ -1809,11 +1853,12 @@ function buildPositionMappingReport(query = {}) {
       continue;
     }
 
+    if (!rule.technicalCondition(technical)) {
+      continue;
+    }
+
     const matches = rule.componentsIds.filter((id) => byId.has(id));
     if (rule.status === 'mapped') {
-      if (!rule.technicalCondition(technical)) {
-        continue;
-      }
       mapped.push({
         componentsIds: matches,
         bibliotheksId: rule.bibliotheksId,

@@ -394,7 +394,8 @@ Geprüft werden mindestens:
 - Mapping auf eine nicht existente Bibliotheks-ID bzw. ein nicht existentes Modul in einem statischen Paket = Waisen-Mapping (`errors`)
 - ungültige Variantenbedingungen (`technicalCondition` ist keine Funktion) (`errors`)
 - unbekannte `contentSource`-Werte (`errors`)
-- doppelte/überlappende Regeln: derselbe Components-Key in mehreren `mapped`-Regeln, bzw. mehrere Regeln mit derselben Ziel-Bibliotheks-ID (`warnings` - technisch erkennbar, aber ob sich die `technicalCondition`-Werte tatsächlich gegenseitig ausschließen, wird nicht automatisch bewiesen, sondern zur manuellen Prüfung gemeldet)
+- doppelte/überlappende Regeln: derselbe Components-Key in mehreren `mapped`-Regeln ohne gemeinsame `variantGroup` (`warnings` - technisch erkennbar, aber ob sich die `technicalCondition`-Werte tatsächlich gegenseitig ausschließen, wird nicht automatisch bewiesen, sondern zur manuellen Prüfung gemeldet), bzw. mehrere Regeln mit derselben Ziel-Bibliotheks-ID (`warnings`)
+- nicht-deterministische Variantengruppen: mehrere `mapped`-Regeln mit derselben `variantGroup` matchen für denselben, enumerierten repräsentativen technischen Kontext gleichzeitig (`errors`, siehe Abschnitt 19)
 - Bibliothekseinträge ohne Verwendung durch eine Mapping-Regel (`warnings`, kein Fehler)
 - auffällig identische Texte über mehrere Bibliothekseinträge hinweg (`warnings`, kein Fehler)
 
@@ -404,4 +405,36 @@ Abgesichert durch `backend/test/library-validation.test.js`:
 2. Anschließend wird der reale Datenbestand (`backend/lv/bibliothek.json` + `POSITION_MAPPING_RULES`) geprüft; aktueller Stand: 0 Fehler, 0 Berichte.
 
 Verbindliche Regel für die folgenden Schritte (Word-Import, Vollübernahme): Ein Bulk-Import darf erst erfolgen, wenn `backend/test/library-validation.test.js` für den importierten Datenbestand fehlerfrei durchläuft.
+
+## 19. Variantenfähiges Mapping (Schritt G)
+
+Eine Components-Position kann abhängig von technischen Bedingungen auf unterschiedliche Bibliotheks-IDs zeigen (`1:n variantenabhängig`). Umsetzung ohne neue Sonderlogik im Renderer:
+
+- Mehrere Regeln in `POSITION_MAPPING_RULES` teilen sich dieselben `componentsIds` und ein gemeinsames `variantGroup`-Feld (String-Kennung der Variantengruppe).
+- Jede Regel der Gruppe hat eine eigene `bibliotheksId` und eine eigene `technicalCondition`, die sich mit den anderen Regeln der Gruppe gegenseitig ausschließen muss.
+- Eine abschließende, ebenfalls der `variantGroup` zugehörige `open`-Regel deckt alle technischen Kontexte ab, die von keiner `mapped`-Regel der Gruppe erfasst werden (Negation der Vereinigung aller `mapped`-Bedingungen) - damit bleibt die Position nachvollziehbar `open` statt unsichtbar zu verschwinden, wenn keine Variante zutrifft.
+- **Determinismus-Test** (`validateVariantGroupDeterminism()` in `backend/lib/library-validation.js`): Für jede `variantGroup` wird über eine enumerierte Menge repräsentativer technischer Kontexte (Kombinationen aus `aufzugstyp`, `hydraulikRegelungsart`, `projektart`) geprüft, dass für jeden Kontext höchstens eine `mapped`-Regel der Gruppe matcht. Ein Verstoß ist ein harter Validierungsfehler, kein Bericht - das ist die konkrete, testbare Umsetzung von "deterministisch und testbar" (Enumeration statt allgemeinem Beweis über beliebige Prädikatsfunktionen).
+
+Erste produktive Variantengruppe: `antrieb-standardrahmen` für `maschine_standardrahmen` (siehe Abschnitt 20).
+
+Wichtig, bereits in der bestätigten Architektur festgelegt und hier nur bestätigt: `antriebTyp` (mechanische Antriebs-/Aufhängungsart: `seil-oben` / `hydraulik-direkt` / `hydraulik-indirekt`) und `hydraulikRegelungsart` (Regelungsart: `frequenzgeregelt` / `softstart` / `konventionell`) sind unabhängige Dimensionen und dürfen nicht gekoppelt werden. Die Variantengruppe `antrieb-standardrahmen` unterscheidet ausschließlich nach `hydraulikRegelungsart` (und `aufzugstyp`), nicht nach `antriebTyp`.
+
+## 20. Geschlossene und weiterhin offene Mappings (Schritt H)
+
+Auf Basis der realen Word-Metadatenzeilen (Kapitel 14, Antrieb Hydraulik) wurde `maschine_standardrahmen` **teilweise** geschlossen:
+
+- `aufzugstyp = hydraulik` + `hydraulikRegelungsart = frequenzgeregelt` → `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER` ("TWR – Hydraulik Frequenzgeregelt (z.B. Bucher)")
+- `aufzugstyp = hydraulik` + `hydraulikRegelungsart = softstart` → `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE` ("TWR – Hydraulik mit Softstart (z.B. Hydroware)")
+
+Beide Bausteine sind inhaltlich passend zur fachlichen Bedeutung von `maschine_standardrahmen` bei Hydraulik ("das komplette Hydraulikaggregat inkl. Gestell", siehe `docs/components-boq-begriffsmatrix.md`) und wurden wortgetreu aus der Word-Quelle in `backend/lv/bibliothek.json` übernommen (Struktur `14.01`/`14.02`, Kapitel `14`, Kategorie `LV_KAP_14_ANTRIEB_HYDRAULIK`).
+
+Bewusst weiterhin **offen** (kein erfundener Ersatztext, siehe Stopp-Kriterien des Architekturauftrags):
+
+- `aufzugstyp = hydraulik` + `hydraulikRegelungsart = konventionell` bzw. leer/unbekannt: In Kapitel 14 der Word-Bibliothek existiert außer `LV_14_01`/`LV_14_02` kein weiterer TWR-Aggregat-Baustein (verifiziert: Kapitel 14 enthält `14.01`–`14.09`, kein `konventionell`-Pendant). Es ist fachlich nicht entschieden, ob dafür ein neuer Bibliothekstext verfasst werden soll oder ob diese Variante bewusst ohne LV-Position bleibt (bereits als offene Frage in `docs/components-boq-begriffsmatrix.md` dokumentiert).
+- `aufzugstyp = seil` (jede `antriebTyp`-Ausprägung): Die Begriffsmatrix benennt mehrere mögliche Kandidaten (`LV_13_01`/`LV_13_02`/`LV_13_03`, Kapitel 13 „Antrieb Seil“), aber keine eindeutige 1:1-Zuordnung - bleibt offen, bis diese fachliche Entscheidung getroffen ist.
+
+Abgesichert durch `backend/test/variant-mapping.test.js` (alle 5 Kontexte: frequenzgeregelt, softstart, konventionell, leer, seil) sowie den Determinismus-Test in `backend/test/library-validation.test.js`.
+
+Türtechnik (`tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`) und `teil_umbaukit_schiebetueren` wurden NICHT geschlossen: Die vorhandenen Bibliothekskandidaten sind herstellerspezifisch (Wittur) formuliert, Components kennt aktuell keine Herstellerdimension - das ist eine echte, in `docs/components-boq-begriffsmatrix.md` dokumentierte offene fachliche Entscheidung (siehe dort, Abschnitt "Offene fachliche Entscheidungen").
+
 

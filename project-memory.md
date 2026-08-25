@@ -52,6 +52,7 @@ Ziel ist die Erstellung und Weiterverarbeitung von Leistungsverzeichnissen mit n
 - `backend/test/mapping-contract.test.js` – Contract-Test (`npm test`)
 - `backend/test/granularity-contract.test.js` – Granularitäts-Contract-Test (`npm test`)
 - `backend/test/library-validation.test.js` – Validierungs-Contract-Test (`npm test`)
+- `backend/test/variant-mapping.test.js` – Varianten-Contract-Test (`npm test`): `maschine_standardrahmen` je `hydraulikRegelungsart`
 - `docs/auth-users.md` – Benutzer-/Auth-Dokumentation
 - `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (fachliche Quelle für `bibliothek.json`)
 
@@ -295,22 +296,21 @@ Verbindliche Zielreihenfolge (siehe Architekturentscheidung): E → B → I → 
 - **E – Granularitätsproblem `contentSource: 'static'` (behoben):** `resolveMappedStaticLvEntries()` löst pro Regel genau ein Modul (`staticModuleId`) auf statt eines ganzen Pakets; Dedup erfolgt über die Ziel-Bibliotheks-ID. Abgesichert durch `backend/test/granularity-contract.test.js`. Details: `docs/lv-architecture.md` Abschnitt 9.1.
 - **B – Bibliotheksschema (festgelegt):** `backend/lv/bibliothek.json` ist jetzt ein Array mit Schema `{id, struktur, kapitel, kategorie, titel, typ, text, status}`, abgeleitet aus der real in der Word-Quelle vorhandenen Metadatenstruktur (Struktur/Typ/Bibliotheks-ID je Baustein). Kein `parentId` (Hierarchie steckt bereits in `struktur`). Details: `docs/lv-architecture.md` Abschnitt 17.
 - **I – Validierungsprozess (aufgebaut):** `backend/lib/library-validation.js` (`validateLibrary()`) prüft Bibliothek und Mappingregeln auf doppelte IDs, fehlende Pflichtfelder, ungültige Status-/Typ-Werte, Waisen-Mappings, ungültige Variantenbedingungen, überlappende Regeln (Bericht), ungenutzte Einträge (Bericht) und auffällig identische Texte (Bericht). Abgesichert durch `backend/test/library-validation.test.js` inkl. Selbsttests mit bewusst fehlerhaften Daten. Details: `docs/lv-architecture.md` Abschnitt 18.
-- **G, H, C, D, F:** siehe `docs/lv-architecture.md` für den jeweiligen Umsetzungsstand.
+- **G – Variantenfähiges Mapping (aufgebaut):** `POSITION_MAPPING_RULES` unterstützt jetzt Variantengruppen (`variantGroup`-Feld): mehrere `mapped`-Regeln mit denselben `componentsIds`, unterschiedlicher `bibliotheksId` und sich gegenseitig ausschließender `technicalCondition`, plus eine abschließende `open`-Regel für nicht abgedeckte Kontexte. Determinismus wird durch Enumeration repräsentativer technischer Kontexte in `validateVariantGroupDeterminism()` hart geprüft (Fehler bei Überlappung). Details: `docs/lv-architecture.md` Abschnitt 19.
+- **H – gezielt geschlossene Mappings:** `maschine_standardrahmen` ist jetzt teilweise geschlossen (Variantengruppe `antrieb-standardrahmen`): Hydraulik + `frequenzgeregelt` → `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER`, Hydraulik + `softstart` → `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE` (beide IDs/Texte 1:1 aus der Word-Quelle verifiziert). Bewusst weiterhin offen: Hydraulik + `konventionell` (kein Baustein in Kapitel 14 vorhanden) und Seil (keine eindeutige 1:1-Zuordnung). Türtechnik und `teil_umbaukit_schiebetueren` bleiben unverändert offen (Herstellerdimension ungeklärt). Abgesichert durch `backend/test/variant-mapping.test.js`. Details: `docs/lv-architecture.md` Abschnitt 20.
+- **C, D, F:** siehe `docs/lv-architecture.md` für den jeweiligen Umsetzungsstand.
 
 ## Nächste fachliche Schritte
 
-1. Bibliotheksschema (Schritt B) festlegen/dokumentieren und bestehende Bibliothekseinträge migrieren.
-2. Validierungsprozess (Schritt I) für Bibliothek und Mappingregeln aufbauen.
-3. Mappingmodell um Variantenbedingungen erweitern (Schritt G), insbesondere `hydraulikRegelungsart`.
-4. Nur fachlich eindeutig ableitbare offene Mappings schließen (Schritt H); Türtechnik-Hersteller-dimension und `hydraulikRegelungsart = 'konventionell'` bleiben ohne bestätigten Bibliotheksbaustein offen.
-5. Kontrollierten Word-Import (Schritt C) aufbauen, sobald Schema und Validierung stabil sind.
-6. Übrige Word-Bausteine automatisiert übernehmen (Schritt D).
-7. Mappinglogik ggf. aus `server.js` auslagern (Schritt F), erst wenn ein echter Wartbarkeitsgewinn besteht.
+1. Kontrollierten Word-Import (Schritt C) aufbauen, sobald Schema und Validierung stabil sind (sind sie: siehe B/I oben).
+2. Übrige Word-Bausteine automatisiert übernehmen (Schritt D).
+3. Mappinglogik ggf. aus `server.js` auslagern (Schritt F), erst wenn ein echter Wartbarkeitsgewinn besteht.
+4. Verbleibende offene fachliche Entscheidungen klären (siehe `docs/components-boq-begriffsmatrix.md`, Abschnitt "Offene fachliche Entscheidungen"): `hydraulikRegelungsart = 'konventionell'`, Seil-Zuordnung für `maschine_standardrahmen`, Herstellerdimension Türtechnik, `frequenzregelung`-Mapping, doppelt geführtes `aufhaengung`-Feld.
 
 ## Offene Punkte
 
-- Fachliche Zuordnung der 6 bewusst offenen Components-Positionen (`maschine_standardrahmen`, `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren`) ist noch offen.
-- Vollständige Integration der modularen LV-Bibliothek für alle übrigen (noch nicht bestätigten) Bausteine ist noch offen.
+- Fachliche Zuordnung von `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren` (Herstellerdimension) sowie der verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) ist noch offen - siehe `docs/components-boq-begriffsmatrix.md`.
+- Vollständige Integration der modularen LV-Bibliothek für alle übrigen (noch nicht bestätigten) Bausteine ist noch offen (Schritt C/D).
 
 ## Kurzfazit
 

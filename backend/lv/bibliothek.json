@@ -98,5 +98,25 @@
     "typ": "Baustein",
     "text": "Die hydraulischen Verbindungsleitungen vom Aggregat bis zum Heberanschluss sind als geprüfter Druckschlauch zu erneuern. (Länge pro Aufzug s. Anlagenzeichnung)\nVorgeschriebene Biegeradien sind einzuhalten.\nDie Halterungen sind schwingungsisolierend auszuführen, so dass keine Körperschallübertragung möglich ist.(Befestigungsschellen mit Gummieinlage)\nZur Vermeidung von Strömungsgeräuschen darf die Ölgeschwindigkeit in der Zuleitung 5 m/s nicht überschreiten.\nDas vorhandene Hydrauliköl ist fachgerecht zu entsorgen und durch neues Hydrauliköl zu ersetzen. (HLP 46 o. vergleichbar)",
     "status": "bestaetigt"
+  },
+  {
+    "id": "LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER",
+    "struktur": "14.01",
+    "kapitel": "14",
+    "kategorie": "LV_KAP_14_ANTRIEB_HYDRAULIK",
+    "titel": "TWR – Hydraulik Frequenzgeregelt (z.B. Bucher)",
+    "typ": "Baustein",
+    "text": "Hydraulisches Aufzugsaggregat mit Frequenzregelung\nDas hydraulische Aufzugsaggregat muss frequenzgeregelt sein und die folgenden Anforderungen erfüllen:\n\nFahrkomfort und Programmierbarkeit\nDie Regelung der Fahrkurve soll unabhängig von Last und Temperatur einen hohen Fahrkomfort gewährleisten.\nDie Fahrkurvenparameter für Auf- und Abfahrten müssen separat programmierbar sein.\n\nDurchflussmessung und Technologie\nDie Durchflussmessung erfolgt viskositätsunabhängig mittels berührungsloser, wartungsfreier Hallsensor-Technologie.\n\nIntegrierte Handnotbefreiung\nEine integrierte Handnotbefreiung ist erforderlich.\n\nAntriebsausführung\nDer hydraulische Antrieb wird als Unterölmotor ausgeführt.\nBehälter und Unterölmotor sind als komplette Einheit zu liefern.\nArbeitsdrücke und Durchflussgeschwindigkeit sind möglichst gering zu halten.\n\nFunktion und Nachregelung\nDer Aufzug muss über den Frequenzumrichter direkt bündig in die Etage einfahren und bei offener Tür nachregulieren können.\n\nÖlmanagement und Temperaturüberwachung\nEine ausreichende Ölmenge ist vorzusehen, um die Ölerwärmung zu berücksichtigen.\nZur Überwachung der Öltemperatur sind Kaltleiter-Temperaturfühler vorgesehen.\n\nMontage und Dämpfung\nDie Aufstellung des Aggregats erfolgt mit Dämpfungselementen an den Behälterfüßen.\nEine Handpumpe ist vorgesehen.\n\nElektrische Anforderungen\nDie Anforderungen nach EN 55011B bzw. EN 50081-1 bezüglich Netzbelastung müssen eingehalten werden.\n\nDer Antriebsmotor ist als Unterölmotor ausgeführt und mit Kaltleiter-Temperaturfühlern zur Überwachung der Motortemperatur ausgestattet.\n\nDie verwendeten Isolierstoffe müssen mindestens Klasse B nach VDE 0530 entsprechen.\n\nAntriebsart: Hydraulik\nLeitfabrikat: Bucher, Algi o.ä.\nPosition: Triebwerksraum \nLeistungsreserve:min. 10 % \n(Leistungsreserve muss nachgewiesen werden.)",
+    "status": "bestaetigt"
+  },
+  {
+    "id": "LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE",
+    "struktur": "14.02",
+    "kapitel": "14",
+    "kategorie": "LV_KAP_14_ANTRIEB_HYDRAULIK",
+    "titel": "TWR – Hydraulik mit Softstart (z.B. Hydroware)",
+    "typ": "Baustein",
+    "text": "Gefordert ist ein hydraulischer Aufzugsantrieb mit Softstartgerät.\nDie Regelung der Fahrkurve muss, unabhängig von Last und Temperatur, einen hohen Fahrkomfort bieten. \nDie Fahrkurvenparameter für die Auf- und Abfahrt sollen getrennt programmiert werden können.  \nDie Durchflussmessung muss viskositätsunabhängig mittels berührungsloser, wartungsfreier Hallsensor-Technologie erfolgen. \nDie Notbefreiung ist durch einen integrierten Handnotablass sicherzustellen. \nDer Fehlerspeicher der Regelkarte muss Störungen zur einfachen Analyse im Störungsfall registrieren.\nDer neu zu liefernde hydraulische Antrieb soll als Unterölaggregat ausgeführt sein. \nSchraubenspindelpumpe und Unterölmotor sind als komplette Einheit zu liefern.\nArbeitsdrücke und Durchflussgeschwindigkeit sind möglichst gering zu halten.\nDie Schraubenspindelpumpe soll geräusch- und pulsationsarm arbeiten.\nDer Aufzug muss über die Ventilsteuerung direkt bündig in die Etage einfahren und bei offener Tür nachregulieren können.\nMit Rücksicht auf die Ölerwärmung ist eine ausreichende Ölmenge vorzusehen. \nDie Aufstellung des Aggregates erfolgt mit Dämpfungselementen an den Behälterfüßen.\nInkl. integrierter Tankheizung\nEine Handpumpe ist vorzusehen.\nDie Forderungen EN 55011B bzw. EN 50081-1 bezüglich Netzbelastung müssen eingehalten werden.\nDer Antriebsmotor ist als Unterölmotor vorzusehen. \nDie Motorwicklungen sollen mit Kaltleiter-Temperaturfühlern zur Überwachung der Motortemperatur versehen sein.\nZusätzlich sind Kaltleiter-Temperaturfühler zur Überwachung der Öltemperatur vorzusehen.\nDie Temperaturbeständigkeit der verwendeten Isolierstoffe muss mindestens Klasse B nach VDE 0530 entsprechen.",
+    "status": "bestaetigt"
   }
 ]

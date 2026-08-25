@@ -18,6 +18,66 @@ const VALID_STATUS = new Set(['entwurf', 'bestaetigt', 'veraltet']);
 const VALID_CONTENT_SOURCES = new Set(['bibliothek', 'static']);
 const REQUIRED_FIELDS = ['id', 'struktur', 'kapitel', 'titel', 'typ', 'status'];
 
+// Repraesentative technische Kontexte fuer den Determinismus-Test von Variantengruppen (Schritt G).
+// Deckt die aktuell bekannten Variantendimensionen ab. Bei neuen Dimensionen (z. B. weitere
+// Regelungsarten, ein neues Enum) hier ergaenzen, damit der Determinismus-Test sie mitprueft.
+const REPRESENTATIVE_TECHNICAL_CONTEXTS = (() => {
+  const aufzugstypValues = ['hydraulik', 'seil', ''];
+  const hydraulikRegelungsartValues = ['frequenzgeregelt', 'softstart', 'konventionell', ''];
+  const projektartValues = ['teilmodernisierung', 'neubau', ''];
+  const contexts = [];
+  for (const aufzugstyp of aufzugstypValues) {
+    for (const hydraulikRegelungsart of hydraulikRegelungsartValues) {
+      for (const projektart of projektartValues) {
+        contexts.push({ aufzugstyp, hydraulikRegelungsart, projektart });
+      }
+    }
+  }
+  return contexts;
+})();
+
+// Schritt G: Beweist, dass eine Variantengruppe (mehrere "mapped"-Regeln mit demselben
+// `variantGroup`, die denselben Components-Key auf unterschiedliche Bibliotheks-IDs abbilden)
+// deterministisch ist - fuer jeden repraesentativen technischen Kontext darf hoechstens EINE Regel
+// der Gruppe matchen. Das ist die konkrete, testbare Umsetzung von "deterministisch und testbar"
+// aus dem Architekturauftrag (Enumeration statt allgemeiner Beweis ueber beliebige Praedikate).
+function validateVariantGroupDeterminism(rules) {
+  const errors = [];
+  const groups = new Map();
+
+  for (const rule of rules) {
+    if (!rule.variantGroup || rule.status !== 'mapped') {
+      continue;
+    }
+    if (!groups.has(rule.variantGroup)) {
+      groups.set(rule.variantGroup, []);
+    }
+    groups.get(rule.variantGroup).push(rule);
+  }
+
+  for (const [variantGroup, groupRules] of groups) {
+    for (const context of REPRESENTATIVE_TECHNICAL_CONTEXTS) {
+      const matching = groupRules.filter((rule) => {
+        try {
+          return Boolean(rule.technicalCondition(context));
+        } catch {
+          return false;
+        }
+      });
+
+      if (matching.length > 1) {
+        errors.push(
+          `Variantengruppe "${variantGroup}" ist fuer den technischen Kontext ${JSON.stringify(context)} nicht deterministisch: ${matching.length} Regeln matchen gleichzeitig (${matching
+            .map((r) => r.groupKey)
+            .join(', ')}).`
+        );
+      }
+    }
+  }
+
+  return errors;
+}
+
 function normalizeText(text) {
   return String(text || '').replace(/\s+/g, ' ').trim().toLowerCase();
 }
@@ -135,7 +195,11 @@ function validateMappingRules(rules, { entries = [], staticPackages = {} } = {})
     }
   }
 
-  // Doppelte/ueberlappende Regeln: derselbe Components-Key in mehreren "mapped"-Regeln.
+  // Doppelte/ueberlappende Regeln: derselbe Components-Key in mehreren "mapped"-Regeln. Regeln, die
+  // Teil derselben, per Determinismus-Test (siehe validateVariantGroupDeterminism) abgesicherten
+  // `variantGroup` sind, werden hier NICHT erneut als vage Warnung gemeldet - deren Exklusivitaet ist
+  // bereits konkret bewiesen. Nur echte, nicht ueber eine variantGroup abgesicherte Ueberlappungen
+  // werden gemeldet.
   const componentIdToRules = new Map();
   for (const rule of mappedRules) {
     for (const cid of rule.componentsIds || []) {
@@ -146,14 +210,25 @@ function validateMappingRules(rules, { entries = [], staticPackages = {} } = {})
     }
   }
   for (const [cid, rulesForId] of componentIdToRules) {
-    if (rulesForId.length > 1) {
-      warnings.push(
-        `Components-Key "${cid}" ist in ${rulesForId.length} Mapping-Regeln vertreten (${rulesForId
-          .map((r) => r.groupKey)
-          .join(', ')}) - pruefen, ob sich die technicalCondition-Werte gegenseitig ausschliessen.`
-      );
+    if (rulesForId.length <= 1) {
+      continue;
     }
+
+    const variantGroups = new Set(rulesForId.map((r) => r.variantGroup).filter(Boolean));
+    const allSameVariantGroup = variantGroups.size === 1 && rulesForId.every((r) => r.variantGroup);
+    if (allSameVariantGroup) {
+      continue;
+    }
+
+    warnings.push(
+      `Components-Key "${cid}" ist in ${rulesForId.length} Mapping-Regeln vertreten (${rulesForId
+        .map((r) => r.groupKey)
+        .join(', ')}) ohne gemeinsame variantGroup - pruefen, ob sich die technicalCondition-Werte gegenseitig ausschliessen.`
+    );
   }
+
+  // Schritt G: Determinismus-Test fuer Variantengruppen (harter Fehler bei Nicht-Determinismus).
+  errors.push(...validateVariantGroupDeterminism(rules));
 
   // Mehrere unterschiedliche Regeln auf dieselbe Ziel-Bibliotheks-ID (Bericht: architekturell
   // erlaubt/gewollt bei n:1, aber pruefenswert, ob die Bedingungen sich wirklich ausschliessen).
