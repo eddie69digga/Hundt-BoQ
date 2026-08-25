@@ -2,6 +2,8 @@
 
 Dieser Abschnitt dokumentiert den aktuellen IST-Zustand, soweit er aus dem Projekt und den vorhandenen Dateien nachvollziehbar ist. Unklare oder noch nicht abgestimmte Punkte sind als `offen` markiert.
 
+Die zentrale fachliche Begriffs- und Mappinggrundlage für einzelne Components-Keys ↔ LV-Bibliotheks-IDs liegt in `docs/components-boq-begriffsmatrix.md` und wird dort als lebendes Dokument gepflegt (nicht hier dupliziert).
+
 ## 1. Aktueller Datenfluss Components → BoQ
 
 Der vorhandene, produktiv getestete Handoff läuft im Wesentlichen so:

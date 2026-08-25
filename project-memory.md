@@ -146,6 +146,10 @@ Abgeleitet daraus gilt:
 - Die fachliche Qualität der LV-Texte für die 10 bestätigten Bibliotheks-IDs ist durch den Contract-Test gegen Regressionen abgesichert.
 - Für alle anderen (noch nicht bestätigten) Positionen gilt weiterhin der Legacy-Pfad bzw. `open`.
 
+## Begriffs- und Positionsmatrix
+
+Die zentrale fachliche Begriffs- und Mappinggrundlage für Components-Keys ↔ LV-Bibliotheks-IDs liegt in `docs/components-boq-begriffsmatrix.md`. Dort werden Bedeutung, Status (`bestätigt`/`prüfen`/`offen`) und offene fachliche Entscheidungen je Components-Schlüssel gepflegt. Diese Datei wird hier nicht dupliziert.
+
 ## Bekannter Architekturfehler
 
 `Kalkulationsstruktur != LV-Struktur`
