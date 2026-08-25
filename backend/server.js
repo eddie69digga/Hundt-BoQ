@@ -1843,21 +1843,39 @@ function buildPositionMappingReport(query = {}) {
   };
 }
 
-let bibliothekCache = null;
+let bibliothekEntriesCache = null;
+let bibliothekIndexCache = null;
 
-function loadBibliothek() {
-  if (bibliothekCache) {
-    return bibliothekCache;
+// Liefert das rohe, strukturierte Bibliotheks-Array (Schema siehe docs/lv-architecture.md,
+// Abschnitt 17). Quelle fuer Validierung, Reporting und den spaeteren Word-Import.
+function loadBibliothekEntries() {
+  if (bibliothekEntriesCache) {
+    return bibliothekEntriesCache;
   }
 
   const bibliothekPath = path.join(__dirname, 'lv', 'bibliothek.json');
   try {
-    bibliothekCache = JSON.parse(fs.readFileSync(bibliothekPath, 'utf8'));
+    const parsed = JSON.parse(fs.readFileSync(bibliothekPath, 'utf8'));
+    bibliothekEntriesCache = Array.isArray(parsed) ? parsed : [];
   } catch {
-    bibliothekCache = {};
+    bibliothekEntriesCache = [];
   }
 
-  return bibliothekCache;
+  return bibliothekEntriesCache;
+}
+
+// Rueckwaertskompatible, nach Bibliotheks-ID gekeyte Lookup-Struktur fuer
+// resolveBibliothekEntryAsLv() und bestehende Tests (bibliothek[bibliotheksId]).
+function loadBibliothek() {
+  if (bibliothekIndexCache) {
+    return bibliothekIndexCache;
+  }
+
+  bibliothekIndexCache = Object.fromEntries(
+    loadBibliothekEntries().map((entry) => [entry.id, entry])
+  );
+
+  return bibliothekIndexCache;
 }
 
 // Baut aus einem Bibliotheks-Baustein (backend/lv/bibliothek.json) ein LV-Objekt im selben
@@ -2812,6 +2830,7 @@ module.exports = {
   resolveBibliothekEntryAsLv,
   resolveStaticModuleEntryAsLv,
   loadBibliothek,
+  loadBibliothekEntries,
   getWordExportLvEntries,
   createBoQDocxBuffer,
   POSITION_MAPPING_RULES,

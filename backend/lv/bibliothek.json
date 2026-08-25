@@ -1,42 +1,102 @@
-{
-  "LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI": {
+[
+  {
+    "id": "LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI",
+    "struktur": "02.07",
+    "kapitel": "02",
+    "kategorie": "LV_KAP_02_VORBEMERKUNGEN_ERSATZANLAGEN_TEILMODERNISI",
     "titel": "Inverkehrbringung / Inbetriebnahme (PVI)",
-    "text": "Für die Inverkehrbringung der Aufzugsanlage gelten die aktuellen Bestimmungen der Verordnung zum Geräte- und Produktsicherheitsgesetz (GPSG).\n\nAlle geforderten Maßnahmen für die erfolgreiche Inverkehrbringung / Inbetriebnahme der Anlage wie, Genehmigungen, Gefahrenanalysen, Gebühren, Messgeräte, Prüfgewichte, Personal und Unterlagen sind durch den Angebotspreis abgegolten.\n\nDie Inverkehrbringung der Anlage erfolgt über eine ZÜS.\n\nAlternativ:\nSollte der AN über ein ISO-Zertifiziertes Qualitätsmanagement verfügen und darüber berechtigt sein, die Anlagen selbst in Verkehr bringen zu können, ist dies mit Zustimmung des AG möglich.\n\nDie Inverkehrbringung der Aufzugsanlage ist mit Fang- und Lastproben in Gegenwart eines Sachverständigen einer ZÜS oder durch einen ISO-Zertifizierten AN durchzuführen.\n\nNach Durchführung der zuvor beschriebenen Verfahren muss die Inbetriebnahme (PVI) durch einen Sachverständigen einer ZÜS erfolgen. Der AN begleitet die PVI.\n\nVoraussetzung zum Antrag auf Abnahme durch den AG ist die erfolgreiche Inverkehrbringung, Inbetriebnahme (PVI)* und Behebung aller wesentlichen Mängel der Aufzugsanlage.\nDes Weiteren ist die Übergabe der Dokumentation mit allen Dokumenten wie z.B. Konformitätserklärung und mangelfreier PVI-Bericht notwendig.\n\n*ausgenommen sind bauseitige PVI Mängel."
+    "typ": "Baustein",
+    "text": "Für die Inverkehrbringung der Aufzugsanlage gelten die aktuellen Bestimmungen der Verordnung zum Geräte- und Produktsicherheitsgesetz (GPSG).\n\nAlle geforderten Maßnahmen für die erfolgreiche Inverkehrbringung / Inbetriebnahme der Anlage wie, Genehmigungen, Gefahrenanalysen, Gebühren, Messgeräte, Prüfgewichte, Personal und Unterlagen sind durch den Angebotspreis abgegolten.\n\nDie Inverkehrbringung der Anlage erfolgt über eine ZÜS.\n\nAlternativ:\nSollte der AN über ein ISO-Zertifiziertes Qualitätsmanagement verfügen und darüber berechtigt sein, die Anlagen selbst in Verkehr bringen zu können, ist dies mit Zustimmung des AG möglich.\n\nDie Inverkehrbringung der Aufzugsanlage ist mit Fang- und Lastproben in Gegenwart eines Sachverständigen einer ZÜS oder durch einen ISO-Zertifizierten AN durchzuführen.\n\nNach Durchführung der zuvor beschriebenen Verfahren muss die Inbetriebnahme (PVI) durch einen Sachverständigen einer ZÜS erfolgen. Der AN begleitet die PVI.\n\nVoraussetzung zum Antrag auf Abnahme durch den AG ist die erfolgreiche Inverkehrbringung, Inbetriebnahme (PVI)* und Behebung aller wesentlichen Mängel der Aufzugsanlage.\nDes Weiteren ist die Übergabe der Dokumentation mit allen Dokumenten wie z.B. Konformitätserklärung und mangelfreier PVI-Bericht notwendig.\n\n*ausgenommen sind bauseitige PVI Mängel.",
+    "status": "bestaetigt"
   },
-  "LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG": {
+  {
+    "id": "LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG",
+    "struktur": "02.09",
+    "kapitel": "02",
+    "kategorie": "LV_KAP_02_VORBEMERKUNGEN_ERSATZANLAGEN_TEILMODERNISI",
     "titel": "Transport und Baustelleneinrichtung",
-    "text": "Für den Transport von schweren Anlagenteilen in das Gebäude bzw. zum Abladen stehen keine bauseitigen Hilfsmittel zur Verfügung und werden auch nicht gestellt.\n\nAlle erforderlichen Maßnahmen für das Abladen sowie für das Transportieren von Anlageteilen in das Gebäude, in den Fahrschacht und ggf. Triebwerksraum, sind durch den AN zu realisieren und entsprechend dem Angebotspreis zu berücksichtigen.\n\nDie Baustelleneinrichtung beinhaltet insbesondere alle erforderlichen Gerüste, Förder- und Transportanlagen, Geräte, Werkzeuge, Montagepläne, Mannschaftsunterkünfte, erforderliche Lagerräume, Aborte, Wasser- und E-Zuleitungen zu den Verbrauchsstellen, Schutz der Arbeiten vor Unfallgefahren und Witterungseinflüssen und Diebstahl."
+    "typ": "Baustein",
+    "text": "Für den Transport von schweren Anlagenteilen in das Gebäude bzw. zum Abladen stehen keine bauseitigen Hilfsmittel zur Verfügung und werden auch nicht gestellt.\n\nAlle erforderlichen Maßnahmen für das Abladen sowie für das Transportieren von Anlageteilen in das Gebäude, in den Fahrschacht und ggf. Triebwerksraum, sind durch den AN zu realisieren und entsprechend dem Angebotspreis zu berücksichtigen.\n\nDie Baustelleneinrichtung beinhaltet insbesondere alle erforderlichen Gerüste, Förder- und Transportanlagen, Geräte, Werkzeuge, Montagepläne, Mannschaftsunterkünfte, erforderliche Lagerräume, Aborte, Wasser- und E-Zuleitungen zu den Verbrauchsstellen, Schutz der Arbeiten vor Unfallgefahren und Witterungseinflüssen und Diebstahl.",
+    "status": "bestaetigt"
   },
-  "LV_07_05_MALERARBEITEN_SCHACHTGRUBE": {
+  {
+    "id": "LV_07_05_MALERARBEITEN_SCHACHTGRUBE",
+    "struktur": "07.05",
+    "kapitel": "07",
+    "kategorie": "LV_KAP_07_SCHACHT",
     "titel": "Malerarbeiten (Schachtgrube)",
-    "text": "Schachtgrube mit einem ölfesten Anstrich (1 Anstrich) streichen.\nDer Sockelanstrich ist umlaufend mind. 10 cm hoch auszuführen."
+    "typ": "Baustein",
+    "text": "Schachtgrube mit einem ölfesten Anstrich (1 Anstrich) streichen.\nDer Sockelanstrich ist umlaufend mind. 10 cm hoch auszuführen.",
+    "status": "bestaetigt"
   },
-  "LV_09_01_SCHACHTINSTALLATION_ELEKTRO": {
+  {
+    "id": "LV_09_01_SCHACHTINSTALLATION_ELEKTRO",
+    "struktur": "09.01",
+    "kapitel": "09",
+    "kategorie": "LV_KAP_09_SCHACHTAUSRUSTUNG",
     "titel": "Schachtinstallation (Elektro)",
-    "text": "Installation erfolgt ausschließlich im Kabelkanal\nIm Wegebereich sind angeschrägte und trittfeste Kanäle vorzusehen, bzw. sind Kabelkanäle trittfest (reversibel) abzudecken.\nKabelkanäle:Ja- Dimensionierung nach\nErfordernis\nInstallation halogenfrei:nein\nSteckdose in Schachtgrube:ja\nPotentialausgleichsschiene:ja\nUnterkonstruktion für Kabelkanal\nbei Glasschächten:ja\nMaterial UK:Edelstahlblech"
+    "typ": "Baustein",
+    "text": "Installation erfolgt ausschließlich im Kabelkanal\nIm Wegebereich sind angeschrägte und trittfeste Kanäle vorzusehen, bzw. sind Kabelkanäle trittfest (reversibel) abzudecken.\nKabelkanäle:Ja- Dimensionierung nach\nErfordernis\nInstallation halogenfrei:nein\nSteckdose in Schachtgrube:ja\nPotentialausgleichsschiene:ja\nUnterkonstruktion für Kabelkanal\nbei Glasschächten:ja\nMaterial UK:Edelstahlblech",
+    "status": "bestaetigt"
   },
-  "LV_09_02_SCHACHTBELEUCHTUNG": {
+  {
+    "id": "LV_09_02_SCHACHTBELEUCHTUNG",
+    "struktur": "09.02",
+    "kapitel": "09",
+    "kategorie": "LV_KAP_09_SCHACHTAUSRUSTUNG",
     "titel": "Schachtbeleuchtung",
-    "text": "Schachtbeleuchtung in energieeffizienter LED-Technik als Tasterschaltung von drei Schaltstellen bedienbar ausführen.\n\nBedienstellen:\nFahrkorbdach\nTriebwerksraum / Steuerung\nGrube"
+    "typ": "Baustein",
+    "text": "Schachtbeleuchtung in energieeffizienter LED-Technik als Tasterschaltung von drei Schaltstellen bedienbar ausführen.\n\nBedienstellen:\nFahrkorbdach\nTriebwerksraum / Steuerung\nGrube",
+    "status": "bestaetigt"
   },
-  "LV_10_20_FAHRKORBTABLEAU_VERTIKAL": {
+  {
+    "id": "LV_10_20_FAHRKORBTABLEAU_VERTIKAL",
+    "struktur": "10.20",
+    "kapitel": "10",
+    "kategorie": "LV_KAP_10_FAHRKORB",
     "titel": "Fahrkorbtableau vertikal",
-    "text": "Flächenbündiges aufgesetztes Vertikaltableau gemäß DIN EN 81-70 als raumhohes halbhohes Paneel mit sichtbarer verdeckter Befestigung und Punktmatrix TFT- Anzeige.\n\nDeckplatte\nMaterial:Edelstahl / Glas / Carbon\nMaterialstärke:1,5 mm\nDekor / Farbe:geschliffen / schwarz\nBreite:gemäß Hersteller\nMontageart:flächenbündig U-Form,\naufgesetzt\nBefestigung:Sterntorx sichtbar\nAnzeige:Punktmatrix oder TFT-Display\nAnzeigegröße:gemäß Hersteller\nKartenleser:nein\nPiktogramm:Brandfallsymbol / DIN EN 81-73 / graviert: Ja\nNorm:DIN EN 81-70 / DIN EN 81-71\nKategorie 2\n\nTasterelement\nForm:Rund\nGrossflächentaster:nein\nTaktil:ja\nBrailleschrift:nein\nTastkappe:gemäß Norm\nQuittung:Bicolor / weiss / rot\nNorm:DIN EN 81-70 / DIN EN 81-71\nKategorie 2\n\nAusstattung\nRufbezeichnung:E/1/2/3/4 usw.\nTür auf / Tür zu:ja\nHauptzugang:erhaben „grün“\nInnenvorzug:ja, inkl. Eurozylinder\nRufanordnung:1-reihig bzw. 2-reihig\nNotruftaster Höhe:min. 850 mm"
+    "typ": "Baustein",
+    "text": "Flächenbündiges aufgesetztes Vertikaltableau gemäß DIN EN 81-70 als raumhohes halbhohes Paneel mit sichtbarer verdeckter Befestigung und Punktmatrix TFT- Anzeige.\n\nDeckplatte\nMaterial:Edelstahl / Glas / Carbon\nMaterialstärke:1,5 mm\nDekor / Farbe:geschliffen / schwarz\nBreite:gemäß Hersteller\nMontageart:flächenbündig U-Form,\naufgesetzt\nBefestigung:Sterntorx sichtbar\nAnzeige:Punktmatrix oder TFT-Display\nAnzeigegröße:gemäß Hersteller\nKartenleser:nein\nPiktogramm:Brandfallsymbol / DIN EN 81-73 / graviert: Ja\nNorm:DIN EN 81-70 / DIN EN 81-71\nKategorie 2\n\nTasterelement\nForm:Rund\nGrossflächentaster:nein\nTaktil:ja\nBrailleschrift:nein\nTastkappe:gemäß Norm\nQuittung:Bicolor / weiss / rot\nNorm:DIN EN 81-70 / DIN EN 81-71\nKategorie 2\n\nAusstattung\nRufbezeichnung:E/1/2/3/4 usw.\nTür auf / Tür zu:ja\nHauptzugang:erhaben „grün“\nInnenvorzug:ja, inkl. Eurozylinder\nRufanordnung:1-reihig bzw. 2-reihig\nNotruftaster Höhe:min. 850 mm",
+    "status": "bestaetigt"
   },
-  "LV_11_16_BEFEHLSGEBER_AUSSENRUF": {
+  {
+    "id": "LV_11_16_BEFEHLSGEBER_AUSSENRUF",
+    "struktur": "11.16",
+    "kapitel": "11",
+    "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
     "titel": "Befehlsgeber (Außenruf)",
-    "text": "Befehlsgebertableau 2 mm aufgesetzt flächenbündig in Mauerumfassungszarge, Türzarge mit unsichtbarer sichtbarer Befestigung und Ruftastern inkl. graviertem Brandfallpiktogramm.\n\nNicht mehr benötigte Öffnungen abgängiger Außenrufe / Anzeigen sind mit einem Edelstahlblech zu verschließen\n\nAusführung gemäß DIN EN 81-71 Kategorie 2.\n\nMontage und Art der Befehlsgeber gemäß DIN EN 81-70.\n\nDeckplatte\nMaterial:Edelstahl / Bieterstandard / Glas\n/ Carbon\nMaterialstärke:2 mm\nDekor / Farbe:geschliffen / schwarz\nBreite:Bieterstandard / ca. 80 mm\nHöhe:Bieterstandard / ca. 150 mm\nBefestigung:Sterntorx / unsichtbar\nNorm:DIN EN 81-70 / DIN EN 81-73 /\nDIN EN 81-71 Kategorie 2\nPiktogramm:Brandfallsymbol graviert\nAnzahl Ruftaster:1 oder 2\nSchlüsselschalter:nein\n\nTasterelement\nForm:Rund\nGrossflächentaster:nein\nTaktil:ja\nBrailleschrift:nein\nTastkappe:gemäß Norm\nQuittung:Bieterstandard / Bicolor\nNorm:DIN EN 81-70 / DIN EN 81-71\nKategorie 2\nEinbauhöhe Taster:min. 850 mm ab OKFF"
+    "typ": "Baustein",
+    "text": "Befehlsgebertableau 2 mm aufgesetzt flächenbündig in Mauerumfassungszarge, Türzarge mit unsichtbarer sichtbarer Befestigung und Ruftastern inkl. graviertem Brandfallpiktogramm.\n\nNicht mehr benötigte Öffnungen abgängiger Außenrufe / Anzeigen sind mit einem Edelstahlblech zu verschließen\n\nAusführung gemäß DIN EN 81-71 Kategorie 2.\n\nMontage und Art der Befehlsgeber gemäß DIN EN 81-70.\n\nDeckplatte\nMaterial:Edelstahl / Bieterstandard / Glas\n/ Carbon\nMaterialstärke:2 mm\nDekor / Farbe:geschliffen / schwarz\nBreite:Bieterstandard / ca. 80 mm\nHöhe:Bieterstandard / ca. 150 mm\nBefestigung:Sterntorx / unsichtbar\nNorm:DIN EN 81-70 / DIN EN 81-73 /\nDIN EN 81-71 Kategorie 2\nPiktogramm:Brandfallsymbol graviert\nAnzahl Ruftaster:1 oder 2\nSchlüsselschalter:nein\n\nTasterelement\nForm:Rund\nGrossflächentaster:nein\nTaktil:ja\nBrailleschrift:nein\nTastkappe:gemäß Norm\nQuittung:Bieterstandard / Bicolor\nNorm:DIN EN 81-70 / DIN EN 81-71\nKategorie 2\nEinbauhöhe Taster:min. 850 mm ab OKFF",
+    "status": "bestaetigt"
   },
-  "LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN": {
+  {
+    "id": "LV_11_20_STAND_UND_WEITERFAHRTANZEIGE_AUSSEN",
+    "struktur": "11.20",
+    "kapitel": "11",
+    "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
     "titel": "Stand- und Weiterfahrtanzeige Außen",
-    "text": "Display:Punktmatrix / TFT\nGröße:Bieterstandard\nDeckplatte:Edelstahl / Bieterstandard / Glas\n/ Carbon\nDekor / Farbe:geschliffen / schwarz\nBefestigung:Bieterstandard / Verdeckt /\nSterntorx\nHaltestellen:Alle Haltestellen,\nHauptzugangsstelle"
+    "typ": "Baustein",
+    "text": "Display:Punktmatrix / TFT\nGröße:Bieterstandard\nDeckplatte:Edelstahl / Bieterstandard / Glas\n/ Carbon\nDekor / Farbe:geschliffen / schwarz\nBefestigung:Bieterstandard / Verdeckt /\nSterntorx\nHaltestellen:Alle Haltestellen,\nHauptzugangsstelle",
+    "status": "bestaetigt"
   },
-  "LV_12_02_STEUERUNG": {
+  {
+    "id": "LV_12_02_STEUERUNG",
+    "struktur": "12.02",
+    "kapitel": "12",
+    "kategorie": "LV_KAP_12_AUFZUGSSTEUERUNG",
     "titel": "Steuerung",
-    "text": "Aufzugssteuerung in Mikroprozessortechnik aus EU-Produktion mit allen Bedienungs- und Anzeigeeinrichtungen. Kommunikation der Komponenten in Bus-Technik.\nSchütze und Relais sollen nur für die Bauteile eingesetzt werden, für die die DIN EN 81 dieses vorschreibt. Die zu liefernde Steuerung muss der elektromagnetischen Verträglichkeit gem. EN 12015 / 12016 entsprechen\nDie Steuerung muss ein fest verbautes Klartextdisplay enthalten, um auf besondere Hilfsmittel oder Werkzeuge für Wartung, Fehlersuche und Parameteranpassung in der Benutzer- Technikerebene verzichten zu können.\nEine vollständige, deutschsprachige Ausfertigung der möglichen Fehlercodes ist im Rahmen der Dokumentation zu übergeben.\n\nSteuerungsart:1-KS / 2-KS\nStörmeldung:vorbereitet\nPotentialfreie Kontakte:mind. 3\nÜberspannungsschutz:Ja; gem. DIN EN 62305 (VDE\n185-305 (2007)"
+    "typ": "Baustein",
+    "text": "Aufzugssteuerung in Mikroprozessortechnik aus EU-Produktion mit allen Bedienungs- und Anzeigeeinrichtungen. Kommunikation der Komponenten in Bus-Technik.\nSchütze und Relais sollen nur für die Bauteile eingesetzt werden, für die die DIN EN 81 dieses vorschreibt. Die zu liefernde Steuerung muss der elektromagnetischen Verträglichkeit gem. EN 12015 / 12016 entsprechen\nDie Steuerung muss ein fest verbautes Klartextdisplay enthalten, um auf besondere Hilfsmittel oder Werkzeuge für Wartung, Fehlersuche und Parameteranpassung in der Benutzer- Technikerebene verzichten zu können.\nEine vollständige, deutschsprachige Ausfertigung der möglichen Fehlercodes ist im Rahmen der Dokumentation zu übergeben.\n\nSteuerungsart:1-KS / 2-KS\nStörmeldung:vorbereitet\nPotentialfreie Kontakte:mind. 3\nÜberspannungsschutz:Ja; gem. DIN EN 62305 (VDE\n185-305 (2007)",
+    "status": "bestaetigt"
   },
-  "LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL": {
+  {
+    "id": "LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL",
+    "struktur": "14.05",
+    "kapitel": "14",
+    "kategorie": "LV_KAP_14_ANTRIEB_HYDRAULIK",
     "titel": "Hydraulikschläuche und Hydrauliköl",
-    "text": "Die hydraulischen Verbindungsleitungen vom Aggregat bis zum Heberanschluss sind als geprüfter Druckschlauch zu erneuern. (Länge pro Aufzug s. Anlagenzeichnung)\nVorgeschriebene Biegeradien sind einzuhalten.\nDie Halterungen sind schwingungsisolierend auszuführen, so dass keine Körperschallübertragung möglich ist.(Befestigungsschellen mit Gummieinlage)\nZur Vermeidung von Strömungsgeräuschen darf die Ölgeschwindigkeit in der Zuleitung 5 m/s nicht überschreiten.\nDas vorhandene Hydrauliköl ist fachgerecht zu entsorgen und durch neues Hydrauliköl zu ersetzen. (HLP 46 o. vergleichbar)"
+    "typ": "Baustein",
+    "text": "Die hydraulischen Verbindungsleitungen vom Aggregat bis zum Heberanschluss sind als geprüfter Druckschlauch zu erneuern. (Länge pro Aufzug s. Anlagenzeichnung)\nVorgeschriebene Biegeradien sind einzuhalten.\nDie Halterungen sind schwingungsisolierend auszuführen, so dass keine Körperschallübertragung möglich ist.(Befestigungsschellen mit Gummieinlage)\nZur Vermeidung von Strömungsgeräuschen darf die Ölgeschwindigkeit in der Zuleitung 5 m/s nicht überschreiten.\nDas vorhandene Hydrauliköl ist fachgerecht zu entsorgen und durch neues Hydrauliköl zu ersetzen. (HLP 46 o. vergleichbar)",
+    "status": "bestaetigt"
   }
-}
+]

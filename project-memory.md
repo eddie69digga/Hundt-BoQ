@@ -48,8 +48,10 @@ Ziel ist die Erstellung und Weiterverarbeitung von Leistungsverzeichnissen mit n
 - `backend/lv/abnahme.json` – statische Abnahme-/Messdaten-LV-Paketdaten
 - `backend/lv/bibliothek.json` – Bibliotheksresolver für Bausteine ohne statische Paketentsprechung
 - `backend/lv/vorbemerkung.txt` – Vorbemerkungstext für Export
+- `backend/lib/library-validation.js` – Validierungsprozess für Bibliothek + Mappingregeln (Schritt I)
 - `backend/test/mapping-contract.test.js` – Contract-Test (`npm test`)
 - `backend/test/granularity-contract.test.js` – Granularitäts-Contract-Test (`npm test`)
+- `backend/test/library-validation.test.js` – Validierungs-Contract-Test (`npm test`)
 - `docs/auth-users.md` – Benutzer-/Auth-Dokumentation
 - `docs/260824_LV_Bibliothek_Components_modular.docx` – modulare LV-Bibliothek (fachliche Quelle für `bibliothek.json`)
 
@@ -291,7 +293,9 @@ Aktuell gibt es keinen Branch-/Staging-Prozess in diesem Projekt. Der Standardab
 Verbindliche Zielreihenfolge (siehe Architekturentscheidung): E → B → I → G → H → C → D → F.
 
 - **E – Granularitätsproblem `contentSource: 'static'` (behoben):** `resolveMappedStaticLvEntries()` löst pro Regel genau ein Modul (`staticModuleId`) auf statt eines ganzen Pakets; Dedup erfolgt über die Ziel-Bibliotheks-ID. Abgesichert durch `backend/test/granularity-contract.test.js`. Details: `docs/lv-architecture.md` Abschnitt 9.1.
-- **B, I, G, H, C, D, F:** siehe `docs/lv-architecture.md` für den jeweiligen Umsetzungsstand.
+- **B – Bibliotheksschema (festgelegt):** `backend/lv/bibliothek.json` ist jetzt ein Array mit Schema `{id, struktur, kapitel, kategorie, titel, typ, text, status}`, abgeleitet aus der real in der Word-Quelle vorhandenen Metadatenstruktur (Struktur/Typ/Bibliotheks-ID je Baustein). Kein `parentId` (Hierarchie steckt bereits in `struktur`). Details: `docs/lv-architecture.md` Abschnitt 17.
+- **I – Validierungsprozess (aufgebaut):** `backend/lib/library-validation.js` (`validateLibrary()`) prüft Bibliothek und Mappingregeln auf doppelte IDs, fehlende Pflichtfelder, ungültige Status-/Typ-Werte, Waisen-Mappings, ungültige Variantenbedingungen, überlappende Regeln (Bericht), ungenutzte Einträge (Bericht) und auffällig identische Texte (Bericht). Abgesichert durch `backend/test/library-validation.test.js` inkl. Selbsttests mit bewusst fehlerhaften Daten. Details: `docs/lv-architecture.md` Abschnitt 18.
+- **G, H, C, D, F:** siehe `docs/lv-architecture.md` für den jeweiligen Umsetzungsstand.
 
 ## Nächste fachliche Schritte
 

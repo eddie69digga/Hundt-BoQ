@@ -338,3 +338,70 @@ Ursache (verifiziert über `kalkulation.letzteKalkulationsdaten.pakete.fahrschac
 Das ist kein Fehler der BoQ-Mappinglogik (diese arbeitet bewusst mit `paketSummen`), sondern ein Timing-Problem auf Components-Seite: Eingaben können nach der letzten Kalkulation geändert werden, ohne dass der Export dies erkennt oder kennzeichnet.
 
 Kleine, sichere Korrektur (Components, `01_Components_reload/frontend/index.html`, Funktion `fuehreXlExportAus`): Vor dem Aufbau des Export-Payloads wird jetzt `await bereiteKalkulationVor()` aufgerufen. Diese Funktion existiert bereits im Code (Signatur-Cache, kein unnötiger Request bei unverändertem Stand) und wird auch an anderer Stelle vor der Ergebnisanzeige verwendet. Schlägt die Kalkulation fehl, wird der Export nicht blockiert, sondern mit dem zuletzt verfügbaren Stand fortgesetzt (Warnung im Log). Damit ist sichergestellt, dass `paketSummen` beim XL-Export den aktuellen Eingabestand widerspiegelt, sofern die Kalkulation erfolgreich durchgeführt werden kann.
+
+## 17. Bibliotheksschema (Schritt B)
+
+`backend/lv/bibliothek.json` ist ab sofort ein **Array** strukturierter Bibliothekseinträge (vorher: flaches Objekt keyed nach ID). Das Schema ist direkt aus der realen Struktur der Word-Quelle abgeleitet, nicht erfunden: `docs/260824_LV_Bibliothek_Components_modular.docx` enthält bereits pro Baustein eine maschinenlesbare Metadatenzeile im Format `Struktur <Nr> | Typ <Typ> | Bibliotheks-ID <ID>` direkt unter der jeweiligen Überschrift. Das Schema übernimmt exakt diese Felder plus die fachlich notwendige Ergänzung `status`:
+
+```json
+{
+  "id": "LV_09_02_SCHACHTBELEUCHTUNG",
+  "struktur": "09.02",
+  "kapitel": "09",
+  "kategorie": "LV_KAP_09_SCHACHTAUSRUSTUNG",
+  "titel": "Schachtbeleuchtung",
+  "typ": "Baustein",
+  "text": "...",
+  "status": "bestaetigt"
+}
+```
+
+Feldbedeutung:
+
+- `id` – stabile Bibliotheks-ID, Quelle: Word-Metadatenzeile (`Bibliotheks-ID ...`). Wird nie geändert, sobald ein Mapping darauf verweist.
+- `struktur` – hierarchische Gliederungsnummer aus der Word-Quelle (z. B. `09.02`, `10.08.01`, `18.04.09.02`). Codiert die Hierarchie bereits vollständig über die Punktnotation.
+- `kapitel` – erstes Struktur-Segment (z. B. `09`), mechanisch aus `struktur` abgeleitet. Kein eigenständiges Feld mit potenziell abweichender Wahrheit, sondern eine Bequemlichkeits-Ableitung für Filterung/Validierung nach Kapitel.
+- `kategorie` – Referenz auf die Bibliotheks-ID des Kapitels (`typ: "Kategorie"`, z. B. `LV_KAP_09_SCHACHTAUSRUSTUNG`), nicht der Klartext-Kapiteltitel. Der Kapiteltitel wird bei Bedarf über den Kategorie-Eintrag selbst nachgeschlagen (keine doppelte Titelpflege).
+- `titel` – Überschrift des Bausteins, wortgetreu aus Word übernommen.
+- `typ` – einer von `Kategorie` (Kapitelebene, kein eigener LV-Baustein), `Baustein` (regulärer LV-Baustein), `Variante` (alternative Ausführung eines Bausteins), `Unterbaustein`, `Unterabschnitt` (weitere Verschachtelungstiefen). Werte 1:1 aus der Word-Metadatenzeile übernommen, keine neue Klassifikation erfunden.
+- `text` – Fliesstext des Bausteins, wortgetreu aus Word übernommen, nicht umformuliert.
+- `status` – Workflow-Status des Bibliothekseintrags selbst (NICHT der Mapping-Status aus `docs/components-boq-begriffsmatrix.md`): `entwurf` (importiert, fachlich noch ungeprüft), `bestaetigt` (Inhalt geprüft, für Mapping freigegeben), `veraltet` (nicht mehr aktuell, nicht für neues Mapping verwenden).
+
+Bewusst **kein** `parentId`-Feld: Die `struktur`-Punktnotation codiert die Hierarchie bereits vollständig und eindeutig; ein zusätzliches Elternreferenzfeld wäre eine redundante, potenziell divergierende zweite Wahrheit ohne fachlichen Mehrwert (`keine unnötige Hierarchie`).
+
+Zugriff im Code (`backend/server.js`):
+
+- `loadBibliothekEntries()` – liefert das rohe Array (Quelle für Validierung/Import/Reporting).
+- `loadBibliothek()` – liefert weiterhin eine nach `id` gekeyte Lookup-Struktur (Rückwärtskompatibilität zu `resolveBibliothekEntryAsLv()` und dem bestehenden Contract-Test).
+
+Migration: Die bisherigen 10 Einträge wurden 1:1 in das neue Schema übernommen. `struktur`, `kapitel`, `kategorie` und `typ` stammen aus der realen Word-Metadatenzeile (verifiziert je Eintrag, nicht geschätzt); `status` wurde für alle 10 auf `bestaetigt` gesetzt, da sie bereits produktiv gemappt und durch den Contract-Test abgesichert sind. `titel` und `text` wurden inhaltlich unverändert übernommen.
+
+Die Word-Quelle enthält insgesamt 311 strukturierte Einträge (24 Kategorien/Kapitel, 226 Bausteine, 22 Varianten, 32 Unterbausteine, 7 Unterabschnitte, keine doppelten IDs) - das ist der Zielumfang für den späteren Vollimport (Schritt D).
+
+## 18. Validierungsprozess (Schritt I)
+
+`backend/lib/library-validation.js` stellt eine reine, seiteneffektfreie Validierungsfunktion (`validateLibrary({ entries, rules, staticPackages })`) bereit, die sowohl die strukturierte Bibliothek (`backend/lv/bibliothek.json`) als auch die Mappingregeln (`POSITION_MAPPING_RULES`) prüft. Ergebnis ist immer `{ errors, warnings }`:
+
+- `errors` – harte Verstöße, die einen Bulk-Import (Schritt C/D) verhindern müssen.
+- `warnings` – fachliche Berichte, die bewusst KEIN Fehler sind (z. B. ungenutzte Bibliothekseinträge, auffällig identische Texte, mehrere Regeln auf denselben Components-Key oder dieselbe Ziel-ID).
+
+Geprüft werden mindestens:
+
+- doppelte Bibliotheks-IDs (`errors`)
+- fehlende Pflichtfelder (`id`, `struktur`, `kapitel`, `titel`, `typ`, `status`; `text` ist nur bei `typ: 'Kategorie'` optional) (`errors`)
+- ungültige `status`- bzw. `typ`-Werte gegenüber dem Schema aus Abschnitt 17 (`errors`)
+- Inkonsistenz zwischen `struktur` und `kapitel` (`errors`)
+- Mapping auf eine nicht existente Bibliotheks-ID bzw. ein nicht existentes Modul in einem statischen Paket = Waisen-Mapping (`errors`)
+- ungültige Variantenbedingungen (`technicalCondition` ist keine Funktion) (`errors`)
+- unbekannte `contentSource`-Werte (`errors`)
+- doppelte/überlappende Regeln: derselbe Components-Key in mehreren `mapped`-Regeln, bzw. mehrere Regeln mit derselben Ziel-Bibliotheks-ID (`warnings` - technisch erkennbar, aber ob sich die `technicalCondition`-Werte tatsächlich gegenseitig ausschließen, wird nicht automatisch bewiesen, sondern zur manuellen Prüfung gemeldet)
+- Bibliothekseinträge ohne Verwendung durch eine Mapping-Regel (`warnings`, kein Fehler)
+- auffällig identische Texte über mehrere Bibliothekseinträge hinweg (`warnings`, kein Fehler)
+
+Abgesichert durch `backend/test/library-validation.test.js`:
+
+1. Selbsttests mit bewusst fehlerhaften synthetischen Daten beweisen, dass der Validierungsprozess jede der oben genannten Fehlerklassen tatsächlich erkennt (kein stiller No-op).
+2. Anschließend wird der reale Datenbestand (`backend/lv/bibliothek.json` + `POSITION_MAPPING_RULES`) geprüft; aktueller Stand: 0 Fehler, 0 Berichte.
+
+Verbindliche Regel für die folgenden Schritte (Word-Import, Vollübernahme): Ein Bulk-Import darf erst erfolgen, wenn `backend/test/library-validation.test.js` für den importierten Datenbestand fehlerfrei durchläuft.
+
