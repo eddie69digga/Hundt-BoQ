@@ -1437,7 +1437,7 @@
     "titel": "LED-Flächenlicht",
     "typ": "Variante",
     "text": "Fahrkorbdecke als vollflächiges, homogenes LED-Flächenlicht mit gerahmter Einfassung, umlaufender Schattenfuge, mit verdeckter Be- und Entlüftung abgehangen. Das Ablegen von Gegenständen auf der Leuchtfläche muss wirksam verhindert sein.\n\nMaterial Rahmen:40 mm Edelstahl / Stahlblech\nTeilung:2-teilig / max. 5 mm Fuge\nDekor:geschliffen, Farbton NCS\nSchattenfuge:ca. 25 mm umlaufend\nAufnahme für Schutzmatten:ja\nKlappbar:fest\nBeleuchtung:LED\nMaterial:Acryl / Glas\nLichtfarbe:3000 K (warmweiß)\nDimmer:ja inkl.\nVandalen-Klasse:gemäß DIN EN81-71 /\nKategorie 2\nVom FK innen tauschbar:ja",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_10_11_03_LED_KACHELN",
@@ -1697,7 +1697,7 @@
     "titel": "Lichtvorhang",
     "typ": "Baustein",
     "text": "Lichtvorhang/Lichtgitter mit berührungsloser Personen- und Objekterkennung.\n\nAnzahl:An jeder Fahrkorbtür\nInfrarot-Lichtschranken:mindestens 154 Strahlen.\nSchutzfeldhöhe:mindestens 1.800 mm,\nReaktionszeit: maximal 50 ms zur sicheren\nUnterbrechung der\nSchließbewegung.\nSchutzklasse: IP54 oder höher, geeignet für\nden Einsatz in üblichen\nAufzugsumgebungen.\nVersorgungsspannung:24 V DC oder kompatibel mit der\nverwendeten Steuerung.\nAnschlüsse und Schnittstellennahtlose Integration in die\nSteuerung des Aufzugs.\n3-D Funktion:Ja / Nein\nAmpelfunktion Rot Grün:Ja / Nein",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_10_31_BELUFTUNG_DES_FAHRKORBES",
@@ -2007,7 +2007,7 @@
     "titel": "Antrittsbleche",
     "typ": "Baustein",
     "text": "Im Übergang zwischen Schachttürschwelle und Bestandsboden auf Schachttürbreite zwischen den Mauerumfassungszargen Antrittsbleche nach örtlichem Aufmaß ausführen.\nMaterial:Edelstahl\nMaterialstärke:1,5 – 2,0 mm\nDekor:geschliffen /SETB 1\nUnterkonstruktion:ja – wenn erforderlich\nMontageart:verschraubt / verklebt\nVersiegelung:Silikon / Farbe: Edelstahl\n\nAntrittsbleche sind auf halbe Mauerwerkslaibung zu begrenzen und mit einer robusten Unterkonstruktion am Boden vollflächig zu verkleben oder zu verschrauben.\n\nÜbergänge zwischen Boden, Mauerumfassungszarge, Schwelle und Antrittsblech versiegeln.",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_11_25_SCHACHT_FAHRKORBTURSCHURZE",
