@@ -1,8 +1,6 @@
 Vorbemerkungen Ersatzanlagen / Teilmodernisierung
 
 Hinweise zum Leistungsverzeichnis
-Alle Preise und technische Daten, sowie Hersteller sind im beigefügtem Preis- und Komponentenblatt des Leistungsverzeichnisses anzugeben. 
-
 Änderungen im Leistungsverzeichnis dürfen nur in vorheriger Absprache und schriftlicher Begründung (Abweichungsblatt) vorgenommen werden. 
 Eigenständige Änderungen oder unvollständiges Ausfüllen, haben den möglichen Ausschluss des Angebotes zur Folge.
 
@@ -237,8 +235,6 @@ Zum Einsatz kommt der Edelstahl-Werkstoff: 1.4301
 Muster
 Es sind auf Anforderung kostenfrei Handmuster (mind. DIN A 4) der Oberflächen vorzulegen.
 Andere Muster wie Befehlsgeber, Anzeiger, Handlauf oder Beleuchtungsmuster sind mit dem AG abzustimmen.
-
-Die Hersteller und oder Bezugsquellen sind ggf. anzugeben.
 
 Grundsätzliche Ausführungsbestimmungen für E-Anlagen
 Der Funkentstörgrad der Anlage muss eingehalten werden. Alle elektrischen Bauteile sind gemäß EG-Konformitätserklärung mit CE-Kennzeichnung zu liefern. 
