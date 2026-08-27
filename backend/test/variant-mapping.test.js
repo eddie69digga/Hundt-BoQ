@@ -179,6 +179,44 @@ async function testFrequencyRuleIsIndependentPosition() {
   reportOk('Eigenständige Frequenzregelung', 'frequenzregelung erzeugt eine eigene, deduplizierbare LV-Position.');
 }
 
+// Regressionstest fuer die REALE Frontend-Uebertragungsform: Das Frontend sendet
+// technik_json = JSON.stringify(currentData.technik); currentData.technik fuehrt die
+// technischen Parameter VERSCHACHTELT unter technischeParameter (nicht flach).
+// hydraulikRegelungsart darf dabei nicht verloren gehen, sonst fallen die
+// frequenzabhaengigen Regeln (maschine_standardrahmen -> LV_14_01,
+// frequenzregelung -> LV_12_12) stillschweigend auf open zurueck.
+async function testRealFrontendTransmissionShape() {
+  const label = 'Reale Frontend-Uebertragungsform (technik_json verschachtelt)';
+  const techP = { aufzugstyp: 'hydraulik', hydraulikRegelungsart: 'frequenzgeregelt', antriebTyp: 'hydraulik-direkt' };
+  const technik = { technischeParameter: techP };
+  const data = {
+    projekt: { projektart: 'Teilmodernisierung' },
+    technischeParameter: techP,
+    technik,
+    kalkulation: { paketSummen: [{ paket: 'antrieb', positionen: [
+      { id: 'maschine_standardrahmen', anzahl: 1 },
+      { id: 'frequenzregelung', anzahl: 1 },
+    ] }] },
+  };
+  const query = { technik_json: JSON.stringify(technik), data };
+  const report = buildPositionMappingReport(query);
+  const mappedIds = new Set((report.mapped || []).map((e) => e.bibliotheksId));
+  const openIds = new Set((report.open || []).flatMap((e) => e.componentsIds || []));
+  if (!mappedIds.has('LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT')) {
+    reportFailure(label, 'maschine_standardrahmen wird in der realen Uebertragungsform nicht auf LV_14_01 gemappt (hydraulikRegelungsart nicht erkannt).');
+    return;
+  }
+  if (!mappedIds.has('LV_12_12_FREQUENZUMRICHTER_REGELUNG')) {
+    reportFailure(label, 'frequenzregelung wird in der realen Uebertragungsform nicht auf LV_12_12 gemappt (hydraulikRegelungsart nicht erkannt).');
+    return;
+  }
+  if (openIds.has('maschine_standardrahmen') || openIds.has('frequenzregelung')) {
+    reportFailure(label, 'Eine frequenzabhaengige Position erscheint faelschlich zugleich als open.');
+    return;
+  }
+  reportOk(label, 'hydraulikRegelungsart wird aus der verschachtelten technik-Struktur erkannt; beide frequenzabhaengigen Positionen mappen.');
+}
+
 async function main() {
   console.log('=== BoQ Variantenfaehiges Mapping (Schritt G/H): maschine_standardrahmen ===\n');
 
@@ -209,6 +247,7 @@ async function main() {
 
   await testCrossContamination();
   await testFrequencyRuleIsIndependentPosition();
+  await testRealFrontendTransmissionShape();
 
   console.log('\n=== Ergebnis ===');
   if (failures > 0) {

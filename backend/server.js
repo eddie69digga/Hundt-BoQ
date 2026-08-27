@@ -1956,6 +1956,14 @@ function readTechnischeKontext(query = {}) {
   const direct = {
     aufzugstyp: query.aufzugstyp || query.aufzugstypText || query.aufzugstyp_name || (typeof payload?.technischeParameter?.aufzugstyp === 'string' ? payload.technischeParameter.aufzugstyp : ''),
     antriebTyp: query.antriebTyp || query.antriebtyp || (typeof payload?.technischeParameter?.antriebTyp === 'string' ? payload.technischeParameter.antriebTyp : ''),
+    // hydraulikRegelungsart (Regelungselektronik) ist eine eigenstaendige technische Dimension
+    // (siehe docs/lv-architecture.md Abschnitt 19/20) und wird von den frequenzabhaengigen
+    // Mapping-Regeln (frequenzregelung, Variantengruppe antrieb-standardrahmen) auf Top-Ebene
+    // gelesen. Sie muss daher - wie aufzugstyp/antriebTyp - explizit aus payload.technischeParameter
+    // an die Top-Ebene gehoben werden. Im realen Frontend-Export (technik_json = JSON.stringify(technik))
+    // liegt sie sonst nur verschachtelt unter technik.technischeParameter und erreicht die
+    // technicalCondition nicht.
+    hydraulikRegelungsart: query.hydraulikRegelungsart || (typeof payload?.technischeParameter?.hydraulikRegelungsart === 'string' ? payload.technischeParameter.hydraulikRegelungsart : ''),
     projektart: query.projektart || query.projektArt || (typeof payload?.projekt?.projektart === 'string' ? payload.projekt.projektart : ''),
   };
 
