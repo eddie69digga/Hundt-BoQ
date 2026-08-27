@@ -1745,6 +1745,17 @@ const POSITION_MAPPING_RULES = Object.freeze([
     canRemainOpen: false,
   },
   {
+    groupKey: 'demontage-schiebetuer-2tlg',
+    componentsIds: ['demontage_schiebetuer_2tlg'],
+    bibliotheksId: 'LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
     groupKey: 'tuerfuehrungen',
     componentsIds: ['tuerfuehrungen'],
     bibliotheksId: 'LV_11_12_UNTERE_TURFUHRUNG_FUR_AUTOMATIKTUREN',

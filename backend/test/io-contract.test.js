@@ -26,11 +26,12 @@ const report = buildPositionMappingReport(query([
   { id: 'auszugsversuch_mauerwerksschaechten', anzahl: 1 },
   { id: 'montageruestung', anzahl: 1 },
   { id: 'schiebetuer_2tlg', anzahl: 2 },
+  { id: 'demontage_schiebetuer_2tlg', anzahl: 1 },
   { id: 'fachlich_unbekannt', anzahl: 2 },
   { bezeichnung: 'Positive Position ohne ID', anzahl: 1 },
 ]));
 
-assert(report.positionStatuses.length === 12, 'Jede positive Position muss genau einen Status erhalten.');
+assert(report.positionStatuses.length === 13, 'Jede positive Position muss genau einen Status erhalten.');
 assert(report.positionStatuses.every((entry) =>
   ['mapped', 'open', 'not_lv_position', 'invalid'].includes(entry.status)
 ), 'Unbekannter Status im Positionsvertrag.');
@@ -40,6 +41,7 @@ for (const [componentsId, bibliotheksId] of [
   ['antrittsblech', 'LV_11_24_ANTRITTSBLECHE'],
   ['led_flaechenlicht_fahrkorb', 'LV_10_11_02_LED_FLACHENLICHT'],
   ['lichtgitter_vorhandene_fahrkorbschiebetuer', 'LV_10_30_LICHTVORHANG'],
+  ['demontage_schiebetuer_2tlg', 'LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG'],
 ]) {
   const entry = report.positionStatuses.find((candidate) => candidate.componentsId === componentsId);
   assert(entry?.status === 'mapped' && entry.bibliotheksId === bibliotheksId,

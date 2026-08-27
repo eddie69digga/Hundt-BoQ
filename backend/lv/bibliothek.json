@@ -780,6 +780,16 @@
     "status": "entwurf"
   },
   {
+    "id": "LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG",
+    "struktur": "05.01",
+    "kapitel": "05",
+    "kategorie": "LV_KAP_05_DEMONTAGE",
+    "titel": "Demontage Schiebetür (2-tlg.)",
+    "typ": "Baustein",
+    "text": "Vorhandene zweiflügelige Schiebetüren fachgerecht demontieren.",
+    "status": "bestaetigt"
+  },
+  {
     "id": "LV_KAP_06_TRIEBWERKSRAUM",
     "struktur": "06",
     "kapitel": "06",

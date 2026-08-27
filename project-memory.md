@@ -202,6 +202,7 @@ Bestätigte Abbildungen (`bibliotheksId` → `contentSource`):
 - `anstrich_schachtgrube` → `LV_07_05_MALERARBEITEN_SCHACHTGRUBE` (`bibliothek`)
 - `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` (`static`) bei `projektart = Teilmodernisierung`
 - `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` (`bibliothek`) bei `projektart = Teilmodernisierung`
+- `demontage_schiebetuer_2tlg` -> `LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG` (`bibliothek`) – Demontage vorhandener zweiflügeliger Schiebetüren (neu 2026-08-27)
 
 `static` = bereits reales Modul in `steuerung.json`/`abnahme.json`. `bibliothek` = kein passendes statisches Modul vorhanden; Baustein wird dediziert aus `backend/lv/bibliothek.json` aufgelöst (Quelle: `docs/260824_LV_Bibliothek_Components_modular.docx`, wortgetreu übernommen).
 
