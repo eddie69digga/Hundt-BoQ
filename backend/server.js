@@ -1756,6 +1756,17 @@ const POSITION_MAPPING_RULES = Object.freeze([
     canRemainOpen: false,
   },
   {
+    groupKey: 'muz-standard',
+    componentsIds: ['muz_standard'],
+    bibliotheksId: 'LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
     groupKey: 'tuerfuehrungen',
     componentsIds: ['tuerfuehrungen'],
     bibliotheksId: 'LV_11_12_UNTERE_TURFUHRUNG_FUR_AUTOMATIKTUREN',

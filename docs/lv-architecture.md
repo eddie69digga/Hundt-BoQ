@@ -321,7 +321,7 @@ Dieser Fall bleibt der verbindliche Contract-Test für die Weiterentwicklung der
 
 ## 14. Offene Punkte
 
-- fachliche Zuordnung der 6 bewusst offenen Components-Positionen (`maschine_standardrahmen`, `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren`) zu Bibliotheks-IDs: `offen`
+- fachliche Zuordnung der 6 bewusst offenen Components-Positionen (`maschine_standardrahmen`, `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren`) zu Bibliotheks-IDs: `offen` (für `muz_standard` am 2026-08-27 geschlossen)
 - vollständige Integration der modularen LV-Bibliothek für alle übrigen (noch nicht bestätigten) Bausteine: `offen`
 - Datenkonsistenz zwischen `pakete.kalkulationsEingaben` und `kalkulation.paketSummen` im Components-Export: siehe 16 (Diagnose + kleine Korrektur in Components umgesetzt)
 
@@ -446,6 +446,7 @@ Eindeutig aus der bestehenden Bibliothek ableitbare Einzelpositionen wurden am 2
 - `lichtgitter_vorhandene_fahrkorbschiebetuer` → `LV_10_30_LICHTVORHANG`
 
 Diese Zuordnungen sind 1:1, ohne Herstellerannahme, und durch den IO-Contract-Test abgesichert. Zusätzlich werden die neutralisierten Türtechnik-Bausteine `tuerfuehrungen` → `LV_11_12`, `tuerlaufrollen` → `LV_11_07`, `tuerkontakte` → `LV_11_10` und `tuerseile` → `LV_11_13` gemappt. `frequenzregelung` erhält unabhängig von `maschine_standardrahmen` die eigene Position `LV_12_12_FREQUENZUMRICHTER_REGELUNG`. `hst_duebel_schachttueren`, `chemieduebel_schachttueren`, `auszugsversuch_mauerwerksschaechten` und `montageruestung` werden als `not_lv_position` klassifiziert und nicht ins Word übernommen. Alle fünf Bibliotheksbausteine sind neutral formuliert und als `bestaetigt` markiert. Ergänzt am 2026-08-27: `schiebetuer_2tlg` ist lediglich ein kalkulatorischer Oberbegriff für die Schachtschiebetür als Ganzes, während die einzelnen Türkomponenten (`tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`) bereits eigene, granulare LV-Positionen besitzen. Eine zusätzliche eigene LV-Position für `schiebetuer_2tlg` würde diese Einzelpositionen fachlich doppeln (Kalkulationsstruktur != LV-Struktur). Daher wird `schiebetuer_2tlg` ebenfalls als `not_lv_position` klassifiziert (`POSITION_MAPPING_RULES`, Regel `schiebetuer-2tlg-nicht-lv`), ohne die Einzelpositionen zu verändern; abgesichert durch `backend/test/io-contract.test.js`.
+`muz_standard` ist am 2026-08-27 als eigene neutrale LV-Position `LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS` geschlossen. Der Baustein verlangt ausdrücklich individuelles Aufmaß an jedem Schachtzugang, enthält keine Herstellerangabe und verwendet nicht den Leistungsbestandteil `Hinterfüllen`. Die Zuordnung ist 1:1 und durch `backend/test/io-contract.test.js` abgesichert.
 
 ## 21. Word-Import (Schritt C)
 
@@ -476,7 +477,7 @@ Am 2026-08-25 mit `node scripts/import-word-library.js --apply` durchgeführt. E
 - Neu importiert (`status: 'entwurf'`): 299 Einträge.
 - Duplikate: 0. Fehler: 0.
 - Bestehende Einträge mit Bericht (Abweichung zur Word-Quelle, nicht automatisch übernommen): 3 (siehe Abschnitt 21).
-- `backend/lv/bibliothek.json` enthält jetzt 311 Einträge.
+- `backend/lv/bibliothek.json` enthält jetzt 313 Einträge; der am 2026-08-27 ergänzte MUZ-Baustein ist als `bestaetigt` freigegeben.
 
 Validierungsbericht des Merge-Bestands (258 Berichte, 0 Fehler):
 

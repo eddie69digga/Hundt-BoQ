@@ -152,7 +152,7 @@ Der aktuelle IST-Zustand ist nach Projektlage wie folgt:
 
 Abgeleitet daraus gilt:
 
-- Die fachliche Qualität der LV-Texte für die 10 bestätigten Bibliotheks-IDs ist durch den Contract-Test gegen Regressionen abgesichert.
+- Die fachliche Qualität der LV-Texte für die bestätigten Bibliotheks-IDs ist durch den Contract-Test gegen Regressionen abgesichert.
 - Für alle anderen (noch nicht bestätigten) Positionen gilt weiterhin der Legacy-Pfad bzw. `open`.
 
 ## Begriffs- und Positionsmatrix
@@ -203,6 +203,7 @@ Bestätigte Abbildungen (`bibliotheksId` → `contentSource`):
 - `zues_kosten_vorpruefung` + `zues_kosten_abnahme` + `zues_begleitung_durch_an_aufzug` + `pruefgewichte` → `LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI` (`static`) bei `projektart = Teilmodernisierung`
 - `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` (`bibliothek`) bei `projektart = Teilmodernisierung`
 - `demontage_schiebetuer_2tlg` -> `LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG` (`bibliothek`) – Demontage vorhandener zweiflügeliger Schiebetüren (neu 2026-08-27)
+- `muz_standard` -> `LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS` (`bibliothek`) – neutrale Mauerumfassungszargen mit individuellem Aufmaß an jedem Schachtzugang (neu 2026-08-27)
 
 `static` = bereits reales Modul in `steuerung.json`/`abnahme.json`. `bibliothek` = kein passendes statisches Modul vorhanden; Baustein wird dediziert aus `backend/lv/bibliothek.json` aufgelöst (Quelle: `docs/260824_LV_Bibliothek_Components_modular.docx`, wortgetreu übernommen).
 
@@ -341,6 +342,15 @@ Die Einzelpositionen selbst wurden nicht veraendert. Abgesichert durch
 `backend/test/io-contract.test.js`. Details: `docs/lv-architecture.md` Abschnitt 20,
 `docs/components-boq-begriffsmatrix.md`.
 
+## Architekturentscheidung: `muz_standard` als eigene neutrale LV-Position (2026-08-27)
+
+`muz_standard` wird als eigene verwendbare LV-Position auf
+`LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS` gemappt. Der Bausteintext
+verlangt individuelles Aufmaß an jedem Schachtzugang, enthält keine Herstellerangabe
+und verwendet nicht den Leistungsbestandteil `Hinterfüllen`. Components bleibt
+unverändert; bestehende offene Positionen und Herstellertexte werden nicht geändert.
+Die Zuordnung ist durch `backend/test/io-contract.test.js` abgesichert.
+
 ## Offene Punkte
 
 - Das `teil_umbaukit_schiebetueren` sowie die verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) sind noch offen. Türtechnik, Frequenzregelung, Befestigungs-/Dübelpositionen und Montagerüstung sind seit 2026-08-27 bestätigt klassifiziert.
@@ -349,4 +359,4 @@ Die Einzelpositionen selbst wurden nicht veraendert. Abgesichert durch
 
 ## Kurzfazit
 
-Für die 17 bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch automatisierte Contract-Tests (6 Testsuiten inklusive IO-Contract) gegen Regressionen abgesichert. Die strukturierte LV-Bibliothek (`backend/lv/bibliothek.json`) enthält jetzt alle 311 Bausteine aus der Word-Quelle (299 davon `entwurf`, fachlich ungeprüft) und ist über einen kontrollierten, validierten Importprozess wiederholbar reproduzierbar. Das Granularitätsproblem bei `contentSource: 'static'` ist behoben; Mapping unterstützt jetzt deterministische Varianten. Offen bleiben mehrere klar benannte fachliche Entscheidungen (Herstellerdimension, Seil-Zuordnung, `konventionell`-Text) sowie Schritt F.
+Für die 18 bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch automatisierte Contract-Tests (6 Testsuiten inklusive IO-Contract) gegen Regressionen abgesichert. Die strukturierte LV-Bibliothek (`backend/lv/bibliothek.json`) enthält jetzt alle 311 Bausteine aus der Word-Quelle (299 davon `entwurf`, fachlich ungeprüft) sowie den bestätigten neutralen MUZ-Baustein und ist über einen kontrollierten, validierten Importprozess wiederholbar reproduzierbar. Das Granularitätsproblem bei `contentSource: 'static'` ist behoben; Mapping unterstützt jetzt deterministische Varianten. Offen bleiben mehrere klar benannte fachliche Entscheidungen (Herstellerdimension, Seil-Zuordnung, `konventionell`-Text) sowie Schritt F.

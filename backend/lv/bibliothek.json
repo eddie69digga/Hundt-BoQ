@@ -2040,6 +2040,16 @@
     "status": "entwurf"
   },
   {
+    "id": "LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS",
+    "struktur": "11.27",
+    "kapitel": "11",
+    "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
+    "titel": "Mauerumfassungszargen (individuelles Aufmaß)",
+    "typ": "Baustein",
+    "text": "Lieferung und Montage von Mauerumfassungszargen an jedem Schachtzugang.\n\nDie Abmessungen und Ausführung sind durch individuelles Aufmaß an jedem Schachtzugang zu ermitteln und gemäß freigegebener Werk- und Montageplanung auszuführen.\n\nBefestigung und umlaufende Versiegelung gemäß Werk- und Montageplanung.\n\nAbrechnungseinheit: je Schachtzugang.",
+    "status": "bestaetigt"
+  },
+  {
     "id": "LV_KAP_12_AUFZUGSSTEUERUNG",
     "struktur": "12",
     "kapitel": "12",
