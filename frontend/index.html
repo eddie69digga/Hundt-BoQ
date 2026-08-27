@@ -677,6 +677,55 @@
       font-weight: 500;
     }
 
+    .io-report {
+      margin: 18px 0 22px;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: #f9fafb;
+    }
+
+    .io-report h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: #1f2937;
+    }
+
+    .io-report-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+
+    .io-report-count {
+      padding: 6px 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      background: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .io-report-table {
+      margin-top: 0;
+      font-size: 0.9rem;
+    }
+
+    .io-report-table .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status-badge-mapped { background: #dcfce7; color: #166534; }
+    .status-badge-open { background: #fef3c7; color: #92400e; }
+    .status-badge-not_lv_position { background: #e0e7ff; color: #3730a3; }
+    .status-badge-invalid { background: #fee2e2; color: #991b1b; }
+
     .export-actions {
       display: flex;
       flex-wrap: wrap;
@@ -889,6 +938,10 @@
         <button id="wordExportButton" class="btn-export-word" type="button">Word Export</button>
         <button id="btnExportX83" type="button">ORCA Export</button>
       </div>
+      <div id="ioReportOverview" class="io-report" aria-labelledby="io-report-heading">
+        <h3 id="io-report-heading">IO-Report</h3>
+        <p class="meta-row">Noch kein IO-Report geladen.</p>
+      </div>
       <div id="positionsMeta" class="meta-row hidden"></div>
       <div id="positionsOverview" class="empty-state">Noch keine LV-Positionen geladen.</div>
     </section>
@@ -936,6 +989,7 @@
       packageOverview: document.getElementById('packageOverview'),
       positionsOverview: document.getElementById('positionsOverview'),
       positionsMeta: document.getElementById('positionsMeta'),
+      ioReportOverview: document.getElementById('ioReportOverview'),
       wordExportButton: document.getElementById('wordExportButton'),
     };
 
@@ -1186,6 +1240,116 @@
       elements.positionsOverview.textContent = 'Noch keine LV-Positionen geladen.';
       elements.positionsMeta.className = 'meta-row hidden';
       elements.positionsMeta.textContent = '';
+      elements.ioReportOverview.replaceChildren(
+        Object.assign(document.createElement('p'), {
+          className: 'meta-row',
+          textContent: 'Noch kein IO-Report geladen.',
+        })
+      );
+    }
+
+    const ioReportStatusLabels = {
+      mapped: 'mapped',
+      open: 'open',
+      not_lv_position: 'not_lv_position',
+      invalid: 'invalid',
+    };
+
+    function renderIoReport(report) {
+      const entries = Array.isArray(report?.positionStatuses) ? report.positionStatuses : [];
+      const container = elements.ioReportOverview;
+      container.replaceChildren();
+
+      const heading = document.createElement('h3');
+      heading.id = 'io-report-heading';
+      heading.textContent = 'IO-Report';
+      container.appendChild(heading);
+
+      const summary = document.createElement('div');
+      summary.className = 'io-report-summary';
+      Object.keys(ioReportStatusLabels).forEach((status) => {
+        const count = entries.filter((entry) => entry.status === status).length;
+        const badge = document.createElement('span');
+        badge.className = 'io-report-count';
+        badge.textContent = `${ioReportStatusLabels[status]}: ${count}`;
+        summary.appendChild(badge);
+      });
+      container.appendChild(summary);
+
+      if (!entries.length) {
+        const empty = document.createElement('p');
+        empty.className = 'meta-row';
+        empty.textContent = 'Keine positiven kalkulierten Positionen vorhanden.';
+        container.appendChild(empty);
+        return;
+      }
+
+      const table = document.createElement('table');
+      table.className = 'io-report-table';
+      const head = document.createElement('thead');
+      const headRow = document.createElement('tr');
+      ['Position', 'Bezeichnung', 'Menge / Einheit', 'Status', 'LV-ID'].forEach((label) => {
+        const cell = document.createElement('th');
+        cell.textContent = label;
+        headRow.appendChild(cell);
+      });
+      head.appendChild(headRow);
+      table.appendChild(head);
+
+      const body = document.createElement('tbody');
+      entries.forEach((entry) => {
+        const row = document.createElement('tr');
+        const positionCell = document.createElement('td');
+        positionCell.dataset.label = 'Position';
+        positionCell.textContent = entry.paketIndex !== undefined && entry.positionIndex !== undefined
+          ? `${Number(entry.paketIndex) + 1}.${String(Number(entry.positionIndex) + 1).padStart(2, '0')}`
+          : fallbackValue(entry.positionId);
+        const nameCell = document.createElement('td');
+        nameCell.dataset.label = 'Bezeichnung';
+        nameCell.textContent = fallbackValue(entry.bezeichnung);
+        const quantityCell = document.createElement('td');
+        quantityCell.dataset.label = 'Menge / Einheit';
+        quantityCell.textContent = `${fallbackValue(entry.menge)} ${fallbackValue(entry.einheit)}`;
+        const statusCell = document.createElement('td');
+        statusCell.dataset.label = 'Status';
+        const statusBadge = document.createElement('span');
+        statusBadge.className = `status-badge status-badge-${entry.status}`;
+        statusBadge.textContent = ioReportStatusLabels[entry.status] || fallbackValue(entry.status);
+        statusCell.appendChild(statusBadge);
+        const lvCell = document.createElement('td');
+        lvCell.dataset.label = 'LV-ID';
+        lvCell.textContent = fallbackValue(entry.bibliotheksId);
+        row.append(positionCell, nameCell, quantityCell, statusCell, lvCell);
+        body.appendChild(row);
+      });
+      table.appendChild(body);
+      container.appendChild(table);
+    }
+
+    async function loadIoReport(data) {
+      try {
+        const response = await fetch(buildApiUrl('/api/io-report'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            data,
+            technik_json: JSON.stringify(data?.technik || {}),
+          }),
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || payload?.success !== true || !payload?.report) {
+          throw new Error(payload?.error || 'IO-Report konnte nicht geladen werden.');
+        }
+        renderIoReport(payload.report);
+      } catch (error) {
+        elements.ioReportOverview.replaceChildren();
+        const heading = document.createElement('h3');
+        heading.textContent = 'IO-Report';
+        const message = document.createElement('p');
+        message.className = 'meta-row';
+        message.textContent = error?.message || 'IO-Report konnte nicht geladen werden.';
+        elements.ioReportOverview.append(heading, message);
+      }
     }
 
     function makeGroup(label, fields) {
@@ -1652,6 +1816,7 @@
       renderProjectOverview(data);
       renderPackageOverview(data.pakete.aktiv);
       renderPositionsOverview(data);
+      void loadIoReport(data);
 
       if (validation.warnings.length) {
         setStatus(

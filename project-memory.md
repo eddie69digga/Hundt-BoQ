@@ -326,6 +326,11 @@ Korrekturwerte werden als `not_lv_position` behandelt; unbekannte, strukturell
 gültige Positionen bleiben offen und werden nicht fachlich geraten. Abgesichert
 durch `backend/test/io-contract.test.js`.
 
+Die BoQ-Oberfläche lädt denselben Report nach jedem Import über `POST /api/io-report`
+und zeigt eine Statuszusammenfassung sowie eine Positions-Tabelle mit Position,
+Bezeichnung, Menge/Einheit, Status und LV-ID. Die Darstellung erzeugt keine
+zusätzlichen Mappingregeln.
+
 ## Offene Punkte
 
 - Fachliche Zuordnung von `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren` (Herstellerdimension) sowie der verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) ist noch offen - siehe `docs/components-boq-begriffsmatrix.md`.

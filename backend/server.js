@@ -2816,6 +2816,26 @@ async function handleBoQWordDownload(req, res) {
   }
 }
 
+function handleIoReport(req, res) {
+  try {
+    const requestData = mergeWordExportRequestData(req);
+    const report = buildPositionMappingReport(requestData);
+    return res.json({
+      success: true,
+      report,
+    });
+  } catch (e) {
+    const statusCode = e && Number.isInteger(e.statusCode) ? e.statusCode : 500;
+    console.error('[IO-Report] ' + (e?.message || e));
+    return res.status(statusCode).json({
+      success: false,
+      error: e?.message || 'IO-Report konnte nicht erstellt werden.',
+    });
+  }
+}
+
+app.post('/api/io-report', handleIoReport);
+
 // Bestehender Endpunkt bleibt kompatibel und nutzt jetzt den kombinierten BoQ-Export.
 app.get('/api/export/steuerung/docx', handleBoQWordDownload);
 app.post('/api/export/steuerung/docx', handleBoQWordDownload);
@@ -2973,6 +2993,7 @@ if (require.main === module) {
 module.exports = {
   app,
   buildPositionMappingReport,
+  handleIoReport,
   resolveMappedStaticLvEntries,
   resolveBibliothekEntryAsLv,
   resolveStaticModuleEntryAsLv,

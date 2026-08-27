@@ -487,6 +487,11 @@ aufgebaut. Strukturell gültige, aber fachlich noch nicht zugeordnete Positionen
 bleiben als `open` sichtbar, ohne dass ein Bibliotheksbaustein erfunden wird.
 Der Contract ist durch `backend/test/io-contract.test.js` abgesichert.
 
+Für die Nachvollziehbarkeit in der BoQ-Oberfläche stellt das Backend denselben
+Report zusätzlich über `POST /api/io-report` bereit. Das Frontend zeigt daraus
+Statuszählung und Positionsdetails inklusive LV-ID; der Word-Export bleibt
+unverändert auf `mapped` beschränkt.
+
 ## 23. Auslagerung Mappinglogik (Schritt F) - geprüft, bewusst zurückgestellt
 
 Geprüft am 2026-08-25, nach Abschluss der Vollübernahme (Schritt D):
