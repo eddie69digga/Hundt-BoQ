@@ -327,7 +327,7 @@ Dieser Fall bleibt der verbindliche Contract-Test für die Weiterentwicklung der
 
 ## 15. Kurzfazit
 
-Der aktuelle Datenfluss zeigt bereits die richtigen Komponenten: Components liefert Kalkulationsdaten, BoQ verarbeitet sie und das Backend erzeugt DOCX-Exporte. Die positionsgenaue Mappinglogik verbindet Kalkulationsstruktur und LV-Struktur für 10 bestätigte Bibliotheks-IDs; ein Contract-Test sichert diesen Zustand gegen Regressionen ab. Die modulare LV-Bibliothek unter `docs` ist als Bibliotheksresolver für Bausteine ohne statische Paketentsprechung angebunden (`backend/lv/bibliothek.json`).
+Der aktuelle Datenfluss zeigt bereits die richtigen Komponenten: Components liefert Kalkulationsdaten, BoQ verarbeitet sie und das Backend erzeugt DOCX-Exporte. Die positionsgenaue Mappinglogik verbindet Kalkulationsstruktur und LV-Struktur für bestätigte Bibliotheks-IDs; ein Contract-Test sichert diesen Zustand gegen Regressionen ab. Die modulare LV-Bibliothek unter `docs` ist als Bibliotheksresolver für Bausteine ohne statische Paketentsprechung angebunden (`backend/lv/bibliothek.json`).
 
 ## 16. Diagnose: `kalkulationsEingaben` vs. `paketSummen` (Components-Export)
 
@@ -375,6 +375,8 @@ Zugriff im Code (`backend/server.js`):
 - `loadBibliothek()` – liefert weiterhin eine nach `id` gekeyte Lookup-Struktur (Rückwärtskompatibilität zu `resolveBibliothekEntryAsLv()` und dem bestehenden Contract-Test).
 
 Migration: Die bisherigen 10 Einträge wurden 1:1 in das neue Schema übernommen. `struktur`, `kapitel`, `kategorie` und `typ` stammen aus der realen Word-Metadatenzeile (verifiziert je Eintrag, nicht geschätzt); `status` wurde für alle 10 auf `bestaetigt` gesetzt, da sie bereits produktiv gemappt und durch den Contract-Test abgesichert sind. `titel` und `text` wurden inhaltlich unverändert übernommen.
+
+Die Components-Position `demontage_schiebetuer_2tlg` ist als verwendbare LV-Position auf den neutralen Bibliotheksbaustein `LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG` gemappt. Der Bibliothekstext lautet exakt: `Vorhandene zweiflügelige Schiebetüren fachgerecht demontieren.`; die Position ist kein Kategorieeintrag und enthält keine Herstellerangabe.
 
 Die Word-Quelle enthält insgesamt 311 strukturierte Einträge (24 Kategorien/Kapitel, 226 Bausteine, 22 Varianten, 32 Unterbausteine, 7 Unterabschnitte, keine doppelten IDs) - das ist der Zielumfang für den späteren Vollimport (Schritt D).
 
