@@ -317,6 +317,15 @@ Verbindliche Zielreihenfolge (siehe Architekturentscheidung): E → B → I → 
 2. Bei Bedarf weitere Components-Positionen gegen die jetzt vollständige Bibliothek (311 Einträge) mappen - nur nach fachlicher Bestätigung, nicht automatisiert (siehe Anti-Try-and-Error-Regel).
 3. Schritt F erneut bewerten, sobald `POSITION_MAPPING_RULES` spürbar wächst.
 
+## IO-Positionsvertrag (2026-08-27)
+
+`buildPositionMappingReport()` liefert zusätzlich `positionStatuses`,
+`not_lv_position` und `invalid`; jede positive Position erhält genau einen der vier
+zulässigen Statuswerte. Die Word-Ausgabe verwendet weiterhin nur `mapped`.
+Korrekturwerte werden als `not_lv_position` behandelt; unbekannte, strukturell
+gültige Positionen bleiben offen und werden nicht fachlich geraten. Abgesichert
+durch `backend/test/io-contract.test.js`.
+
 ## Offene Punkte
 
 - Fachliche Zuordnung von `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren` (Herstellerdimension) sowie der verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) ist noch offen - siehe `docs/components-boq-begriffsmatrix.md`.

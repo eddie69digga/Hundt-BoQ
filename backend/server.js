@@ -1803,6 +1803,41 @@ function readPositiveComponentsFromQuery(query = {}) {
   return positives;
 }
 
+// Liest den vollständigen Positionsvertrag. Positive Positionen mit ungültiger
+// Struktur werden absichtlich nicht verworfen, damit der IO-Report niemals
+// stillschweigend Positionen verliert.
+function readComponentsPositionContract(query = {}) {
+  const payload = parseStructuredPayload(query.payload) || parseStructuredPayload(query.data) || {};
+  const kalkulation = parseStructuredPayload(query.kalkulation) || payload?.kalkulation || {};
+  const paketSummen = Array.isArray(kalkulation.paketSummen)
+    ? kalkulation.paketSummen
+    : (Array.isArray(payload?.kalkulation?.paketSummen) ? payload.kalkulation.paketSummen : []);
+  const positions = [];
+
+  for (const [paketIndex, paket] of paketSummen.entries()) {
+    const paketPositionen = Array.isArray(paket?.positionen) ? paket.positionen : [];
+    for (const [positionIndex, position] of paketPositionen.entries()) {
+      const rawMenge = position && typeof position === 'object'
+        ? (position.anzahl ?? position.menge ?? position.qty ?? position.anzahlPos ?? position.anzahl_positiv)
+        : undefined;
+      const menge = Number(rawMenge);
+      if (!Number.isFinite(menge) || menge <= 0) continue;
+      const id = normalizeToken(position?.id || position?.name || position?.key || '');
+      positions.push({
+        id,
+        paket: normalizeToken(paket?.paket || position?.paket || ''),
+        bezeichnung: String(position?.bezeichnung || position?.name || position?.id || '').trim(),
+        menge,
+        einheit: String(position?.einheit || '').trim() || 'Stk',
+        paketIndex,
+        positionIndex,
+        structurallyValid: Boolean(id),
+      });
+    }
+  }
+  return positions;
+}
+
 function readTechnischeKontext(query = {}) {
   const payload = parseStructuredPayload(query.payload) || parseStructuredPayload(query.data) || {};
   const technikSource = parseStructuredPayload(query.technik_json) || parseStructuredPayload(query.technischeParameter_json) || parseStructuredPayload(query.technischeDaten_json) || payload?.technischeParameter || payload?.technik || {};
@@ -1834,6 +1869,7 @@ function dedupeMappingEntries(entries = []) {
 
 function buildPositionMappingReport(query = {}) {
   const positives = readPositiveComponentsFromQuery(query);
+  const contractPositions = readComponentsPositionContract(query);
   const technical = readTechnischeKontext(query);
   const byId = new Map();
 
@@ -1846,6 +1882,39 @@ function buildPositionMappingReport(query = {}) {
 
   const mapped = [];
   const open = [];
+  const not_lv_position = [];
+  const invalid = [];
+  const statusByPosition = new Map();
+
+  function setPositionStatus(position, status, details = {}) {
+    const key = `${position.paketIndex}:${position.positionIndex}`;
+    if (statusByPosition.has(key)) return;
+    statusByPosition.set(key, {
+      positionId: position.id || null,
+      componentsId: position.id || null,
+      paket: position.paket,
+      bezeichnung: position.bezeichnung,
+      menge: position.menge,
+      einheit: position.einheit,
+      paketIndex: position.paketIndex,
+      positionIndex: position.positionIndex,
+      status,
+      ...details,
+    });
+  }
+
+  for (const position of contractPositions) {
+    if (!position.structurallyValid) {
+      setPositionStatus(position, 'invalid', { reason: 'positive Position ohne stabile Components-ID' });
+    }
+  }
+
+  const correctionIds = new Set(['korrekturwert_1', 'korrekturwert_2', 'korrekturwert_3', 'korrekturwert_4']);
+  for (const position of contractPositions) {
+    if (position.structurallyValid && correctionIds.has(position.id)) {
+      setPositionStatus(position, 'not_lv_position', { reason: 'Korrekturwert ist keine LV-Position' });
+    }
+  }
 
   for (const rule of POSITION_MAPPING_RULES) {
     const hasMatch = rule.componentsIds.some((id) => byId.has(id));
@@ -1868,6 +1937,12 @@ function buildPositionMappingReport(query = {}) {
         groupKey: rule.groupKey,
         status: 'mapped',
       });
+      for (const position of contractPositions.filter((candidate) => matches.includes(candidate.id))) {
+        setPositionStatus(position, 'mapped', {
+          groupKey: rule.groupKey,
+          bibliotheksId: rule.bibliotheksId,
+        });
+      }
       continue;
     }
 
@@ -1878,6 +1953,30 @@ function buildPositionMappingReport(query = {}) {
       groupKey: rule.groupKey,
       status: 'open',
     });
+    for (const position of contractPositions.filter((candidate) => matches.includes(candidate.id))) {
+      setPositionStatus(position, 'open', { groupKey: rule.groupKey, reason: 'Kein bestätigtes LV-Mapping' });
+    }
+  }
+
+  // Positive, strukturell gültige Positionen ohne passende Regel bleiben
+  // nachvollziehbar offen. Es wird kein fachlicher Bibliotheksbaustein erfunden.
+  for (const position of contractPositions) {
+    if (position.structurallyValid && !statusByPosition.has(`${position.paketIndex}:${position.positionIndex}`)) {
+      setPositionStatus(position, 'open', { reason: 'Keine Mapping-Regel vorhanden' });
+      open.push({
+        componentsIds: [position.id],
+        bibliotheksId: null,
+        staticEntryId: null,
+        groupKey: `open-unmapped-${position.id}`,
+        status: 'open',
+      });
+    }
+  }
+
+  const positionStatuses = [...statusByPosition.values()];
+  for (const statusEntry of positionStatuses) {
+    if (statusEntry.status === 'not_lv_position') not_lv_position.push(statusEntry);
+    if (statusEntry.status === 'invalid') invalid.push(statusEntry);
   }
 
   return {
@@ -1885,6 +1984,9 @@ function buildPositionMappingReport(query = {}) {
     positives,
     mapped: dedupeMappingEntries(mapped),
     open: dedupeMappingEntries(open),
+    not_lv_position,
+    invalid,
+    positionStatuses,
   };
 }
 
@@ -2880,4 +2982,3 @@ module.exports = {
   createBoQDocxBuffer,
   POSITION_MAPPING_RULES,
 };
-

@@ -476,6 +476,17 @@ Validierungsbericht des Merge-Bestands (258 Berichte, 0 Fehler):
 
 Wichtig: Der Vollimport erweitert ausschließlich die **Bibliothek** (die Menge verfügbarer, potenziell referenzierbarer LV-Bausteine). Er verändert `POSITION_MAPPING_RULES` nicht und schließt keine weiteren offenen Components-Positionen. Die 299 neu importierten Einträge sind `entwurf` (fachlich ungeprüft) und werden erst nach einer bestätigten fachlichen Zuordnung überhaupt referenziert.
 
+## 23a. Vollständiger Components-IO-Positionsvertrag
+
+Seit 2026-08-27 wird jede positive Components-Kalkulationsposition im BoQ-Report
+positionsgenau und deterministisch klassifiziert. Zulässige Statuswerte sind
+`mapped`, `open`, `not_lv_position` und `invalid`; keine positive Position wird
+stillschweigend verworfen. Korrekturwerte (`korrekturwert_1` bis `_4`) sind
+`not_lv_position`. Die Word-Auswahl wird weiterhin ausschließlich aus `mapped`
+aufgebaut. Strukturell gültige, aber fachlich noch nicht zugeordnete Positionen
+bleiben als `open` sichtbar, ohne dass ein Bibliotheksbaustein erfunden wird.
+Der Contract ist durch `backend/test/io-contract.test.js` abgesichert.
+
 ## 23. Auslagerung Mappinglogik (Schritt F) - geprüft, bewusst zurückgestellt
 
 Geprüft am 2026-08-25, nach Abschluss der Vollübernahme (Schritt D):
@@ -485,5 +496,3 @@ Geprüft am 2026-08-25, nach Abschluss der Vollübernahme (Schritt D):
 - Die reine Mapping-/Resolutionslogik (`POSITION_MAPPING_RULES`, `buildPositionMappingReport()`, `resolveMappedStaticLvEntries()`, `resolveBibliothekEntryAsLv()`, `resolveStaticModuleEntryAsLv()`, `loadBibliothek()`/`loadBibliothekEntries()`) ist bereits räumlich zusammenhängend innerhalb von `server.js` und über eine klare Testgrenze (`backend/test/mapping-contract.test.js`, `granularity-contract.test.js`, `variant-mapping.test.js`) abgesichert - unabhängig davon, ob sie in einer eigenen Datei liegt.
 
 Entscheidung: Schritt F wird **bewusst zurückgestellt**, nicht durchgeführt. Ein Auslagern in ein eigenes Modul (analog zu `backend/lib/library-validation.js` und `backend/lib/word-library-extractor.js`) wäre risikoarm und architektonisch naheliegend, aber bei nur 16 Regeln kein Schritt mit "echtem" Wartbarkeitsgewinn im Sinne des Architekturauftrags - er würde `server.js` verkleinern, ohne eine bestehende Wartbarkeitsschwierigkeit zu lösen. Erneut zu prüfen, sobald `POSITION_MAPPING_RULES` durch weitere fachlich bestätigte Mappings spürbar wächst (z. B. > 40-50 Regeln) oder `server.js` aus anderen Gründen unübersichtlich wird.
-
-

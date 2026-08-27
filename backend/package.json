@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node test/mapping-contract.test.js && node test/granularity-contract.test.js && node test/library-validation.test.js && node test/variant-mapping.test.js && node test/word-import.test.js"
+    "test": "node test/mapping-contract.test.js && node test/granularity-contract.test.js && node test/library-validation.test.js && node test/variant-mapping.test.js && node test/word-import.test.js && node test/io-contract.test.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.1",
