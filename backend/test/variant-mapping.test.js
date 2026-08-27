@@ -6,8 +6,8 @@
  *
  * Fachliche Grundlage (siehe docs/components-boq-begriffsmatrix.md, docs/lv-architecture.md
  * Abschnitt 17/18):
- *   - hydraulik + frequenzgeregelt -> LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER
- *   - hydraulik + softstart        -> LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE
+ *   - hydraulik + frequenzgeregelt -> LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT
+ *   - hydraulik + softstart        -> LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART
  *   - hydraulik + konventionell    -> bleibt offen (kein bestaetigter Bibliotheksbaustein)
  *   - seil (jede Regelungsart)     -> bleibt offen (keine eindeutige Zuordnung, siehe Begriffsmatrix)
  *
@@ -139,11 +139,11 @@ async function testCrossContamination() {
   const freqTitels = freqResolved.flatMap((e) => (e.lv?.module || []).map((m) => m.titel));
   const softTitels = softResolved.flatMap((e) => (e.lv?.module || []).map((m) => m.titel));
 
-  if (freqTitels.includes('TWR – Hydraulik mit Softstart (z.B. Hydroware)')) {
+  if (freqTitels.includes('TWR – Hydraulik mit Softstart')) {
     reportFailure(label, 'Frequenzgeregelt-Kontext enthaelt faelschlich den Softstart-Baustein.');
     return;
   }
-  if (softTitels.includes('TWR – Hydraulik Frequenzgeregelt (z.B. Bucher)')) {
+  if (softTitels.includes('TWR – Hydraulik Frequenzgeregelt')) {
     reportFailure(label, 'Softstart-Kontext enthaelt faelschlich den Frequenzgeregelt-Baustein.');
     return;
   }
@@ -161,15 +161,15 @@ async function main() {
   await testVariant(
     'Hydraulik + frequenzgeregelt',
     { aufzugstyp: 'hydraulik', hydraulikRegelungsart: 'frequenzgeregelt' },
-    'LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER',
-    'TWR – Hydraulik Frequenzgeregelt (z.B. Bucher)'
+    'LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT',
+    'TWR – Hydraulik Frequenzgeregelt'
   );
 
   await testVariant(
     'Hydraulik + softstart',
     { aufzugstyp: 'hydraulik', hydraulikRegelungsart: 'softstart' },
-    'LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE',
-    'TWR – Hydraulik mit Softstart (z.B. Hydroware)'
+    'LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART',
+    'TWR – Hydraulik mit Softstart'
   );
 
   await testVariant('Hydraulik + konventionell (bewusst offen)', { aufzugstyp: 'hydraulik', hydraulikRegelungsart: 'konventionell' }, null, null);

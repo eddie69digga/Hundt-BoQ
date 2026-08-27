@@ -117,7 +117,7 @@ Der aktuelle Ablauf:
 1. Das Frontend sendet die vollständige Kalkulationsstruktur (`currentData`, inkl. `kalkulation.paketSummen[*].positionen`) im POST-Body unter dem Feld `data`.
 2. `getWordExportLvEntries(query)` bzw. `createBoQDocxBuffer(query)` prüfen zuerst über `buildPositionMappingReport`, ob positive Positionsdaten vorhanden sind.
 3. Liegen positive Positionen vor, wird ausschließlich `resolveMappedStaticLvEntries` verwendet: Es werden nur die durch die Mappingregeln bestätigten statischen Einträge (`steuerung`, `abnahme`) ausgewählt; `antrieb` (mit dem Seil-/MRL-Text) wird in diesem Modus grundsätzlich ausgeschlossen, unabhängig von `aktivePakete`/`aktiveBundles`.
-4. Fehlen positive Positionsdaten (z. B. bei einem GET-Request ohne Body oder bei alten Datensätzen), greift der Legacy-Pfad: `extractAktiveSelektionen(query)` entscheidet, welche Pakete aktiv sind, und alle Standardpakete (Steuerung, Antrieb, Abnahme) werden nach der bisherigen Logik zusammengeführt.
+4. Fehlen positive Positionsdaten (bei einem GET-Request ohne Body oder bei alten Datensätzen), greift der Legacy-Pfad: `extractAktiveSelektionen(query)` entscheidet, welche Pakete aktiv sind, und alle Standardpakete (Steuerung, Antrieb, Abnahme) werden nach der bisherigen Logik zusammengeführt.
 5. `buildMinimalX83XmlFromWordSource` bzw. `createBoQDocxBuffer` bauen daraus das Word-/XML-Dokument.
 
 Wesentlicher Effekt:
@@ -209,13 +209,13 @@ Die Legacy-Abgrenzung ist bewusst und technisch sauber: Wenn kein neues Componen
 
 ### 9.1 Behobenes Granularitaetsproblem (Schritt E)
 
-Bis zur Korrektur wurde bei `contentSource: 'static'` das GESAMTE statische Paket (`steuerung.json` mit allen ~20 Modulen bzw. `abnahme.json`) dedupliziert unter dem Paket-Schluessel (`staticEntryId`, z. B. `steuerung`) eingefuegt, sobald IRGENDEINE der 6 auf dasselbe Paket zeigenden Regeln (`steuerung`, `fahrkorbtableau`, `aussenruftableau`, `standanzeige`, `schachtbeleuchtung`, `kabelkanaele`) positiv war. Dadurch erschienen automatisch auch nicht bestaetigte, nicht positive Module desselben Pakets im LV (z. B. Frequenzumrichter/Regelung, Lastmesssystem, Schaltschrank, Brandfallsteuerung, Schachtkopierung, Parkhaltestelle) - ein Verstoss gegen `Kalkulationsstruktur != LV-Struktur`.
+Bis zur Korrektur wurde bei `contentSource: 'static'` das GESAMTE statische Paket (`steuerung.json` mit allen ~20 Modulen bzw. `abnahme.json`) dedupliziert unter dem Paket-Schluessel (`staticEntryId`, `steuerung`) eingefuegt, sobald IRGENDEINE der 6 auf dasselbe Paket zeigenden Regeln (`steuerung`, `fahrkorbtableau`, `aussenruftableau`, `standanzeige`, `schachtbeleuchtung`, `kabelkanaele`) positiv war. Dadurch erschienen automatisch auch nicht bestaetigte, nicht positive Module desselben Pakets im LV (Frequenzumrichter/Regelung, Lastmesssystem, Schaltschrank, Brandfallsteuerung, Schachtkopierung, Parkhaltestelle) - ein Verstoss gegen `Kalkulationsstruktur != LV-Struktur`.
 
 Fix (`backend/server.js`, `resolveMappedStaticLvEntries()` / `resolveStaticModuleEntryAsLv()`):
 
-- Jede Regel mit `contentSource: 'static'` traegt jetzt `staticModuleId` (das genaue Modul innerhalb des Pakets, z. B. `schachtbeleuchtung` → Modul-ID `schachtbeleuchtung`, `aussenruftableau` → Modul-ID `befehlsgeber_aussenruf`).
+- Jede Regel mit `contentSource: 'static'` traegt jetzt `staticModuleId` (das genaue Modul innerhalb des Pakets, `schachtbeleuchtung` → Modul-ID `schachtbeleuchtung`, `aussenruftableau` → Modul-ID `befehlsgeber_aussenruf`).
 - Aufgeloest wird ein synthetisches LV-Objekt mit genau diesem einen Modul (analog zu `resolveBibliothekEntryAsLv()`), nicht mehr das komplette Paket.
-- Dedupliziert wird ausschliesslich ueber die Ziel-Bibliotheks-ID (`bibliotheksId`), nicht mehr ueber den Paket-Schluessel. Dadurch fuehren mehrere Regeln, die auf dasselbe Paket zeigen (z. B. alle 6 Steuerung-Positionen), zu jeweils EIGENEN LV-Positionen, wenn sie einzeln positiv sind - und zu GAR KEINER Ausgabe, wenn sie es nicht sind.
+- Dedupliziert wird ausschliesslich ueber die Ziel-Bibliotheks-ID (`bibliotheksId`), nicht mehr ueber den Paket-Schluessel. Dadurch fuehren mehrere Regeln, die auf dasselbe Paket zeigen (alle 6 Steuerung-Positionen), zu jeweils EIGENEN LV-Positionen, wenn sie einzeln positiv sind - und zu GAR KEINER Ausgabe, wenn sie es nicht sind.
 - Fachlich richtige Ausgaben bleiben erhalten: Der Modultext in `steuerung.json`/`abnahme.json` ist inhaltlich identisch mit dem entsprechenden `backend/lv/bibliothek.json`-Eintrag (verifiziert; einzige Unterschiede sind Tabulatur-Formatierung ohne Renderingauswirkung sowie ein Anfuehrungszeichen-Encoding-Artefakt bei `fahrkorbtableau_vertikal`).
 - Abgesichert durch `backend/test/granularity-contract.test.js` (positive Granularitaet, Negativpruefung auf DOCX-Ebene mit eindeutigen Textfragmenten, Dedup-Pruefung, Vollstaendigkeitspruefung fuer alle 6 Steuerung-Positionen, Offen-Pruefung ohne erfundenen Ersatztext).
 
@@ -253,7 +253,7 @@ Umgesetzt in `backend/test/mapping-contract.test.js` (`npm test` im Verzeichnis 
 - **Stufe D (Export):** Steuerung und Abnahme sind in der finalen Word-Export-Auswahl enthalten.
 - **Stufe E (DOCX-Inhalt):** Das erzeugte DOCX enthält für jede der 10 IDs den kanonischen Titel als Text; die Seil-/MRL-Negativliste ist vollständig abwesend.
 
-Schlägt eine Stufe fehl, benennt der Test explizit, auf welcher Stufe der Datenpfad gebrochen ist (z. B. "STUFE C GEBROCHEN: ... nicht in aufgeloester Export-Auswahl gefunden"), statt nur pauschal "Test fehlgeschlagen" zu melden.
+Schlägt eine Stufe fehl, benennt der Test explizit, auf welcher Stufe der Datenpfad gebrochen ist ("STUFE C GEBROCHEN: ... nicht in aufgeloester Export-Auswahl gefunden"), statt nur pauschal "Test fehlgeschlagen" zu melden.
 
 
 
@@ -359,9 +359,9 @@ Kleine, sichere Korrektur (Components, `01_Components_reload/frontend/index.html
 Feldbedeutung:
 
 - `id` – stabile Bibliotheks-ID, Quelle: Word-Metadatenzeile (`Bibliotheks-ID ...`). Wird nie geändert, sobald ein Mapping darauf verweist.
-- `struktur` – hierarchische Gliederungsnummer aus der Word-Quelle (z. B. `09.02`, `10.08.01`, `18.04.09.02`). Codiert die Hierarchie bereits vollständig über die Punktnotation.
-- `kapitel` – erstes Struktur-Segment (z. B. `09`), mechanisch aus `struktur` abgeleitet. Kein eigenständiges Feld mit potenziell abweichender Wahrheit, sondern eine Bequemlichkeits-Ableitung für Filterung/Validierung nach Kapitel.
-- `kategorie` – Referenz auf die Bibliotheks-ID des Kapitels (`typ: "Kategorie"`, z. B. `LV_KAP_09_SCHACHTAUSRUSTUNG`), nicht der Klartext-Kapiteltitel. Der Kapiteltitel wird bei Bedarf über den Kategorie-Eintrag selbst nachgeschlagen (keine doppelte Titelpflege).
+- `struktur` – hierarchische Gliederungsnummer aus der Word-Quelle (`09.02`, `10.08.01`, `18.04.09.02`). Codiert die Hierarchie bereits vollständig über die Punktnotation.
+- `kapitel` – erstes Struktur-Segment (`09`), mechanisch aus `struktur` abgeleitet. Kein eigenständiges Feld mit potenziell abweichender Wahrheit, sondern eine Bequemlichkeits-Ableitung für Filterung/Validierung nach Kapitel.
+- `kategorie` – Referenz auf die Bibliotheks-ID des Kapitels (`typ: "Kategorie"`, `LV_KAP_09_SCHACHTAUSRUSTUNG`), nicht der Klartext-Kapiteltitel. Der Kapiteltitel wird bei Bedarf über den Kategorie-Eintrag selbst nachgeschlagen (keine doppelte Titelpflege).
 - `titel` – Überschrift des Bausteins, wortgetreu aus Word übernommen.
 - `typ` – einer von `Kategorie` (Kapitelebene, kein eigener LV-Baustein), `Baustein` (regulärer LV-Baustein), `Variante` (alternative Ausführung eines Bausteins), `Unterbaustein`, `Unterabschnitt` (weitere Verschachtelungstiefen). Werte 1:1 aus der Word-Metadatenzeile übernommen, keine neue Klassifikation erfunden.
 - `text` – Fliesstext des Bausteins, wortgetreu aus Word übernommen, nicht umformuliert.
@@ -383,7 +383,7 @@ Die Word-Quelle enthält insgesamt 311 strukturierte Einträge (24 Kategorien/Ka
 `backend/lib/library-validation.js` stellt eine reine, seiteneffektfreie Validierungsfunktion (`validateLibrary({ entries, rules, staticPackages })`) bereit, die sowohl die strukturierte Bibliothek (`backend/lv/bibliothek.json`) als auch die Mappingregeln (`POSITION_MAPPING_RULES`) prüft. Ergebnis ist immer `{ errors, warnings }`:
 
 - `errors` – harte Verstöße, die einen Bulk-Import (Schritt C/D) verhindern müssen.
-- `warnings` – fachliche Berichte, die bewusst KEIN Fehler sind (z. B. ungenutzte Bibliothekseinträge, auffällig identische Texte, mehrere Regeln auf denselben Components-Key oder dieselbe Ziel-ID).
+- `warnings` – fachliche Berichte, die bewusst KEIN Fehler sind (ungenutzte Bibliothekseinträge, auffällig identische Texte, mehrere Regeln auf denselben Components-Key oder dieselbe Ziel-ID).
 
 Geprüft werden mindestens:
 
@@ -423,8 +423,8 @@ Wichtig, bereits in der bestätigten Architektur festgelegt und hier nur bestät
 
 Auf Basis der realen Word-Metadatenzeilen (Kapitel 14, Antrieb Hydraulik) wurde `maschine_standardrahmen` **teilweise** geschlossen:
 
-- `aufzugstyp = hydraulik` + `hydraulikRegelungsart = frequenzgeregelt` → `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER` ("TWR – Hydraulik Frequenzgeregelt (z.B. Bucher)")
-- `aufzugstyp = hydraulik` + `hydraulikRegelungsart = softstart` → `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE` ("TWR – Hydraulik mit Softstart (z.B. Hydroware)")
+- `aufzugstyp = hydraulik` + `hydraulikRegelungsart = frequenzgeregelt` → `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT` ("TWR – Hydraulik Frequenzgeregelt ")
+- `aufzugstyp = hydraulik` + `hydraulikRegelungsart = softstart` → `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART` ("TWR – Hydraulik mit Softstart ")
 
 Beide Bausteine sind inhaltlich passend zur fachlichen Bedeutung von `maschine_standardrahmen` bei Hydraulik ("das komplette Hydraulikaggregat inkl. Gestell", siehe `docs/components-boq-begriffsmatrix.md`) und wurden wortgetreu aus der Word-Quelle in `backend/lv/bibliothek.json` übernommen (Struktur `14.01`/`14.02`, Kapitel `14`, Kategorie `LV_KAP_14_ANTRIEB_HYDRAULIK`).
 
@@ -435,7 +435,7 @@ Bewusst weiterhin **offen** (kein erfundener Ersatztext, siehe Stopp-Kriterien d
 
 Abgesichert durch `backend/test/variant-mapping.test.js` (alle 5 Kontexte: frequenzgeregelt, softstart, konventionell, leer, seil) sowie den Determinismus-Test in `backend/test/library-validation.test.js`.
 
-Türtechnik (`tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`) und `teil_umbaukit_schiebetueren` wurden NICHT geschlossen: Die vorhandenen Bibliothekskandidaten sind herstellerspezifisch (Wittur) formuliert, Components kennt aktuell keine Herstellerdimension - das ist eine echte, in `docs/components-boq-begriffsmatrix.md` dokumentierte offene fachliche Entscheidung (siehe dort, Abschnitt "Offene fachliche Entscheidungen").
+Türtechnik (`tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`) und `teil_umbaukit_schiebetueren` wurden NICHT geschlossen: Die vorhandenen Bibliothekskandidaten sind herstellerspezifisch () formuliert, Components kennt aktuell keine Herstellerdimension - das ist eine echte, in `docs/components-boq-begriffsmatrix.md` dokumentierte offene fachliche Entscheidung (siehe dort, Abschnitt "Offene fachliche Entscheidungen").
 
 Eindeutig aus der bestehenden Bibliothek ableitbare Einzelpositionen wurden am 2026-08-27 geschlossen:
 
@@ -461,7 +461,7 @@ Der Extraktor trifft **keine** fachlichen Entscheidungen: kein Mapping, kein Err
 - Neue IDs werden mit `status: 'entwurf'` ergänzt (fachlich ungeprüft), nie mit `bestaetigt`.
 - Vor jedem Schreibvorgang läuft `validateLibrary()` über den gesamten Merge-Bestand; bei Fehlern wird **nicht** geschrieben (`node scripts/import-word-library.js`, ohne `--apply`, ist der Standard-Dry-Run).
 
-Bekannter, bewusst nicht automatisch übernommener Befund: 3 der 12 ursprünglich manuell kuratierten Einträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER`, `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE`) weichen im Feld `text` minimal von einer frischen Word-Extraktion ab (Trailing-Whitespace-Bereinigung bei den beiden `LV_14_*`-Einträgen; bei `LV_07_05` enthält die Word-Quelle einen zusätzlichen, sichtbar unvollständigen, grün eingefärbten Entwurfssatz "Schachtgrubenanstrich - ölfest in 2-K", der im ursprünglich kuratierten Text bewusst nicht enthalten ist). Diese 3 Fälle werden bei jedem Importlauf weiterhin als Bericht angezeigt, aber **nicht** automatisch überschrieben - das ist eine fachliche Entscheidung (Wortlaut übernehmen oder nicht), die hier offen bleibt.
+Bekannter, bewusst nicht automatisch übernommener Befund: 3 der 12 ursprünglich manuell kuratierten Einträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT`, `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART`) weichen im Feld `text` minimal von einer frischen Word-Extraktion ab (Trailing-Whitespace-Bereinigung bei den beiden `LV_14_*`-Einträgen; bei `LV_07_05` enthält die Word-Quelle einen zusätzlichen, sichtbar unvollständigen, grün eingefärbten Entwurfssatz "Schachtgrubenanstrich - ölfest in 2-K", der im ursprünglich kuratierten Text bewusst nicht enthalten ist). Diese 3 Fälle werden bei jedem Importlauf weiterhin als Bericht angezeigt, aber **nicht** automatisch überschrieben - das ist eine fachliche Entscheidung (Wortlaut übernehmen oder nicht), die hier offen bleibt.
 
 Abgesichert durch `backend/test/word-import.test.js`: 311 Einträge werden aus der Word-Quelle extrahiert (keine Duplikate, alle Kernfelder vorhanden), alle bestehenden Einträge bleiben im Merge-Ergebnis byte-identisch, neue Einträge erhalten ausnahmslos `status: 'entwurf'`, keine ID-Kollision, und der resultierende Merge-Bestand ist validierungsfehlerfrei (Voraussetzung für Schritt D).
 
@@ -478,8 +478,8 @@ Am 2026-08-25 mit `node scripts/import-word-library.js --apply` durchgeführt. E
 
 Validierungsbericht des Merge-Bestands (258 Berichte, 0 Fehler):
 
-- 27 × "kein Fliesstext vorhanden" - reine Gruppierungsknoten, deren Inhalt vollständig in untergeordneten `Variante`/`Unterbaustein`-Einträgen steht (z. B. `LV_10_08_WANDBELAGE` mit den Varianten `LV_10_08_01_GLAS`/`_02_EDELSTAHL`/`_03_HPL...`).
-- 17 × "auffällig identischer Text in mehreren Einträgen" - u. a. weil Kapitel 01 (Vorbemerkungen Neuanlagen) und Kapitel 02 (Vorbemerkungen Ersatzanlagen/Teilmodernisierung) zahlreiche wortgleiche Klauseln enthalten (z. B. `LV_01_07`/`LV_02_07` beide "Inverkehrbringung / Inbetriebnahme (PVI)").
+- 27 × "kein Fliesstext vorhanden" - reine Gruppierungsknoten, deren Inhalt vollständig in untergeordneten `Variante`/`Unterbaustein`-Einträgen steht (`LV_10_08_WANDBELAGE` mit den Varianten `LV_10_08_01_GLAS`/`_02_EDELSTAHL`/`_03_HPL...`).
+- 17 × "auffällig identischer Text in mehreren Einträgen" - u. a. weil Kapitel 01 (Vorbemerkungen Neuanlagen) und Kapitel 02 (Vorbemerkungen Ersatzanlagen/Teilmodernisierung) zahlreiche wortgleiche Klauseln enthalten (`LV_01_07`/`LV_02_07` beide "Inverkehrbringung / Inbetriebnahme (PVI)").
 - 214 × "wird von keiner Mapping-Regel verwendet" - erwartet, da für die 299 neuen Einträge noch keine Mapping-Regel existiert; das ist **keine** Aufforderung, jetzt automatisch neue Mappings zu ergänzen (siehe Anti-Try-and-Error-Regel: Kalkulationsstruktur bestimmt, welche Bausteine tatsächlich gebraucht werden, nicht die Bibliotheksgröße).
 
 Wichtig: Der Vollimport erweitert ausschließlich die **Bibliothek** (die Menge verfügbarer, potenziell referenzierbarer LV-Bausteine). Er verändert `POSITION_MAPPING_RULES` nicht und schließt keine weiteren offenen Components-Positionen. Die 299 neu importierten Einträge sind `entwurf` (fachlich ungeprüft) und werden erst nach einer bestätigten fachlichen Zuordnung überhaupt referenziert.
@@ -508,4 +508,4 @@ Geprüft am 2026-08-25, nach Abschluss der Vollübernahme (Schritt D):
 - `POSITION_MAPPING_RULES` umfasst aktuell 19 Regeln. Die Vollübernahme (Schritt D) hat bewusst nur die Bibliothek erweitert; die drei zusätzlichen Regeln vom 2026-08-27 schließen ausschließlich eindeutig ableitbare Einzelpositionen.
 - Die reine Mapping-/Resolutionslogik (`POSITION_MAPPING_RULES`, `buildPositionMappingReport()`, `resolveMappedStaticLvEntries()`, `resolveBibliothekEntryAsLv()`, `resolveStaticModuleEntryAsLv()`, `loadBibliothek()`/`loadBibliothekEntries()`) ist weiterhin räumlich zusammenhängend innerhalb von `server.js` und über klare Testgrenzen (`backend/test/mapping-contract.test.js`, `granularity-contract.test.js`, `variant-mapping.test.js`, `io-contract.test.js`) abgesichert.
 
-Entscheidung: Schritt F wird **bewusst zurückgestellt**, nicht durchgeführt. Ein Auslagern in ein eigenes Modul (analog zu `backend/lib/library-validation.js` und `backend/lib/word-library-extractor.js`) wäre risikoarm und architektonisch naheliegend, löst bei 19 Regeln aber noch keine bestehende Wartbarkeitsschwierigkeit. Erneut zu prüfen, sobald `POSITION_MAPPING_RULES` durch weitere fachlich bestätigte Mappings spürbar wächst (z. B. > 40-50 Regeln) oder `server.js` aus anderen Gründen unübersichtlich wird.
+Entscheidung: Schritt F wird **bewusst zurückgestellt**, nicht durchgeführt. Ein Auslagern in ein eigenes Modul (analog zu `backend/lib/library-validation.js` und `backend/lib/word-library-extractor.js`) wäre risikoarm und architektonisch naheliegend, löst bei 19 Regeln aber noch keine bestehende Wartbarkeitsschwierigkeit. Erneut zu prüfen, sobald `POSITION_MAPPING_RULES` durch weitere fachlich bestätigte Mappings spürbar wächst (> 40-50 Regeln) oder `server.js` aus anderen Gründen unübersichtlich wird.

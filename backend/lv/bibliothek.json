@@ -100,21 +100,21 @@
     "status": "bestaetigt"
   },
   {
-    "id": "LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT_Z_B_BUCHER",
+    "id": "LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT",
     "struktur": "14.01",
     "kapitel": "14",
     "kategorie": "LV_KAP_14_ANTRIEB_HYDRAULIK",
-    "titel": "TWR – Hydraulik Frequenzgeregelt (z.B. Bucher)",
+    "titel": "TWR – Hydraulik Frequenzgeregelt",
     "typ": "Baustein",
-    "text": "Hydraulisches Aufzugsaggregat mit Frequenzregelung\nDas hydraulische Aufzugsaggregat muss frequenzgeregelt sein und die folgenden Anforderungen erfüllen:\n\nFahrkomfort und Programmierbarkeit\nDie Regelung der Fahrkurve soll unabhängig von Last und Temperatur einen hohen Fahrkomfort gewährleisten.\nDie Fahrkurvenparameter für Auf- und Abfahrten müssen separat programmierbar sein.\n\nDurchflussmessung und Technologie\nDie Durchflussmessung erfolgt viskositätsunabhängig mittels berührungsloser, wartungsfreier Hallsensor-Technologie.\n\nIntegrierte Handnotbefreiung\nEine integrierte Handnotbefreiung ist erforderlich.\n\nAntriebsausführung\nDer hydraulische Antrieb wird als Unterölmotor ausgeführt.\nBehälter und Unterölmotor sind als komplette Einheit zu liefern.\nArbeitsdrücke und Durchflussgeschwindigkeit sind möglichst gering zu halten.\n\nFunktion und Nachregelung\nDer Aufzug muss über den Frequenzumrichter direkt bündig in die Etage einfahren und bei offener Tür nachregulieren können.\n\nÖlmanagement und Temperaturüberwachung\nEine ausreichende Ölmenge ist vorzusehen, um die Ölerwärmung zu berücksichtigen.\nZur Überwachung der Öltemperatur sind Kaltleiter-Temperaturfühler vorgesehen.\n\nMontage und Dämpfung\nDie Aufstellung des Aggregats erfolgt mit Dämpfungselementen an den Behälterfüßen.\nEine Handpumpe ist vorgesehen.\n\nElektrische Anforderungen\nDie Anforderungen nach EN 55011B bzw. EN 50081-1 bezüglich Netzbelastung müssen eingehalten werden.\n\nDer Antriebsmotor ist als Unterölmotor ausgeführt und mit Kaltleiter-Temperaturfühlern zur Überwachung der Motortemperatur ausgestattet.\n\nDie verwendeten Isolierstoffe müssen mindestens Klasse B nach VDE 0530 entsprechen.\n\nAntriebsart: Hydraulik\nLeitfabrikat: Bucher, Algi o.ä.\nPosition: Triebwerksraum \nLeistungsreserve:min. 10 % \n(Leistungsreserve muss nachgewiesen werden.)",
+    "text": "Hydraulisches Aufzugsaggregat mit Frequenzregelung\nDas hydraulische Aufzugsaggregat muss frequenzgeregelt sein und die folgenden Anforderungen erfüllen:\n\nFahrkomfort und Programmierbarkeit\nDie Regelung der Fahrkurve soll unabhängig von Last und Temperatur einen hohen Fahrkomfort gewährleisten.\nDie Fahrkurvenparameter für Auf- und Abfahrten müssen separat programmierbar sein.\n\nDurchflussmessung und Technologie\nDie Durchflussmessung erfolgt viskositätsunabhängig mittels berührungsloser, wartungsfreier Hallsensor-Technologie.\n\nIntegrierte Handnotbefreiung\nEine integrierte Handnotbefreiung ist erforderlich.\n\nAntriebsausführung\nDer hydraulische Antrieb wird als Unterölmotor ausgeführt.\nBehälter und Unterölmotor sind als komplette Einheit zu liefern.\nArbeitsdrücke und Durchflussgeschwindigkeit sind möglichst gering zu halten.\n\nFunktion und Nachregelung\nDer Aufzug muss über den Frequenzumrichter direkt bündig in die Etage einfahren und bei offener Tür nachregulieren können.\n\nÖlmanagement und Temperaturüberwachung\nEine ausreichende Ölmenge ist vorzusehen, um die Ölerwärmung zu berücksichtigen.\nZur Überwachung der Öltemperatur sind Kaltleiter-Temperaturfühler vorgesehen.\n\nMontage und Dämpfung\nDie Aufstellung des Aggregats erfolgt mit Dämpfungselementen an den Behälterfüßen.\nEine Handpumpe ist vorgesehen.\n\nElektrische Anforderungen\nDie Anforderungen nach EN 55011B bzw. EN 50081-1 bezüglich Netzbelastung müssen eingehalten werden.\n\nDer Antriebsmotor ist als Unterölmotor ausgeführt und mit Kaltleiter-Temperaturfühlern zur Überwachung der Motortemperatur ausgestattet.\n\nDie verwendeten Isolierstoffe müssen mindestens Klasse B nach VDE 0530 entsprechen.\n\nAntriebsart: Hydraulik\nAusführung: technisch gleichwertigä.\nPosition: Triebwerksraum \nLeistungsreserve:min. 10 % \n(Leistungsreserve muss nachgewiesen werden.)",
     "status": "bestaetigt"
   },
   {
-    "id": "LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART_Z_B_HYDROWARE",
+    "id": "LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART",
     "struktur": "14.02",
     "kapitel": "14",
     "kategorie": "LV_KAP_14_ANTRIEB_HYDRAULIK",
-    "titel": "TWR – Hydraulik mit Softstart (z.B. Hydroware)",
+    "titel": "TWR – Hydraulik mit Softstart",
     "typ": "Baustein",
     "text": "Gefordert ist ein hydraulischer Aufzugsantrieb mit Softstartgerät.\nDie Regelung der Fahrkurve muss, unabhängig von Last und Temperatur, einen hohen Fahrkomfort bieten. \nDie Fahrkurvenparameter für die Auf- und Abfahrt sollen getrennt programmiert werden können.  \nDie Durchflussmessung muss viskositätsunabhängig mittels berührungsloser, wartungsfreier Hallsensor-Technologie erfolgen. \nDie Notbefreiung ist durch einen integrierten Handnotablass sicherzustellen. \nDer Fehlerspeicher der Regelkarte muss Störungen zur einfachen Analyse im Störungsfall registrieren.\nDer neu zu liefernde hydraulische Antrieb soll als Unterölaggregat ausgeführt sein. \nSchraubenspindelpumpe und Unterölmotor sind als komplette Einheit zu liefern.\nArbeitsdrücke und Durchflussgeschwindigkeit sind möglichst gering zu halten.\nDie Schraubenspindelpumpe soll geräusch- und pulsationsarm arbeiten.\nDer Aufzug muss über die Ventilsteuerung direkt bündig in die Etage einfahren und bei offener Tür nachregulieren können.\nMit Rücksicht auf die Ölerwärmung ist eine ausreichende Ölmenge vorzusehen. \nDie Aufstellung des Aggregates erfolgt mit Dämpfungselementen an den Behälterfüßen.\nInkl. integrierter Tankheizung\nEine Handpumpe ist vorzusehen.\nDie Forderungen EN 55011B bzw. EN 50081-1 bezüglich Netzbelastung müssen eingehalten werden.\nDer Antriebsmotor ist als Unterölmotor vorzusehen. \nDie Motorwicklungen sollen mit Kaltleiter-Temperaturfühlern zur Überwachung der Motortemperatur versehen sein.\nZusätzlich sind Kaltleiter-Temperaturfühler zur Überwachung der Öltemperatur vorzusehen.\nDie Temperaturbeständigkeit der verwendeten Isolierstoffe muss mindestens Klasse B nach VDE 0530 entsprechen.",
     "status": "bestaetigt"
@@ -1314,7 +1314,7 @@
     "struktur": "10.06",
     "kapitel": "10",
     "kategorie": "LV_KAP_10_FAHRKORB",
-    "titel": "Tragmittel Gurte (z.B. Ziehl Abegg)",
+    "titel": "Tragmittel Gurte",
     "typ": "Baustein",
     "text": "Auf Grund der Schachtgeometrie sind als Tragmittel Gurte vorgesehen.\nGurte (Polyurethan) mit integrierten Stahlseilen\nDer Mindestdurchmesser von Umlenkrollen / Treibscheiben soll 100 mm nicht unterschreiten\n\nDiese sind so auszulegen, dass eine hohe Standzeit erzielt wird.(Mindestlebensdauer 2,5 Mio Fahrtrichtungswechsel)\n\nDie Tragmittel sind über einzeln nachspannbare Aufhängungen am Fangrahmen und am Gegengewicht zu befestigen.\n\nTragmittel:Gurt\n\n(Lebenszyklus bei Gurten ist anzugeben)",
     "status": "entwurf"
@@ -1486,7 +1486,7 @@
     "kategorie": "LV_KAP_10_FAHRKORB",
     "titel": "Kunststoffbelag werkseitig",
     "typ": "Variante",
-    "text": "Kabinenboden mit werksseitigem Bodenbelag (Kunststoff) und stabiler Unterkonstruktion.\nMaterial:Sicherheitsbelag nach EN\n13845\nDekor:Grau\nRutschklasse:R11\nVersiegelung Silikon Farbe:Wahl AG\nFabrikat:ALTRO Walkway /\nBieterstandard",
+    "text": "Kabinenboden mit werksseitigem Bodenbelag (Kunststoff) und stabiler Unterkonstruktion.\nMaterial:Sicherheitsbelag nach EN\n13845\nDekor:Grau\nRutschklasse:R11\nVersiegelung Silikon Farbe:Wahl AG\nAusf\\u00fchrung: Bieterstandard /\nBieterstandard",
     "status": "entwurf"
   },
   {
@@ -1686,7 +1686,7 @@
     "kategorie": "LV_KAP_10_FAHRKORB",
     "titel": "Fahrkorbtürantrieb und Fahrkorbschwelle erneuern",
     "typ": "Baustein",
-    "text": "Bestand: 1Stück je Aufzug Meiller mit Spindelantrieb\nDer Fahrkorbtürantrieb inkl. Türschwelle ist  komplett zu erneuern (kein Umbausatz).\n\nMaterial Schwelle:Aluminium",
+    "text": "Bestand: 1Stück je Aufzug  mit Spindelantrieb\nDer Fahrkorbtürantrieb inkl. Türschwelle ist  komplett zu erneuern (kein Umbausatz).\n\nMaterial Schwelle:Aluminium",
     "status": "entwurf"
   },
   {
@@ -1796,7 +1796,7 @@
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
     "titel": "Schachtabschlusstür Blech",
     "typ": "Baustein",
-    "text": "2-teilig einseitig zentral öffnende Schachtabschlusstür gemäß DIN EN 81-58, doppelwandig, robuste einfache Ausführung. Die Schachtabschlusstüren sind mit bauartgeprüften Türverriegelungen auszurüsten. Grundlage bilden als Mindestanforderung die Fabrikate: Selcom Hydra 3201, Sematic B-G, Meiller TTS25 oder gleichwertig.\n\nDas Datenblatt der Tür ist auf Aufforderung dem Angebot beizufügen.\nMaterial:Edelstahl\nWerkstoff:1.4509\nNichtrostender Stahl nach EN 10088, Werkstoff-Nr. 1.4509, entsprechend AISI 441 (einfachste Qualität)\n\n1.4301\nNichtrostender Stahl nach EN 10088, Werkstoff-Nr. 1.4301, entsprechend AISI 304\n(bessere Qualität > geschützter Außenbereich)\n\n1.4404\nNichtrostender Stahl nach EN 10088, Werkstoff-Nr. 1.4404, entsprechend AISI 316L\n(direkte Bewitterung\nAußenbereich / Küste)\n\nMaterialstärke:1,5 mm o.gw. Ausführung\nDekor:Leinen, K240, Wahl des AG\nSchwellenmaterial:Aluminium / Edelstahl\nSchwellenverlängerung:Ja\nSchwellenheizung:nein\nAchslast:40 % der Nennlast\nHöhe:2100 mm\nBreite:900 mm\nTürbewegung:>400.000 Zyklen p.a.\nLaufrollendurchmesser:zwischen 40 und 60 mm\nRuf / Anzeige im Rahmen:nein, in Zarge vorsehen\nBrandschutzklasse:E120\nLaufwagenabdeckung:ja\nOberfläche Abdeckung:Edelstahl / RAL\n\nDie Schachtabschlusstür ist fachgerecht und nach Zulassung zu montieren, dass die zertifizierte Brandschutzklasse/-zulassung der Tür erhalten bleibt.",
+    "text": "2-teilig einseitig zentral öffnende Schachtabschlusstür gemäß DIN EN 81-58, doppelwandig, robuste einfache Ausführung. Die Schachtabschlusstüren sind mit bauartgeprüften Türverriegelungen auszurüsten. Grundlage bilden technisch gleichwertige, zugelassene Ausführungen: technisch gleichwertige Ausführungen oder gleichwertig.\n\nDas Datenblatt der Tür ist auf Aufforderung dem Angebot beizufügen.\nMaterial:Edelstahl\nWerkstoff:1.4509\nNichtrostender Stahl nach EN 10088, Werkstoff-Nr. 1.4509, entsprechend AISI 441 (einfachste Qualität)\n\n1.4301\nNichtrostender Stahl nach EN 10088, Werkstoff-Nr. 1.4301, entsprechend AISI 304\n(bessere Qualität > geschützter Außenbereich)\n\n1.4404\nNichtrostender Stahl nach EN 10088, Werkstoff-Nr. 1.4404, entsprechend AISI 316L\n(direkte Bewitterung\nAußenbereich / Küste)\n\nMaterialstärke:1,5 mm o.gw. Ausführung\nDekor:Leinen, K240, Wahl des AG\nSchwellenmaterial:Aluminium / Edelstahl\nSchwellenverlängerung:Ja\nSchwellenheizung:nein\nAchslast:40 % der Nennlast\nHöhe:2100 mm\nBreite:900 mm\nTürbewegung:>400.000 Zyklen p.a.\nLaufrollendurchmesser:zwischen 40 und 60 mm\nRuf / Anzeige im Rahmen:nein, in Zarge vorsehen\nBrandschutzklasse:E120\nLaufwagenabdeckung:ja\nOberfläche Abdeckung:Edelstahl / RAL\n\nDie Schachtabschlusstür ist fachgerecht und nach Zulassung zu montieren, dass die zertifizierte Brandschutzklasse/-zulassung der Tür erhalten bleibt.",
     "status": "entwurf"
   },
   {
@@ -1806,7 +1806,7 @@
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
     "titel": "Schachtabschlusstür Glas gerahmt",
     "typ": "Baustein",
-    "text": "2-teilig einseitig zentral öffnende Schachtabschlusstür gemäß DIN EN 81-58, doppelwandig, robuste einfache Ausführung. Die Schachtabschlusstüren sind mit bauartgeprüften Türverriegelungen auszurüsten. Grundlage bilden als Mindestanforderung die Fabrikate: Selcom Hydra 3201, Sematic B-G, Meiller TTS25 oder gleichwertig.\nMaterial Rahmen: Edelstahl\nBreite Rahmen ca.: 50 mm\nDekor:Leinen, K240, Wahl des AG\nSchwellenmaterial: Aluminiumprofil / Edelstahl\nGlas: VSG\nSchwellenmaterial:Aluminium / Edelstahl\nSchwellenverlängerung:Ja\nSchwellenheizung:nein\nAchslast:40 % der Nennlast\nHöhe:2100 mm\nBreite:900 mm\nTürbewegung:>400.000 Zyklen p.a.\nLaufrollendurchmesser:zwischen 40 und 60 mm\nRuf / Anzeige im Rahmen:nein, in Zarge vorsehen\nBrandschutzklasse:E120\nLaufwagenabdeckung:ja\nOberfläche Abdeckung:Edelstahl / RAL",
+    "text": "2-teilig einseitig zentral öffnende Schachtabschlusstür gemäß DIN EN 81-58, doppelwandig, robuste einfache Ausführung. Die Schachtabschlusstüren sind mit bauartgeprüften Türverriegelungen auszurüsten. Grundlage bilden technisch gleichwertige, zugelassene Ausführungen: technisch gleichwertige Ausführungen oder gleichwertig.\nMaterial Rahmen: Edelstahl\nBreite Rahmen ca.: 50 mm\nDekor:Leinen, K240, Wahl des AG\nSchwellenmaterial: Aluminiumprofil / Edelstahl\nGlas: VSG\nSchwellenmaterial:Aluminium / Edelstahl\nSchwellenverlängerung:Ja\nSchwellenheizung:nein\nAchslast:40 % der Nennlast\nHöhe:2100 mm\nBreite:900 mm\nTürbewegung:>400.000 Zyklen p.a.\nLaufrollendurchmesser:zwischen 40 und 60 mm\nRuf / Anzeige im Rahmen:nein, in Zarge vorsehen\nBrandschutzklasse:E120\nLaufwagenabdeckung:ja\nOberfläche Abdeckung:Edelstahl / RAL",
     "status": "entwurf"
   },
   {
@@ -1850,83 +1850,83 @@
     "status": "entwurf"
   },
   {
-    "id": "LV_11_07_LAUFROLLEN_FUR_AUTOMATIKTUREN_WITTUR",
+    "id": "LV_11_07_LAUFROLLEN_FUR_AUTOMATIKTUREN",
     "struktur": "11.07",
     "kapitel": "11",
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
-    "titel": "Laufrollen für Automatiktüren (Wittur)",
+    "titel": "Laufrollen für Automatiktüren",
     "typ": "Baustein",
-    "text": "Laufrolle Schachttür mit exakten Maßtoleranzen für reibungslosen Betrieb.\n\nFunktion: Laufrolle Automatiktüren\nMarkenkompatibilität:Selcom, Wittur,\nModell:3201\nAnzahl je Türflügel:2 Stück\nAnzahl gesamt:16 Stück (4 Schachttüren)",
+    "text": "Laufrolle Schachttür mit exakten Maßtoleranzen für reibungslosen Betrieb.\n\nFunktion: Laufrolle Automatiktüren\nMarkenkompatibilität:,\nModell:3201\nAnzahl je Türflügel:2 Stück\nAnzahl gesamt:16 Stück (4 Schachttüren)",
     "status": "entwurf"
   },
   {
-    "id": "LV_11_08_GEGENROLLE_FUR_AUTOMATIKTUREN_WITTUR",
+    "id": "LV_11_08_GEGENROLLE_FUR_AUTOMATIKTUREN",
     "struktur": "11.08",
     "kapitel": "11",
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
-    "titel": "Gegenrolle für Automatiktüren (Wittur)",
+    "titel": "Gegenrolle für Automatiktüren",
     "typ": "Baustein",
-    "text": "Gegenrolle zur Laufrolle\n\nFunktion: Laufrolle Automatiktüren\nMarkenkompatibilität:Selcom, Wittur,\nModell:3201\nAnzahl je Türflügel:2 Stück\nAnzahl gesamt:16 Stück (4 Schachttüren)",
+    "text": "Gegenrolle zur Laufrolle\n\nFunktion: Laufrolle Automatiktüren\nMarkenkompatibilität:,\nModell:3201\nAnzahl je Türflügel:2 Stück\nAnzahl gesamt:16 Stück (4 Schachttüren)",
     "status": "entwurf"
   },
   {
-    "id": "LV_11_09_KONTAKTBRUCKE_FUR_AUTOMATIKTUREN_WITTUR",
+    "id": "LV_11_09_KONTAKTBRUCKE_FUR_AUTOMATIKTUREN",
     "struktur": "11.09",
     "kapitel": "11",
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
-    "titel": "Kontaktbrücke für Automatiktüren (Wittur)",
+    "titel": "Kontaktbrücke für Automatiktüren",
     "typ": "Baustein",
-    "text": "Kontaktbrücke ohne Halterung\n\nMarkenkompatibilität:Selcom, Wittur,\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
+    "text": "Kontaktbrücke ohne Halterung\n\nMarkenkompatibilität:,\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
     "status": "entwurf"
   },
   {
-    "id": "LV_11_10_TURKONTAKT_FUR_AUTOMATIKTUREN_WITTUR",
+    "id": "LV_11_10_TURKONTAKT_FUR_AUTOMATIKTUREN",
     "struktur": "11.10",
     "kapitel": "11",
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
-    "titel": "Türkontakt für Automatiktüren (Wittur)",
+    "titel": "Türkontakt für Automatiktüren",
     "typ": "Baustein",
-    "text": "Türkontakt passend zur Türbrücke\n\nMarkenkompatibilität:Selcom, Wittur,\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
+    "text": "Türkontakt passend zur Türbrücke\n\nMarkenkompatibilität:,\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
     "status": "entwurf"
   },
   {
-    "id": "LV_11_11_SCHLIESSFEDER_FUR_AUTOMATIKTUREN_WITTUR",
+    "id": "LV_11_11_SCHLIESSFEDER_FUR_AUTOMATIKTUREN",
     "struktur": "11.11",
     "kapitel": "11",
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
-    "titel": "Schließfeder für Automatiktüren (Wittur)",
+    "titel": "Schließfeder für Automatiktüren",
     "typ": "Baustein",
-    "text": "Schließfeder zum selbsttätigen Schließen der Schachttüren\n\nMarkenkompatibilität:Selcom, Wittur\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
+    "text": "Schließfeder zum selbsttätigen Schließen der Schachttüren\n\nMarkenkompatibilität:\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
     "status": "entwurf"
   },
   {
-    "id": "LV_11_12_UNTERE_TURFUHRUNG_FUR_AUTOMATIKTUREN_WITTU",
+    "id": "LV_11_12_UNTERE_TURFUHRUNG_FUR_AUTOMATIKTUREN",
     "struktur": "11.12",
     "kapitel": "11",
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
-    "titel": "Untere Türführung für Automatiktüren (Wittur)",
+    "titel": "Untere Türführung für Automatiktüren",
     "typ": "Baustein",
-    "text": "Führungsschuh für Schachtschiebetüren\n\nMarkenkompatibilität:Selcom, Wittur\nMaterial:Kunststoff\nAnzahl je Türflügel:2 Stück\nAnzahl gesamt:16 Stück (4 Schachttüren)",
+    "text": "Führungsschuh für Schachtschiebetüren\n\nMarkenkompatibilität:\nMaterial:Kunststoff\nAnzahl je Türflügel:2 Stück\nAnzahl gesamt:16 Stück (4 Schachttüren)",
     "status": "entwurf"
   },
   {
-    "id": "LV_11_13_TURSEIL_FUR_AUTOMATIKTUREN_WITTUR",
+    "id": "LV_11_13_TURSEIL_FUR_AUTOMATIKTUREN",
     "struktur": "11.13",
     "kapitel": "11",
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
-    "titel": "Türseil für Automatiktüren (Wittur)",
+    "titel": "Türseil für Automatiktüren",
     "typ": "Baustein",
-    "text": "Türseil für Schachtschiebetüren\n\nMarkenkompatibilität:Selcom, Wittur\nTürbreite:900 mm / 1000 mm\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
+    "text": "Türseil für Schachtschiebetüren\n\nMarkenkompatibilität:\nTürbreite:900 mm / 1000 mm\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
     "status": "entwurf"
   },
   {
-    "id": "LV_11_14_TURSEILROLLE_FUR_AUTOMATIKTUREN_WITTUR",
+    "id": "LV_11_14_TURSEILROLLE_FUR_AUTOMATIKTUREN",
     "struktur": "11.14",
     "kapitel": "11",
     "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
-    "titel": "Türseilrolle für Automatiktüren (Wittur)",
+    "titel": "Türseilrolle für Automatiktüren",
     "typ": "Baustein",
-    "text": "Türseilrolle passend zum Türseil\n\nMarkenkompatibilität:Selcom, Wittur\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
+    "text": "Türseilrolle passend zum Türseil\n\nMarkenkompatibilität:\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
     "status": "entwurf"
   },
   {
@@ -2236,7 +2236,7 @@
     "kategorie": "LV_KAP_13_ANTRIEB_SEIL",
     "titel": "TWR – Seil Asynchron mit Getriebe",
     "typ": "Baustein",
-    "text": "Treibscheibenantrieb in Kombination Motor-Getriebe mit Leistungsreserve im Triebwerksraum auf einer körperschallentkoppelten Lagerung\nDie Forderungen EN 55011B bzw. EN 50081-1 bezüglich Netzbelastung müssen eingehalten werden.\n\nAntriebsart:Getriebe\nAntriebstyp:gemäß Bieterstandard\nGeregelt:Ja\nBelüftung:ohne Fremdbelüftung\nBremse:Zwei-Kreis Haltebremse\nMontageart:auf Maschinenrahmen\nAufhängung:2:1 / 1:1\nLeistungsreserve:mind. 10 %\n(Leistungsreserve muss nachgewiesen werden.)\nAntriebseinheit:Schneckengetriebe und angeflanschter Motor. (Fabrikat Liftequip, Ziehl Abegg oder technisch vergleichbar)\nElektromotor: Spezialausführung, frequenzgeregelt mit Drehimpulsgeber.\nGehäusematerial: EN-GJL 250 in\nMonoblockausführung mit\nseparaten Lagerschildern.\nSchneckenwelle: Oben liegend, zweigängig\nEinsatzstahl (16MnCrS5),\nwälzgelagert, Ölschmierung.\nSchneckenrad: Schleuderbronze (CuSn12Ni-C-GZ) mit verschraubter Nabe.\nAbtriebswelle:Vergütungsstahl (C60), wälzgelagert, Ölschmierung.\nKontrollöffnungen: Deckel für Tragbildkontrolle und Ölbefüllung, Ölpeilstab mit Entlüftung.\nDemontage: Altes Triebwerk und Betonfundament sind zu entfernen.\nRahmen:Maschinenrahmen mit Lastverteilungsrahmen,schwingungsisoliert,\nStatischer Nachweis:Durch AN / AG\nImpulsgeber:Digitaler Impulsgeber für Soll-\n/Istwert-Vergleich.\nSchneckenradwelle:induktiv gehärtet.\nTreibscheibe:Fliegende Lagerung, gehärtete\nFlanken, Schutzabdeckungen gegen Verletzungen und Objekteinzug.\nUmlenkrollen:Mit Abdeckung ausgestattet.\nSeilklemme:Lieferung im Lieferumfang\nenthalten.\nSicherheitsausrüstung:Einrichtung gegen\nunkontrollierte\nAufwärtsbewegung nach EN 81-20.direkt am Antrieb (NBS)\nPotentialausgleich:Nach Montage am neuen\nAntriebsrahmen anzuschließen.",
+    "text": "Treibscheibenantrieb in Kombination Motor-Getriebe mit Leistungsreserve im Triebwerksraum auf einer körperschallentkoppelten Lagerung\nDie Forderungen EN 55011B bzw. EN 50081-1 bezüglich Netzbelastung müssen eingehalten werden.\n\nAntriebsart:Getriebe\nAntriebstyp:gemäß Bieterstandard\nGeregelt:Ja\nBelüftung:ohne Fremdbelüftung\nBremse:Zwei-Kreis Haltebremse\nMontageart:auf Maschinenrahmen\nAufhängung:2:1 / 1:1\nLeistungsreserve:mind. 10 %\n(Leistungsreserve muss nachgewiesen werden.)\nAntriebseinheit:Schneckengetriebe und angeflanschter Motor (technisch vergleichbare Ausf\\u00fchrung)\nElektromotor: Spezialausführung, frequenzgeregelt mit Drehimpulsgeber.\nGehäusematerial: EN-GJL 250 in\nMonoblockausführung mit\nseparaten Lagerschildern.\nSchneckenwelle: Oben liegend, zweigängig\nEinsatzstahl (16MnCrS5),\nwälzgelagert, Ölschmierung.\nSchneckenrad: Schleuderbronze (CuSn12Ni-C-GZ) mit verschraubter Nabe.\nAbtriebswelle:Vergütungsstahl (C60), wälzgelagert, Ölschmierung.\nKontrollöffnungen: Deckel für Tragbildkontrolle und Ölbefüllung, Ölpeilstab mit Entlüftung.\nDemontage: Altes Triebwerk und Betonfundament sind zu entfernen.\nRahmen:Maschinenrahmen mit Lastverteilungsrahmen,schwingungsisoliert,\nStatischer Nachweis:Durch AN / AG\nImpulsgeber:Digitaler Impulsgeber für Soll-\n/Istwert-Vergleich.\nSchneckenradwelle:induktiv gehärtet.\nTreibscheibe:Fliegende Lagerung, gehärtete\nFlanken, Schutzabdeckungen gegen Verletzungen und Objekteinzug.\nUmlenkrollen:Mit Abdeckung ausgestattet.\nSeilklemme:Lieferung im Lieferumfang\nenthalten.\nSicherheitsausrüstung:Einrichtung gegen\nunkontrollierte\nAufwärtsbewegung nach EN 81-20.direkt am Antrieb (NBS)\nPotentialausgleich:Nach Montage am neuen\nAntriebsrahmen anzuschließen.",
     "status": "entwurf"
   },
   {
