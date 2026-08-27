@@ -327,6 +327,19 @@ und zeigt eine Statuszusammenfassung sowie eine Positions-Tabelle mit Position,
 Bezeichnung, Menge/Einheit, Status und LV-ID. Die Darstellung erzeugt keine
 zusätzlichen Mappingregeln.
 
+## Architekturentscheidung: `schiebetuer_2tlg` als `not_lv_position` (2026-08-27)
+
+`schiebetuer_2tlg` ist ein kalkulatorischer Oberbegriff fuer die Schachtschiebetuer als
+Ganzes und keine eigenstaendige LV-Position, da die einzelnen Tuerkomponenten
+(`tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`) bereits eigene,
+granulare LV-Positionen besitzen. Eine zusaetzliche Position haette diese Einzel-
+positionen fachlich dupliziert (Kalkulationsstruktur != LV-Struktur). Umgesetzt als
+neue Regel `schiebetuer-2tlg-nicht-lv` in `POSITION_MAPPING_RULES`
+(`backend/server.js`), analog zu den bestehenden `not_lv_position`-Nebenleistungen.
+Die Einzelpositionen selbst wurden nicht veraendert. Abgesichert durch
+`backend/test/io-contract.test.js`. Details: `docs/lv-architecture.md` Abschnitt 20,
+`docs/components-boq-begriffsmatrix.md`.
+
 ## Offene Punkte
 
 - Das `teil_umbaukit_schiebetueren` sowie die verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) sind noch offen. Türtechnik, Frequenzregelung, Befestigungs-/Dübelpositionen und Montagerüstung sind seit 2026-08-27 bestätigt klassifiziert.

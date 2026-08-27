@@ -25,11 +25,12 @@ const report = buildPositionMappingReport(query([
   { id: 'chemieduebel_schachttueren', anzahl: 1 },
   { id: 'auszugsversuch_mauerwerksschaechten', anzahl: 1 },
   { id: 'montageruestung', anzahl: 1 },
+  { id: 'schiebetuer_2tlg', anzahl: 2 },
   { id: 'fachlich_unbekannt', anzahl: 2 },
   { bezeichnung: 'Positive Position ohne ID', anzahl: 1 },
 ]));
 
-assert(report.positionStatuses.length === 11, 'Jede positive Position muss genau einen Status erhalten.');
+assert(report.positionStatuses.length === 12, 'Jede positive Position muss genau einen Status erhalten.');
 assert(report.positionStatuses.every((entry) =>
   ['mapped', 'open', 'not_lv_position', 'invalid'].includes(entry.status)
 ), 'Unbekannter Status im Positionsvertrag.');
@@ -51,12 +52,15 @@ for (const componentsId of [
   'chemieduebel_schachttueren',
   'auszugsversuch_mauerwerksschaechten',
   'montageruestung',
+  'schiebetuer_2tlg',
 ]) {
   assert(report.not_lv_position.some((entry) => entry.componentsId === componentsId),
     `${componentsId} muss not_lv_position sein.`);
 }
 assert(report.invalid.some((entry) => entry.status === 'invalid'),
   'Positive Position ohne ID muss invalid sein.');
+assert(!report.open.some((entry) => (entry.componentsIds || []).includes('schiebetuer_2tlg')),
+  'schiebetuer_2tlg ist ein kalkulatorischer Oberbegriff und darf nicht als offene LV-Position erscheinen.');
 assert(report.open.some((entry) => entry.componentsIds.includes('fachlich_unbekannt')),
   'Unbekanntes, strukturell gültiges Mapping muss offen nachvollziehbar bleiben.');
 

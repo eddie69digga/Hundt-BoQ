@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const path = require('node:path');
 const fs = require('node:fs');
 const { Document, Packer, Paragraph, TextRun, TabStopType, HeadingLevel, UnderlineType, AlignmentType, Table, TableRow, TableCell, BorderStyle, WidthType, VerticalAlign, ShadingType, ImageRun } = require('docx');
@@ -1721,6 +1721,23 @@ const POSITION_MAPPING_RULES = Object.freeze([
   {
     groupKey: 'montageruestung-nicht-lv',
     componentsIds: ['montageruestung'],
+    bibliotheksId: null,
+    staticEntryId: null,
+    status: 'not_lv_position',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  // schiebetuer_2tlg ist ein kalkulatorischer Oberbegriff fuer die Schachtschiebetuer als Ganzes
+  // (siehe docs/components-boq-begriffsmatrix.md), waehrend die einzelnen Tuerkomponenten
+  // (tuerfuehrungen, tuerlaufrollen, tuerkontakte, tuerseile) bereits eigene, granulare
+  // LV-Positionen haben. Eine zusaetzliche eigene LV-Position fuer schiebetuer_2tlg wuerde diese
+  // Einzelpositionen fachlich doppeln (Kalkulationsstruktur != LV-Struktur). Architekturentscheidung
+  // (bestaetigt): schiebetuer_2tlg bleibt bewusst not_lv_position, analog zu den Nebenleistungen
+  // oben, und wird nicht als eigene Position ins Word uebernommen. Die Einzelpositionen selbst
+  // bleiben davon unveraendert.
+  {
+    groupKey: 'schiebetuer-2tlg-nicht-lv',
+    componentsIds: ['schiebetuer_2tlg'],
     bibliotheksId: null,
     staticEntryId: null,
     status: 'not_lv_position',
