@@ -437,6 +437,14 @@ Abgesichert durch `backend/test/variant-mapping.test.js` (alle 5 Kontexte: frequ
 
 Türtechnik (`tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`) und `teil_umbaukit_schiebetueren` wurden NICHT geschlossen: Die vorhandenen Bibliothekskandidaten sind herstellerspezifisch (Wittur) formuliert, Components kennt aktuell keine Herstellerdimension - das ist eine echte, in `docs/components-boq-begriffsmatrix.md` dokumentierte offene fachliche Entscheidung (siehe dort, Abschnitt "Offene fachliche Entscheidungen").
 
+Eindeutig aus der bestehenden Bibliothek ableitbare Einzelpositionen wurden am 2026-08-27 geschlossen:
+
+- `antrittsblech` → `LV_11_24_ANTRITTSBLECHE`
+- `led_flaechenlicht_fahrkorb` → `LV_10_11_02_LED_FLACHENLICHT`
+- `lichtgitter_vorhandene_fahrkorbschiebetuer` → `LV_10_30_LICHTVORHANG`
+
+Diese Zuordnungen sind 1:1, ohne Herstellerannahme, und durch den IO-Contract-Test abgesichert. Die übrigen Türpositionen bleiben davon unberührt offen.
+
 ## 21. Word-Import (Schritt C)
 
 `backend/lib/word-library-extractor.js` extrahiert strukturierte Bibliothekseinträge direkt aus `word/document.xml` der DOCX-Quelle. Grundlage ist dieselbe maschinenlesbare Metadatenzeile wie in Abschnitt 17 beschrieben (`Struktur <nr> | Typ <typ> | Bibliotheks-ID <id>`, Absatzformat `LVBibliothekMetadaten`):
@@ -497,7 +505,7 @@ unverändert auf `mapped` beschränkt.
 Geprüft am 2026-08-25, nach Abschluss der Vollübernahme (Schritt D):
 
 - `backend/server.js` umfasst aktuell ca. 2.550 Zeilen (Auth, Supabase, DOCX-Erzeugung, GAEB/X83-Export, positionsgenaue Mappinglogik).
-- `POSITION_MAPPING_RULES` umfasst weiterhin nur 16 Regeln - die Vollübernahme (Schritt D) hat bewusst nur die Bibliothek erweitert (311 Einträge), nicht die Mappingregeln (siehe Abschnitt 22, Anti-Try-and-Error-Regel). Der ursprünglich erwartete Auslöser für Schritt F ("wenn nach der Mengenausweitung ein echter Wartbarkeitsgewinn besteht") ist damit **nicht** eingetreten: Die Mengenausweitung betraf die Bibliothek, nicht die Mappinglogik.
-- Die reine Mapping-/Resolutionslogik (`POSITION_MAPPING_RULES`, `buildPositionMappingReport()`, `resolveMappedStaticLvEntries()`, `resolveBibliothekEntryAsLv()`, `resolveStaticModuleEntryAsLv()`, `loadBibliothek()`/`loadBibliothekEntries()`) ist bereits räumlich zusammenhängend innerhalb von `server.js` und über eine klare Testgrenze (`backend/test/mapping-contract.test.js`, `granularity-contract.test.js`, `variant-mapping.test.js`) abgesichert - unabhängig davon, ob sie in einer eigenen Datei liegt.
+- `POSITION_MAPPING_RULES` umfasst aktuell 19 Regeln. Die Vollübernahme (Schritt D) hat bewusst nur die Bibliothek erweitert; die drei zusätzlichen Regeln vom 2026-08-27 schließen ausschließlich eindeutig ableitbare Einzelpositionen.
+- Die reine Mapping-/Resolutionslogik (`POSITION_MAPPING_RULES`, `buildPositionMappingReport()`, `resolveMappedStaticLvEntries()`, `resolveBibliothekEntryAsLv()`, `resolveStaticModuleEntryAsLv()`, `loadBibliothek()`/`loadBibliothekEntries()`) ist weiterhin räumlich zusammenhängend innerhalb von `server.js` und über klare Testgrenzen (`backend/test/mapping-contract.test.js`, `granularity-contract.test.js`, `variant-mapping.test.js`, `io-contract.test.js`) abgesichert.
 
-Entscheidung: Schritt F wird **bewusst zurückgestellt**, nicht durchgeführt. Ein Auslagern in ein eigenes Modul (analog zu `backend/lib/library-validation.js` und `backend/lib/word-library-extractor.js`) wäre risikoarm und architektonisch naheliegend, aber bei nur 16 Regeln kein Schritt mit "echtem" Wartbarkeitsgewinn im Sinne des Architekturauftrags - er würde `server.js` verkleinern, ohne eine bestehende Wartbarkeitsschwierigkeit zu lösen. Erneut zu prüfen, sobald `POSITION_MAPPING_RULES` durch weitere fachlich bestätigte Mappings spürbar wächst (z. B. > 40-50 Regeln) oder `server.js` aus anderen Gründen unübersichtlich wird.
+Entscheidung: Schritt F wird **bewusst zurückgestellt**, nicht durchgeführt. Ein Auslagern in ein eigenes Modul (analog zu `backend/lib/library-validation.js` und `backend/lib/word-library-extractor.js`) wäre risikoarm und architektonisch naheliegend, löst bei 19 Regeln aber noch keine bestehende Wartbarkeitsschwierigkeit. Erneut zu prüfen, sobald `POSITION_MAPPING_RULES` durch weitere fachlich bestätigte Mappings spürbar wächst (z. B. > 40-50 Regeln) oder `server.js` aus anderen Gründen unübersichtlich wird.

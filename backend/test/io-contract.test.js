@@ -17,17 +17,29 @@ function assert(condition, message) {
 
 const report = buildPositionMappingReport(query([
   { id: 'schachtbeleuchtung', anzahl: 1 },
+  { id: 'antrittsblech', anzahl: 2 },
+  { id: 'led_flaechenlicht_fahrkorb', anzahl: 1 },
+  { id: 'lichtgitter_vorhandene_fahrkorbschiebetuer', anzahl: 1 },
   { id: 'korrekturwert_1', anzahl: 250, einheit: '€' },
   { id: 'fachlich_unbekannt', anzahl: 2 },
   { bezeichnung: 'Positive Position ohne ID', anzahl: 1 },
 ]));
 
-assert(report.positionStatuses.length === 4, 'Jede positive Position muss genau einen Status erhalten.');
+assert(report.positionStatuses.length === 7, 'Jede positive Position muss genau einen Status erhalten.');
 assert(report.positionStatuses.every((entry) =>
   ['mapped', 'open', 'not_lv_position', 'invalid'].includes(entry.status)
 ), 'Unbekannter Status im Positionsvertrag.');
 assert(report.positionStatuses.filter((entry) => entry.componentsId === 'schachtbeleuchtung')[0].status === 'mapped',
   'Bekanntes Mapping muss mapped sein.');
+for (const [componentsId, bibliotheksId] of [
+  ['antrittsblech', 'LV_11_24_ANTRITTSBLECHE'],
+  ['led_flaechenlicht_fahrkorb', 'LV_10_11_02_LED_FLACHENLICHT'],
+  ['lichtgitter_vorhandene_fahrkorbschiebetuer', 'LV_10_30_LICHTVORHANG'],
+]) {
+  const entry = report.positionStatuses.find((candidate) => candidate.componentsId === componentsId);
+  assert(entry?.status === 'mapped' && entry.bibliotheksId === bibliotheksId,
+    `${componentsId} muss auf ${bibliotheksId} gemappt sein.`);
+}
 assert(report.not_lv_position.some((entry) => entry.componentsId === 'korrekturwert_1'),
   'Korrekturwerte müssen not_lv_position sein.');
 assert(report.invalid.some((entry) => entry.status === 'invalid'),
