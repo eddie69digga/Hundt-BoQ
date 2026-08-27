@@ -443,7 +443,7 @@ Eindeutig aus der bestehenden Bibliothek ableitbare Einzelpositionen wurden am 2
 - `led_flaechenlicht_fahrkorb` → `LV_10_11_02_LED_FLACHENLICHT`
 - `lichtgitter_vorhandene_fahrkorbschiebetuer` → `LV_10_30_LICHTVORHANG`
 
-Diese Zuordnungen sind 1:1, ohne Herstellerannahme, und durch den IO-Contract-Test abgesichert. Die übrigen Türpositionen bleiben davon unberührt offen.
+Diese Zuordnungen sind 1:1, ohne Herstellerannahme, und durch den IO-Contract-Test abgesichert. Zusätzlich werden die neutralisierten Türtechnik-Bausteine `tuerfuehrungen` → `LV_11_12`, `tuerlaufrollen` → `LV_11_07`, `tuerkontakte` → `LV_11_10` und `tuerseile` → `LV_11_13` gemappt. `frequenzregelung` erhält unabhängig von `maschine_standardrahmen` die eigene Position `LV_12_12_FREQUENZUMRICHTER_REGELUNG`. `hst_duebel_schachttueren`, `chemieduebel_schachttueren`, `auszugsversuch_mauerwerksschaechten` und `montageruestung` werden als `not_lv_position` klassifiziert und nicht ins Word übernommen. Alle fünf Bibliotheksbausteine sind neutral formuliert und als `bestaetigt` markiert.
 
 ## 21. Word-Import (Schritt C)
 

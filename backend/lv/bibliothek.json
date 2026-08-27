@@ -1857,7 +1857,7 @@
     "titel": "Laufrollen für Automatiktüren",
     "typ": "Baustein",
     "text": "Laufrolle Schachttür mit exakten Maßtoleranzen für reibungslosen Betrieb.\n\nFunktion: Laufrolle Automatiktüren\nMarkenkompatibilität:,\nModell:3201\nAnzahl je Türflügel:2 Stück\nAnzahl gesamt:16 Stück (4 Schachttüren)",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_11_08_GEGENROLLE_FUR_AUTOMATIKTUREN",
@@ -1887,7 +1887,7 @@
     "titel": "Türkontakt für Automatiktüren",
     "typ": "Baustein",
     "text": "Türkontakt passend zur Türbrücke\n\nMarkenkompatibilität:,\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_11_11_SCHLIESSFEDER_FUR_AUTOMATIKTUREN",
@@ -1907,7 +1907,7 @@
     "titel": "Untere Türführung für Automatiktüren",
     "typ": "Baustein",
     "text": "Führungsschuh für Schachtschiebetüren\n\nMarkenkompatibilität:\nMaterial:Kunststoff\nAnzahl je Türflügel:2 Stück\nAnzahl gesamt:16 Stück (4 Schachttüren)",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_11_13_TURSEIL_FUR_AUTOMATIKTUREN",
@@ -1917,7 +1917,7 @@
     "titel": "Türseil für Automatiktüren",
     "typ": "Baustein",
     "text": "Türseil für Schachtschiebetüren\n\nMarkenkompatibilität:\nTürbreite:900 mm / 1000 mm\nAnzahl je Schachttür:1 Stück\nAnzahl gesamt:4 Stück (4 Schachttüren)",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_11_14_TURSEILROLLE_FUR_AUTOMATIKTUREN",
@@ -2187,7 +2187,7 @@
     "titel": "Frequenzumrichter / Regelung",
     "typ": "Baustein",
     "text": "Ein für die Wandmontage geeigneter FU mit festem oder mobilen Programmdisplay, Netzfilter sowie Leistungsreserve und Rückspeiseoption ins Netz.\n\nAlternativ, Frequenzumrichter im Schachtkopf platzieren.\n\nElektronische, feldorientierte Regelung Das System soll die Motorspannung und die Motorfrequenz regeln.\nDurch die Regelung soll der Motor für alle Lastverhältnisse ein konstantes Drehmoment erzeugen. Ein ruckfreies, stufenloses Anfahren und Abbremsen müssen gewährleistet sein.\nDer Aufzug soll ohne Schleichfahrt mit einer Anhalte-Genauigkeit von +/- 5 mm direkt in die Haltestellen einfahren.\nDas System ist für …. Fahrten/Stunde auszulegen\nDie Regelung soll auch bei Netzspannungsschwankungen von +/- 10 % funktionsfähig bleiben.\nEntstör-Filter zur Vermeidung von Netzbeeinflussung sind vorzusehen.\n\nLeistungsreserve: mind. 10 %\n(Leistungsreserve muss nachgewiesen werden.)",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_12_13_EVAKUIERUNGSFAHRT_UBER_AKKU_SYSTEM",

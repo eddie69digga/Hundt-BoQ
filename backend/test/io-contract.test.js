@@ -21,11 +21,15 @@ const report = buildPositionMappingReport(query([
   { id: 'led_flaechenlicht_fahrkorb', anzahl: 1 },
   { id: 'lichtgitter_vorhandene_fahrkorbschiebetuer', anzahl: 1 },
   { id: 'korrekturwert_1', anzahl: 250, einheit: '€' },
+  { id: 'hst_duebel_schachttueren', anzahl: 1 },
+  { id: 'chemieduebel_schachttueren', anzahl: 1 },
+  { id: 'auszugsversuch_mauerwerksschaechten', anzahl: 1 },
+  { id: 'montageruestung', anzahl: 1 },
   { id: 'fachlich_unbekannt', anzahl: 2 },
   { bezeichnung: 'Positive Position ohne ID', anzahl: 1 },
 ]));
 
-assert(report.positionStatuses.length === 7, 'Jede positive Position muss genau einen Status erhalten.');
+assert(report.positionStatuses.length === 11, 'Jede positive Position muss genau einen Status erhalten.');
 assert(report.positionStatuses.every((entry) =>
   ['mapped', 'open', 'not_lv_position', 'invalid'].includes(entry.status)
 ), 'Unbekannter Status im Positionsvertrag.');
@@ -42,6 +46,15 @@ for (const [componentsId, bibliotheksId] of [
 }
 assert(report.not_lv_position.some((entry) => entry.componentsId === 'korrekturwert_1'),
   'Korrekturwerte müssen not_lv_position sein.');
+for (const componentsId of [
+  'hst_duebel_schachttueren',
+  'chemieduebel_schachttueren',
+  'auszugsversuch_mauerwerksschaechten',
+  'montageruestung',
+]) {
+  assert(report.not_lv_position.some((entry) => entry.componentsId === componentsId),
+    `${componentsId} muss not_lv_position sein.`);
+}
 assert(report.invalid.some((entry) => entry.status === 'invalid'),
   'Positive Position ohne ID muss invalid sein.');
 assert(report.open.some((entry) => entry.componentsIds.includes('fachlich_unbekannt')),

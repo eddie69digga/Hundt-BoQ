@@ -1692,6 +1692,85 @@ const POSITION_MAPPING_RULES = Object.freeze([
     technicalCondition: (technical) => normalizeToken(technical?.projektart || '') === 'teilmodernisierung',
     canRemainOpen: false,
   },
+  {
+    groupKey: 'frequenzregelung',
+    componentsIds: ['frequenzregelung'],
+    bibliotheksId: 'LV_12_12_FREQUENZUMRICHTER_REGELUNG',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: (technical) =>
+      normalizeToken(technical?.aufzugstyp || '') === 'hydraulik' &&
+      normalizeToken(technical?.hydraulikRegelungsart || '') === 'frequenzgeregelt',
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'befestigung-nicht-lv',
+    componentsIds: [
+      'hst_duebel_schachttueren',
+      'chemieduebel_schachttueren',
+      'auszugsversuch_mauerwerksschaechten',
+    ],
+    bibliotheksId: null,
+    staticEntryId: null,
+    status: 'not_lv_position',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'montageruestung-nicht-lv',
+    componentsIds: ['montageruestung'],
+    bibliotheksId: null,
+    staticEntryId: null,
+    status: 'not_lv_position',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'tuerfuehrungen',
+    componentsIds: ['tuerfuehrungen'],
+    bibliotheksId: 'LV_11_12_UNTERE_TURFUHRUNG_FUR_AUTOMATIKTUREN',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'tuerlaufrollen',
+    componentsIds: ['tuerlaufrollen'],
+    bibliotheksId: 'LV_11_07_LAUFROLLEN_FUR_AUTOMATIKTUREN',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'tuerkontakte',
+    componentsIds: ['tuerkontakte'],
+    bibliotheksId: 'LV_11_10_TURKONTAKT_FUR_AUTOMATIKTUREN',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'tuerseile',
+    componentsIds: ['tuerseile'],
+    bibliotheksId: 'LV_11_13_TURSEIL_FUR_AUTOMATIKTUREN',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
   // Variantengruppe 'antrieb-standardrahmen': maschine_standardrahmen zeigt je nach technischer
   // Bedingung (hydraulikRegelungsart) auf unterschiedliche Bibliotheks-IDs. antriebTyp (mechanische
   // Aufhaengungsart) und hydraulikRegelungsart (Regelungselektronik) bleiben bewusst getrennte
@@ -1974,6 +2053,16 @@ function buildPositionMappingReport(query = {}) {
         setPositionStatus(position, 'mapped', {
           groupKey: rule.groupKey,
           bibliotheksId: rule.bibliotheksId,
+        });
+      }
+      continue;
+    }
+
+    if (rule.status === 'not_lv_position') {
+      for (const position of contractPositions.filter((candidate) => matches.includes(candidate.id))) {
+        setPositionStatus(position, 'not_lv_position', {
+          groupKey: rule.groupKey,
+          reason: 'Fachlich relevante Kalkulationsposition ohne eigene LV-Position',
         });
       }
       continue;

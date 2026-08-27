@@ -49,16 +49,16 @@ const EXPECTED_MAPPED_BIBLIOTHEKS_IDS = [
   'LV_07_05_MALERARBEITEN_SCHACHTGRUBE',
   'LV_02_07_INVERKEHRBRINGUNG_INBETRIEBNAHME_PVI',
   'LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG',
+  'LV_11_12_UNTERE_TURFUHRUNG_FUR_AUTOMATIKTUREN',
+  'LV_11_07_LAUFROLLEN_FUR_AUTOMATIKTUREN',
+  'LV_11_10_TURKONTAKT_FUR_AUTOMATIKTUREN',
+  'LV_11_13_TURSEIL_FUR_AUTOMATIKTUREN',
 ];
 
 // Components-Positionen, die im aktuellen Mappingstand bewusst offen bleiben (kein
 // erfundener Ersatzbaustein).
 const EXPECTED_OPEN_COMPONENTS_IDS = [
   'maschine_standardrahmen',
-  'tuerfuehrungen',
-  'tuerlaufrollen',
-  'tuerkontakte',
-  'tuerseile',
   'teil_umbaukit_schiebetueren',
 ];
 

@@ -143,6 +143,7 @@ async function testCrossContamination() {
     reportFailure(label, 'Frequenzgeregelt-Kontext enthaelt faelschlich den Softstart-Baustein.');
     return;
   }
+
   if (softTitels.includes('TWR – Hydraulik Frequenzgeregelt')) {
     reportFailure(label, 'Softstart-Kontext enthaelt faelschlich den Frequenzgeregelt-Baustein.');
     return;
@@ -153,6 +154,29 @@ async function testCrossContamination() {
   }
 
   reportOk(label, 'Frequenzgeregelt und Softstart schliessen sich in der aufgeloesten Auswahl gegenseitig eindeutig aus.');
+}
+
+async function testFrequencyRuleIsIndependentPosition() {
+  const query = {
+    data: {
+      technischeParameter: { aufzugstyp: 'hydraulik', hydraulikRegelungsart: 'frequenzgeregelt' },
+      kalkulation: { paketSummen: [{ paket: 'antrieb', positionen: [
+        { id: 'frequenzregelung', anzahl: 1 },
+      ] }] },
+    },
+  };
+  const report = buildPositionMappingReport(query);
+  if (!(report.mapped || []).some((entry) => entry.bibliotheksId === 'LV_12_12_FREQUENZUMRICHTER_REGELUNG')) {
+    reportFailure('Eigenständige Frequenzregelung', 'frequenzregelung wird nicht auf LV_12_12 gemappt.');
+    return;
+  }
+  const resolved = resolveMappedStaticLvEntries(query, baseLvEntries());
+  const titles = resolved.flatMap((entry) => (entry.lv?.module || []).map((module) => module.titel));
+  if (!titles.includes('Frequenzumrichter / Regelung')) {
+    reportFailure('Eigenständige Frequenzregelung', 'Der neutrale Bibliotheksbaustein wird nicht aufgelöst.');
+    return;
+  }
+  reportOk('Eigenständige Frequenzregelung', 'frequenzregelung erzeugt eine eigene, deduplizierbare LV-Position.');
 }
 
 async function main() {
@@ -184,6 +208,7 @@ async function main() {
   );
 
   await testCrossContamination();
+  await testFrequencyRuleIsIndependentPosition();
 
   console.log('\n=== Ergebnis ===');
   if (failures > 0) {

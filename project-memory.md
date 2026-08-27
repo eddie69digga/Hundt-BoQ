@@ -207,11 +207,7 @@ Bestätigte Abbildungen (`bibliotheksId` → `contentSource`):
 
 Offen bleiben:
 
-- `maschine_standardrahmen`
-- `tuerfuehrungen`
-- `tuerlaufrollen`
-- `tuerkontakte`
-- `tuerseile`
+- `maschine_standardrahmen` für Seil bzw. Hydraulik `konventionell`/unbekannt
 - `teil_umbaukit_schiebetueren`
 
 Die Legacy-Abgrenzung ist bewusst: Nur wenn keine passende Positionsstruktur vorliegt, fallen die bisherigen statischen Paketdateien aus `backend/lv` in den Fallback. Im neuen Components-Export wird dieser Fallback nicht mehr genutzt, damit fachlich falsche Texte wie `Antrieb Seil` oder `MRL - Seil Synchron` bei Hydraulik vollständig ausgeschlossen sind.
@@ -306,14 +302,14 @@ Verbindliche Zielreihenfolge (siehe Architekturentscheidung): E → B → I → 
 - **B – Bibliotheksschema (festgelegt):** `backend/lv/bibliothek.json` ist jetzt ein Array mit Schema `{id, struktur, kapitel, kategorie, titel, typ, text, status}`, abgeleitet aus der real in der Word-Quelle vorhandenen Metadatenstruktur (Struktur/Typ/Bibliotheks-ID je Baustein). Kein `parentId` (Hierarchie steckt bereits in `struktur`). Details: `docs/lv-architecture.md` Abschnitt 17.
 - **I – Validierungsprozess (aufgebaut):** `backend/lib/library-validation.js` (`validateLibrary()`) prüft Bibliothek und Mappingregeln auf doppelte IDs, fehlende Pflichtfelder, ungültige Status-/Typ-Werte, Waisen-Mappings, ungültige Variantenbedingungen, überlappende Regeln (Bericht), ungenutzte Einträge (Bericht) und auffällig identische Texte (Bericht). Abgesichert durch `backend/test/library-validation.test.js` inkl. Selbsttests mit bewusst fehlerhaften Daten. Details: `docs/lv-architecture.md` Abschnitt 18.
 - **G – Variantenfähiges Mapping (aufgebaut):** `POSITION_MAPPING_RULES` unterstützt jetzt Variantengruppen (`variantGroup`-Feld): mehrere `mapped`-Regeln mit denselben `componentsIds`, unterschiedlicher `bibliotheksId` und sich gegenseitig ausschließender `technicalCondition`, plus eine abschließende `open`-Regel für nicht abgedeckte Kontexte. Determinismus wird durch Enumeration repräsentativer technischer Kontexte in `validateVariantGroupDeterminism()` hart geprüft (Fehler bei Überlappung). Details: `docs/lv-architecture.md` Abschnitt 19.
-- **H – gezielt geschlossene Mappings:** `maschine_standardrahmen` ist jetzt teilweise geschlossen (Variantengruppe `antrieb-standardrahmen`): Hydraulik + `frequenzgeregelt` → `LV_14_01_TWR_HYDRAULIK_FREQUENZGEREGELT`, Hydraulik + `softstart` → `LV_14_02_TWR_HYDRAULIK_MIT_SOFTSTART` (beide IDs/Texte 1:1 aus der Word-Quelle verifiziert). Zusätzlich wurden am 2026-08-27 die eindeutigen Einzelmappings `antrittsblech` → `LV_11_24_ANTRITTSBLECHE`, `led_flaechenlicht_fahrkorb` → `LV_10_11_02_LED_FLACHENLICHT` und `lichtgitter_vorhandene_fahrkorbschiebetuer` → `LV_10_30_LICHTVORHANG` geschlossen. Bewusst weiterhin offen: Hydraulik + `konventionell` (kein Baustein in Kapitel 14 vorhanden), Seil (keine eindeutige 1:1-Zuordnung) sowie herstellerabhängige Türtechnik und Umbaukits. Abgesichert durch `backend/test/variant-mapping.test.js` und `backend/test/io-contract.test.js`. Details: `docs/lv-architecture.md` Abschnitt 20.
+- **H – gezielt geschlossene Mappings:** Neben den Hydraulikvarianten und drei Einzelmappings sind die neutralisierten Türtechnik-Bausteine, `frequenzregelung` als eigene Position sowie die `not_lv_position`-Nebenleistungen bestätigt. Bewusst weiterhin offen: Hydraulik + `konventionell`, Seil und das Umbaukit. Abgesichert durch Contract-Tests. Details: `docs/lv-architecture.md` Abschnitt 20.
 - **C – Word-Import (aufgebaut):** `backend/lib/word-library-extractor.js` extrahiert Bibliothekseinträge direkt aus der Word-Metadatenzeile; `backend/scripts/import-word-library.js` (`planImport()`) gleicht gegen den bestehenden Bestand ab, ändert bestehende IDs nie still, markiert neue Einträge als `status: 'entwurf'` und schreibt nur nach erfolgreicher Validierung (`--apply`). Abgesichert durch `backend/test/word-import.test.js`. Details: `docs/lv-architecture.md` Abschnitt 21.
 - **D – Vollübernahme (durchgeführt, 2026-08-25):** `backend/lv/bibliothek.json` enthält jetzt alle 311 Word-Bibliothekseinträge (12 `bestaetigt`, 299 `entwurf`). 0 Fehler, 258 Berichte (27 Gruppierungsknoten ohne eigenen Text, 17 auffällig identische Texte, 214 noch ungenutzte Einträge - erwartet, da noch keine Mapping-Regel existiert). Details: `docs/lv-architecture.md` Abschnitt 22.
 - **F – Auslagerung Mappinglogik (geprüft, bewusst zurückgestellt):** `POSITION_MAPPING_RULES` umfasst aktuell 19 Regeln. Die Regeln sind weiterhin räumlich zusammenhängend und durch Contract-Tests abgesichert; ein echter Wartbarkeitsgewinn durch Auslagerung ist noch nicht nachgewiesen. Erneut prüfen, wenn die Regelanzahl spürbar wächst. Details: `docs/lv-architecture.md` Abschnitt 23.
 
 ## Nächste fachliche Schritte
 
-1. Verbleibende offene fachliche Entscheidungen klären (siehe `docs/components-boq-begriffsmatrix.md`, Abschnitt "Offene fachliche Entscheidungen"): `hydraulikRegelungsart = 'konventionell'`, Seil-Zuordnung für `maschine_standardrahmen`, Herstellerdimension der verbleibenden Türtechnik, `frequenzregelung`-Mapping und doppelt geführtes `aufhaengung`-Feld.
+1. Verbleibende offene fachliche Entscheidungen klären (siehe `docs/components-boq-begriffsmatrix.md`, Abschnitt "Offene fachliche Entscheidungen"): `hydraulikRegelungsart = 'konventionell'`, Seil-Zuordnung für `maschine_standardrahmen`, Umbaukit und doppelt geführtes `aufhaengung`-Feld.
 2. Bei Bedarf weitere Components-Positionen gegen die jetzt vollständige Bibliothek (311 Einträge) mappen - nur nach fachlicher Bestätigung, nicht automatisiert (siehe Anti-Try-and-Error-Regel).
 3. Schritt F erneut bewerten, sobald `POSITION_MAPPING_RULES` spürbar wächst.
 
@@ -333,10 +329,10 @@ zusätzlichen Mappingregeln.
 
 ## Offene Punkte
 
-- Fachliche Zuordnung von `tuerfuehrungen`, `tuerlaufrollen`, `tuerkontakte`, `tuerseile`, `teil_umbaukit_schiebetueren` (Herstellerdimension) sowie der verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) ist noch offen - siehe `docs/components-boq-begriffsmatrix.md`. `antrittsblech`, `led_flaechenlicht_fahrkorb` und `lichtgitter_vorhandene_fahrkorbschiebetuer` sind seit 2026-08-27 eindeutig gemappt.
+- Das `teil_umbaukit_schiebetueren` sowie die verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) sind noch offen. Türtechnik, Frequenzregelung, Befestigungs-/Dübelpositionen und Montagerüstung sind seit 2026-08-27 bestätigt klassifiziert.
 - 3 bestehende Bibliothekseinträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_...`, `LV_14_02_...`) weichen minimal von einer frischen Word-Extraktion ab (siehe `docs/lv-architecture.md` Abschnitt 21) - bewusst nicht automatisch übernommen, fachliche Entscheidung offen.
 - Schritt F (Auslagerung Mappinglogik) wurde geprüft und bewusst zurückgestellt (siehe `docs/lv-architecture.md` Abschnitt 23) - kein offener Punkt, sondern eine dokumentierte Entscheidung.
 
 ## Kurzfazit
 
-Für die 10 ursprünglich bestätigten Bibliotheks-IDs (jetzt 15, inkl. der beiden Hydraulik-Varianten und drei eindeutigen Einzelmappings aus Schritt H) ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch automatisierte Contract-Tests (6 Testsuiten inklusive IO-Contract) gegen Regressionen abgesichert. Die strukturierte LV-Bibliothek (`backend/lv/bibliothek.json`) enthält jetzt alle 311 Bausteine aus der Word-Quelle (299 davon `entwurf`, fachlich ungeprüft) und ist über einen kontrollierten, validierten Importprozess wiederholbar reproduzierbar. Das Granularitätsproblem bei `contentSource: 'static'` ist behoben; Mapping unterstützt jetzt deterministische Varianten. Offen bleiben mehrere klar benannte fachliche Entscheidungen (Herstellerdimension, Seil-Zuordnung, `konventionell`-Text) sowie Schritt F.
+Für die 17 bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch automatisierte Contract-Tests (6 Testsuiten inklusive IO-Contract) gegen Regressionen abgesichert. Die strukturierte LV-Bibliothek (`backend/lv/bibliothek.json`) enthält jetzt alle 311 Bausteine aus der Word-Quelle (299 davon `entwurf`, fachlich ungeprüft) und ist über einen kontrollierten, validierten Importprozess wiederholbar reproduzierbar. Das Granularitätsproblem bei `contentSource: 'static'` ist behoben; Mapping unterstützt jetzt deterministische Varianten. Offen bleiben mehrere klar benannte fachliche Entscheidungen (Herstellerdimension, Seil-Zuordnung, `konventionell`-Text) sowie Schritt F.
