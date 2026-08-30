@@ -27,12 +27,13 @@ const report = buildPositionMappingReport(query([
   { id: 'montageruestung', anzahl: 1 },
   { id: 'schiebetuer_2tlg', anzahl: 2 },
   { id: 'muz_standard', anzahl: 2 },
+  { id: 'zargenbeleuchtung', anzahl: 2 },
   { id: 'demontage_schiebetuer_2tlg', anzahl: 1 },
   { id: 'fachlich_unbekannt', anzahl: 2 },
   { bezeichnung: 'Positive Position ohne ID', anzahl: 1 },
 ]));
 
-assert(report.positionStatuses.length === 14, 'Jede positive Position muss genau einen Status erhalten.');
+assert(report.positionStatuses.length === 15, 'Jede positive Position muss genau einen Status erhalten.');
 assert(report.positionStatuses.every((entry) =>
   ['mapped', 'open', 'not_lv_position', 'invalid'].includes(entry.status)
 ), 'Unbekannter Status im Positionsvertrag.');
@@ -44,6 +45,7 @@ for (const [componentsId, bibliotheksId] of [
   ['lichtgitter_vorhandene_fahrkorbschiebetuer', 'LV_10_30_LICHTVORHANG'],
   ['demontage_schiebetuer_2tlg', 'LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG'],
   ['muz_standard', 'LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS'],
+  ['zargenbeleuchtung', 'LV_11_28_ZARGENBELEUCHTUNG'],
 ]) {
   const entry = report.positionStatuses.find((candidate) => candidate.componentsId === componentsId);
   assert(entry?.status === 'mapped' && entry.bibliotheksId === bibliotheksId,
@@ -56,6 +58,13 @@ assert(muzLibraryEntry?.text.includes('individuelles Aufmaß an jedem Schachtzug
   'Der MUZ-Baustein muss individuelles Aufmaß an jedem Schachtzugang enthalten.');
 assert(!/hinterfüllen/i.test(muzLibraryEntry?.text || ''),
   'Der MUZ-Baustein darf keinen Leistungsbestandteil Hinterfüllen enthalten.');
+const zargenbeleuchtung = require('../server.js').loadBibliothek()['LV_11_28_ZARGENBELEUCHTUNG'];
+assert(zargenbeleuchtung?.titel === 'Zargenbeleuchtung',
+  'Der Zargenbeleuchtungs-Baustein muss unter dem neutralen Titel vorhanden sein.');
+assert(zargenbeleuchtung?.text === 'Integrierte LED-Beleuchtung beidseitig, ca. 25 cm über OKFF, einschließlich erforderlicher Anschlüsse und betriebsfertiger Montage.',
+  'Der Zargenbeleuchtungs-Baustein muss den bestätigten Wortlaut exakt enthalten.');
+assert(!/hersteller/i.test(`${zargenbeleuchtung?.titel || ''} ${zargenbeleuchtung?.text || ''}`),
+  'Der Zargenbeleuchtungs-Baustein darf keine Herstellerangabe enthalten.');
 assert(report.not_lv_position.some((entry) => entry.componentsId === 'korrekturwert_1'),
   'Korrekturwerte müssen not_lv_position sein.');
 for (const componentsId of [

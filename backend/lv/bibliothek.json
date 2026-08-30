@@ -2050,6 +2050,16 @@
     "status": "bestaetigt"
   },
   {
+    "id": "LV_11_28_ZARGENBELEUCHTUNG",
+    "struktur": "11.28",
+    "kapitel": "11",
+    "kategorie": "LV_KAP_11_SCHACHTABSCHLUSSTUREN_MAUERUMFASSUNGSZARGE",
+    "titel": "Zargenbeleuchtung",
+    "typ": "Baustein",
+    "text": "Integrierte LED-Beleuchtung beidseitig, ca. 25 cm über OKFF, einschließlich erforderlicher Anschlüsse und betriebsfertiger Montage.",
+    "status": "bestaetigt"
+  },
+  {
     "id": "LV_KAP_12_AUFZUGSSTEUERUNG",
     "struktur": "12",
     "kapitel": "12",

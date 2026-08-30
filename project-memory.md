@@ -204,6 +204,7 @@ Bestätigte Abbildungen (`bibliotheksId` → `contentSource`):
 - `transport_allgemein_baustelle_lager` → `LV_02_09_TRANSPORT_UND_BAUSTELLENEINRICHTUNG` (`bibliothek`) bei `projektart = Teilmodernisierung`
 - `demontage_schiebetuer_2tlg` -> `LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG` (`bibliothek`) – Demontage vorhandener zweiflügeliger Schiebetüren (neu 2026-08-27)
 - `muz_standard` -> `LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS` (`bibliothek`) – neutrale Mauerumfassungszargen mit individuellem Aufmaß an jedem Schachtzugang (neu 2026-08-27)
+- `zargenbeleuchtung` -> `LV_11_28_ZARGENBELEUCHTUNG` (`bibliothek`) – neutrale integrierte LED-Beleuchtung an den Zargen (neu 2026-08-27)
 
 `static` = bereits reales Modul in `steuerung.json`/`abnahme.json`. `bibliothek` = kein passendes statisches Modul vorhanden; Baustein wird dediziert aus `backend/lv/bibliothek.json` aufgelöst (Quelle: `docs/260824_LV_Bibliothek_Components_modular.docx`, wortgetreu übernommen).
 
@@ -351,12 +352,22 @@ und verwendet nicht den Leistungsbestandteil `Hinterfüllen`. Components bleibt
 unverändert; bestehende offene Positionen und Herstellertexte werden nicht geändert.
 Die Zuordnung ist durch `backend/test/io-contract.test.js` abgesichert.
 
+## Architekturentscheidung: `zargenbeleuchtung` als eigene neutrale LV-Position (2026-08-27)
+
+`zargenbeleuchtung` wird als eigene verwendbare LV-Position auf
+`LV_11_28_ZARGENBELEUCHTUNG` gemappt. Der Bibliothekstext lautet exakt:
+„Integrierte LED-Beleuchtung beidseitig, ca. 25 cm über OKFF, einschließlich
+erforderlicher Anschlüsse und betriebsfertiger Montage.“ Er enthält keine
+Herstellerangabe. Components bleibt unverändert; andere offene Positionen
+werden nicht verändert. Die Zuordnung ist durch `backend/test/io-contract.test.js`
+abgesichert.
+
 ## Offene Punkte
 
-- Das `teil_umbaukit_schiebetueren` sowie die verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) sind noch offen. Türtechnik, Frequenzregelung, Befestigungs-/Dübelpositionen und Montagerüstung sind seit 2026-08-27 bestätigt klassifiziert.
+- Das `teil_umbaukit_schiebetueren` sowie die verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) sind noch offen. Türtechnik, Frequenzregelung, Befestigungs-/Dübelpositionen, Montagerüstung und `zargenbeleuchtung` sind seit 2026-08-27 bestätigt klassifiziert.
 - 3 bestehende Bibliothekseinträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_...`, `LV_14_02_...`) weichen minimal von einer frischen Word-Extraktion ab (siehe `docs/lv-architecture.md` Abschnitt 21) - bewusst nicht automatisch übernommen, fachliche Entscheidung offen.
 - Schritt F (Auslagerung Mappinglogik) wurde geprüft und bewusst zurückgestellt (siehe `docs/lv-architecture.md` Abschnitt 23) - kein offener Punkt, sondern eine dokumentierte Entscheidung.
 
 ## Kurzfazit
 
-Für die 18 bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch automatisierte Contract-Tests (6 Testsuiten inklusive IO-Contract) gegen Regressionen abgesichert. Die strukturierte LV-Bibliothek (`backend/lv/bibliothek.json`) enthält jetzt alle 311 Bausteine aus der Word-Quelle (299 davon `entwurf`, fachlich ungeprüft) sowie den bestätigten neutralen MUZ-Baustein und ist über einen kontrollierten, validierten Importprozess wiederholbar reproduzierbar. Das Granularitätsproblem bei `contentSource: 'static'` ist behoben; Mapping unterstützt jetzt deterministische Varianten. Offen bleiben mehrere klar benannte fachliche Entscheidungen (Herstellerdimension, Seil-Zuordnung, `konventionell`-Text) sowie Schritt F.
+Für die 19 bestätigten Bibliotheks-IDs ist die Kalkulationsstruktur sauber mit der LV-Struktur verbunden und durch automatisierte Contract-Tests (6 Testsuiten inklusive IO-Contract) gegen Regressionen abgesichert. Die strukturierte LV-Bibliothek (`backend/lv/bibliothek.json`) enthält jetzt alle 311 Bausteine aus der Word-Quelle (299 davon `entwurf`, fachlich ungeprüft) sowie den bestätigten neutralen MUZ-Baustein und ist über einen kontrollierten, validierten Importprozess wiederholbar reproduzierbar. Das Granularitätsproblem bei `contentSource: 'static'` ist behoben; Mapping unterstützt jetzt deterministische Varianten. Offen bleiben mehrere klar benannte fachliche Entscheidungen (Herstellerdimension, Seil-Zuordnung, `konventionell`-Text) sowie Schritt F.
