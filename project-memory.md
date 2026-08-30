@@ -362,9 +362,47 @@ Herstellerangabe. Components bleibt unverändert; andere offene Positionen
 werden nicht verändert. Die Zuordnung ist durch `backend/test/io-contract.test.js`
 abgesichert.
 
+## Positionsdeckungstest (2026-08-30)
+
+`backend/test/position-coverage.test.js` prüft, dass **jede Kalkulationsposition,
+die Components real erzeugt**, von BoQ einen nachvollziehbaren Status erhält.
+Grundlage ist `backend/test/fixtures/components-positions-inventory.json`:
+23 verschiedene Positionen aus 31 Demo-Projekten (626 Vorkommen), erzeugt durch
+`backend/test/fixtures/generate-components-positions-inventory.js`.
+
+Der Test trifft **keine fachliche Entscheidung**. Er verlangt kein Mapping,
+sondern nur, dass keine Position unbemerkt durchfällt. Er schlägt an, wenn:
+
+- eine neue oder umbenannte Components-Position ohne Regel und ohne dokumentierte
+  Entscheidung auftaucht,
+- eine real erzeugte Position als `invalid` gilt,
+- `BEKANNT_OHNE_MAPPING` veraltet (eine dort gelistete Position hat inzwischen
+  eine Regel oder existiert nicht mehr).
+
+Beide Richtungen wurden gegengeprüft: Der Test schlägt bei einer künstlich
+eingefügten Position fehl und ebenso bei einem veralteten Listeneintrag.
+
+Bewusst offen gelassen (`BEKANNT_OHNE_MAPPING`, alle im Paket `antrieb` eines
+Seilaufzugs): `tragseile`, `ablenkrolle`, `adapterrahmen`, `seilaufhaengung`,
+`seilkauschen`. Deckungsgleich mit dem Status `offen` in
+`docs/components-boq-begriffsmatrix.md` ("kein Bibliothekseintrag identifiziert").
+Sie erscheinen korrekt als `open` mit dem Grund "Keine Mapping-Regel vorhanden" –
+es geht nichts verloren, es fehlen nur bestätigte Bibliothekstexte.
+
+Zusätzlich geführt: `PROJEKTARTGEBUNDEN` (`zues_*`, `pruefgewichte`,
+`transport_allgemein_baustelle_lager`). Diese Regeln sind bewusst an
+`projektart = Teilmodernisierung` gebunden und bleiben bei z. B. Budgetierung
+regulär offen. Damit diese Ausnahme keine echte Lücke verdeckt, prüft der Test
+gegen, dass jede dieser Positionen in mindestens einem Projekt tatsächlich
+gemappt wird.
+
+Hinweis: BoQ normalisiert Positions-IDs auf Kleinschreibung – Components liefert
+`Tragseile`, der Positionsvertrag führt `tragseile`.
+
 ## Offene Punkte
 
 - Das `teil_umbaukit_schiebetueren` sowie die verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) sind noch offen. Türtechnik, Frequenzregelung, Befestigungs-/Dübelpositionen, Montagerüstung und `zargenbeleuchtung` sind seit 2026-08-27 bestätigt klassifiziert.
+- Für die fünf Seil-Antriebspositionen (`tragseile`, `ablenkrolle`, `adapterrahmen`, `seilaufhaengung`, `seilkauschen`) fehlen bestätigte LV-Bibliothekstexte. Kein technischer Defekt: Sie werden korrekt als `open` ausgewiesen. Offene fachliche Frage, ob Kapitel 13 der Word-Quelle passende Bausteine enthält.
 - 3 bestehende Bibliothekseinträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_...`, `LV_14_02_...`) weichen minimal von einer frischen Word-Extraktion ab (siehe `docs/lv-architecture.md` Abschnitt 21) - bewusst nicht automatisch übernommen, fachliche Entscheidung offen.
 - Schritt F (Auslagerung Mappinglogik) wurde geprüft und bewusst zurückgestellt (siehe `docs/lv-architecture.md` Abschnitt 23) - kein offener Punkt, sondern eine dokumentierte Entscheidung.
 

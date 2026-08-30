@@ -1,0 +1,4951 @@
+{
+  "quelle": "01_Components_reload/frontend/demo-json",
+  "erzeugtDurch": "backend/test/fixtures/generate-components-positions-inventory.js",
+  "erzeugt": "2026-08-30",
+  "hinweis": "aufzugstyp/antriebTyp werden aus anlage.antriebsart abgeleitet. Projekte ohne Antriebsangabe behalten leere Werte - das ist der reale Zustand.",
+  "demoDateien": 31,
+  "verschiedenePositionen": 23,
+  "projekte": [
+    {
+      "datei": "00_Neumünster.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 8,
+        "zugangsstellen": 8,
+        "tragfaehigkeitKg": 1800,
+        "tragfaehigkeitPersonen": 24,
+        "geschwindigkeit": 1.6,
+        "foerderhoehe": 25.2,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 8
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "00_kiel.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 4,
+        "zugangsstellen": 4,
+        "tragfaehigkeitKg": 630,
+        "tragfaehigkeitPersonen": 8,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 10.8,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 4
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "00_preetz.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 6,
+        "zugangsstellen": 6,
+        "tragfaehigkeitKg": 1200,
+        "tragfaehigkeitPersonen": 16,
+        "geschwindigkeit": 1.6,
+        "foerderhoehe": 17.4,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 6
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "00_probsteierhagen.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 10,
+        "zugangsstellen": 10,
+        "tragfaehigkeitKg": 2500,
+        "tragfaehigkeitPersonen": 33,
+        "geschwindigkeit": 2,
+        "foerderhoehe": 31.5,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 10
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "01_Berlin.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 6,
+        "zugangsstellen": 9,
+        "tragfaehigkeitKg": 800,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 2,
+        "foerderhoehe": 15.3,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 9
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "02_Paris.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 16,
+        "zugangsstellen": 18,
+        "tragfaehigkeitKg": 1050,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 2.5,
+        "foerderhoehe": 22.9,
+        "durchladung": true,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 18
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "03_Madrid.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 12,
+        "zugangsstellen": 12,
+        "tragfaehigkeitKg": 800,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 34.67,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 12
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "04_Rome.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 10,
+        "zugangsstellen": 10,
+        "tragfaehigkeitKg": 1050,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1.6,
+        "foerderhoehe": 28.9,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 10
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "05_Vienna.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 10,
+        "zugangsstellen": 10,
+        "tragfaehigkeitKg": 800,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1.6,
+        "foerderhoehe": 28.29,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 10
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "06_Amsterdam.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 6,
+        "zugangsstellen": 8,
+        "tragfaehigkeitKg": 1150,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 16.83,
+        "durchladung": true,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 8
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "07_Brussels.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 8,
+        "zugangsstellen": 8,
+        "tragfaehigkeitKg": 1050,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 2,
+        "foerderhoehe": 22.17,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 8
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "08_Copenhagen.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 5,
+        "zugangsstellen": 8,
+        "tragfaehigkeitKg": 1600,
+        "tragfaehigkeitPersonen": 18,
+        "geschwindigkeit": 2,
+        "foerderhoehe": 12.86,
+        "durchladung": true,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 8
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "09_Stockholm.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 12,
+        "zugangsstellen": 20,
+        "tragfaehigkeitKg": 2000,
+        "tragfaehigkeitPersonen": 26,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 34.73,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 20
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "10_Oslo.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 9,
+        "zugangsstellen": 9,
+        "tragfaehigkeitKg": 630,
+        "tragfaehigkeitPersonen": 9,
+        "geschwindigkeit": 1.6,
+        "foerderhoehe": 24.61,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 9
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "11_Helsinki.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 5,
+        "zugangsstellen": 5,
+        "tragfaehigkeitKg": 800,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 12.37,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "12_Warsaw.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 12,
+        "zugangsstellen": 12,
+        "tragfaehigkeitKg": 800,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 34.77,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 12
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "13_Prague.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 12,
+        "zugangsstellen": 12,
+        "tragfaehigkeitKg": 1050,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 34.64,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 12
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "14_Budapest.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 10,
+        "zugangsstellen": 10,
+        "tragfaehigkeitKg": 1050,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 27.67,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 10
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "15_Athens.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 8,
+        "zugangsstellen": 8,
+        "tragfaehigkeitKg": 800,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 21.19,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 8
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "16_Lisbon.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 7,
+        "zugangsstellen": 9,
+        "tragfaehigkeitKg": 1350,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 19.15,
+        "durchladung": true,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 9
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "17_Dublin.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 10,
+        "zugangsstellen": 10,
+        "tragfaehigkeitKg": 1000,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 28.63,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 10
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "18_London.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 10,
+        "zugangsstellen": 10,
+        "tragfaehigkeitKg": 1150,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 27.21,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 10
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "19_Bern.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 9,
+        "zugangsstellen": 9,
+        "tragfaehigkeitKg": 1050,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 24.38,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 9
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "20_Reykjavik.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 8,
+        "zugangsstellen": 9,
+        "tragfaehigkeitKg": 1600,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 21.55,
+        "durchladung": true,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 9
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "21_Budget_10_Anlagen.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "",
+        "projektart": "Budgetierung",
+        "tragfaehigkeit": "630",
+        "vnenn": "1.0",
+        "aufhaengung": "2:1",
+        "durchladung": "Nein",
+        "tuerart": "2-fluegelig",
+        "haltestellenanzahl": "6",
+        "schachtzugaenge": "6",
+        "foerderhoehe": "15",
+        "kostenMontagestunde": "82"
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 6
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "22_Hydraulik_450kg_3HS_direkt.json",
+      "technik": {
+        "aufzugstyp": "hydraulik",
+        "antriebTyp": "hydraulik-direkt",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 3,
+        "zugangsstellen": 3,
+        "tragfaehigkeitKg": 450,
+        "tragfaehigkeitPersonen": 6,
+        "geschwindigkeit": 0.63,
+        "foerderhoehe": 6,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 3
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Hydraulikaggregat",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikschlauch",
+          "bezeichnung": "Hydraulikschlauch",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikoel",
+          "bezeichnung": "Hydrauliköl",
+          "einheit": "Liter",
+          "anzahl": 238.81
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "23_Hydraulik_630kg_5HS_indirekt.json",
+      "technik": {
+        "aufzugstyp": "hydraulik",
+        "antriebTyp": "hydraulik-indirekt",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 5,
+        "zugangsstellen": 5,
+        "tragfaehigkeitKg": 630,
+        "tragfaehigkeitPersonen": 8,
+        "geschwindigkeit": 0.63,
+        "foerderhoehe": 12.5,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Hydraulikaggregat",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikschlauch",
+          "bezeichnung": "Hydraulikschlauch",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikoel",
+          "bezeichnung": "Hydrauliköl",
+          "einheit": "Liter",
+          "anzahl": 292.54
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "24_Hydraulik_1000kg_6HS_indirekt.json",
+      "technik": {
+        "aufzugstyp": "hydraulik",
+        "antriebTyp": "hydraulik-indirekt",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 6,
+        "zugangsstellen": 6,
+        "tragfaehigkeitKg": 1000,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 0.63,
+        "foerderhoehe": 15,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 6
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Hydraulikaggregat",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikschlauch",
+          "bezeichnung": "Hydraulikschlauch",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikoel",
+          "bezeichnung": "Hydrauliköl",
+          "einheit": "Liter",
+          "anzahl": 402.99
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "25_Hydraulik_1600kg_4HS_direkt.json",
+      "technik": {
+        "aufzugstyp": "hydraulik",
+        "antriebTyp": "hydraulik-direkt",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 4,
+        "zugangsstellen": 4,
+        "tragfaehigkeitKg": 1600,
+        "tragfaehigkeitPersonen": 21,
+        "geschwindigkeit": 0.63,
+        "foerderhoehe": 8.5,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 4
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Hydraulikaggregat",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikschlauch",
+          "bezeichnung": "Hydraulikschlauch",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikoel",
+          "bezeichnung": "Hydrauliköl",
+          "einheit": "Liter",
+          "anzahl": 582.09
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "26_Hydraulik_2500kg_7HS_indirekt.json",
+      "technik": {
+        "aufzugstyp": "hydraulik",
+        "antriebTyp": "hydraulik-indirekt",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 7,
+        "zugangsstellen": 7,
+        "tragfaehigkeitKg": 2500,
+        "tragfaehigkeitPersonen": 33,
+        "geschwindigkeit": 0.63,
+        "foerderhoehe": 18,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 7
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Hydraulikaggregat",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikschlauch",
+          "bezeichnung": "Hydraulikschlauch",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "hydraulikoel",
+          "bezeichnung": "Hydrauliköl",
+          "einheit": "Liter",
+          "anzahl": 850.75
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    },
+    {
+      "datei": "test-import.json",
+      "technik": {
+        "aufzugstyp": "seil",
+        "antriebTyp": "seil-oben",
+        "projektart": "Teilmodernisierung",
+        "haltestellen": 7,
+        "zugangsstellen": 7,
+        "tragfaehigkeitKg": 1050,
+        "tragfaehigkeitPersonen": 13,
+        "geschwindigkeit": 1,
+        "foerderhoehe": 15.56,
+        "durchladung": false,
+        "ruecksackaufhaengung": false
+      },
+      "positionen": [
+        {
+          "paket": "steuerung",
+          "id": "steuerung",
+          "bezeichnung": "Steuerung Grundpreis ohne Tableaus und FU",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "fahrkorbtableau",
+          "bezeichnung": "Fahrkorbtableau",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "aussenruftableau",
+          "bezeichnung": "Außenruftableau",
+          "einheit": "Stk",
+          "anzahl": 7
+        },
+        {
+          "paket": "steuerung",
+          "id": "lastmessung",
+          "bezeichnung": "Lastmessung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "schachtbeleuchtung",
+          "bezeichnung": "Schachtbeleuchtung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kontakt_regler",
+          "bezeichnung": "Kontakt Spanngewicht Begrenzer",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "kabelkanaele",
+          "bezeichnung": "Kabelkanäle / Elektromaterial",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "frequenzumrichter",
+          "bezeichnung": "Frequenzumrichter",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "bremswiderstand",
+          "bezeichnung": "Bremswiderstand",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "steuerung",
+          "id": "verbindungsleitungen",
+          "bezeichnung": "Verbindungsleitungen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "maschine_standardrahmen",
+          "bezeichnung": "Antrieb / Maschine ohne Rahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "adapterrahmen",
+          "bezeichnung": "Maschinenrahmen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "Tragseile",
+          "bezeichnung": "Tragseile",
+          "einheit": "Stk",
+          "anzahl": 5
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilkauschen",
+          "bezeichnung": "Seilkauschen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "seilaufhaengung",
+          "bezeichnung": "Seilaufhängung anpassen (Schlosser oder ähnlich)",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "antrieb",
+          "id": "ablenkrolle",
+          "bezeichnung": "Ablenkrollen",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_vorpruefung",
+          "bezeichnung": "ZÜS Kosten Vorprüfung",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_kosten_abnahme",
+          "bezeichnung": "ZÜS Kosten Abnahme",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "zues_begleitung_durch_an_aufzug",
+          "bezeichnung": "ZÜS Begleitung durch AN Aufzug",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "pruefgewichte",
+          "bezeichnung": "Prüfgewichte",
+          "einheit": "Stk",
+          "anzahl": 1
+        },
+        {
+          "paket": "messungen",
+          "id": "transport_allgemein_baustelle_lager",
+          "bezeichnung": "Transport allgemein Baustelle Lager",
+          "einheit": "Stk",
+          "anzahl": 1
+        }
+      ]
+    }
+  ]
+}
