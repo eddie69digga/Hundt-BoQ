@@ -1550,6 +1550,43 @@ function extractAktiveSelektionen(query = {}) {
 // werden). Der Baustein wird stattdessen direkt aus backend/lv/bibliothek.json aufgeloest.
 const POSITION_MAPPING_RULES = Object.freeze([
   {
+    // Tragseile, deren Aufhaengung und die Seilkauschen sind in LV_10_05
+    // gemeinsam beschrieben (DIN 15020 fuer die Seilauslegung, separat
+    // nachspannbare Aufhaengungen, Seilenden mit Kausche nach DIN 3090).
+    // Drei Kalkulationspositionen, eine LV-Position: n:1, dedupliziert.
+    groupKey: 'seil-tragmittel',
+    componentsIds: ['tragseile', 'seilaufhaengung', 'seilkauschen'],
+    bibliotheksId: 'LV_10_05_TRAGMITTEL_AUFHANGUNG',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'seil-ablenkrolle',
+    componentsIds: ['ablenkrolle'],
+    bibliotheksId: 'LV_13_08_UMLENKROLLEN_IM_ANTRIEBSBEREICH',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
+    groupKey: 'seil-adapterrahmen',
+    componentsIds: ['adapterrahmen'],
+    bibliotheksId: 'LV_13_09_ADAPTERRAHMEN_ANTRIEB',
+    staticEntryId: null,
+    staticModuleId: null,
+    contentSource: 'bibliothek',
+    status: 'mapped',
+    technicalCondition: () => true,
+    canRemainOpen: false,
+  },
+  {
     groupKey: 'hydraulik-antrieb',
     componentsIds: ['hydraulikschlauch', 'hydraulikoel'],
     bibliotheksId: 'LV_14_05_HYDRAULIKSCHLAUCHE_UND_HYDRAULIKOL',

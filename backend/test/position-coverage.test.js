@@ -24,20 +24,13 @@ function assert(condition, message) {
 }
 
 // Positionen, fuer die es bewusst (noch) keine Mapping-Regel gibt.
-// Quelle: docs/components-boq-begriffsmatrix.md - die Zeile zu `tragseile`/
-// `ablenkrolle` steht dort auf Status `offen` ("kein Bibliothekseintrag
-// identifiziert"). Alle fuenf gehoeren zum Paket `antrieb` eines Seilaufzugs.
-// Diese Liste ist eine Bestandsaufnahme, keine fachliche Freigabe. Sie soll
-// schrumpfen, sobald ein bestaetigter Bibliothekstext vorliegt.
+// Aktuell leer: Die fuenf Seil-Antriebspositionen (tragseile, seilaufhaengung,
+// seilkauschen, ablenkrolle, adapterrahmen) sind seit 2026-08-30 fachlich
+// bestaetigt gemappt.
+// Diese Liste ist eine Bestandsaufnahme, keine fachliche Freigabe.
 // Hinweis: BoQ normalisiert Positions-IDs auf Kleinschreibung
 // (Components liefert z. B. "Tragseile", der Vertrag fuehrt "tragseile").
-const BEKANNT_OHNE_MAPPING = Object.freeze([
-  'ablenkrolle',
-  'adapterrahmen',
-  'seilaufhaengung',
-  'seilkauschen',
-  'tragseile',
-]);
+const BEKANNT_OHNE_MAPPING = Object.freeze([]);
 
 // Regeln wie `pvi-teilmodernisierung` und `transport-teilmodernisierung` sind
 // bewusst an `projektart = Teilmodernisierung` gebunden. Bei anderen Projektarten

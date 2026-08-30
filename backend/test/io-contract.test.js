@@ -29,11 +29,16 @@ const report = buildPositionMappingReport(query([
   { id: 'muz_standard', anzahl: 2 },
   { id: 'zargenbeleuchtung', anzahl: 2 },
   { id: 'demontage_schiebetuer_2tlg', anzahl: 1 },
+  { id: 'Tragseile', anzahl: 1 },
+  { id: 'seilaufhaengung', anzahl: 1 },
+  { id: 'seilkauschen', anzahl: 1 },
+  { id: 'ablenkrolle', anzahl: 2 },
+  { id: 'adapterrahmen', anzahl: 1 },
   { id: 'fachlich_unbekannt', anzahl: 2 },
   { bezeichnung: 'Positive Position ohne ID', anzahl: 1 },
 ]));
 
-assert(report.positionStatuses.length === 15, 'Jede positive Position muss genau einen Status erhalten.');
+assert(report.positionStatuses.length === 20, 'Jede positive Position muss genau einen Status erhalten.');
 assert(report.positionStatuses.every((entry) =>
   ['mapped', 'open', 'not_lv_position', 'invalid'].includes(entry.status)
 ), 'Unbekannter Status im Positionsvertrag.');
@@ -46,11 +51,27 @@ for (const [componentsId, bibliotheksId] of [
   ['demontage_schiebetuer_2tlg', 'LV_05_01_DEMONTAGE_SCHIEBETUER_2TLG'],
   ['muz_standard', 'LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS'],
   ['zargenbeleuchtung', 'LV_11_28_ZARGENBELEUCHTUNG'],
+  ['tragseile', 'LV_10_05_TRAGMITTEL_AUFHANGUNG'],
+  ['seilaufhaengung', 'LV_10_05_TRAGMITTEL_AUFHANGUNG'],
+  ['seilkauschen', 'LV_10_05_TRAGMITTEL_AUFHANGUNG'],
+  ['ablenkrolle', 'LV_13_08_UMLENKROLLEN_IM_ANTRIEBSBEREICH'],
+  ['adapterrahmen', 'LV_13_09_ADAPTERRAHMEN_ANTRIEB'],
 ]) {
   const entry = report.positionStatuses.find((candidate) => candidate.componentsId === componentsId);
   assert(entry?.status === 'mapped' && entry.bibliotheksId === bibliotheksId,
     `${componentsId} muss auf ${bibliotheksId} gemappt sein.`);
 }
+// Die drei Seil-Tragmittelpositionen teilen sich eine Ziel-ID und duerfen
+// daher nur eine einzige LV-Position erzeugen (n:1 mit Deduplizierung).
+assert(report.mapped.filter((entry) => entry.bibliotheksId === 'LV_10_05_TRAGMITTEL_AUFHANGUNG').length === 1,
+  'tragseile/seilaufhaengung/seilkauschen muessen zu genau einer LV-Position dedupliziert werden.');
+const adapterrahmen = require('../server.js').loadBibliothek()['LV_13_09_ADAPTERRAHMEN_ANTRIEB'];
+assert(adapterrahmen?.titel === 'Adapterrahmen Antrieb',
+  'Der Adapterrahmen-Baustein muss unter dem neutralen Titel vorhanden sein.');
+assert(adapterrahmen?.text === 'Lieferung und Montage einer passenden Rahmenkonstruktion aus Stahlprofilen zur fachgerechten Anpassung des neuen Antriebs an die bestehende Situation, einschließlich Aufmaß, Auslegung, Fertigung, Lieferung und Montage.',
+  'Der Adapterrahmen-Baustein muss den bestätigten Wortlaut exakt enthalten.');
+assert(!/hersteller/i.test(`${adapterrahmen?.titel || ''} ${adapterrahmen?.text || ''}`),
+  'Der Adapterrahmen-Baustein darf keine Herstellerangabe enthalten.');
 const muzLibraryEntry = require('../server.js').loadBibliothek()['LV_11_27_MAUERUMFASSUNGSZARGEN_INDIVIDUELLES_AUFMASS'];
 assert(muzLibraryEntry?.titel === 'Mauerumfassungszargen (individuelles Aufmaß)',
   'Der MUZ-Baustein muss unter dem konventionsgerechten Titel vorhanden sein.');

@@ -382,12 +382,11 @@ sondern nur, dass keine Position unbemerkt durchfällt. Er schlägt an, wenn:
 Beide Richtungen wurden gegengeprüft: Der Test schlägt bei einer künstlich
 eingefügten Position fehl und ebenso bei einem veralteten Listeneintrag.
 
-Bewusst offen gelassen (`BEKANNT_OHNE_MAPPING`, alle im Paket `antrieb` eines
-Seilaufzugs): `tragseile`, `ablenkrolle`, `adapterrahmen`, `seilaufhaengung`,
-`seilkauschen`. Deckungsgleich mit dem Status `offen` in
-`docs/components-boq-begriffsmatrix.md` ("kein Bibliothekseintrag identifiziert").
-Sie erscheinen korrekt als `open` mit dem Grund "Keine Mapping-Regel vorhanden" –
-es geht nichts verloren, es fehlen nur bestätigte Bibliothekstexte.
+`BEKANNT_OHNE_MAPPING` war zunächst mit den fünf Seil-Antriebspositionen
+(`tragseile`, `ablenkrolle`, `adapterrahmen`, `seilaufhaengung`, `seilkauschen`)
+gefüllt. Diese sind seit 2026-08-30 bestätigt gemappt (siehe Architekturentscheidung
+unten); die Liste ist seitdem **leer**. Der Deckungstest meldet
+"17 gemappt, 0 dokumentiert offen".
 
 Zusätzlich geführt: `PROJEKTARTGEBUNDEN` (`zues_*`, `pruefgewichte`,
 `transport_allgemein_baustelle_lager`). Diese Regeln sind bewusst an
@@ -399,10 +398,39 @@ gemappt wird.
 Hinweis: BoQ normalisiert Positions-IDs auf Kleinschreibung – Components liefert
 `Tragseile`, der Positionsvertrag führt `tragseile`.
 
+## Architekturentscheidung: Seil-Antriebspositionen gemappt (2026-08-30)
+
+Die fünf bis dahin offenen Positionen des Pakets `antrieb` (Seilaufzug) sind
+fachlich bestätigt zugeordnet:
+
+- `tragseile`, `seilaufhaengung`, `seilkauschen` → `LV_10_05_TRAGMITTEL_AUFHANGUNG`
+  (`bibliothek`). **n:1**: Der Bibliothekstext beschreibt alle drei Aspekte
+  gemeinsam – Seilauslegung nach DIN 15020, separat nachspannbare Aufhängungen
+  an Fangrahmen und Gegengewicht, Seilenden mit Kausche nach DIN 3090. Die drei
+  Positionen werden über die Ziel-Bibliotheks-ID dedupliziert und erzeugen genau
+  eine LV-Position (verifiziert).
+- `ablenkrolle` → `LV_13_08_UMLENKROLLEN_IM_ANTRIEBSBEREICH` (`bibliothek`), 1:1.
+- `adapterrahmen` → `LV_13_09_ADAPTERRAHMEN_ANTRIEB` (`bibliothek`), 1:1.
+
+`LV_10_05` und `LV_13_08` standen zuvor auf `entwurf` (unbestätigt aus dem
+Word-Import) und wurden mit dieser Entscheidung auf `bestaetigt` gesetzt – analog
+zum Vorgehen bei `muz_standard` und `zargenbeleuchtung`.
+
+`LV_13_09_ADAPTERRAHMEN_ANTRIEB` ist **neu angelegt**, weil die Word-Bibliothek
+keinen passenden Baustein enthielt. `LV_13_06_LASTVERTEILTRAGER_TRIEBWERKSRAUM`
+wurde geprüft und verworfen: Er beschreibt die Lastableitung in die
+Triebwerkswände, nicht die Antriebsanpassung. Wortlaut (ohne Herstellerangabe):
+„Lieferung und Montage einer passenden Rahmenkonstruktion aus Stahlprofilen zur
+fachgerechten Anpassung des neuen Antriebs an die bestehende Situation,
+einschließlich Aufmaß, Auslegung, Fertigung, Lieferung und Montage.“
+
+Components bleibt unverändert. Abgesichert durch
+`backend/test/position-coverage.test.js` (0 dokumentiert offene Positionen).
+
 ## Offene Punkte
 
 - Das `teil_umbaukit_schiebetueren` sowie die verbleibenden `maschine_standardrahmen`-Fälle (Seil, `konventionell`) sind noch offen. Türtechnik, Frequenzregelung, Befestigungs-/Dübelpositionen, Montagerüstung und `zargenbeleuchtung` sind seit 2026-08-27 bestätigt klassifiziert.
-- Für die fünf Seil-Antriebspositionen (`tragseile`, `ablenkrolle`, `adapterrahmen`, `seilaufhaengung`, `seilkauschen`) fehlen bestätigte LV-Bibliothekstexte. Kein technischer Defekt: Sie werden korrekt als `open` ausgewiesen. Offene fachliche Frage, ob Kapitel 13 der Word-Quelle passende Bausteine enthält.
+- Für die fünf Seil-Antriebspositionen (`tragseile`, `ablenkrolle`, `adapterrahmen`, `seilaufhaengung`, `seilkauschen`) liegen seit 2026-08-30 bestätigte Mappings vor (siehe Architekturentscheidung oben). Kein offener Punkt mehr.
 - 3 bestehende Bibliothekseinträge (`LV_07_05_MALERARBEITEN_SCHACHTGRUBE`, `LV_14_01_...`, `LV_14_02_...`) weichen minimal von einer frischen Word-Extraktion ab (siehe `docs/lv-architecture.md` Abschnitt 21) - bewusst nicht automatisch übernommen, fachliche Entscheidung offen.
 - Schritt F (Auslagerung Mappinglogik) wurde geprüft und bewusst zurückgestellt (siehe `docs/lv-architecture.md` Abschnitt 23) - kein offener Punkt, sondern eine dokumentierte Entscheidung.
 

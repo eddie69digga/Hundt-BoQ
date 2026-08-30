@@ -1317,7 +1317,7 @@
     "titel": "Tragmittel / Aufhängung",
     "typ": "Baustein",
     "text": "Die Tragmittel sind zu erneuern.\nDie Tragseile sind so auszulegen, dass eine hohe Standzeit erzielt wird.\n\nDie Auslegung der Tragseile erfolgt auf Basis den DIN 15020.\n\nDie Tragseile sind über separat nachspannbare Aufhängungen am Fangrahmen und am Gegengewicht zu befestigen.\n\nZur Befestigung der Tragmittel an Aufzügen werden Seilenden mit Kausche nach DIN 3090 mithilfe einer Augenschraube bzw. Ösenstange, Druckfedern, Federtellern, Muttern und Splinten montiert und gegen Verdrehen gesichert.\n\nTragmittel:Seil / Gurt\nKunststoffummantelte Seile\nZulässig:ja / nein\nAnzahl:XX Stück\nDurchmesser:xx mm\n\nSollten Gurte als Tragmittel zum Einsatz kommen, ist der erstmalige Gurttausch inkl. Umlenkrollen unter dem Punkt Optionen \"Gurttausch\" auf Preisbasis 2023 anzugeben.\n\nDer Lebenszyklus der Gurte in Bezug auf Anzahl Fahrten oder Jahre ist ebenfalls anzugeben.",
-    "status": "entwurf"
+    "status": "bestaetigt"
   },
   {
     "id": "LV_10_06_TRAGMITTEL_GURTE_Z_B_ZIEHL_ABEGG",
@@ -2317,7 +2317,17 @@
     "titel": "Umlenkrollen im Antriebsbereich",
     "typ": "Baustein",
     "text": "Die Umlenkrollen sind neu zu lagern und zu reinigen / zu erneuern.\n\nAnzahl:XX Stück\nDurchmesser:XXX mm\nLager:Wälzlager / Pendelrollenlager",
-    "status": "entwurf"
+    "status": "bestaetigt"
+  },
+  {
+    "id": "LV_13_09_ADAPTERRAHMEN_ANTRIEB",
+    "struktur": "13.09",
+    "kapitel": "13",
+    "kategorie": "LV_KAP_13_ANTRIEB_SEIL",
+    "titel": "Adapterrahmen Antrieb",
+    "typ": "Baustein",
+    "text": "Lieferung und Montage einer passenden Rahmenkonstruktion aus Stahlprofilen zur fachgerechten Anpassung des neuen Antriebs an die bestehende Situation, einschließlich Aufmaß, Auslegung, Fertigung, Lieferung und Montage.",
+    "status": "bestaetigt"
   },
   {
     "id": "LV_KAP_14_ANTRIEB_HYDRAULIK",
